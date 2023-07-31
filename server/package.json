@@ -1,25 +1,19 @@
 {
-  "name": "server",
+  "name": "descuentos-ya-back",
   "version": "1.0.0",
-  "description": "Server Proyecto Individual",
+  "description": "Backend de un sitio web para un club, desarrollado en Express con una base de datos PostgreSQL y ORM Prisma. El sitio permite a los miembros del club registrarse y acceder a beneficios exclusivos proporcionados por empresas asociadas. Estos beneficios incluyen descuentos en una variedad de servicios y productos, disponibles solo para los miembros. El backend se encarga de gestionar la autenticación, la inscripción de nuevos miembros y la administración de los beneficios asociados. Con Express como framework, Prisma como ORM y PostgreSQL como base de datos, se garantiza un rendimiento eficiente y una experiencia de usuario fluida para todos los socios del club.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
-  "author": "",
+  "author": "CebrasDevs",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prisma": "^5.0.0"
+  },
   "dependencies": {
-    "axios": "^1.4.0",
-    "concurrently": "^8.0.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "json-server": "^0.17.3",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.22",
-    "npm-run-all": "^4.1.5",
-    "pg": "^8.10.0",
-    "pg-hstore": "^2.3.4",
-    "sequelize": "^6.31.1"
+    "@prisma/client":"^5.0.0",
+    "express": "^4.18.2"
   }
 }
