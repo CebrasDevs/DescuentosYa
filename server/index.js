@@ -1,10 +1,7 @@
-const server = require("./src/server");
-const { conn } = require('./src/db.js');
-require('dotenv').config();
-const { PORT } = process.env;
+const express = require("express");
+const app = express();
 
-conn.sync({ force: true }).then(() => {
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+app.use(express.json());
+app.listen(3000, () => {
+  console.log(`Server listening on port 3000`);
 })
-}).catch(error => console.error(error))
