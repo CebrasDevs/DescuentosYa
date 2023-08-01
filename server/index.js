@@ -1,7 +1,11 @@
-const express = require("express");
-const app = express();
+//nos traemos el servidor con su configuracion
+const app = require("./src/app");
 
-app.use(express.json());
-app.listen(3000, () => {
-  console.log(`Server listening on port 3000`);
-})
+//cargamos las variables de entorno guardados en .env
+require('dotenv').config();
+const { PORT } = process.env;
+
+// y finalmente levantamos el servidor
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
