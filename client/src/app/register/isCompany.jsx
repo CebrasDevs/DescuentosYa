@@ -1,7 +1,7 @@
 'use client'
 import { useState } from "react"
-import SignUpMember from "../components/SignUpMember";
-import SignUpCompany from "../components/SignUpCompany";
+import SignUpMember from "../../components/SignUpMember";
+import SignUpCompany from "../../components/SignUpCompany";
 
 export default function IsCompany () {
     const [IsCompany, setIsCompany] = useState(false);
