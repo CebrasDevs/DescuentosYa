@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BsCart3 } from "react-icons/bs";
 
 // const links = [
 //   {
@@ -24,25 +25,31 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className=" flex h-full w-full bg-slate-800 ">
-      <div className=" flex p-1 w-full h-full">
-        <Link href={"/profile"} className="mr-5">
+    <div className=" flex w-full h-24 bg-slate-800">
+      <div className="flex w-1/3 h-full items-center">
+        <Link href={"/"}>
+          <h1>I AM THE LOGO</h1>
+        </Link>
+      </div>
+      <div className=" flex w-1/3 h-full items-center justify-around ">
+        <Link className=" text-xl hover:underline" href={"/"}>
           Home
         </Link>
-        <Link href={"/brands"} className="mr-5">
+        <Link className=" text-xl hover:underline" href={"/brands"}>
           About
         </Link>
+        <Link className=" text-xl hover:underline" href={"/shoppingcart"}>
+          <BsCart3 />
+        </Link>
       </div>
-      <div className="flex ">
-      <button className="inline-flex items-center bg-yellow-500 border-0 py-2 px-4 mt-4 top-0 left-0">
-        Sign Up
-      </button>
-      <button className="inline-flex items-center bg-yellow-500 border-0 py-2 px-4 mt-4 top-0 left-0">
-        Log in
-      </button>
-
+      <div className="flex w-1/3 h-full items-center justify-end ">
+        <button className="flex items-center justify-center bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-16">
+          <Link href={"/register"}>Sign Up</Link>
+        </button>
+        <button className="flex items-center justify-center bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-28">
+          <Link href={"/login"}>Log in</Link>
+        </button>
       </div>
-      
     </div>
   );
 }
