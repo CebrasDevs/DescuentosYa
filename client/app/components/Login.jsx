@@ -20,12 +20,12 @@ export default function Login(){
     }
 
     return(
-        <form>
+        <form onSubmit={handleLogIn}>
             <label>Email:</label>
             <input className='text-black' type='text' name="email" value={input.email} onChange={handleInput} />
             <label>Password:</label>
-            <input className='text-black' type='text' name="password" value={input.password} onChange={handleInput} />
-            <button className='text-black bg-white ml-20 p-1' onClick={handleLogIn}>Log in</button>
+            <input className='text-black' type='password' name="password" value={input.password} onChange={handleInput} />
+            <button className='text-black bg-white ml-20 p-1' type="submit">Log in</button>
         </form>
     )
 }
