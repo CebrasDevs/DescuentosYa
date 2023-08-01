@@ -10,57 +10,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Role {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  User User[]
+enum Role {
+  ADMIN
+  COMPANY
+  MEMBER
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
-  role     Role      @relation(fields: [roleId], references: [id])
-  roleId   Int
-  email    String    @unique
-  password String
-  enabled  Boolean
-  Member   Member[]
-  Company  Company[]
-}
-
-model Member {
   id           Int        @id @default(autoincrement())
-  user         User       @relation(fields: [userId], references: [id])
-  userId       Int
-  dni          String     @unique
-  last_name    String
-  name         String
-  last_payment DateTime
-  address      String?
+  email        String     @unique
+  password     String
+  enabled      Boolean
+  role         Role
+  dni          String?
+  cuit         String?
+  name         String?
+  company_name String?
+  address      String
   phone        String?
+  last_payment DateTime?
+  description  String?
+  discount     Int?
+  Item         Item[]
   Voucher      Voucher[]
   Shopping     Shopping[]
 }
 
-model Company {
-  id            Int        @id @default(autoincrement())
-  user          User       @relation(fields: [userId], references: [id])
-  userId        Int
-  cuit          String     @unique
-  description   String?
-  name          String
-  address       String
-  phone         String?
-  token         String
-  social_reason String
-  discount      Int
-  Item          Item[]
-  Shopping      Shopping[]
-}
-
 model Item {
   id            Int             @id @default(autoincrement())
-  company       Company         @relation(fields: [companyId], references: [id])
-  companyId     Int
+  user          User            @relation(fields: [userId], references: [id])
+  userId        Int
   description   String?
   name          String
   price         Float           @default(0)
@@ -69,29 +48,31 @@ model Item {
 }
 
 model Voucher {
-  id       Int    @id @default(autoincrement())
-  item     Item   @relation(fields: [itemId], references: [id])
-  itemId   Int
-  member   Member @relation(fields: [memberId], references: [id])
-  memberId Int
-  code     String
+  id     Int    @id @default(autoincrement())
+  item   Item   @relation(fields: [itemId], references: [id])
+  itemId Int
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
+  code   String
 }
 
-model Way_To_Pay {
-  id       Int        @id @default(autoincrement())
-  name     String
-  Shopping Shopping[]
+enum Way_To_Pay {
+  CASH
+  CARD
+}
+
+enum State {
+  SUCCESS
+  PENDING
 }
 
 model Shopping {
   id            Int             @id @default(autoincrement())
-  company       Company         @relation(fields: [companyId], references: [id])
-  companyId     Int
-  member        Member          @relation(fields: [memberId], references: [id])
-  memberId      Int
-  way_to_pay    Way_To_Pay      @relation(fields: [wayToPayId], references: [id])
-  wayToPayId    Int
+  user          User            @relation(fields: [userId], references: [id])
+  userId        Int
   url_PDF       String
+  way_to_pay    Way_To_Pay
+  state         State
   Item_Shopping Item_Shopping[]
 }
 
