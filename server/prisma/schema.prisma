@@ -10,4 +10,98 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Role {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  User User[]
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  role     Role      @relation(fields: [roleId], references: [id])
+  roleId   Int
+  email    String    @unique
+  password String
+  enabled  Boolean
+  Member   Member[]
+  Company  Company[]
+}
+
+model Member {
+  id           Int        @id @default(autoincrement())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int
+  dni          String     @unique
+  last_name    String
+  name         String
+  last_payment DateTime
+  address      String?
+  phone        String?
+  Voucher      Voucher[]
+  Shopping     Shopping[]
+}
+
+model Company {
+  id            Int        @id @default(autoincrement())
+  user          User       @relation(fields: [userId], references: [id])
+  userId        Int
+  cuit          String     @unique
+  description   String?
+  name          String
+  address       String
+  phone         String?
+  token         String
+  social_reason String
+  discount      Int
+  Item          Item[]
+  Shopping      Shopping[]
+}
+
+model Item {
+  id            Int             @id @default(autoincrement())
+  company       Company         @relation(fields: [companyId], references: [id])
+  companyId     Int
+  description   String?
+  name          String
+  price         Float           @default(0)
+  Voucher       Voucher[]
+  Item_Shopping Item_Shopping[]
+}
+
+model Voucher {
+  id       Int    @id @default(autoincrement())
+  item     Item   @relation(fields: [itemId], references: [id])
+  itemId   Int
+  member   Member @relation(fields: [memberId], references: [id])
+  memberId Int
+  code     String
+}
+
+model Way_To_Pay {
+  id       Int        @id @default(autoincrement())
+  name     String
+  Shopping Shopping[]
+}
+
+model Shopping {
+  id            Int             @id @default(autoincrement())
+  company       Company         @relation(fields: [companyId], references: [id])
+  companyId     Int
+  member        Member          @relation(fields: [memberId], references: [id])
+  memberId      Int
+  way_to_pay    Way_To_Pay      @relation(fields: [wayToPayId], references: [id])
+  wayToPayId    Int
+  url_PDF       String
+  Item_Shopping Item_Shopping[]
+}
+
+model Item_Shopping {
+  id            Int      @id @default(autoincrement())
+  item          Item     @relation(fields: [itemId], references: [id])
+  itemId        Int
+  shopping      Shopping @relation(fields: [shoppingId], references: [id])
+  shoppingId    Int
+  quantity_Item Int
+}
+
 // Aca se crean los modelos de la base de datos
