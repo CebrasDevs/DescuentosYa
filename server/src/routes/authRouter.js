@@ -27,15 +27,33 @@ router.post("/", async (req, res) => {
     }
 
     // Si el usuario y la contraseña son correctos, crear la cookie
-    res.cookie("Access granted", JSON.stringify(user), {
+    res.cookie(`${user.email}`, JSON.stringify(user), {
       maxAge: 900000, // Tiempo de vida de la cookie en milisegundos (ejemplo: 900000ms = 15 minutos)
       httpOnly: true, // La cookie solo es accesible mediante HTTP (no JavaScript)
     });
 
     // Respuesta para indicar que el inicio de sesión fue exitoso.
-    res.json({ mensaje: "Login successful!" });
+    res.status(200).json({ mensaje: "Login successful!" });
   } catch (error) {
     res.status(500).json({ error: "Error authenticating the user" });
+  }
+});
+
+router.post("/logout", (req, res) => {
+  try {
+    // Capturamos el valor del email desde el cuerpo de la solicitud
+    const { email } = req.body;
+
+    // Eliminamos la cookie existente al establecer su tiempo de vida en 0
+    res.cookie(email, "", {
+      maxAge: 0,
+      httpOnly: true,
+    });
+
+    // Respuesta para indicar que el logout fue exitoso.
+    res.status(200).json({ mensaje: "Logout successful!" });
+  } catch (error) {
+    res.status(500).json({ error: "Error during logout" });
   }
 });
 
