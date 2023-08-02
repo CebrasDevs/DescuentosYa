@@ -18,12 +18,12 @@ router.post("/", async (req, res) => {
 
     // Si el usuario no existe, devolver un mensaje de error
     if (!user) {
-      return res.status(404).json({ error: "El usuario no existe" });
+      return res.status(404).json({ error: "User doesn't exist" });
     }
 
     // Verificar que la contraseña sea correcta
     if (user.password !== password) {
-      return res.status(401).json({ error: "Contraseña incorrecta" });
+      return res.status(401).json({ error: "Incorrect password" });
     }
 
     // Si el usuario y la contraseña son correctos, crear la cookie
@@ -33,10 +33,9 @@ router.post("/", async (req, res) => {
     });
 
     // Respuesta para indicar que el inicio de sesión fue exitoso.
-    res.json({ mensaje: "Inicio de sesión exitoso!" });
+    res.json({ mensaje: "Login successful!" });
   } catch (error) {
-    console.error("Error al autenticar al usuario:", error);
-    res.status(500).json({ error: "Error al autenticar al usuario" });
+    res.status(500).json({ error: "Error authenticating the user" });
   }
 });
 
