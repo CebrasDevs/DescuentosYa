@@ -17,17 +17,19 @@ enum Role {
 }
 
 model User {
-  id           Int        @id @default(autoincrement())
-  email        String     @unique
+  id           Int     @id @default(autoincrement())
+  email        String  @unique
   password     String
-  enabled      Boolean
+  enabled      Boolean @default(false)
   role         Role
   dni          String?
   cuit         String?
   name         String?
+  url_image    String
   company_name String?
   address      String
   phone        String?
+
   last_payment DateTime?
   description  String?
   discount     Int?
@@ -43,6 +45,7 @@ model Item {
   description   String?
   name          String
   price         Float           @default(0)
+  url_image     String
   Voucher       Voucher[]
   Item_Shopping Item_Shopping[]
 }
