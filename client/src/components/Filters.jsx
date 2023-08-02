@@ -30,19 +30,19 @@ export default function Filters () {
     return (
         <div>
             <p>Type:</p>
-            <select value={activeFilters.chosenItemType} onChange={handleChange}>
+            <select value={activeFilters.chosenItemType} name="chosenItemType" onChange={handleChange}>
                 {
                     itemTypeOptions.map((type) => {
-                        return <option key={type} name="chosenItemType" value={type}>{type}</option>
+                        return <option key={type} value={type}>{type}</option>
                     })
                 }
             </select>
 
             <p>Category:</p>
-            <select value={activeFilters.chosenCategory} onChange={handleChange}>
+            <select value={activeFilters.chosenCategory} name="chosenCategory" onChange={handleChange}>
                 {
                     categories?.map((category) => {
-                        return <option key={category} name="chosenCategory" value={category}>{category}</option>
+                        return <option key={category} value={category}>{category}</option>
                     })
                 }
             </select>
@@ -67,10 +67,10 @@ export default function Filters () {
             }
 
             <p>Sort:</p>
-            <select value={activeFilters.chosenSorting} onChange={handleChange}>
+            <select value={activeFilters.chosenSorting} name="chosenSorting" onChange={handleChange}>
                 {
                     sortingOptions.map((sort) => {
-                        return <option key={sort} name="chosenSorting" value={sort}>{sort}</option>
+                        return <option key={sort} value={sort}>{sort}</option>
                     })
                 }
             </select>
