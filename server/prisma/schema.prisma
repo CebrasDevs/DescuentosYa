@@ -43,6 +43,7 @@ model Item {
   description   String?
   name          String
   price         Float           @default(0)
+  url_image     String
   Voucher       Voucher[]
   Item_Shopping Item_Shopping[]
 }
