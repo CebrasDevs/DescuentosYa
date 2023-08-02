@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Filters () {
     const dispatch = useDispatch();
-    const discountOptions = ['25%', '40%', '50%'];
+    const discountOptions = ['All', '+25%', '+40%', '+50%'];
     const itemTypeOptions = ['All types', 'Products', 'Services'];
-    const orderOptions = ['Alphabetical', 'Highest discount'];
+    const sortingOptions = ['Alphabetical', 'Highest discount'];
 
     //* Descomentar estas lineas cuando esten listos los estados globales para filtrar
     // const { allCategories } = useSelector((state) => state);
-    // const { chosenItemType, chosenDiscount, chosenCategory, chosenOrder } = useSelector((state) => state.activeFilters);
+    // const { chosenItemType, chosenDiscount, chosenCategory, chosenSorting } = useSelector((state) => state.activeFilters);
     // const categories = ['All categories', ...allCategories];
 
     //* Quitar esta linea cuando haya conectado los estados de redux
@@ -20,6 +20,7 @@ export default function Filters () {
     //!FALTA agregar los atributos "value={estado global}" a los <select>
     return (
         <div>
+            <p>Type:</p>
             <select>
                 {
                     itemTypeOptions.map((type, index) => {
@@ -27,6 +28,7 @@ export default function Filters () {
                     })
                 }
             </select>
+            <p>Category:</p>
             <select>
                 {
                     provisoryCategories.map((category, index) => {
@@ -34,6 +36,7 @@ export default function Filters () {
                     })
                 }
             </select>
+            <p>%Discount:</p>
             {
                 discountOptions.map((discount, index) => {
                     return (
@@ -49,10 +52,11 @@ export default function Filters () {
                     )
                 })
             }
+            <p>Sort:</p>
             <select>
                 {
-                    orderOptions.map((order, index) => {
-                        return <option key={index} name="order">{order}</option>
+                    sortingOptions.map((sort, index) => {
+                        return <option key={index} name="order">{sort}</option>
                     })
                 }
             </select>
