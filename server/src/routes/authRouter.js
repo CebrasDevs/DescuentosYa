@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     }
 
     // Si el usuario y la contraseña son correctos, crear la cookie
-    res.cookie("miCookie", JSON.stringify(user), {
+    res.cookie("Access granted", JSON.stringify(user), {
       maxAge: 900000, // Tiempo de vida de la cookie en milisegundos (ejemplo: 900000ms = 15 minutos)
       httpOnly: true, // La cookie solo es accesible mediante HTTP (no JavaScript)
     });
