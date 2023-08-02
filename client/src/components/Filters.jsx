@@ -1,41 +1,52 @@
 'use client'
 
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filterCards } from "@/redux/actions";
 
 export default function Filters () {
     const dispatch = useDispatch();
+    const { allCategories, activeFilters } = useSelector((state) => state);
+
     const discountOptions = ['All', '+25%', '+40%', '+50%'];
     const itemTypeOptions = ['All types', 'Products', 'Services'];
     const sortingOptions = ['Alphabetical', 'Highest discount'];
+    const categories = ['All categories', ...allCategories];
 
-    //* Descomentar estas lineas cuando esten listos los estados globales para filtrar
-    // const { allCategories } = useSelector((state) => state);
-    // const { chosenItemType, chosenDiscount, chosenCategory, chosenSorting } = useSelector((state) => state.activeFilters);
-    // const categories = ['All categories', ...allCategories];
+    
 
     //* Quitar esta linea cuando haya conectado los estados de redux
-    const provisoryCategories = ['All categories', 'Cleaning', 'Apparel', 'Food', 'Health & Wellness'];
+    // const provisoryCategories = ['All categories', 'Cleaning', 'Apparel', 'Food', 'Health & Wellness'];
 
-    //!FALTA agregar los atributos "value={estado global}" a los <select>
+
+    function handleChange(e) {
+        dispatch(filterCards({
+            ...activeFilters,
+            [e.target.name]: e.target.value
+            })
+        );
+    };
+
+
     return (
         <div>
             <p>Type:</p>
-            <select>
+            <select value={activeFilters.chosenItemType} onChange={handleChange}>
                 {
-                    itemTypeOptions.map((type, index) => {
-                        return <option key={index} name="itemType">{type}</option>
+                    itemTypeOptions.map((type) => {
+                        return <option key={type} name="chosenItemType" value={type}>{type}</option>
                     })
                 }
             </select>
+
             <p>Category:</p>
-            <select>
+            <select value={activeFilters.chosenCategory} onChange={handleChange}>
                 {
-                    provisoryCategories.map((category, index) => {
-                        return <option key={index} name="category">{category}</option>
+                    categories?.map((category) => {
+                        return <option key={category} name="chosenCategory" value={category}>{category}</option>
                     })
                 }
             </select>
+
             <p>%Discount:</p>
             {
                 discountOptions.map((discount, index) => {
@@ -44,19 +55,22 @@ export default function Filters () {
                             <input 
                                 key={index}
                                 type="radio" 
-                                name="discount"
+                                name="chosenDiscount"
+                                checked={activeFilters.chosenDiscount === discount}
                                 value={discount}
+                                onChange={handleChange}
                             />
                             {discount}
                         </label>
                     )
                 })
             }
+
             <p>Sort:</p>
-            <select>
+            <select value={activeFilters.chosenSorting} onChange={handleChange}>
                 {
-                    sortingOptions.map((sort, index) => {
-                        return <option key={index} name="order">{sort}</option>
+                    sortingOptions.map((sort) => {
+                        return <option key={sort} name="chosenSorting" value={sort}>{sort}</option>
                     })
                 }
             </select>
