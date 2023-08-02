@@ -9,6 +9,7 @@ module.exports = async (body) => {
             description: body.description,
             name: body.name,
             price: body.price,
+            url_image: body.url_image
         }
     });
     await prisma.$disconnect();
