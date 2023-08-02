@@ -1,6 +1,9 @@
 'use client'
 
 import { useState } from "react"
+import styles from "../styles/Login.module.css";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 export default function Login(){
     const [input, setInput] = useState({
@@ -20,12 +23,22 @@ export default function Login(){
     }
 
     return(
-        <form onSubmit={handleLogIn}>
-            <label>Email:</label>
-            <input className='text-black' type='text' name="email" value={input.email} onChange={handleInput} />
-            <label>Password:</label>
-            <input className='text-black' type='password' name="password" value={input.password} onChange={handleInput} />
-            <button className='text-black bg-white ml-20 p-1' type="submit">Log in</button>
+        <form onSubmit={handleLogIn} className="flex flex-col gap-5">
+            <div className={styles.input_group}>
+                <input type="email" name="email" placeholder="Email" className={styles.input_text}/>
+            </div>
+            <div className={styles.input_group}>
+                <input type="password" name="password" placeholder="Password" className={styles.input_text}/>
+            </div>
+            <div className="input-button">
+                <button type="submit" className={styles.button}>Log in</button>
+            </div>
+            <div className="input-button">
+                <button type="button" className={styles.button_custom}>Sign In with Google<FcGoogle size={'1.5em'}/></button>
+            </div>
+            <div className="input-button">
+                <button type="button" className={styles.button_custom}>Sign In with Github<FaGithub size={'1.5em'}/></button>
+            </div>
         </form>
     )
 }
