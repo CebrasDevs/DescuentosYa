@@ -7,16 +7,15 @@ module.exports = async (user) => {
             email: user.email,
             password: user.password,
             role: user.role,
-            enabled: false,
             dni: user.dni,
             cuit: user.cuit,
             name: user.name,
+            url_image: user.url_image,
             company_name: user.company_name,
             address: user.address,
             phone: user.phone,
             last_payment: user.last_payment,
             description: user.description,
-            discount: user.discount
         }
     });
     await prisma.$disconnect();
