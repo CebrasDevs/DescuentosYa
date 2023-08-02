@@ -43,12 +43,18 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="flex w-1/3 h-full items-center justify-end ">
-        <button className="flex items-center justify-center bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-16">
-          <Link href={"/register"}>Sign Up</Link>
-        </button>
-        <button className="flex items-center justify-center bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-28">
-          <Link href={"/login"}>Log in</Link>
-        </button>
+        <Link
+          className="flex items-center justify-center bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-16 text-lg"
+          href={"/register"}
+        >
+          Sign Up
+        </Link>
+        <Link
+          className="flex items-center justify-center bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-16 text-lg"
+          href={"/login"}
+        >
+          Log in
+        </Link>
       </div>
     </div>
   );
