@@ -1,12 +1,18 @@
 
-export function filterArray(array, activeFilters) {
-    let filtered = [...array];
+export function filterArray(items, filters) {
+    // Codigo defensivo
+    if (!items.length) {
+        console.log("ERROR: no items available to filter (at utils/reduxUtils)");
+        return items;
+    }
+    // Preparo los items a filtrar, y los criterios de filtrado
+    let filtered = [...items];
     const { 
         chosenItemType, 
         chosenDiscount, 
         chosenCategory, 
         chosenSorting 
-    } = activeFilters;
+    } = filters;
 
     //FILTRO POR TIPO DE ITEM
     if (chosenItemType === 'Products') {
@@ -35,5 +41,6 @@ export function filterArray(array, activeFilters) {
         default:
             console.log('ERROR: invalid sorting method chosen (at reduxUtils)');
     };
+    
     return filtered;
 }
