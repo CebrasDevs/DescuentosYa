@@ -6,10 +6,12 @@ module.exports = async (body) => {
     const res = await prisma.item.create({
         data: {
             userId: body.userId,
+            categoryId: body.categoryId,
             description: body.description,
             name: body.name,
             price: body.price,
-            url_image: body.url_image
+            url_image: body.url_image,
+            discount: body.discount
         }
     });
     await prisma.$disconnect();
