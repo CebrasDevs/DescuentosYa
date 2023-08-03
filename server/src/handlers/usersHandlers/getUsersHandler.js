@@ -1,6 +1,6 @@
 // Cuando se agregue todo en el index del handler vamos a descomentarlo
 
-// const { getUsersController } = require('../../controllers');
+const { getUsersController } = require('../../controllers');
 
 module.exports = async (req, res) => {
     try {

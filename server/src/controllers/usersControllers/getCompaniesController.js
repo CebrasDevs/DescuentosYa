@@ -3,6 +3,6 @@
 const { getUsersHelper } = require('../../helpers');
 
 module.exports = async () => {
-    const users = await getUsersHelper();
-    return users;
+    const companies = await getUsersHelper({ role: 'COMPANY' });
+    return companies;
 };

@@ -1,8 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-module.exports = async () => {
+module.exports = async ( role = {}) => {
     const users = await prisma.user.findMany({
+        where: role || true,
         include: {
             Item: true,
             Voucher: true,
