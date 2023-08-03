@@ -1,17 +1,12 @@
 import styles from "../../styles/Layout.module.css";
 
-export default function Layout({children}){
-    
-    return(
-        <div className="flex h-screen bg-blue-400">
-            <div className="m-auto bg-slate-50 rounded-md w-3/5 h-3/4 grid lg:grid-cols-2">
-                <div className={styles.imgStyle}>
-                    Images
-                </div>
-                <div className="right flex flex-col justify-evenly text-black">
-                    <div className="text-center py-10">
-                        {children}
-                    </div>
+export default function Layout({ children }) {
+
+    return (
+        <div className="flex h-screen bg-slate-200">
+            <div className="right flex flex-col justify-evenly text-black m-auto bg-slate-50 rounded-md w-1/3">
+                <div className="text-center py-10">
+                    {children}
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import styles from "../styles/Login.module.css";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from "react-icons/fa";
+import { BsFacebook } from "react-icons/bs";
 
 export default function Login(){
     const [input, setInput] = useState({
@@ -24,6 +24,15 @@ export default function Login(){
 
     return(
         <form onSubmit={handleLogIn} className="flex flex-col gap-5">
+            <div className="input-button">
+                <button type="button" className={styles.button_custom}>Sign In with Google<FcGoogle size={'1.5em'}/></button>
+            </div>
+            <div className="input-button">
+                <button type="button" className={styles.button_custom}>Sign In with Facebook<BsFacebook size={'1.5em'} color="#1877F2"/></button>
+            </div>
+            <div>
+                ----- O -----
+            </div>
             <div className={styles.input_group}>
                 <input type="email" name="email" placeholder="Email" className={styles.input_text}/>
             </div>
@@ -33,12 +42,7 @@ export default function Login(){
             <div className="input-button">
                 <button type="submit" className={styles.button}>Log in</button>
             </div>
-            <div className="input-button">
-                <button type="button" className={styles.button_custom}>Sign In with Google<FcGoogle size={'1.5em'}/></button>
-            </div>
-            <div className="input-button">
-                <button type="button" className={styles.button_custom}>Sign In with Github<FaGithub size={'1.5em'}/></button>
-            </div>
+            
         </form>
     )
 }
