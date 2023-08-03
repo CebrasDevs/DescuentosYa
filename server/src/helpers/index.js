@@ -1,6 +1,7 @@
 const getUsersHelper = require("./usersHelpers/getUsersHelper");
 const updateUsersHelper = require("./usersHelpers/updateUsersHelper");
 const createUsersHelper = require("./usersHelpers/createUsersHelper");
+const getUsersByIdHelper = require("./usersHelpers/getUsersByIdHelper");
 
 const  getShoppingHelper  = require('./shoppingHelpers/getShoppingHelper');
 const  createShoppingHelper  = require('./shoppingHelpers/createShoppingHelper');
@@ -26,6 +27,7 @@ module.exports = {
     getUsersHelper,
     updateUsersHelper,
     createUsersHelper,
+    getUsersByIdHelper,
 
     getVouchersHelper,
     updateVouchersHelper,
