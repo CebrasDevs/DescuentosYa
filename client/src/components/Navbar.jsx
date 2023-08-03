@@ -24,38 +24,50 @@ import { BsCart3 } from "react-icons/bs";
 // ))}
 
 export default function Navbar() {
-  return (
-    <div className="  flex relative w-full h-24 bg-slate-800 z-10">
-      <div className="flex w-1/3 h-full items-center">
-        <Link className="text-white" href={"/"}>
-          I AM THE LOGO
-        </Link>
-      </div>
-      <div className=" flex w-1/3 h-full items-center justify-around ">
-        <Link className=" text-xl text-white hover:underline" href={"/"}>
-          Home
-        </Link>
-        <Link className=" text-xl text-white hover:underline" href={"/brands"}>
-          About
-        </Link>
-        <Link className=" text-xl text-white hover:underline" href={"/shoppingcart"}>
-          <BsCart3 />
-        </Link>
-      </div>
-      <div className="flex w-1/3 h-full items-center justify-end ">
-        <Link
-          className="flex items-center justify-center text-white bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-16 text-lg"
-          href={"/register"}
-        >
-          Sign Up
-        </Link>
-        <Link
-          className="flex items-center justify-center text-white bg-red-600 border-0 rounded-2xl h-12 w-1/6 mr-16 text-lg"
-          href={"/login"}
-        >
-          Log in
-        </Link>
-      </div>
-    </div>
-  );
+    return (
+        <>
+            <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md">
+                <div className=" flex w-3/4 m-auto items-center">
+                    <div className="flex items-center h-full ml-10 mr-auto">
+                        <Link href={"/"}>
+                            <h1>DESCUENTOS YA (home)</h1>
+                        </Link>
+                        <Link className="hover:text-blue-500 ml-10" href={"#"}>
+                            How It Works
+                        </Link>
+                        <Link className="hover:text-blue-500 ml-10" href={"/discounts"}>
+                            Browse Discounts
+                        </Link>
+                    </div>
+                    <div className="flex items-center">
+                        <Link href={"/login"} className="mr-10 font-medium hover:text-blue-500">
+                            Log in
+                        </Link>
+                        <Link href={"/register"} className="mr-10 font-medium hover:text-blue-500">
+                            Sign Up
+                        </Link>
+                        <Link
+                            href={"#"}
+                            className="mr-10 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
+                        >
+                            Post a Discount
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <div className="flex items-center w-full h-12 bg-neutral-800 mt-16">
+                <div className=" flex w-3/4 m-auto">
+                    <div className="flex h-full mr-auto text-white">
+                        <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">Find Companies</Link>
+                        <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                            Find Services
+                        </Link>
+                        <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                            About
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
