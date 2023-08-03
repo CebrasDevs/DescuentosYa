@@ -29,7 +29,7 @@ export default function Filters () {
             <select value={activeFilters.chosenItemType} name="chosenItemType" onChange={handleChange}>
                 {
                     itemTypeOptions.map((type) => {
-                        return <option key={type} value={type}>{type}</option>
+                        return <option key={type}>{type}</option>
                     })
                 }
             </select>
@@ -38,7 +38,7 @@ export default function Filters () {
             <select value={activeFilters.chosenCategory} name="chosenCategory" onChange={handleChange}>
                 {
                     allCategories?.map((category) => {
-                        return <option key={category} value={category}>{category}</option>
+                        return <option key={category}>{category}</option>
                     })
                 }
             </select>
@@ -65,7 +65,7 @@ export default function Filters () {
             <select value={activeFilters.chosenSorting} name="chosenSorting" onChange={handleChange}>
                 {
                     sortingOptions.map((sort) => {
-                        return <option key={sort} value={sort}>{sort}</option>
+                        return <option key={sort}>{sort}</option>
                     })
                 }
             </select>
