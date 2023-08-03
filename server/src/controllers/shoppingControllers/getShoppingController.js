@@ -1,4 +1,4 @@
-const  getShoppingHelper  = require('../../helpers');
+const  {getShoppingHelper}  = require('../../helpers');
 
 
 module.exports = async () => {
