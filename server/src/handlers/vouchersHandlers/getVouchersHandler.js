@@ -1,6 +1,4 @@
-// Cuando se agregue todo en el index del handler vamos a descomentarlo
-
-// const { getVouchersController } = require('../../controllers');
+const { getVouchersController } = require('../../controllers');
 
 module.exports = async (req, res) => {
     try {

@@ -1,5 +1,3 @@
-// Cuando se agregue todo en el index del handler vamos a descomentarlo
-
 const { createCompanyController } = require('../../controllers');
 
 module.exports = async (req, res) => {

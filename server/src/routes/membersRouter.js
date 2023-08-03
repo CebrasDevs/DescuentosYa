@@ -1,15 +1,14 @@
 const {
-    createMemberHandler,
-    updateMemberHandler,
+    createMembersHandler,
+    updateMembersHandler,
     getMembersHandler
 } = require("../handlers");
 
-//instanaciamos router para direccionar segun metodos y rutas
 const { Router } = require("express");
 const router = Router();
 
-router.post("/", createMemberHandler);
-router.patch("/:id", updateMemberHandler);
+router.post("/", createMembersHandler);
+router.patch("/:id", updateMembersHandler);
 router.get("/", getMembersHandler);
 
 module.exports = router;

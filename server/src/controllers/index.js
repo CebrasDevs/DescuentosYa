@@ -1,5 +1,37 @@
-// validamos todos los datos correspondientes de entrada y salida
+const createUsersController = require("./usersControllers/createUsersController");
+const updateUsersController = require("./usersControllers/updateUsersController");
+const getUsersController = require("./usersControllers/getUsersController");
 
+const createCompaniesController = require("./usersControllers/createCompaniesController");
+const updateCompaniesController = require("./usersControllers/updateCompaniesController");
+const getCompaniesController = require("./usersControllers/getCompaniesController");
+
+const createMembersController = require("./usersControllers/createMembersController");
+const updateMembersController = require("./usersControllers/updateMembersController");
+const getMembersController = require("./usersControllers/getMembersController");
+
+const createVouchersController = require("./vouchersControllers/createVouchersController");
+const updateVouchersController = require("./vouchersControllers/updateVouchersController");
+const getVouchersController = require("./vouchersControllers/getVouchersController");
+
+module.exports = {
+    createUsersController,
+    updateUsersController,
+    getUsersController,
+
+    createCompaniesController,
+    updateCompaniesController,
+    getCompaniesController,
+
+    createMembersController,
+    updateMembersController,
+    getMembersController,
+
+    createVouchersController,
+    updateVouchersController,
+    getVouchersController
+
+};
 
 const  getShoppingController  = require('./shoppingControllers/getShoppingController');
 const  createShoppingController   = require('./shoppingControllers/createShoppingController');

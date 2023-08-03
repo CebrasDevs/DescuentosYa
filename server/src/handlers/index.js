@@ -1,25 +1,49 @@
-// Recibe la solicitud del cliente (front) 
+const getShoppingHandler = require('./shoppingHandlers/getShoppingHandler');
+const createShoppingHandler = require('./shoppingHandlers/createShoppingHandler');
+const updateShoppingHandler = require('./shoppingHandlers/updateShoppingHandler');
 
+const getItemsHandler = require('./itemsHandlers/getItemsHandler');
+const createItemsHandler = require('./itemsHandlers/createItemsHandler');
+const updateItemsHandler = require('./itemsHandlers/updateItemsHandler');
 
+const createUsersHandler = require("./usersHandlers/createUsersHandler");
+const updateUsersHandler = require("./usersHandlers/updateUsersHandler");
+const getUsersHandler = require("./usersHandlers/getUsersHandler");
 
-const  getShoppingHandler  = require('./shoppingHandlers/getShoppingHandler');
-const  createShoppingHandler  = require('./shoppingHandlers/createShoppingHandler');
-const  updateShoppingHandler  = require('./shoppingHandlers/updateShoppingHandler');
+const createCompaniesHandler = require("./usersHandlers/createCompaniesHandler");
+const updateCompaniesHandler = require("./usersHandlers/updateCompaniesHandler");
+const getCompaniesHandler = require("./usersHandlers/getCompaniesHandler");
 
-const  getItemsHandler  = require('./itemsHandlers/getItemsHandler');
-const  createItemsHandler  = require('./itemsHandlers/createItemsHandler');
-const  updateItemsHandler  = require('./itemsHandlers/updateItemsHandler');
+const createMembersHandler = require("./usersHandlers/createMembersHandler");
+const updateMembersHandler = require("./usersHandlers/updateMembersHandler");
+const getMembersHandler = require("./usersHandlers/getMembersHandler");
 
-
+const createVouchersHandler = require("./vouchersHandlers/createVouchersHandler");
+const updateVouchersHandler = require("./vouchersHandlers/updateVouchersHandler");
+const getVouchersHandler = require("./vouchersHandlers/getVouchersHandler");
 
 module.exports = {
-
     getShoppingHandler,
     createShoppingHandler,
     updateShoppingHandler,
-    
+
     getItemsHandler,
     createItemsHandler,
-    updateItemsHandler
+    updateItemsHandler,
 
-}
+    createUsersHandler,
+    updateUsersHandler,
+    getUsersHandler,
+
+    createCompaniesHandler,
+    getCompaniesHandler,
+    updateCompaniesHandler,
+
+    createMembersHandler,
+    updateMembersHandler,
+    getMembersHandler,
+
+    createVouchersHandler,
+    getVouchersHandler,
+    updateVouchersHandler,
+};
