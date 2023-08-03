@@ -1,11 +1,11 @@
 // Cuando se agregue todo en el index del handler vamos a descomentarlo
 
-const { createUserController } = require('../../controllers');
+const { getCompaniesController } = require('../../controllers');
 
 module.exports = async (req, res) => {
     try {
-        const user = await createUserController(req.body);
-        return res.status(200).json(user);
+        const companies = await getCompaniesController();
+        return res.status(200).json(companies);
     } catch (error) {
         return res.status(400).json({ error: error.message });
     };
