@@ -1,9 +1,21 @@
 import {
-    GET_COMPANIES
+    GET_COMPANIES,
+    FILTER_CARDS,
 } from "./actions";
+import { filterCards } from "./actions";
+
 
 const initialState = {
     companies: [],
+    categories: [],
+    allItems: [],
+    filteredItems: [],
+    activeFilters: {
+        chosenItemType: 'All types',
+        chosenDiscount: 'All',
+        chosenCategory: 'All categories',
+        chosenSorting: 'Alphabetical'
+    }
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -12,6 +24,13 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 companies: action.payload,
+            };
+        case FILTER_CARDS:
+            const filtered = filterCards(state.allItems, action.payload);
+            return {
+                ...state,
+                filteredItems: filtered,
+                activeFilters: action.payload
             };
         default:
             return { ...state };
