@@ -7,12 +7,11 @@ export default function Card({item}) {
   return(
     <div className='m-20'>
         <h2>{item.name}</h2>
-        <li>Category {item.category[0]}</li>
+        <li>Category {item.category}</li>
         <li>{item.discount}% discount</li>
         <div>
             <h2 /* link al item view */>Ver oferta</h2>
         </div>
-
     </div>
   );
 }
