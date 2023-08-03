@@ -5,17 +5,13 @@ import { filterCards } from "@/redux/actions";
 
 export default function Filters () {
     const dispatch = useDispatch();
-    const { allCategories, activeFilters } = useSelector((state) => state);
+    const activeFilters = useSelector((state) => state.activeFilters);
+    const categories = useSelector((state) => state.categories);
 
     const discountOptions = ['All', '+25%', '+40%', '+50%'];
     const itemTypeOptions = ['All types', 'Products', 'Services'];
     const sortingOptions = ['Alphabetical', 'Highest discount'];
-    const categories = ['All categories', ...allCategories];
-
-    
-
-    //* Quitar esta linea cuando haya conectado los estados de redux
-    // const provisoryCategories = ['All categories', 'Cleaning', 'Apparel', 'Food', 'Health & Wellness'];
+    const allCategories = ['All categories', ...categories];
 
 
     function handleChange(e) {
@@ -41,7 +37,7 @@ export default function Filters () {
             <p>Category:</p>
             <select value={activeFilters.chosenCategory} name="chosenCategory" onChange={handleChange}>
                 {
-                    categories?.map((category) => {
+                    allCategories?.map((category) => {
                         return <option key={category} value={category}>{category}</option>
                     })
                 }
@@ -49,11 +45,10 @@ export default function Filters () {
 
             <p>%Discount:</p>
             {
-                discountOptions.map((discount, index) => {
+                discountOptions.map((discount) => {
                     return (
-                        <label>
+                        <label key={discount}>
                             <input 
-                                key={index}
                                 type="radio" 
                                 name="chosenDiscount"
                                 checked={activeFilters.chosenDiscount === discount}

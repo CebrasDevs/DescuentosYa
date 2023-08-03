@@ -7,9 +7,9 @@ import { filterCards } from "./actions";
 
 const initialState = {
     companies: [],
+    categories: [],
     allItems: [],
     filteredItems: [],
-    allCategories: [],
     activeFilters: {
         chosenItemType: 'All types',
         chosenDiscount: 'All',
