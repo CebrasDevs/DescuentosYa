@@ -14,6 +14,14 @@ const createVouchersController = require("./vouchersControllers/createVouchersCo
 const updateVouchersController = require("./vouchersControllers/updateVouchersController");
 const getVouchersController = require("./vouchersControllers/getVouchersController");
 
+const  getShoppingController  = require('./shoppingControllers/getShoppingController');
+const  createShoppingController   = require('./shoppingControllers/createShoppingController');
+const  updateShoppingController   = require('./shoppingControllers/updateShoppingController');
+
+const  getItemsController  = require('./itemsControllers/getItemsController');
+const  createItemsController   = require('./itemsControllers/createItemsController');
+const  updateItemsController   = require('./itemsControllers/updateItemsController');
+
 module.exports = {
     createUsersController,
     updateUsersController,
@@ -29,20 +37,7 @@ module.exports = {
 
     createVouchersController,
     updateVouchersController,
-    getVouchersController
-
-};
-
-const  getShoppingController  = require('./shoppingControllers/getShoppingController');
-const  createShoppingController   = require('./shoppingControllers/createShoppingController');
-const  updateShoppingController   = require('./shoppingControllers/updateShoppingController');
-
-const  getItemsController  = require('./itemsControllers/getItemsController');
-const  createItemsController   = require('./itemsControllers/createItemsController');
-const  updateItemsController   = require('./itemsControllers/updateItemsController');
-
-
-module.exports = {
+    getVouchersController,
 
     getShoppingController,
     createShoppingController,
@@ -51,5 +46,4 @@ module.exports = {
     getItemsController,
     createItemsController,
     updateItemsController
-
-}
+};
