@@ -26,7 +26,7 @@ import { BsCart3 } from "react-icons/bs";
 export default function Navbar() {
     return (
         <>
-            <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md">
+            <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md z-10">
                 <div className=" flex w-3/4 m-auto items-center">
                     <div className="flex items-center h-full ml-10 mr-auto">
                         <Link href={"/"}>
