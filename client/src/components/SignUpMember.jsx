@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatMember } from "@/utils/formatUtils";
 
 export default function SignUpMember () {
     const [input, setInput] = useState({
@@ -20,7 +21,9 @@ export default function SignUpMember () {
 
     function handleSubmit(e) {
         e.preventDefault();
-        window.alert("Member submitted successfully (testing)");
+        const formattedMember = formatMember(input);
+        window.alert(`Member ${input.firstName, input.lastName} submitted successfully (provisory)`);
+        //devolver el formattedMember al backend
     }
 
     return (

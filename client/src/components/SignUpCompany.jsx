@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatCompany } from "@/utils/formatUtils";
 
 export default function SignUpCompany () {
     const [input, setInput] = useState({
@@ -21,7 +22,9 @@ export default function SignUpCompany () {
 
     function handleSubmit(e) {
         e.preventDefault();
-        window.alert("Company submitted successfully (testing)");
+        const formattedCompany = formatCompany(input);
+        window.alert(`Company ${input.companyName} submitted successfully (provisory)`);
+        //devolver el formattedCompany al backend
     };
 
     return (
@@ -53,10 +56,6 @@ export default function SignUpCompany () {
 
                 <label>Phone number: </label>
                 <input type="text" name="phoneNumber" value={input.phoneNumber} onChange={handleInputChange}/>
-
-
-                <label>Discount applied (%): </label>
-                <input type="text" name="discount" value={input.discount} onChange={handleInputChange}/>
 
                 <button>Submit</button>
             </form>
