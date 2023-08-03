@@ -1,4 +1,4 @@
-const updateShoppingHelper = require('../../helpers');
+const {updateShoppingHelper} = require('../../helpers');
 
 
 module.exports = async (id, dataShopping) => {
