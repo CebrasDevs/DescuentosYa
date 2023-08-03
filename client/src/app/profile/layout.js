@@ -1,21 +1,35 @@
+import Link from "next/link";
+import {FaUserEdit} from "react-icons/fa"
+
 export default function profileView() {
   return (
-    <div className="flex w-full h-screen items-center justify-center ">
-      <div className=" block w-3/4 h-1/4 rounded-3xl mt-2 bg-gradient-to-b from-cyan-300 to-blue-300">
-        <div className="  h-full w-1/2 ">
-          <div className=" flex justify-center mt-16 mb-16 ">
-            <img
-              className=" w-1/2 h-3/5  rounded-full shadow-2xl"
-              src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg"
-              alt="defaultprofilepic"
-            />
+    <div className=" absolute top-1/4 left-1/2 transform -translate-x-1/2 w-2/4 flex shadow-lg">
+      <FaUserEdit className="flex absolute h-8 w-8 -right-3 -top-4 bg-white rounded-full border-2 border-neutral-900 cursor-pointer"/>
+      <div className=" h-1/2 w-5/12 bg-gradient-to-b from-orange-400 to-orange-300 p-8 text-center items-center justify-center rounded-tl-2xl rounded-bl-2xl">
+        <img
+          className=" rounded-full mb-5" 
+          src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg"
+          alt="defaultprofilepic"
+        />
+        <h3 className=" font-bold text-3xl">Alberto Gentile</h3>
+      </div>
+      <div className=" w-7/12 bg-white rounded-br-2xl rounded-tr-2xl p-10">
+        <div>
+          <h3 className=" text-2xl font-sans tracking-wider">Information</h3>
+          <div className=" border-t-2 border-gray-600">
+            <div className=" mt-4 border-b-2 p-6 border-gray-400">
+              <h3 className=" text-lg font-medium">Info 1</h3>
+              <p>Info 1</p>
+            </div>
+            <div className=" mt-4 border-b-2 p-6 border-gray-400">
+              <h3 className=" text-lg font-medium">Info 2</h3>
+              <p>Info 2</p>
+            </div>
+            <div className=" mt-4 border-b-2 p-6">
+              <h3 className=" text-lg font-medium">Info 3</h3>
+              <p>Info 3</p>
+            </div>
           </div>
-          <div className=" text-center text-black h-2/5 mt-16 mb-16">
-            <h1 className=" text-2xl font-semibold">Luis "El Doctor" Canales</h1>
-          </div>
-        </div>
-        <div className=" block w-1/2 right-0">
-          <h3 className=" flex ">Otra Info relevante del user</h3>
         </div>
       </div>
     </div>
