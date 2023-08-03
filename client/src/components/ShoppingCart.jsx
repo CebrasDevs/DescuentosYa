@@ -1,74 +1,65 @@
 "use client";
+import { deleteShoppingCartItem } from "@/redux/actions";
+import Link from "next/link";
 import { useState } from "react";
-
-// const allShoppingItems = useSelector((state)=> state.allShoppingItems);
-//me traigo el arreglo de items del carrito del estado global (useSelector)
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ShoppingCart() {
-  const [allShoppingItems, setAllShoppingItems] = useState([
-    {
-      id: 1,
-      userId: 2,
-      description: "coca cola 1,5lt",
-      name: "bebida cola",
-      price: 350,
-    },
-    {
-      id: 2,
-      userId: 3,
-      description: "fanta 1,5lt",
-      name: "bebida gasificada",
-      price: 400,
-    },
-  ]);
-
-  const [counters, setCounters] = useState(allShoppingItems.map(() => 1));//creo un counter para cada item, iniciado en 1
+  const dispatch = useDispatch();
+  const allShoppingItems = useSelector((state) => state.allShoppingItems);
+  const [counters, setCounters] = useState(allShoppingItems.map(() => 1)); //creo un counter para cada item, iniciado en 1
 
   const handleCounter = function (event, index) {
-   
-
     if (event.target.name === "minus" && counters[index] > 1) {
-      let countersCopy = [...counters]; /* [2,2] */
-      countersCopy[index] = counters[index] - 1; /* [1,2] */
-      setCounters(countersCopy);  /* [1,2] */
+      let countersCopy = [...counters];
+      countersCopy[index] = counters[index] - 1;
+      setCounters(countersCopy);
     } else {
-        let countersCopy = [...counters]; /* [2,2] */
-        countersCopy[index] = counters[index] + 1; /* [3,2] */
-        setCounters(countersCopy);  /* [3,2] */
+      let countersCopy = [...counters];
+      countersCopy[index] = counters[index] + 1;
+      setCounters(countersCopy);
     }
   };
 
   const handleDelete = function (id) {
-    //despacho una action que me borre un elemento (objeto) del arreglo de items del carrito (EG)
-    setAllShoppingItems(allShoppingItems.filter((item) => item.id !== id));
+    dispatch(deleteShoppingCartItem(id));
   };
 
   return (
     <div>
       {allShoppingItems?.map((item, index) => {
         return (
-          <div className="mt-10">
-            <h2>Product name: {item.name}</h2>
-            <h2>Price: {item.price} $</h2>
-            <h2>Total Price:{item.price * counters[index]} $</h2>
+          <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap bg-violet-200">
+            <h2 className="m-10 justify-center">Product name: {item.name}</h2>
+            <h2 className="m-10 justify-center">Price: ${item.price}</h2>
+            <h2 className="m-10 justify-center">
+              Total Price: ${item.price * counters[index]}
+            </h2>
             <div>
               <button
                 className="m-10"
                 name="minus"
                 onClick={(event) => handleCounter(event, index)}
                 disabled={counters[index] === 1}
-              > - </button>
-              
+              >
+                {" "}
+                -{" "}
+              </button>
+
               {counters[index]}
-              
+
               <button
                 className="m-10"
                 name="plus"
                 onClick={(event) => handleCounter(event, index)}
-              > + </button>
+              >
+                {" "}
+                +{" "}
+              </button>
             </div>
+
             <button
-              className="bg-red-500"
+              className="h-1/4 w-20 mt-10 bg-red-500"
               onClick={() => handleDelete(item.id)}
             >
               Delete
@@ -78,7 +69,13 @@ export default function ShoppingCart() {
       })}
 
       <div>
-        <button>Checkout</button>
+        {allShoppingItems.length ? (
+          <button>Checkout</button>
+        ) : (
+          <Link href={"/"}>
+            <h2>Shopping Cart is empty, try adding products or services!</h2>
+          </Link>
+        )}
       </div>
     </div>
   );
