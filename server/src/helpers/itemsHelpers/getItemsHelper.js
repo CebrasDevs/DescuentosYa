@@ -6,8 +6,8 @@ module.exports = async () => {
     const items = await prisma.item.findMany({
         include: {
             user: true,
-            Voucher: false,
-            Item_Shopping: false
+            Voucher: true,
+            Item_Shopping: true
         }
     })
     console.log(items)

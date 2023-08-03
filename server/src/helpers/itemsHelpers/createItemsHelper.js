@@ -2,16 +2,16 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-module.exports = async (body) => {
+module.exports = async (item) => {
     const res = await prisma.item.create({
         data: {
-            userId: body.userId,
-            categoryId: body.categoryId,
-            description: body.description,
-            name: body.name,
-            price: body.price,
-            url_image: body.url_image,
-            discount: body.discount
+            userId: item.userId,
+            categoryId: item.categoryId,
+            description: item.description,
+            name: item.name,
+            price: item.price,
+            url_image: item.url_image,
+            discount: item.discount
         }
     });
     await prisma.$disconnect();
