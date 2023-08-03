@@ -3,7 +3,7 @@ import {
     FILTER_CARDS,
     SET_CURRENT_PAGE
 } from "./actions";
-import { filterCards } from "./actions";
+import { filterArray } from "@/utils/reduxUtils";
 
 const provisoryCategories = ["food","health","fashion"];
 const provisoryItems = [
@@ -132,7 +132,7 @@ const rootReducer = (state = initialState, action) => {
                 companies: action.payload,
             };
         case FILTER_CARDS:
-            const filtered = filterCards(state.allItems, action.payload);
+            const filtered = filterArray(state.allItems, action.payload);
             return {
                 ...state,
                 filteredItems: filtered,
