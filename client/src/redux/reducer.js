@@ -9,7 +9,118 @@ import {
 import { filterArray } from "@/utils/reduxUtils";
 
 const provisoryCategories = ["food", "health", "fashion"];
-// const provisoryItems = 
+const provisoryItems = [
+  {
+    id: 1,
+    userId: 2,
+    description: null,
+    discount: 15,
+    category: "food",
+    name: "Bebida Cola",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 2,
+    userId: 3,
+    description: null,
+    discount: 20,
+    category: "health",
+    name: "Chinese massage",
+    price: 200,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 3,
+    userId: 4,
+    description: null,
+    discount: 50,
+    category: "fashion",
+    name: "T-shirts",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 4,
+    userId: 2,
+    description: null,
+    discount: 30,
+    category: "health",
+    name: "Nails",
+    price: 100,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 5,
+    userId: 3,
+    description: null,
+    discount: 40,
+    category: "fashion",
+    name: "Shoes",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 6,
+    userId: 2,
+    description: null,
+    discount: 5,
+    category: "food",
+    name: "Fish",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 7,
+    userId: 5,
+    description: null,
+    discount: 30,
+    category: "food",
+    name: "Meat",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 8,
+    userId: 2,
+    description: null,
+    discount: 20,
+    category: "health",
+    name: "Sauna",
+    price: 100,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 9,
+    userId: 1,
+    description: null,
+    discount: 60,
+    category: "fashion",
+    name: "Hats",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 10,
+    userId: 2,
+    description: null,
+    discount: 30,
+    category: "health",
+    name: "Sport Nutricion",
+    price: 1000,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+  {
+    id: 11,
+    userId: 2,
+    description: null,
+    discount: 50,
+    category: "food",
+    name: "Cookies",
+    price: 0,
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP37w4fJtnjPbvrgpY0YhURH8ivQtApmfXWVcCeDuwJAG_ZsgPiC_yMN59olVVnv1GN30&usqp=CAU"
+  },
+];
 
 const provisoryActiveUser = {
     id: 2,
@@ -33,60 +144,6 @@ const provisoryActiveUser = {
           price: 0,
         },
         {
-          id: 2,
-          userId: 3,
-          description: null,
-          discount: 20,
-          category: "health",
-          name: "Chinese massage",
-          price: 200,
-        },
-        {
-          id: 3,
-          userId: 4,
-          description: null,
-          discount: 50,
-          category: "fashion",
-          name: "T-shirts",
-          price: 0,
-        },
-        {
-          id: 4,
-          userId: 2,
-          description: null,
-          discount: 30,
-          category: "health",
-          name: "Nails",
-          price: 100,
-        },
-        {
-          id: 5,
-          userId: 3,
-          description: null,
-          discount: 40,
-          category: "fashion",
-          name: "Shoes",
-          price: 0,
-        },
-        {
-          id: 6,
-          userId: 2,
-          description: null,
-          discount: 5,
-          category: "food",
-          name: "Fish",
-          price: 0,
-        },
-        {
-          id: 7,
-          userId: 5,
-          description: null,
-          discount: 30,
-          category: "food",
-          name: "Meat",
-          price: 0,
-        },
-        {
           id: 8,
           userId: 2,
           description: null,
@@ -94,15 +151,6 @@ const provisoryActiveUser = {
           category: "health",
           name: "Sauna",
           price: 100,
-        },
-        {
-          id: 9,
-          userId: 1,
-          description: null,
-          discount: 60,
-          category: "fashion",
-          name: "Hats",
-          price: 0,
         },
         {
           id: 10,
@@ -128,10 +176,8 @@ const provisoryActiveUser = {
 
 const initialState = {
   companies: [],
-  // categories: [],
-  // allItems: [],
   categories: provisoryCategories,
-//   allItems: provisoryItems,
+  allItems: provisoryItems,
   activeUser: provisoryActiveUser,
   allShoppingItems: [],
   filteredItems: [],
