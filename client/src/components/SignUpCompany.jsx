@@ -55,17 +55,11 @@ export default function SignUpCompany() {
             <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
               Create account
             </h1>
-            <form
-              onSubmit={handleSubmit}
-              className=" relative"
-            >
+            <form onSubmit={handleSubmit} className=" relative">
               <div className=" flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="email"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
-                    Your email
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
+                    Company email
                   </label>
                   <input
                     type="text"
@@ -77,13 +71,14 @@ export default function SignUpCompany() {
                     placeholder="name@company.com"
                     required=""
                   />
-                  {errors.email && <p className=" text-red-600 text-sm font-semibold ">{errors.email}</p>}
+                  {errors.email && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="name"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Company Name
                   </label>
                   <input
@@ -96,15 +91,16 @@ export default function SignUpCompany() {
                     placeholder="Company's name"
                     required=""
                   />
-                  {errors.companyName && <p className=" text-red-600 text-sm font-semibold ">{errors.companyName}</p>}
+                  {errors.companyName && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.companyName}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className=" flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="password"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Password
                   </label>
                   <input
@@ -117,13 +113,14 @@ export default function SignUpCompany() {
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required=""
                   />
-                  {errors.password && <p className=" text-red-600 text-sm font-semibold ">{errors.password}</p>}
+                  {errors.password && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.password}
+                    </p>
+                  )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="confirm-password"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Confirm password
                   </label>
                   <input
@@ -135,15 +132,16 @@ export default function SignUpCompany() {
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     required=""
                   />
-                  {errors.confirmPassword && <p className=" text-red-600 text-sm font-semibold ">{errors.confirmPassword}</p>}
+                  {errors.confirmPassword && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.confirmPassword}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className=" flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="description"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Company Description
                   </label>
                   <input
@@ -157,13 +155,14 @@ export default function SignUpCompany() {
                     required=""
                   />
 
-                  {errors.description && <p className=" text-red-600 text-sm font-semibold ">{errors.description}</p>}
+                  {errors.description && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.description}
+                    </p>
+                  )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="cuit"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     CUIT
                   </label>
                   <input
@@ -176,15 +175,16 @@ export default function SignUpCompany() {
                     placeholder="Company's CUIT"
                     required=""
                   />
-                  {errors.cuit && <p className=" text-red-600 text-sm font-semibold ">{errors.cuit}</p>}
+                  {errors.cuit && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.cuit}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="adress"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Adress
                   </label>
                   <input
@@ -196,13 +196,14 @@ export default function SignUpCompany() {
                     placeholder="Company's Adress"
                     required=""
                   />
-                  {errors.address && <p className=" text-red-600 text-sm font-semibold ">{errors.address}</p>}
+                  {errors.address && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.address}
+                    </p>
+                  )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="phoneNumber"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Phone Number
                   </label>
                   <input
@@ -214,10 +215,14 @@ export default function SignUpCompany() {
                     placeholder="Company's phone number"
                     required=""
                   />
-                  {errors.phoneNumber && <p className=" text-red-600 text-sm font-semibold ">{errors.phoneNumber}</p>}
+                  {errors.phoneNumber && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.phoneNumber}
+                    </p>
+                  )}
                 </div>
-                </div>
-                <div className=" h-28">
+              </div>
+              <div className=" h-28">
                 <div>
                   <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Company logo
@@ -231,7 +236,11 @@ export default function SignUpCompany() {
                     value={input.imageUrl}
                     onChange={handleInputChange}
                   />
-                  {errors.imageUrl && <p className=" text-red-600 text-sm font-semibold ">{errors.imageUrl}</p>}
+                  {errors.imageUrl && (
+                    <p className=" text-red-600 text-sm font-semibold ">
+                      {errors.imageUrl}
+                    </p>
+                  )}
                 </div>
               </div>
               <button

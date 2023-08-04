@@ -61,10 +61,7 @@ export default function SignUpMember() {
             <form onSubmit={handleSubmit} className=" relative">
               <div className=" flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="email"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Your email
                   </label>
                   <input
@@ -84,10 +81,7 @@ export default function SignUpMember() {
                   )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="name"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     DNI
                   </label>
                   <input
@@ -109,10 +103,7 @@ export default function SignUpMember() {
               </div>
               <div className=" flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="password"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Password
                   </label>
                   <input
@@ -132,10 +123,7 @@ export default function SignUpMember() {
                   )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="confirm-password"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Confirm password
                   </label>
                   <input
@@ -156,10 +144,7 @@ export default function SignUpMember() {
               </div>
               <div className="flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="adress"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     First Name
                   </label>
                   <input
@@ -178,10 +163,7 @@ export default function SignUpMember() {
                   )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="phoneNumber"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Last Name
                   </label>
                   <input
@@ -202,10 +184,7 @@ export default function SignUpMember() {
               </div>
               <div className="flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
-                  <label
-                    for="adress"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Adress
                   </label>
                   <input
@@ -224,10 +203,7 @@ export default function SignUpMember() {
                   )}
                 </div>
                 <div className=" w-2/5">
-                  <label
-                    for="phoneNumber"
-                    className="block mb-2 text-m font-medium text-gray-900 "
-                  >
+                  <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Phone Number
                   </label>
                   <input
@@ -252,6 +228,7 @@ export default function SignUpMember() {
                     Profile Picture
                   </label>{" "}
                   <input
+                  placeholder="Your picture"
                     type="text"
                     name="imageUrl"
                     for="Your picture"
