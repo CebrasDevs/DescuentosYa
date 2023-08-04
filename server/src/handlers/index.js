@@ -1,10 +1,10 @@
-const getShoppingHandler = require('./shoppingHandlers/getShoppingHandler');
-const createShoppingHandler = require('./shoppingHandlers/createShoppingHandler');
-const updateShoppingHandler = require('./shoppingHandlers/updateShoppingHandler');
+const getShoppingHandler = require("./shoppingHandlers/getShoppingHandler");
+const createShoppingHandler = require("./shoppingHandlers/createShoppingHandler");
+const updateShoppingHandler = require("./shoppingHandlers/updateShoppingHandler");
 
-const getItemsHandler = require('./itemsHandlers/getItemsHandler');
-const createItemsHandler = require('./itemsHandlers/createItemsHandler');
-const updateItemsHandler = require('./itemsHandlers/updateItemsHandler');
+const getItemsHandler = require("./itemsHandlers/getItemsHandler");
+const createItemsHandler = require("./itemsHandlers/createItemsHandler");
+const updateItemsHandler = require("./itemsHandlers/updateItemsHandler");
 
 const createUsersHandler = require("./usersHandlers/createUsersHandler");
 const updateUsersHandler = require("./usersHandlers/updateUsersHandler");
@@ -29,35 +29,45 @@ const createVouchersHandler = require("./vouchersHandlers/createVouchersHandler"
 const updateVouchersHandler = require("./vouchersHandlers/updateVouchersHandler");
 const getVouchersHandler = require("./vouchersHandlers/getVouchersHandler");
 
+const createCategoryHandler = require("./categoriesHandler/createCategoryHandler");
+const deleteCategoryHandler = require("./categoriesHandler/deleteCategoryHandler");
+const getCategoriesHandler = require("./categoriesHandler/getCategoriesHandler");
+const updateCategoryHandler = require("./categoriesHandler/updateCategoryHandler");
+
 module.exports = {
-    getShoppingHandler,
-    createShoppingHandler,
-    updateShoppingHandler,
+  getShoppingHandler,
+  createShoppingHandler,
+  updateShoppingHandler,
 
-    getItemsHandler,
-    createItemsHandler,
-    updateItemsHandler,
+  getItemsHandler,
+  createItemsHandler,
+  updateItemsHandler,
 
-    createUsersHandler,
-    updateUsersHandler,
-    getUsersHandler,
+  createUsersHandler,
+  updateUsersHandler,
+  getUsersHandler,
 
-    createAdminsHandler,
-    updateAdminsHandler,
-    getAdminsHandler,
-    getAdminsByIdHandler,
+  createAdminsHandler,
+  updateAdminsHandler,
+  getAdminsHandler,
+  getAdminsByIdHandler,
 
-    createCompaniesHandler,
-    getCompaniesHandler,
-    updateCompaniesHandler,
-    getCompaniesByIdHandler,
+  createCompaniesHandler,
+  getCompaniesHandler,
+  updateCompaniesHandler,
+  getCompaniesByIdHandler,
 
-    createMembersHandler,
-    updateMembersHandler,
-    getMembersHandler,
-    getMembersByIdHandler,
+  createMembersHandler,
+  updateMembersHandler,
+  getMembersHandler,
+  getMembersByIdHandler,
 
-    createVouchersHandler,
-    getVouchersHandler,
-    updateVouchersHandler,
+  createVouchersHandler,
+  getVouchersHandler,
+  updateVouchersHandler,
+
+  createCategoryHandler,
+  deleteCategoryHandler,
+  getCategoriesHandler,
+  updateCategoryHandler,
 };
