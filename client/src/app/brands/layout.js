@@ -24,11 +24,11 @@ export default function BrandView() {
 
   return (
     <div className=" flex relative">
-      <div class=" mx-auto py-8">
-        <div class="grid grid-cols-2 gap-20 p-24 items-center justify-center ">
+      <div className=" mx-auto py-8">
+        <div className="grid grid-cols-2 gap-20 p-24 items-center justify-center ">
           {logos.map((logo) => (
-            <div class="bg-white shadow-xl h-64 rounded-lg overflow-hidden cursor-pointer ">
-              <img class="h-full w-full object-cover" src={logo} alt="Brand 1" />
+            <div className="bg-white shadow-xl h-64 rounded-lg overflow-hidden cursor-pointer ">
+              <img className="h-full w-full object-cover" src={logo} alt="Brand 1" />
             </div>
           ))}
         </div>

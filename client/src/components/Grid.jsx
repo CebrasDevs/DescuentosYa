@@ -2,21 +2,23 @@
 import Card from "./Card";
 import usePaginate from "@/hooks/usePaginate";
 import Pagination from "@/components/Pagination";
+import styles from "../styles/Discounts.module.css";
 
 export default function Grid() {
-  const {
-    currentView
-  } = usePaginate();
+    const { currentView } = usePaginate();
 
-  const items = currentView;
+    const items = currentView;
 
-  
-  return (
-    <div className="grid grid-cols-3 gap-12 p-24 items-center justify-center ">
-      {items.map((item, index) => {
-        return <Card item={item} key={index} />;
-      })}
-      <Pagination/>
-    </div>
-  );
+    return (
+        <>
+            <div className={styles.container}>
+                {items.map((item, index) => {
+                    return <Card item={item} key={index} />;
+                })}
+            </div>
+            <div className="text-center mt-4">
+                <Pagination />
+            </div>
+        </>
+    );
 }
