@@ -26,6 +26,7 @@ module.exports = {
     getUsersHelper,
     updateUsersHelper,
     createUsersHelper,
+    getUsersByIdHelper,
 
     getVouchersHelper,
     updateVouchersHelper,
