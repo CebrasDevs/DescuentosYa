@@ -1,9 +1,10 @@
 const { Router } = require('express');
 const mainRouter = Router();
 
-const shoppingRouter = require('./shoppingRouter')
-const itemsRouter = require('./itemsRouter')
+const shoppingRouter = require('./shoppingRouter');
+const itemsRouter = require('./itemsRouter');
 const usersRouter = require("./usersRouter");
+const adminsRouter = require("./adminsRouter");
 const companiesRouter = require("./companiesRouter");
 const membersRouter = require("./membersRouter");
 const vouchersRouter = require("./vouchersRouter");
@@ -11,6 +12,7 @@ const vouchersRouter = require("./vouchersRouter");
 mainRouter.use('/shopping', shoppingRouter);
 mainRouter.use('/items', itemsRouter);
 mainRouter.use("/users", usersRouter);
+mainRouter.use("/admins", adminsRouter);
 mainRouter.use("/companies", companiesRouter);
 mainRouter.use("/members", membersRouter);
 

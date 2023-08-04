@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 module.exports = async (user) => {
-    const res = await prisma.user.create({
+    const newUser = await prisma.user.create({
         data: {
             email: user.email,
             password: user.password,
@@ -10,17 +10,17 @@ module.exports = async (user) => {
             dni: user.dni,
             cuit: user.cuit,
             name: user.name,
-            url_image: user.url_image,
-            company_name: user.company_name,
+            url_image: user.imageUrl,
+            company_name: user.companyName,
             address: user.address,
-            phone: user.phone,
+            phone: user.phoneNumber,
             last_payment: user.last_payment,
             description: user.description,
         }
     });
     await prisma.$disconnect();
-    if (res) {
-        return res;
+    if (newUser) {
+        return newUser;
     }
     throw new Error(error.message);
 };
