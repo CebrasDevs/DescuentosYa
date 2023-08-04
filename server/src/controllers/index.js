@@ -28,6 +28,7 @@ const updateShoppingController = require("./shoppingControllers/updateShoppingCo
 const getItemsController = require("./itemsControllers/getItemsController");
 const createItemsController = require("./itemsControllers/createItemsController");
 const updateItemsController = require("./itemsControllers/updateItemsController");
+const getItemsByIdController = require("./itemsControllers/getItemsByIdController");
 
 const createCategoryController = require("./categoriesControllers/createCategoryController");
 const deleteCategoryController = require("./categoriesControllers/deleteCategoryController");
@@ -67,6 +68,7 @@ module.exports = {
   getItemsController,
   createItemsController,
   updateItemsController,
+  getItemsByIdController,
 
   createCategoryController,
   deleteCategoryController,

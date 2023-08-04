@@ -1,6 +1,6 @@
 const { createCategoryHelper } = require("../../helpers");
 
-module.exports = async (category) => {
-  const category = await createCategoryHelper(category);
+module.exports = async (body) => {
+  const category = await createCategoryHelper(body);
   return category;
 };
