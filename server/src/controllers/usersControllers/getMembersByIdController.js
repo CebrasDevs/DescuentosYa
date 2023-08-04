@@ -1,6 +1,6 @@
-const { getUsersByIdHelper } = require('../../helpers');
+const { getUsersHelper } = require('../../helpers');
 
 module.exports = async (id) => {
-    const member = await getUsersByIdHelper(id);
+    const member = await getUsersHelper({ id: +id });
     return member;
 };
