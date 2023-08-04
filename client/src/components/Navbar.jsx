@@ -52,6 +52,9 @@ export default function Navbar() {
                         >
                             Post a Discount
                         </Link>
+                        <Link href={"/shoppingcart"} className="mr-10 font-medium hover:text-blue-500">
+                            <BsCart3/>
+                        </Link>
                     </div>
                 </div>
             </div>
