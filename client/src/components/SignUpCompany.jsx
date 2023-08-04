@@ -58,7 +58,6 @@ export default function SignUpCompany() {
             <form
               onSubmit={handleSubmit}
               className=" relative"
-              action="#"
             >
               <div className=" flex flex-row h-28 justify-between">
                 <div className=" w-2/5">
@@ -94,7 +93,7 @@ export default function SignUpCompany() {
                     value={input.companyName}
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="Your Company name"
+                    placeholder="Company's name"
                     required=""
                   />
                   {errors.companyName && <p className=" text-red-600 text-sm font-semibold ">{errors.companyName}</p>}
@@ -154,7 +153,7 @@ export default function SignUpCompany() {
                     type="text"
                     id="companyName"
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="Your Company description"
+                    placeholder="Company's description"
                     required=""
                   />
 
@@ -212,7 +211,7 @@ export default function SignUpCompany() {
                     value={input.phoneNumber}
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder="Company's Adress"
+                    placeholder="Company's phone number"
                     required=""
                   />
                   {errors.phoneNumber && <p className=" text-red-600 text-sm font-semibold ">{errors.phoneNumber}</p>}
@@ -226,7 +225,8 @@ export default function SignUpCompany() {
                   <input
                     type="text"
                     name="imageUrl"
-                    for="Your company Logo"
+                    for="Company Logo"
+                    placeholder="Company's logo"
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     value={input.imageUrl}
                     onChange={handleInputChange}

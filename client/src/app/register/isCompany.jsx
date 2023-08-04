@@ -13,8 +13,10 @@ export default function IsCompany () {
 
     return (
         <div>
-            <label>
-                <input 
+            <div className=" flex justify-center gap-12 my-4">
+            <label className="py-2 px-6 font-bold rounded text-white  bg-violet-500 active:bg-violet-900 selection:bg-violet-900">
+                <input
+                    className=" hidden selection:bg-violet-900 "
                     type="radio" 
                     value="false"
                     checked={IsCompany === false}
@@ -22,8 +24,9 @@ export default function IsCompany () {
                 />
                 Member
             </label>
-            <label>
-                <input 
+            <label className="py-2 px-6 font-bold rounded text-white  bg-violet-500 active:bg-violet-900 selection:bg-violet-900 ">
+                <input
+                    className="hidden selection:bg-violet-900"
                     type="radio" 
                     value="true"
                     checked={IsCompany === true}
@@ -31,6 +34,7 @@ export default function IsCompany () {
                 />
                 Company
             </label>
+            </div>
             {
                 IsCompany 
                     ? <SignUpCompany/>
