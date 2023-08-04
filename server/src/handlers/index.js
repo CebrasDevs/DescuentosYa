@@ -10,6 +10,11 @@ const createUsersHandler = require("./usersHandlers/createUsersHandler");
 const updateUsersHandler = require("./usersHandlers/updateUsersHandler");
 const getUsersHandler = require("./usersHandlers/getUsersHandler");
 
+const createAdminsHandler = require("./usersHandlers/createAdminsHandler");
+const updateAdminsHandler = require("./usersHandlers/updateAdminsHandler");
+const getAdminsHandler = require("./usersHandlers/getAdminsHandler");
+const getAdminsByIdHandler = require("./usersHandlers/getAdminsByIdHandler");
+
 const createCompaniesHandler = require("./usersHandlers/createCompaniesHandler");
 const updateCompaniesHandler = require("./usersHandlers/updateCompaniesHandler");
 const getCompaniesHandler = require("./usersHandlers/getCompaniesHandler");
@@ -34,6 +39,11 @@ module.exports = {
     createUsersHandler,
     updateUsersHandler,
     getUsersHandler,
+
+    createAdminsHandler,
+    updateAdminsHandler,
+    getAdminsHandler,
+    getAdminsByIdHandler,
 
     createCompaniesHandler,
     getCompaniesHandler,
