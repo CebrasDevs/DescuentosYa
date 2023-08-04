@@ -1,3 +1,8 @@
+const createAdminsController = require("./usersControllers/createAdminsController");
+const updateAdminsController = require("./usersControllers/updateAdminsController");
+const getAdminsController = require("./usersControllers/getAdminsController");
+const getAdminsByIdController = require("./usersControllers/getAdminsByIdController");
+
 const createUsersController = require("./usersControllers/createUsersController");
 const updateUsersController = require("./usersControllers/updateUsersController");
 const getUsersController = require("./usersControllers/getUsersController");
@@ -28,6 +33,11 @@ module.exports = {
     createUsersController,
     updateUsersController,
     getUsersController,
+
+    createAdminsController,
+    updateAdminsController,
+    getAdminsController,
+    getAdminsByIdController,
 
     createCompaniesController,
     updateCompaniesController,
