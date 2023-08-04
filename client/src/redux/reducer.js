@@ -4,118 +4,135 @@ import {
   SET_CURRENT_PAGE,
   ADD_SHOPPING_CART_ITEM,
   DELETE_SHOPPING_CART_ITEM,
+  DELETE_COMPANY_ITEM
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 
 const provisoryCategories = ["food", "health", "fashion"];
-const provisoryItems = [
-  {
-    id: 1,
-    userId: 2,
-    description: null,
-    discount: 15,
-    category: "food",
-    name: "Bebida Cola",
-    price: 0,
-  },
-  {
+// const provisoryItems = 
+
+const provisoryActiveUser = {
     id: 2,
-    userId: 2,
-    description: null,
-    discount: 20,
-    category: "health",
-    name: "Chinese massage",
-    price: 200,
-  },
-  {
-    id: 3,
-    userId: 2,
-    description: null,
-    discount: 50,
-    category: "fashion",
-    name: "T-shirts",
-    price: 0,
-  },
-  {
-    id: 4,
-    userId: 2,
-    description: null,
-    discount: 30,
-    category: "health",
-    name: "Nails",
-    price: 100,
-  },
-  {
-    id: 5,
-    userId: 2,
-    description: null,
-    discount: 40,
-    category: "fashion",
-    name: "Shoes",
-    price: 0,
-  },
-  {
-    id: 6,
-    userId: 2,
-    description: null,
-    discount: 5,
-    category: "food",
-    name: "Fish",
-    price: 0,
-  },
-  {
-    id: 7,
-    userId: 2,
-    description: null,
-    discount: 30,
-    category: "food",
-    name: "Meat",
-    price: 0,
-  },
-  {
-    id: 8,
-    userId: 2,
-    description: null,
-    discount: 20,
-    category: "health",
-    name: "Sauna",
-    price: 100,
-  },
-  {
-    id: 9,
-    userId: 2,
-    description: null,
-    discount: 60,
-    category: "fashion",
-    name: "Hats",
-    price: 0,
-  },
-  {
-    id: 10,
-    userId: 2,
-    description: null,
-    discount: 30,
-    category: "health",
-    name: "Sport Nutricion",
-    price: 1000,
-  },
-  {
-    id: 11,
-    userId: 2,
-    description: null,
-    discount: 50,
-    category: "food",
-    name: "Cookies",
-    price: 0,
-  },
-];
+    role: 'company',
+    email: 'contact@youcompanyla.com',
+    password: 'YOUwellnesslove123',
+    companyName: 'YOU - Wellness & Health',
+    description: 'If you are looking for a',
+    cuit: 20402458354,
+    address: '1234 Maple Street, Los Angeles, CA 90001, United States',
+    phoneNumber: 2135557890,
+    imageUrl: 'https://example.com/logo.png',
+    Items: [
+        {
+          id: 1,
+          userId: 2,
+          description: null,
+          discount: 15,
+          category: "food",
+          name: "Bebida Cola",
+          price: 0,
+        },
+        {
+          id: 2,
+          userId: 3,
+          description: null,
+          discount: 20,
+          category: "health",
+          name: "Chinese massage",
+          price: 200,
+        },
+        {
+          id: 3,
+          userId: 4,
+          description: null,
+          discount: 50,
+          category: "fashion",
+          name: "T-shirts",
+          price: 0,
+        },
+        {
+          id: 4,
+          userId: 2,
+          description: null,
+          discount: 30,
+          category: "health",
+          name: "Nails",
+          price: 100,
+        },
+        {
+          id: 5,
+          userId: 3,
+          description: null,
+          discount: 40,
+          category: "fashion",
+          name: "Shoes",
+          price: 0,
+        },
+        {
+          id: 6,
+          userId: 2,
+          description: null,
+          discount: 5,
+          category: "food",
+          name: "Fish",
+          price: 0,
+        },
+        {
+          id: 7,
+          userId: 5,
+          description: null,
+          discount: 30,
+          category: "food",
+          name: "Meat",
+          price: 0,
+        },
+        {
+          id: 8,
+          userId: 2,
+          description: null,
+          discount: 20,
+          category: "health",
+          name: "Sauna",
+          price: 100,
+        },
+        {
+          id: 9,
+          userId: 1,
+          description: null,
+          discount: 60,
+          category: "fashion",
+          name: "Hats",
+          price: 0,
+        },
+        {
+          id: 10,
+          userId: 2,
+          description: null,
+          discount: 30,
+          category: "health",
+          name: "Sport Nutricion",
+          price: 1000,
+        },
+        {
+          id: 11,
+          userId: 2,
+          description: null,
+          discount: 50,
+          category: "food",
+          name: "Cookies",
+          price: 0,
+        },
+      ]
+}
+
 
 const initialState = {
   companies: [],
   // categories: [],
   // allItems: [],
   categories: provisoryCategories,
-  allItems: provisoryItems,
+//   allItems: provisoryItems,
+  activeUser: provisoryActiveUser,
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {
@@ -155,6 +172,14 @@ const rootReducer = (state = initialState, action) => {
         return{
             ...state,
             allShoppingItems: state.allShoppingItems.filter((item)=> item.id !== action.payload)
+        }
+    case DELETE_COMPANY_ITEM:
+        let copyAllItems = state.activeUser
+        copyAllItems= copyAllItems.Items.filter((item)=> item.id !== action.payload)
+        console.log(copyAllItems)
+        return {
+            ...state,
+            activeUser: {...state.activeUser, Items: copyAllItems}
         }
     default:
       return { ...state };

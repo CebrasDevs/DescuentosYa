@@ -33,8 +33,7 @@ export default function ItemDetail({id}){
         <div>
             <h1>Imagen del item</h1>
             <h1>Aprovecha el {itemFound.discount} % de descuento en la seccion {itemFound.category} en {itemFound.company} </h1>
-            <button onClick={handleGenerateCode}>Generar Codigo</button>
-            
+            <button onClick={handleGenerateCode}>Generar Codigo</button>  
         </div>
     )
 }
