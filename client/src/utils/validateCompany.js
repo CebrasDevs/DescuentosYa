@@ -69,8 +69,8 @@ export default function validateCompany(company) {
     if (!cuit.length) {
         errors.cuit = 'Required field';
     } else {
-        if (cuit.length < 10 || cuit.length > 11) {
-            errors.cuit = 'Invalid CUIT number';
+        if (cuit.length !== 11) {
+            errors.cuit = 'CUIT number must contain 11 digits';
         } else if (!intRegex.test(cuit)) {
             errors.cuit = 'Must contain only numbers';
         };
