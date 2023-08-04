@@ -17,9 +17,9 @@ const createVouchersHelper = require("./vouchersHelpers/createVouchersHelper");
 const createCategoryHelper = require("./categoriesHelpers/createCategoryHelper");
 const deleteCategoryHelper = require("./categoriesHelpers/deleteCategoryHelper");
 const getCategoriesHelper = require("./categoriesHelpers/getCategoriesHelper");
-const getCategoriesEnabledHelper = require("./categoriesHelpers/getCategoriesEnabledHelper");
-const getCategoriesDisabledHelper = require("./categoriesHelpers/getCategoriesDisabledHelper");
-const updateCategoryHelper = require("./categoriesHelpers/updateCategoryHelper");
+//const getCategoriesEnabledHelper = require("./categoriesHelpers/getCategoriesEnabledHelper");
+//const getCategoriesDisabledHelper = require("./categoriesHelpers/getCategoriesDisabledHelper");
+//const updateCategoryHelper = require("./categoriesHelpers/updateCategoryHelper");
 
 module.exports = {
   getShoppingHelper,
@@ -33,7 +33,7 @@ module.exports = {
   getUsersHelper,
   updateUsersHelper,
   createUsersHelper,
-  getUsersByIdHelper,
+  //getUsersByIdHelper,
 
   getVouchersHelper,
   updateVouchersHelper,
@@ -42,7 +42,7 @@ module.exports = {
   createCategoryHelper,
   deleteCategoryHelper,
   getCategoriesHelper,
-  getCategoriesDisabledHelper,
-  getCategoriesEnabledHelper,
-  updateCategoryHelper,
+  //getCategoriesDisabledHelper,
+  //getCategoriesEnabledHelper,
+  //updateCategoryHelper,
 };

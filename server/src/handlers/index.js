@@ -5,6 +5,7 @@ const updateShoppingHandler = require("./shoppingHandlers/updateShoppingHandler"
 const getItemsHandler = require("./itemsHandlers/getItemsHandler");
 const createItemsHandler = require("./itemsHandlers/createItemsHandler");
 const updateItemsHandler = require("./itemsHandlers/updateItemsHandler");
+const getItemsByIdHandler = require("./itemsHandlers/getItemsByIdHandler")
 
 const createUsersHandler = require("./usersHandlers/createUsersHandler");
 const updateUsersHandler = require("./usersHandlers/updateUsersHandler");
@@ -42,6 +43,7 @@ module.exports = {
   getItemsHandler,
   createItemsHandler,
   updateItemsHandler,
+  getItemsByIdHandler,
 
   createUsersHandler,
   updateUsersHandler,
