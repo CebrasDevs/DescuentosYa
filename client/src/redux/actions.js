@@ -3,6 +3,8 @@ export const FILTER_CARDS = "FILTER_CARDS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const ADD_SHOPPING_CART_ITEM = "ADD_SHOPPING_CART_ITEM";
 export const DELETE_SHOPPING_CART_ITEM = "DELETE_SHOPPING_CART_ITEM";
+export const DELETE_COMPANY_ITEM = 'DELETE_COMPANY_ITEM';
+
 
 
 
@@ -24,4 +26,8 @@ export const addShoppinCartItem = (item) => {
 
 export const deleteShoppingCartItem = (id) => {
     return {type: DELETE_SHOPPING_CART_ITEM, payload: id};
-}
+};
+
+export const deleteCompanyItem = (id) => {
+    return {type: DELETE_COMPANY_ITEM, payload: id};
+};
