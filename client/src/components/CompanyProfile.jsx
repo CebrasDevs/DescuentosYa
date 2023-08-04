@@ -36,7 +36,7 @@ export default function CompanyProfile(){
                     <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap bg-violet-200" key={index}>
                         <h1 className="m-10 justify-center">{item.id}</h1>
                         <h1 className="m-10 justify-center">Imagen del servicio o producto</h1>
-                        <h1 className="m-10 justify-center">Descripcion del producto o servicio{item.description}</h1>
+                        <h1 className="m-10 justify-center">Descripcion del producto o servicio  {item.description}</h1>
                         <button onClick={()=>handleDelete(item.id)} className="h-1/4 w-20 mt-10 bg-red-500"> Delete </button>
                     </div>
                     )})}
