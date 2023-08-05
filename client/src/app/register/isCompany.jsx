@@ -14,7 +14,7 @@ export default function IsCompany() {
   return (
     <div>
       <div className=" flex justify-center gap-12 my-4">
-        <label className={`py-2 px-6 font-bold rounded text-white bg-${IsCompany ? 'violet-500' : 'violet-900'} hover:bg-violet-700 `}>
+        <label className={`cursor-pointer py-2 px-6 font-bold rounded text-white bg-${IsCompany ? 'violet-500' : 'violet-900'} hover:bg-violet-700 `}>
           <input
             className={
               IsCompany ? "hidden bg-violet-900" : "hidden bg-violet-500"
@@ -26,7 +26,7 @@ export default function IsCompany() {
           />
           Member
         </label>
-        <label className={`py-2 px-6 font-bold rounded text-white bg-${!IsCompany ? 'violet-500' : 'violet-900'} hover:bg-violet-700 `}>
+        <label className={`cursor-pointer py-2 px-6 font-bold rounded text-white bg-${!IsCompany ? 'violet-500' : 'violet-900'} hover:bg-violet-700 `}>
           <input
             className={`hidden ${IsCompany} ? bg-violet-900`}
             type="radio"

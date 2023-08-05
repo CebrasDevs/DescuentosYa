@@ -24,15 +24,6 @@ export default function Login(){
 
     return(
         <form onSubmit={handleLogIn} className="flex flex-col gap-5">
-            <div className="input-button">
-                <button type="button" className={styles.button_custom}>Sign In with Google<FcGoogle size={'1.5em'}/></button>
-            </div>
-            <div className="input-button">
-                <button type="button" className={styles.button_custom}>Sign In with Facebook<BsFacebook size={'1.5em'} color="#1877F2"/></button>
-            </div>
-            <div>
-                ----- O -----
-            </div>
             <div className={styles.input_group}>
                 <input type="email" name="email" placeholder="Email" className={styles.input_text}/>
             </div>
@@ -42,7 +33,15 @@ export default function Login(){
             <div className="input-button">
                 <button type="submit" className={styles.button}>Log in</button>
             </div>
-            
+            <div>
+                ----- OR -----
+            </div>
+            <div className="input-button">
+                <button type="button" className={styles.button_custom}>Sign In with Google<FcGoogle size={'1.5em'}/></button>
+            </div>
+            <div className="input-button">
+                <button type="button" className={styles.button_custom}>Sign In with Facebook<BsFacebook size={'1.5em'} color="#1877F2"/></button>
+            </div>        
         </form>
     )
 }

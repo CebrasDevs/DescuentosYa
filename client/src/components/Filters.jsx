@@ -1,7 +1,8 @@
 "use client";
 
 import { useDispatch, useSelector } from "react-redux";
-import { filterCards } from "@/redux/actions";
+import { filterCards, getCategories } from "@/redux/actions";
+import { useEffect } from "react";
 
 export default function Filters() {
   const dispatch = useDispatch();
@@ -12,6 +13,11 @@ export default function Filters() {
   const itemTypeOptions = ["All types", "Products", "Services"];
   const sortingOptions = ["Alphabetical", "Highest discount"];
   const allCategories = ["All categories", ...categories];
+
+//   useEffect(() => {
+//     dispatch(getCategories());
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+// }, [dispatch]);
 
   function handleChange(e) {
     dispatch(
@@ -30,7 +36,7 @@ export default function Filters() {
           value={activeFilters.chosenItemType}
           name="chosenItemType"
           onChange={handleChange}
-          className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
+          className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
         >
           {itemTypeOptions.map((type) => {
             return <option key={type}>{type}</option>;
@@ -43,7 +49,7 @@ export default function Filters() {
         value={activeFilters.chosenCategory}
         name="chosenCategory"
         onChange={handleChange}
-        className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
+        className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
       >
         {allCategories?.map((category) => {
           return <option key={category}>{category}</option>;
@@ -56,7 +62,7 @@ export default function Filters() {
         return (
           <label className="flex justify-center mt-2" key={discount}>
             <input
-            className=" w-10"
+            className=" w-10 cursor-pointer"
               type="radio"
               name="chosenDiscount"
               checked={activeFilters.chosenDiscount === discount}
@@ -71,7 +77,7 @@ export default function Filters() {
       <div className=" p-6">
       <p className="font-medium mb-2 text-lg">Sort:</p>
       <select
-      className=" py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
+      className=" py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
         value={activeFilters.chosenSorting}
         name="chosenSorting"
         onChange={handleChange}
