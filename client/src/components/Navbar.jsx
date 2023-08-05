@@ -47,7 +47,7 @@ export default function Navbar() {
                             Sign Up
                         </Link>
                         <Link
-                            href={"#"}
+                            href="/create"
                             className="mr-10 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
                         >
                             Post a Discount
