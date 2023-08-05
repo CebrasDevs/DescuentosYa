@@ -14,10 +14,10 @@ export default function Filters() {
   const sortingOptions = ["Alphabetical", "Highest discount"];
   const allCategories = ["All categories", ...categories];
 
-//   useEffect(() => {
-//     dispatch(getCategories());
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [dispatch]);
 
   function handleChange(e) {
     dispatch(

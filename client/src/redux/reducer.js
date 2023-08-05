@@ -217,6 +217,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 filteredItems: filtered,
                 activeFilters: action.payload,
+                currentPage: 1
             };
         case SET_CURRENT_PAGE:
             return {

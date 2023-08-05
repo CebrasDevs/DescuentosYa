@@ -30,7 +30,7 @@ export function filterArray(items, filters) {
         filtered = filtered.filter((item) => item.discount >= minDiscount);
     };
     //FILTRO POR CATEGORIA
-    if (!chosenCategory === 'All categories') {
+    if (chosenCategory !== 'All categories') {
         filtered = filtered.filter((item) => item.category === chosenCategory);
     };
     //ORDENAMIENTOS
