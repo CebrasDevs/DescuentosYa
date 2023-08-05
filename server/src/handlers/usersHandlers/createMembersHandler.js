@@ -1,10 +1,21 @@
-const { createMemberController } = require('../../controllers');
+const { createMemberController } = require("../../controllers");
 
 module.exports = async (req, res) => {
-    try {
-        const member = await createMemberController(req.body);
-        return res.status(200).json(member);
-    } catch (error) {
-        return res.status(400).json({ error: error.message });
+  try {
+    let { email, password, dni, imageUrl, name, address, phoneNumber } =
+      req.body;
+    let dataMember = {
+      email,
+      password,
+      dni,
+      imageUrl,
+      name,
+      address,
+      phoneNumber,
     };
+    const newMember = await createMemberController(dataMember);
+    return res.status(200).json(newMember);
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
 };
