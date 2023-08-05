@@ -19,20 +19,20 @@ export function filterArray(items, filters) {
     //FILTRO POR TIPO DE ITEM
     if (chosenItemType === 'Products') {
         filtered = filtered.filter((item) => item.price === 0);
-    }
+    };
     if (chosenItemType === 'Services') {
         filtered = filtered.filter((item) => item.price > 0);
-    }
+    };
 
     //FILTRO POR %DESC
-    if (!chosenDiscount === 'All') {
-        const minDiscount = Number(chosenDiscount.slice(1, -1));
+    if (chosenDiscount !== 'All') {
+        const minDiscount = Number(chosenDiscount.substring(0, 2));
         filtered = filtered.filter((item) => item.discount >= minDiscount);
-    }
+    };
     //FILTRO POR CATEGORIA
     if (!chosenCategory === 'All categories') {
         filtered = filtered.filter((item) => item.category === chosenCategory);
-    }
+    };
     //ORDENAMIENTOS
     switch(chosenSorting) {
         case 'Alphabetical':
