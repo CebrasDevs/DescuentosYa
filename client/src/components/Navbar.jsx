@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { BsCart3 } from "react-icons/bs";
+import Image from "next/image";
+import logo from "../assets/D-logo.jpg";
+
 
 // const links = [
 //   {
@@ -29,8 +32,9 @@ export default function Navbar() {
             <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md z-10">
                 <div className=" flex w-3/4 m-auto items-center">
                     <div className="flex items-center h-full ml-10 mr-auto">
-                        <Link href={"/"}>
-                            <h1>DESCUENTOS YA (home)</h1>
+                        <Link href={"/"} className="flex items-center">
+                            <Image src={logo} alt="logo" width={50} height={50} />
+                            <h1 className="text-violet-600 font-bold text-2xl">DESCUENTOS</h1>&nbsp;&nbsp;<h1 className="font-bold text-2xl">YA</h1>
                         </Link>
                         <Link className="hover:text-blue-500 ml-10" href={"#"}>
                             How It Works
@@ -53,7 +57,7 @@ export default function Navbar() {
                             Post a Discount
                         </Link>
                         <Link href={"/shoppingcart"} className="mr-10 font-medium hover:text-blue-500">
-                            <BsCart3/>
+                            <BsCart3 />
                         </Link>
                     </div>
                 </div>
@@ -61,7 +65,9 @@ export default function Navbar() {
             <div className="flex items-center w-full h-12 bg-neutral-800 mt-16">
                 <div className=" flex w-3/4 m-auto">
                     <div className="flex h-full mr-auto text-white">
-                        <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">Find Companies</Link>
+                        <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">
+                            Find Companies
+                        </Link>
                         <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
                             Find Services
                         </Link>

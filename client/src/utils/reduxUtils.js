@@ -14,6 +14,8 @@ export function filterArray(items, filters) {
         chosenSorting 
     } = filters;
 
+    
+
     //FILTRO POR TIPO DE ITEM
     if (chosenItemType === 'Products') {
         filtered = filtered.filter((item) => item.price === 0);
@@ -21,6 +23,7 @@ export function filterArray(items, filters) {
     if (chosenItemType === 'Services') {
         filtered = filtered.filter((item) => item.price > 0);
     }
+
     //FILTRO POR %DESC
     if (!chosenDiscount === 'All') {
         const minDiscount = Number(chosenDiscount.slice(1, -1));
@@ -36,7 +39,7 @@ export function filterArray(items, filters) {
             filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
             break;
         case 'Highest discount':
-            filtered = filtered.sort((a, b) => a.discount - b.discount ? -1 : 1);
+            filtered.sort((a, b) => b.discount - a.discount);
             break;
         default:
             console.log('ERROR: invalid sorting method chosen (at reduxUtils)');

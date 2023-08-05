@@ -1,7 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import Carousel from "./Carousel";
+import { getCompanies, getDiscounts } from "@/redux/actions";
+import { useDispatch } from "react-redux";
 
 const slides = [
     {
@@ -18,6 +20,13 @@ const slides = [
 export default function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCompanies())
+        .then(() => dispatch(getDiscounts()));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch]);
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
@@ -38,11 +47,11 @@ export default function Home() {
                     style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
                     className="w-full h-full bg-center bg-cover ease-out duration-500"
                 ></div>
-                
+
                 <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
                     <BsChevronCompactLeft onClick={prevSlide} size={30} />
                 </div>
-                
+
                 <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
                     <BsChevronCompactRight onClick={nextSlide} size={30} />
                 </div>
@@ -50,12 +59,12 @@ export default function Home() {
 
             <div className="w-2/3 m-auto mt-10">
                 <h2 className="mb-3 text-2xl">Discounts</h2>
-                <Carousel value={"discounts"}/>
+                <Carousel value={"discounts"} />
             </div>
 
             <div className="w-2/3 m-auto mt-10">
                 <h2 className="mb-3 text-2xl">Companies</h2>
-                <Carousel value={"companies"}/>
+                <Carousel value={"companies"} />
             </div>
         </div>
     );
