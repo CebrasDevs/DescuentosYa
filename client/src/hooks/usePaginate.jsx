@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 export default function usePaginate() {
     const dispatch = useDispatch();
 
-    const filteredItems = useSelector((state) => state.filteredItems);
-    const currentPage = useSelector((state) => state.currentPage);
+    const filteredItems = useSelector((state)=> state.filteredItems);
+    const currentPage = useSelector((state)=> state.currentPage)
 
     useEffect(() => {
         dispatch(getDiscounts());
@@ -19,7 +19,7 @@ export default function usePaginate() {
     const maxIndex = currentPage * itemsPerPage;
     const minIndex = maxIndex - itemsPerPage;
     const currentView = filteredItems?.slice(minIndex, maxIndex); // se envia a GRID
-    const numberOfPages = Math.ceil(filteredItems.length / itemsPerPage) || 1; // para asegurarnos de que el number of pages no sea nunca 0
+    const numberOfPages = Math.ceil(filteredItems?.length / itemsPerPage) || 1; // para asegurarnos de que el number of pages no sea nunca 0
 
     function handleOnClick(e) {
         if (e.target.name === "previous")
