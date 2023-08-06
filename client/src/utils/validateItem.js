@@ -1,6 +1,6 @@
 
 // algunas regex para validar datos
-const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙâêîôûÂÊÎÔÛ']+$/;
+const nameRegex = /^[0-9A-Za-z\s-]+$/;
 const descriptionRegex = /^[0-9a-zA-Z \-\/\+\_\!\¡\¿]+$/;
 const floatRegex = /^[0-9.]+$/;
 const intRegex = /^[0-9]+$/;
