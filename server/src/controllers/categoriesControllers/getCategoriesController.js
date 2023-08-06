@@ -2,5 +2,6 @@ const { getCategoriesHelper } = require("../../helpers");
 
 module.exports = async () => {
   const categories = await getCategoriesHelper();
-  return categories;
+  const categoryNames = categories.map((category) => category.name);
+  return categoryNames;
 };

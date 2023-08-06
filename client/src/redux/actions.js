@@ -46,6 +46,7 @@ export const getCategories = () => {
     return async (dispatch) => {
         try {
             const { data } = await axios.get("http://localhost:3001/categories");
+            // console.log("PABLOOO", data);
             return dispatch({
                 type: GET_CATEGORIES,
                 payload: data,
