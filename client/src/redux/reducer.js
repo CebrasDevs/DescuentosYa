@@ -6,7 +6,7 @@ import {
     SET_CURRENT_PAGE,
     ADD_SHOPPING_CART_ITEM,
     DELETE_SHOPPING_CART_ITEM,
-    DELETE_COMPANY_ITEM
+    DELETE_COMPANY_ITEM,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 
