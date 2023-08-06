@@ -215,11 +215,12 @@ const rootReducer = (state = initialState, action) => {
       };
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);
-      return {
-        ...state,
-        filteredItems: filtered,
-        activeFilters: action.payload,
-      };
+            return {
+                ...state,
+                filteredItems: filtered,
+                activeFilters: action.payload,
+                currentPage: 1
+            };
     case SET_CURRENT_PAGE:
       return {
         ...state,
@@ -242,7 +243,6 @@ const rootReducer = (state = initialState, action) => {
       copyAllItems = copyAllItems.Items.filter(
         (item) => item.id !== action.payload
       );
-      console.log(copyAllItems);
       return {
         ...state,
         activeUser: { ...state.activeUser, Items: copyAllItems },

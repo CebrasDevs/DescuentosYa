@@ -72,7 +72,6 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="name@mail.com"
-                    required=""
                   />
                   {errors.email && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -92,7 +91,6 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your DNI"
-                    required=""
                   />
                   {errors.dni && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -114,7 +112,7 @@ export default function SignUpMember() {
                     value={input.password}
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    required=""
+                    
                   />
                   {errors.password && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -133,7 +131,7 @@ export default function SignUpMember() {
                     placeholder="••••••••"
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    required=""
+                    
                   />
                   {errors.confirmPassword && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -154,7 +152,7 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your first name"
-                    required=""
+                    
                   />
                   {errors.firstName && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -173,7 +171,7 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your last name"
-                    required=""
+                    
                   />
                   {errors.lastName && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -194,7 +192,6 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your Adress"
-                    required=""
                   />
                   {errors.address && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -213,7 +210,6 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your phone number"
-                    required=""
                   />
                   {errors.phoneNumber && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -231,7 +227,6 @@ export default function SignUpMember() {
                   placeholder="Your picture"
                     type="text"
                     name="imageUrl"
-                    for="Your picture"
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     value={input.imageUrl}
                     onChange={handleInputChange}
