@@ -6,7 +6,7 @@ import {
     SET_CURRENT_PAGE,
     ADD_SHOPPING_CART_ITEM,
     DELETE_SHOPPING_CART_ITEM,
-    DELETE_COMPANY_ITEM
+    DELETE_COMPANY_ITEM,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 
@@ -217,6 +217,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 filteredItems: filtered,
                 activeFilters: action.payload,
+                currentPage: 1
             };
         case SET_CURRENT_PAGE:
             return {

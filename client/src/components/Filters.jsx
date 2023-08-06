@@ -9,15 +9,15 @@ export default function Filters() {
   const activeFilters = useSelector((state) => state.activeFilters);
   const categories = useSelector((state) => state.categories);
 
-  const discountOptions = ["All", "25%", "40%", "50%"];
+  const discountOptions = ["All", "25% or more", "35% or more", "45% or more"];
   const itemTypeOptions = ["All types", "Products", "Services"];
   const sortingOptions = ["Alphabetical", "Highest discount"];
   const allCategories = ["All categories", ...categories];
 
-//   useEffect(() => {
-//     dispatch(getCategories());
-//     // eslint-disable-next-line react-hooks/exhaustive-deps
-// }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCategories());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [dispatch]);
 
   function handleChange(e) {
     dispatch(

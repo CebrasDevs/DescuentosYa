@@ -6,7 +6,7 @@ const {
 
 module.exports = async (req, res) => {
   try {
-    const enabled = req.query;
+    const enabled = req.query.enabled;
     let categories;
     if (enabled) {
       if (enabled === "true") {
