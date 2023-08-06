@@ -8,7 +8,12 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const ADD_SHOPPING_CART_ITEM = "ADD_SHOPPING_CART_ITEM";
 export const DELETE_SHOPPING_CART_ITEM = "DELETE_SHOPPING_CART_ITEM";
 export const DELETE_COMPANY_ITEM = "DELETE_COMPANY_ITEM";
+
+export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
+export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
+
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
+
 
 export const getCompanies = () => {
   return async (dispatch) => {
@@ -42,10 +47,23 @@ export const getCategories = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("http://localhost:3001/categories");
-      // console.log("PABLOOO", data);
       return dispatch({
         type: GET_CATEGORIES,
         payload: data,
+      });
+    } catch (error) {
+
+        console.log("error");
+    }
+};
+
+export const getCompanyDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/companies/${id}`);
+      return dispatch({
+        type: GET_COMPANY_DETAIL,
+        payload: data[0],
       });
     } catch (error) {
       console.log("error");
@@ -53,6 +71,9 @@ export const getCategories = () => {
   };
 };
 
+export const cleanCompanyDetail = () => {
+  return { type: CLEAN_COMPANY_DETAIL };
+};
 export const filterCards = (filters) => {
   return { type: FILTER_CARDS, payload: filters };
 };
@@ -62,8 +83,9 @@ export const setCurrentPage = (page) => {
 };
 
 export const addShoppinCartItem = (item) => {
-  return { type: ADD_SHOPPING_CART_ITEM, payload: item };
-};
+
+    return { type: ADD_SHOPPING_CART_ITEM, payload: item };
+
 
 export const deleteShoppingCartItem = (id) => {
   return { type: DELETE_SHOPPING_CART_ITEM, payload: id };
