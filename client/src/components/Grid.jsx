@@ -16,9 +16,6 @@ export default function Grid() {
                     return <Card item={item} key={index} />;
                 })}
             </div>
-            <div className="text-center mt-4">
-                <Pagination />
-            </div>
         </>
     );
 }
