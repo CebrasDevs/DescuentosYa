@@ -6,7 +6,7 @@ export default function Pagination() {
   const { handleOnClick, currentPage, numberOfPages } = usePaginate();
 
   return (
-    <div className="flex justify-center items-center gap-4">
+    <div className="flex justify-center items-center gap-4 mt-6">
       <button
         name="previous"
         className="flex items-center gap-2 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"

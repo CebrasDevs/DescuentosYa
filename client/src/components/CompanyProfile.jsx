@@ -17,7 +17,7 @@ export default function CompanyProfile(){
         dispatch(deleteCompanyItem(id));
     };
 
-    if(activeUser.role === 'company'){
+    if(activeUser.role === 'COMPANY'){
         return (
             <div>
                 <div>

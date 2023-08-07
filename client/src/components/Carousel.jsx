@@ -3,6 +3,7 @@ import Card from "./Card";
 import usePaginate from "@/hooks/usePaginate";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 // action que me llene un arreglo EG de items ni bien se levante el front, me traigo ese EG
 export default function Carousel({ value }) {
@@ -27,11 +28,13 @@ export default function Carousel({ value }) {
                 return (
                     <div key={index}>
                         <div className="card bg-white w-[270px] rounded-lg m-2 shadow-md hover:shadow-xl">
-                        <img
-                            className=" card w-[500px] h-[200px] bg-white shadow-xl rounded-lg"
-                            src={company.imageUrl}
-                            alt={company.companyName}
-                        />
+                        <Link href={`/brands/${company.id}`}>
+                            <img
+                                className=" card w-[500px] h-[200px] bg-white shadow-xl rounded-lg"
+                                src={company.imageUrl}
+                                alt={company.companyName}
+                            />
+                        </Link>
                         </div>
                     </div>
                 );
