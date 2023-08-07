@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  COMPANY
+  MEMBER
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  email        String     @unique
+  password     String
+  enabled      Boolean    @default(false)
+  role         Role
+  dni          String?
+  cuit         String?
+  name         String?
+  url_image    String
+  company_name String?
+  address      String
+  phone        String?
+  last_payment DateTime?
+  description  String?
+  Item         Item[]
+  Voucher      Voucher[]
+  Shopping     Shopping[]
+}
+
+model Item {
+  id            Int             @id @default(autoincrement())
+  user          User            @relation(fields: [userId], references: [id])
+  userId        Int
+  category      Category        @relation(fields: [categoryId], references: [id])
+  categoryId    Int
+  description   String?
+  name          String
+  price         Float           @default(0)
+  url_image     String
+  discount      Int
+  Voucher       Voucher[]
+  Item_Shopping Item_Shopping[]
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+  Item Item[]
+}
+
+model Voucher {
+  id     Int    @id @default(autoincrement())
+  item   Item   @relation(fields: [itemId], references: [id])
+  itemId Int
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int
+  code   String
+}
+
+enum Way_To_Pay {
+  CASH
+  CARD
+}
+
+enum State {
+  SUCCESS
+  PENDING
+}
+
+model Shopping {
+  id            Int             @id @default(autoincrement())
+  user          User            @relation(fields: [userId], references: [id])
+  userId        Int
+  url_PDF       String
+  way_to_pay    Way_To_Pay
+  state         State
+  Item_Shopping Item_Shopping[]
+}
+
+model Item_Shopping {
+  id            Int      @id @default(autoincrement())
+  item          Item     @relation(fields: [itemId], references: [id])
+  itemId        Int
+  shopping      Shopping @relation(fields: [shoppingId], references: [id])
+  shoppingId    Int
+  quantity_Item Int
+}
+
+// Aca se crean los modelos de la base de datos
