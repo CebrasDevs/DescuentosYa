@@ -6,7 +6,7 @@ export default function UserProfile() {
 
     const activeUser = useSelector((state) => state.activeUser);
 
-    if(activeUser.role === 'member'){
+    if(activeUser.role === 'MEMBER'){
         return (
             <div className=" absolute top-1/4 left-1/2 transform -translate-x-1/2 w-2/4 flex shadow-lg">
                 <FaUserEdit className="flex absolute h-8 w-8 -right-3 -top-4 bg-white rounded-full border-2 border-neutral-900 cursor-pointer" />
