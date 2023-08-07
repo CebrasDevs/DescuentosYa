@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default async function Layout({ params }) {
   const { id } = params;
-  const { data } = await axios(`http://localhost:3001/items/${id}`);
+  const { data } = await axios(`https://desceuntosya-back.onrender.com/items/${id}`);
 
   return (
     <div>
