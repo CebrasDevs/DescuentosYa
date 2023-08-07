@@ -2,7 +2,7 @@ const {
     createMembersHandler,
     updateMembersHandler,
     getMembersHandler,
-    getMembersByIdHandler
+    getMembersByIdHandler,
 } = require("../handlers");
 
 const { Router } = require("express");
@@ -12,5 +12,6 @@ router.post("/", createMembersHandler);
 router.patch("/:id", updateMembersHandler);
 router.get("/:id", getMembersByIdHandler);
 router.get("/", getMembersHandler);
+
 
 module.exports = router;
