@@ -1,9 +1,32 @@
 const { createItemsController } = require("../../controllers")
-
+// falta las validaciones de categories
+// falta validaciones de vouchers
+// el get Users devuelve toda la info sin estructurar
 
 module.exports = async (req, res) => {
     try {
-        const response = await createItemsController(req.body);
+        let { 
+            userId, 
+            categoryId, 
+            description, 
+            name, 
+            price,
+            imageUrl,
+            discount
+        } = req.body;
+
+        let dataItem = {
+            userId, 
+            categoryId, 
+            description, 
+            name, 
+            price,
+            imageUrl,
+            discount
+        }
+
+        const response = await createItemsController(dataItem);
+
         return res.status(200).json(response);
         
     } catch (error) {
