@@ -15,10 +15,12 @@ export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 
+const URL_BASE = "https://desceuntosya-back.onrender.com";
+
 export const getCompanies = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/companies");
+      const { data } = await axios.get(`${URL_BASE}/companies`);
       return dispatch({
         type: GET_COMPANIES,
         payload: data,
@@ -32,7 +34,7 @@ export const getCompanies = () => {
 export const getDiscounts = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/items");
+      const { data } = await axios.get(`${URL_BASE}/items`);
       return dispatch({
         type: GET_DISCOUNTS,
         payload: data,
@@ -46,7 +48,7 @@ export const getDiscounts = () => {
 export const getCategories = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/categories");
+      const { data } = await axios.get(`${URL_BASE}/categories`);
       return dispatch({
         type: GET_CATEGORIES,
         payload: data,
@@ -60,7 +62,7 @@ export const getCategories = () => {
 export const getItemsByName = (value) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/items?name=${value}`);
+      const { data } = await axios.get(`${URL_BASE}/items?name=${value}`);
       return dispatch({
         type: GET_ITEM_BY_NAME,
         payload: data,
@@ -74,7 +76,7 @@ export const getItemsByName = (value) => {
 export const getCompanyDetail = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/companies/${id}`);
+      const { data } = await axios.get(`${URL_BASE}/companies/${id}`);
       return dispatch({
         type: GET_COMPANY_DETAIL,
         payload: data[0],
