@@ -3,9 +3,24 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
 module.exports = async (id, dataItem) => {
+    
+    console.log(id)
+    console.log(dataItem)
+
+    const updateData = {
+        ...dataItem,
+        id: dataItem.id === null ? +id : dataItem.id,
+        };
+        
+        const res = await prisma.item.update({
+            where: { id: +id },
+            data: updateData,
+        });
+
+    
     const res = await prisma.item.update({
         where: { id: +id},
-        data: dataItem
+        data:  updateData 
     })
     await prisma.$disconnect();
     if (res){
