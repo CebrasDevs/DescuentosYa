@@ -14,7 +14,6 @@ export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 
-
 export const getCompanies = () => {
   return async (dispatch) => {
     try {
@@ -52,9 +51,9 @@ export const getCategories = () => {
         payload: data,
       });
     } catch (error) {
-
-        console.log("error");
+      console.log("error");
     }
+  };
 };
 
 export const getCompanyDetail = (id) => {
@@ -83,9 +82,8 @@ export const setCurrentPage = (page) => {
 };
 
 export const addShoppinCartItem = (item) => {
-
-    return { type: ADD_SHOPPING_CART_ITEM, payload: item };
-
+  return { type: ADD_SHOPPING_CART_ITEM, payload: item };
+};
 
 export const deleteShoppingCartItem = (id) => {
   return { type: DELETE_SHOPPING_CART_ITEM, payload: id };
