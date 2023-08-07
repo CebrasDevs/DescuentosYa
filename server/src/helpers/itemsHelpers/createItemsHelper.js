@@ -12,9 +12,7 @@ module.exports = async (item) => {
             price: + item.price,
             discount: + item.discount,
             url_image: item.imageUrl
-            // user: {    // Establece la relación 'user' aquí
-            //     connect: { id: +item.userId }
-            // },
+            
         }
     });
     await prisma.$disconnect();
