@@ -6,7 +6,7 @@ export default function Card({ item }) {
     return (
         <div className="card bg-white w-[270px] h-[400px] rounded-lg m-2 shadow-md hover:shadow-xl hover:scale-105 transition-transform ease-in-out duration-300">
             <div className="top border-b flex justify-center">
-                <img src={item.img} alt="" className="w-[250px] h-[250px] object-cover" />
+                <img src={item.imageUrl} alt="" className="w-[250px] h-[250px] object-cover" />
             </div>
             <div className="bottom flex flex-col justify-center items-start px-4 mt-4">
                 <div className="title font-semibold text-lg">{item.name}</div>

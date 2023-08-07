@@ -3,7 +3,9 @@ const { getItemsController } = require("../../controllers")
 
 module.exports = async (req, res) => {
     try {
-        const response = await getItemsController()
+        const {name} = req.query;
+        
+        const response = await getItemsController(name)
         return res.status(200).json(response)
 
     } catch (error) {

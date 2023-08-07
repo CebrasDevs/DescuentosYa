@@ -1,7 +1,7 @@
 const { getItemsHelper } = require('../../helpers')
 
-module.exports = async () => {
-    const result = await getItemsHelper();
+module.exports = async (name) => {
+    const result = await getItemsHelper({name: {contains: name, mode:"insensitive"}});
 
     const itemsInfo = result.map((item) => {
         return {

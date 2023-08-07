@@ -66,6 +66,7 @@ export function formatItem(item) {
     const parsedPrice = parseFloat(price).toFixed(2);
     const parsedDiscount = Number(discount);
     return {
+        userId: 2,
         name: name,
         category: category,
         description: description,

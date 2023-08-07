@@ -1,8 +1,6 @@
 const {updateItemsHelper} = require('../../helpers')
 
 module.exports = async (dataItem) => {
-    console.log(dataItem)
-
     if (
         (dataItem.id === undefined || isNaN(dataItem.id)) || // No tiene id numérico
         (

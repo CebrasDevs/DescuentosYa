@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client')
+const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient()
 
@@ -12,7 +12,6 @@ module.exports = async ( condition = {} ) => {
             Item_Shopping: true
         }
     })
-    console.log(items)
     await prisma.$disconnect();
     if (items){
         return items;

@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_ITEM_BY_NAME = "GET_ITEM_BY_NAME";
 export const FILTER_CARDS = "FILTER_CARDS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const ADD_SHOPPING_CART_ITEM = "ADD_SHOPPING_CART_ITEM";
@@ -48,6 +49,20 @@ export const getCategories = () => {
       const { data } = await axios.get("http://localhost:3001/categories");
       return dispatch({
         type: GET_CATEGORIES,
+        payload: data,
+      });
+    } catch (error) {
+      console.log("error");
+    }
+  };
+};
+
+export const getItemsByName = (value) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`http://localhost:3001/items?name=${value}`);
+      return dispatch({
+        type: GET_ITEM_BY_NAME,
         payload: data,
       });
     } catch (error) {
