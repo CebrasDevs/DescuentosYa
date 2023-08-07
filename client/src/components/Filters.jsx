@@ -30,7 +30,7 @@ export default function Filters() {
     }
 
     return (
-        <div className="sticky top-10">
+        <div className="sticky top-16">
             <div className="flex flex-col justify-center text-center ">
                 <div className=" p-5">
                     <p className="font-medium mb-2 text-lg">Type:</p>
