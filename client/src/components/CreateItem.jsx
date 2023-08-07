@@ -48,7 +48,7 @@ export default function CreateItem() {
         const formattedItem = formatItem(input);
         console.log(formattedItem);
         try {
-            const response = await axios.post(`http://localhost:3001/items`, formattedItem);
+            const response = await axios.post(`https://desceuntosya-back.onrender.com/items`, formattedItem);
             if (response.status === 200) {
                 window.alert("The item was created successfully");
                 setErrors({});
