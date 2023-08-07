@@ -5,6 +5,7 @@ module.exports = async (id) => {
 
     const itemsInfo = result.map((item) => {
         return {
+            id:+item.id,
             url_image: item.url_image,
             name: item.name,
             description: item.description,
@@ -15,5 +16,5 @@ module.exports = async (id) => {
         }
     })
 
-    return (itemsInfo);
+    return (itemsInfo[0]);
 };
