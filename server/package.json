@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "seed": "PRISMA_FORCE_NAPI=true npx prisma db push && PRISMA_FORCE_NAPI=true npx prisma migrate dev && yes | node ./prisma/seeder/seeder.js"
+    "seed": "npx prisma db push && npx prisma migrate dev && node ./prisma/seeder/seeder.js"
   },
   "author": "CebrasDevs",
   "license": "ISC",
