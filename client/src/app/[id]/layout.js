@@ -1,4 +1,4 @@
-export default async function Layout({ params }) {
+export default async function Layout({ children }) {
   
   return (
     <div>
