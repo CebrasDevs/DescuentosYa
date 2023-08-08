@@ -3,7 +3,28 @@ const { createItemsController } = require("../../controllers")
 
 module.exports = async (req, res) => {
     try {
-        const response = await createItemsController(req.body);
+        let { 
+            userId, 
+            categoryId, 
+            description, 
+            name, 
+            price,
+            imageUrl,
+            discount
+        } = req.body;
+
+        let dataItem = {
+            userId, 
+            categoryId, 
+            description, 
+            name, 
+            price,
+            imageUrl,
+            discount
+        }
+
+        const response = await createItemsController(dataItem);
+
         return res.status(200).json(response);
         
     } catch (error) {
