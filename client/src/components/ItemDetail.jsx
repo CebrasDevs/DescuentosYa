@@ -7,7 +7,6 @@ import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
 
 export default function ItemDetail({ data }) {
-  console.log(data)
   const dispatch = useDispatch();
   const allShoppingItems = useSelector((state) => state.allShoppingItems);
   const activeUser = useSelector((state) => state.activeUser);
