@@ -79,7 +79,7 @@ export default function ItemDetail({ data }) {
                     Add to Cart <BsCart3 className=" text-xl" />
                   </button>
                 </Link>
-                {/* {activeUser.id === data.userId && (
+                {/* {activeUser.id === data.companyId && (
                   <button onClick={modifyHandler}>Edit</button>
                 )} */}
                 <button onClick={modifyHandler}>Edit</button>
@@ -139,7 +139,7 @@ export default function ItemDetail({ data }) {
               >
                 Generate Code
               </button>
-              {/* {activeUser.id === data.userId && (
+              {/* {activeUser.id === data.companyId && (
                 <button onClick={modifyHandler}>Edit</button>
               )} */}
               <button onClick={modifyHandler}>Edit</button>
