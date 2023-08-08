@@ -15,8 +15,10 @@ import {
 import { filterArray } from "@/utils/reduxUtils";
 
 const provisoryActiveUser = {
+  id:1,
   userId: 2,
-  role: "ADMIN",
+  name: 'Burguer King',
+  role: "COMPANY",
   email: "burgerking@gmail.com",
   password: "YOUwellnesslove123",
   companyName: "YOU - Wellness & Health",

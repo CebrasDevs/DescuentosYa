@@ -1,9 +1,10 @@
 'use client'
 import Link from "next/link";
 import { BsCart3 } from "react-icons/bs";
+import { IoPerson } from 'react-icons/io5';
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
-import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 // const links = [
 //   {
@@ -49,12 +50,15 @@ export default function Navbar() {
                         </Link>}
                     </div>
                     <div className="flex items-center">
-                        <Link href={"/login"} className="mr-10 font-medium hover:text-blue-500">
-                            Log in
-                        </Link>
-                        <Link href={"/register"} className="mr-10 font-medium hover:text-blue-500">
-                            Sign Up
-                        </Link>
+                        {!activeUser &&(<div>
+                            <Link href={"/login"} className="mr-10 font-medium hover:text-blue-500">
+                                Log in
+                            </Link>
+                            <Link href={"/register"} className="mr-10 font-medium hover:text-blue-500">
+                                Sign Up
+                            </Link>
+                            </div>)
+                        }
                         <Link
                             href="/create"
                             className="mr-10 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
@@ -64,6 +68,12 @@ export default function Navbar() {
                         <Link href={"/shoppingcart"} className="mr-10 font-medium hover:text-blue-500">
                             <BsCart3 />
                         </Link>
+                        <div className="flex items-center">
+                            <Link href={"/profile"} className="mr-10 font-medium hover:text-blue-500">
+                                <IoPerson />
+                            </Link>
+                            <h1>{activeUser.name}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
