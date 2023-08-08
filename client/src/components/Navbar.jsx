@@ -1,8 +1,9 @@
+'use client'
 import Link from "next/link";
 import { BsCart3 } from "react-icons/bs";
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
-
+import { UseSelector, useSelector } from "react-redux/es/hooks/useSelector";
 
 // const links = [
 //   {
@@ -27,6 +28,7 @@ import logo from "../assets/D-logo.jpg";
 // ))}
 
 export default function Navbar() {
+    const activeUser = useSelector((state)=> state.activeUser)
     return (
         <>
             <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md z-10">
@@ -42,6 +44,9 @@ export default function Navbar() {
                         <Link className="hover:text-blue-500 ml-10" href={"/discounts"}>
                             Browse Discounts
                         </Link>
+                        {activeUser.role === 'ADMIN' && <Link className="hover:text-blue-500 ml-10" href={"/admin"}>
+                            Dashboard
+                        </Link>}
                     </div>
                     <div className="flex items-center">
                         <Link href={"/login"} className="mr-10 font-medium hover:text-blue-500">

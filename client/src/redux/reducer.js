@@ -10,12 +10,13 @@ import {
   GET_COMPANY_DETAIL,
   CLEAN_COMPANY_DETAIL,
   GET_ITEM_BY_NAME,
+  GET_USERS,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 
 const provisoryActiveUser = {
   userId: 2,
-  role: "company",
+  role: "ADMIN",
   email: "burgerking@gmail.com",
   password: "YOUwellnesslove123",
   companyName: "YOU - Wellness & Health",
@@ -67,6 +68,7 @@ const provisoryActiveUser = {
 const initialState = {
   companies: [],
   categories: [],
+  users:[],
   allItems: [],
   activeUser: provisoryActiveUser,
   allShoppingItems: [],
@@ -83,6 +85,11 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USERS:
+      return{
+        ...state,
+        users: action.payload
+      }
     case GET_COMPANIES:
       return {
         ...state,
