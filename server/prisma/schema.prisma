@@ -17,23 +17,21 @@ enum Role {
 }
 
 model User {
-  id           Int        @id @default(autoincrement())
-  email        String     @unique
-  password     String
-  enabled      Boolean    @default(false)
-  role         Role
-  dni          String?
-  cuit         String?
-  name         String?
-  url_image    String
-  company_name String?
-  address      String
-  phone        String?
-  last_payment DateTime?
-  description  String?
-  Item         Item[]
-  Voucher      Voucher[]
-  Shopping     Shopping[]
+  id          Int        @id @default(autoincrement())
+  email       String     @unique
+  password    String
+  enabled     Boolean    @default(false)
+  role        Role
+  dni_cuit    String?
+  name        String?
+  imageUrl    String
+  address     String
+  phoneNumber String?
+  lastPayment DateTime?
+  description String?
+  Item        Item[]
+  Voucher     Voucher[]
+  Shopping    Shopping[]
 }
 
 model Item {
@@ -45,28 +43,32 @@ model Item {
   description   String?
   name          String
   price         Float           @default(0)
-  url_image     String
+  imageUrl      String
   discount      Int
+  enabled       Boolean         @default(true)
   Voucher       Voucher[]
   Item_Shopping Item_Shopping[]
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String
-  Item Item[]
+  id      Int     @id @default(autoincrement())
+  name    String
+  enabled Boolean @default(false)
+  Item    Item[]
 }
 
 model Voucher {
-  id     Int    @id @default(autoincrement())
-  item   Item   @relation(fields: [itemId], references: [id])
-  itemId Int
-  user   User   @relation(fields: [userId], references: [id])
-  userId Int
-  code   String
+  id             Int      @id @default(autoincrement())
+  item           Item     @relation(fields: [itemId], references: [id])
+  itemId         Int
+  user           User     @relation(fields: [userId], references: [id])
+  userId         Int
+  code           String
+  enabled        Boolean  @default(true)
+  expirationDate DateTime
 }
 
-enum Way_To_Pay {
+enum WayToPay {
   CASH
   CARD
 }
@@ -80,19 +82,19 @@ model Shopping {
   id            Int             @id @default(autoincrement())
   user          User            @relation(fields: [userId], references: [id])
   userId        Int
-  url_PDF       String
-  way_to_pay    Way_To_Pay
+  pdfUrl        String
+  wayToPay      WayToPay
   state         State
   Item_Shopping Item_Shopping[]
 }
 
 model Item_Shopping {
-  id            Int      @id @default(autoincrement())
-  item          Item     @relation(fields: [itemId], references: [id])
-  itemId        Int
-  shopping      Shopping @relation(fields: [shoppingId], references: [id])
-  shoppingId    Int
-  quantity_Item Int
+  id           Int      @id @default(autoincrement())
+  item         Item     @relation(fields: [itemId], references: [id])
+  itemId       Int
+  shopping     Shopping @relation(fields: [shoppingId], references: [id])
+  shoppingId   Int
+  quantityItem Int
 }
 
 // Aca se crean los modelos de la base de datos
