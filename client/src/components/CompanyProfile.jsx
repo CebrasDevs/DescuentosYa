@@ -31,7 +31,7 @@ export default function CompanyProfile(){
                     <h1>Phone Number: {activeUser.phoneNumber} </h1>
                 </div>
 
-                <div>
+                <div id="items" className="transition ease-in-out">
                     {activeUser.Items?.map((item, index)=> {
                     return (
                     <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap bg-violet-200" key={index}>

@@ -6,30 +6,10 @@ import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 
-// const links = [
-//   {
-//     label: "Home",
-//     route: "/",
-//   },
-//   {
-//     label: "About",
-//     route: "/brands",
-//   },
-//   {
-//     label: "profile",
-//     route: "/profile",
-//   },
-//   {
-//     label: "login",
-//     route: "/login",
-//   },
-// ];
-// {links.map(({ label, route }) => (
-//  <Link href={route}>{label}</Link>
-// ))}
-
 export default function Navbar() {
     const activeUser = useSelector((state)=> state.activeUser)
+
+    
     return (
         <>
             <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md z-10">
@@ -79,6 +59,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center w-full h-12 bg-neutral-800 mt-16">
                 <div className=" flex w-3/4 m-auto">
+                    {}
                     <div className="flex h-full mr-auto text-white">
                         <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">
                             Find Companies
@@ -90,6 +71,21 @@ export default function Navbar() {
                             About
                         </Link>
                     </div>
+                    
+
+                    <div className="flex h-full mr-auto text-white">
+                        <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">
+                            Find Companies
+                        </Link>
+                        <Link href={"#items"} className="hover:bg-neutral-600 py-3 px-6">
+                            My Items
+                        </Link>
+                        <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                            About
+                        </Link>
+                    </div>
+
+
                 </div>
             </div>
         </>
