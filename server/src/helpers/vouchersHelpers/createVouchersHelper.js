@@ -8,7 +8,7 @@ module.exports = async (voucher) => {
         data: {
             itemId : voucher.itemId,
             userId : voucher.userId,
-            code: Math.random().toString(),
+            code: (Math.random() * 1000).toString(),
             expirationDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000) // Agregar dos días en milisegundos
         }
     });
