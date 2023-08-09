@@ -1,13 +1,11 @@
 "use client";
 import Card from "./Card";
 import usePaginate from "@/hooks/usePaginate";
-import Pagination from "@/components/Pagination";
 import styles from "../styles/Discounts.module.css";
 
-export default function Grid() {
-    const { currentView } = usePaginate();
-
-    const items = currentView;
+export default function Grid({company}) {
+    const { currentView, itemsCompany } = usePaginate(company);
+    const items = currentView || itemsCompany;
 
     return (
         <>
