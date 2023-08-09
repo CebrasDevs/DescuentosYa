@@ -5,6 +5,7 @@ const prisma = new PrismaClient()
 module.exports = async (id, dataItem) => {
     const updateData = {
         ...dataItem,
+        price: + dataItem.price,
         id: dataItem.id === null ? +id : dataItem.id,
         };
 
