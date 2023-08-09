@@ -34,6 +34,8 @@ const categoriesRouter = require("./categoriesRouter");
 const authRouter = require("./authRouter");
 // const authRouterCookie = require("./authRouterCookie");
 const profileRouter = require("./profileRouter");
+const authRouter = require("./authRouter");
+// const authRouterCookie = require("./authRouterCookie");
 
 // Usamos el middleware para verificar el token en rutas protegidas
 mainRouter.use("/shopping", verificarToken, shoppingRouter);
@@ -46,5 +48,6 @@ mainRouter.use("/vouchers", verificarToken, vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);
 mainRouter.use("/", authRouter);
 mainRouter.use("/profile", profileRouter);
+mainRouter.use("/", authRouter);
 
 module.exports = mainRouter;
