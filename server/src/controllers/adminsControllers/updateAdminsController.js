@@ -1,4 +1,4 @@
-const { updateUserHelper } = require("../../helpers");
+const { updateUsersHelper } = require("../../helpers");
 
 module.exports = async (dataAdmin) => {
   if (
@@ -11,17 +11,17 @@ module.exports = async (dataAdmin) => {
     (dataAdmin.address && typeof dataAdmin.address !== "string")
   )
     throw new Error("Incomplete data or incorrect");
-  const updatedAdmin = await updateUserHelper(dataAdmin);
+  let { id } = dataAdmin;
+  const updatedAdmin = await updateUsersHelper(id, dataAdmin);
   let {
-    id,
     email,
     enabled,
     role,
     dni,
     name,
-    url_image: imageUrl,
+    imageUrl,
     address,
-    phone: phoneNumber,
+    phoneNumber,
   } = updatedAdmin;
   return {
     id,
