@@ -23,7 +23,7 @@ export default function usePaginate(company) {
     const currentView = filteredItems?.slice(minIndex, maxIndex); // se envia a GRID
     const numberOfPages = Math.ceil(filteredItems?.length / itemsPerPage) || 1; // para asegurarnos de que el number of pages no sea nunca 0
 
-    const itemsCompany = activeUser.Items.slice(minIndex, maxIndex);
+    const itemsCompany = activeUser.Item?.slice(minIndex, maxIndex);
 
     function handleOnClick(e) {
         if (e.target.name === "previous")

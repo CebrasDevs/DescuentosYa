@@ -23,7 +23,7 @@ export default function CompanyProfile() {
                     <h1 className="border-b-2 p-4 font-bold text-xl">DATA</h1>
                     <div className="flex h-[300px] ">
                         <div className="flex justify-center items-center w-1/2">
-                            <img src={activeUser.imageUrl} />
+                            <img src={activeUser.imageUrl} className="w-[300px]"/>
                         </div>
                         <div className="w-1/2 flex flex-col justify-center">
                             <h1>Company Name: {activeUser.companyName} </h1>
@@ -45,28 +45,7 @@ export default function CompanyProfile() {
                     <div>
 
                     <Grid company={true}/>
-                        {/* {activeUser.Items?.map((item, index) => {
-                            return (
-                                <div
-                                    className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap bg-violet-200"
-                                    key={index}
-                                >
-                                    <h1 className="m-10 justify-center">{item.id}</h1>
-                                    <h1 className="m-10 justify-center">Imagen del servicio o producto</h1>
-                                    <h1 className="m-10 justify-center">
-                                        Descripcion del producto o servicio {item.description}
-                                    </h1>
-                                    <button
-                                        onClick={() => handleDelete(item.id)}
-                                        className="h-1/4 w-20 mt-10 bg-red-500"
-                                    >
-                                        {" "}
-                                        Delete{" "}
-                                    </button>
-                                    <Link href={`/${item.id}`}>Edit</Link>
-                                </div>
-                            );
-                        })} */}
+                        
                     </div>
                 </div>
 
