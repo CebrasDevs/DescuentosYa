@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { getUsersByIdHandler } = require("../handlers");
+const { getProfileHandler } = require("../handlers");
 const router = Router();
 
-router.get("/:id", getUsersByIdHandler);
+router.get("/:id", getProfileHandler);
 
 
 
