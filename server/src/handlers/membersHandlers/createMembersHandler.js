@@ -1,4 +1,4 @@
-const { updateMemberController } = require("../../controllers");
+const { createMembersController } = require("../../controllers");
 
 module.exports = async (req, res) => {
   try {
@@ -9,23 +9,19 @@ module.exports = async (req, res) => {
       imageUrl,
       name,
       address,
-      phoneNumber,
-      lastPayment,
+      phoneNumber
     } = req.body;
     let dataMember = {
-      id: req.params.id,
       email,
       password,
-      enabled,
-      dni,
+      dni_cuit: dni,
       imageUrl,
       name,
       address,
-      phoneNumber,
-      lastPayment,
+      phoneNumber
     };
-    const updatedMember = await updateMemberController(dataMember);
-    return res.status(200).json(updatedMember);
+    const newMember = await createMembersController(dataMember);
+    return res.status(200).json(newMember);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }

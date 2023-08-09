@@ -1,35 +1,39 @@
+// SHOPPPING HELPERS
 const getShoppingHandler = require("./shoppingHandlers/getShoppingHandler");
 const createShoppingHandler = require("./shoppingHandlers/createShoppingHandler");
 const updateShoppingHandler = require("./shoppingHandlers/updateShoppingHandler");
 
+// ITEMS HELPERS
 const getItemsHandler = require("./itemsHandlers/getItemsHandler");
 const createItemsHandler = require("./itemsHandlers/createItemsHandler");
 const updateItemsHandler = require("./itemsHandlers/updateItemsHandler");
 const getItemsByIdHandler = require("./itemsHandlers/getItemsByIdHandler")
 
+// USERS HELPERS
 const createUsersHandler = require("./usersHandlers/createUsersHandler");
 const updateUsersHandler = require("./usersHandlers/updateUsersHandler");
 const getUsersHandler = require("./usersHandlers/getUsersHandler");
 
-const createAdminsHandler = require("./usersHandlers/createAdminsHandler");
-const updateAdminsHandler = require("./usersHandlers/updateAdminsHandler");
-const getAdminsHandler = require("./usersHandlers/getAdminsHandler");
-const getAdminsByIdHandler = require("./usersHandlers/getAdminsByIdHandler");
+// ADMINS HELPERS
+const createAdminsHandler = require("./adminsHandlers/createAdminsHandler");
+const updateAdminsHandler = require("./adminsHandlers/updateAdminsHandler");
 
-const createCompaniesHandler = require("./usersHandlers/createCompaniesHandler");
-const updateCompaniesHandler = require("./usersHandlers/updateCompaniesHandler");
-const getCompaniesHandler = require("./usersHandlers/getCompaniesHandler");
-const getCompaniesByIdHandler = require("./usersHandlers/getCompaniesByIdHandler");
+// COMPANIES HELPERS
+const createCompaniesHandler = require("./companiesHanlders/createCompaniesHandler");
+const updateCompaniesHandler = require("./companiesHanlders/updateCompaniesHandler");
+const getCompaniesHandler = require("./companiesHanlders/getCompaniesHandler");
+const getCompaniesByIdHandler = require("./companiesHanlders/getCompaniesByIdHandler");
 
-const createMembersHandler = require("./usersHandlers/createMembersHandler");
-const updateMembersHandler = require("./usersHandlers/updateMembersHandler");
-const getMembersHandler = require("./usersHandlers/getMembersHandler");
-const getMembersByIdHandler = require("./usersHandlers/getMembersByIdHandler");
+// MEMBERS HELPERS
+const createMembersHandler = require("./membersHandlers/createMembersHandler");
+const updateMembersHandler = require("./membersHandlers/updateMembersHandler");
 
+// VOUCHERS HELPERS
 const createVouchersHandler = require("./vouchersHandlers/createVouchersHandler");
 const updateVouchersHandler = require("./vouchersHandlers/updateVouchersHandler");
 const getVouchersHandler = require("./vouchersHandlers/getVouchersHandler");
 
+// CATEGORIES HELPERS
 const createCategoryHandler = require("./categoriesHandler/createCategoryHandler");
 const deleteCategoryHandler = require("./categoriesHandler/deleteCategoryHandler");
 const getCategoriesHandler = require("./categoriesHandler/getCategoriesHandler");
@@ -51,8 +55,6 @@ module.exports = {
 
   createAdminsHandler,
   updateAdminsHandler,
-  getAdminsHandler,
-  getAdminsByIdHandler,
 
   createCompaniesHandler,
   getCompaniesHandler,
@@ -61,8 +63,6 @@ module.exports = {
 
   createMembersHandler,
   updateMembersHandler,
-  getMembersHandler,
-  getMembersByIdHandler,
 
   createVouchersHandler,
   getVouchersHandler,
