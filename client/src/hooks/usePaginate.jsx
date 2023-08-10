@@ -4,13 +4,15 @@ import { getDiscounts, setCurrentPage } from "@/redux/actions";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function usePaginate(company) {
+export default function usePaginate(value) {
     const dispatch = useDispatch();
 
     const filteredItems = useSelector((state) => state.filteredItems);
     const currentPage = useSelector((state) => state.currentPage);
 
     const activeUser = useSelector((state) => state.activeUser);
+
+    const detailUser = useSelector((state) => state.companyDetail);
 
     useEffect(() => {
         dispatch(getDiscounts());
@@ -23,8 +25,10 @@ export default function usePaginate(company) {
     const currentView = filteredItems?.slice(minIndex, maxIndex); // se envia a GRID
     const numberOfPages = Math.ceil(filteredItems?.length / itemsPerPage) || 1; // para asegurarnos de que el number of pages no sea nunca 0
 
-    const itemsCompany = activeUser.Item?.slice(minIndex, maxIndex);
+    const itemsProfile = activeUser.items?.slice(minIndex, maxIndex);
 
+    const itemsDetail = detailUser.items?.slice(minIndex, maxIndex);
+    
     function handleOnClick(e) {
         if (e.target.name === "previous")
             if (currentPage > 1) {
@@ -36,19 +40,30 @@ export default function usePaginate(company) {
             }
     }
 
-    if (company === true) {
+    if (value === "profile") {
         return {
-            itemsCompany,
+            itemsProfile,
             handleOnClick,
             numberOfPages,
             currentPage,
         };
     }
 
-    return {
-        currentView,
-        handleOnClick,
-        numberOfPages,
-        currentPage,
-    };
+    if (value === "detail") {
+        return {
+            itemsDetail,
+            handleOnClick,
+            numberOfPages,
+            currentPage,
+        };
+    }
+
+    if (value !== "detail" && value !== "profile") {
+        return {
+            currentView,
+            handleOnClick,
+            numberOfPages,
+            currentPage,
+        };
+    }
 }
