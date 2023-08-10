@@ -1,58 +1,57 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
+require("dotenv").config();
 
-// Creamos una instancia de Prisma para interactuar con la base de datos
 const prisma = new PrismaClient();
 
-// Ruta para autenticación y creación de cookie
-router.post("/", async (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Buscar el usuario en la base de datos a partir del email
     const user = await prisma.user.findUnique({
       where: { email },
     });
-    await prisma.$disconnect();
-
-    // Si el usuario no existe, devolver un mensaje de error
+    const { password, ...user2 } = user;
     if (!user) {
       return res.status(404).json({ error: "User doesn't exist" });
     }
 
-    // Verificar que la contraseña sea correcta
     if (user.password !== password) {
       return res.status(401).json({ error: "Incorrect password" });
     }
 
-    // Si el usuario y la contraseña son correctos, crear la cookie
-    res.cookie(`${user.email}`, JSON.stringify(user), {
-      maxAge: 900000, // Tiempo de vida de la cookie en milisegundos (ejemplo: 900000ms = 15 minutos)
-      httpOnly: true, // La cookie solo es accesible mediante HTTP (no JavaScript)
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
     });
 
-    // Respuesta para indicar que el inicio de sesión fue exitoso.
-    res.status(200).json({ mensaje: "Login successful!" });
+    const cookieData = { token, user: { id: user.id, role: user.role } };
+
+    res.cookie(`${user.id}`, cookieData, {
+      maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos (1 hora)
+      httpOnly: true,
+    });
+
+    res.status(200).json({
+      user2,
+      message: "Login successful!",
+    }); // Envía un mensaje de éxito
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Error authenticating the user" });
   }
 });
 
 router.post("/logout", (req, res) => {
   try {
-    // Capturamos el valor del email desde el cuerpo de la solicitud
-    const { email } = req.body;
+    const { id } = req.body;
 
-    // Eliminamos la cookie existente al establecer su tiempo de vida en 0
-    res.cookie(email, "", {
-      maxAge: 0,
-      httpOnly: true,
-    });
+    res.clearCookie(`${id}`); // Elimina la cookie del token
 
-    // Respuesta para indicar que el logout fue exitoso.
-    res.status(200).json({ mensaje: "Logout successful!" });
+    res.status(200).json({ message: "Logout successful!" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Error during logout" });
   }
 });
