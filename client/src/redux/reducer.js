@@ -13,7 +13,7 @@ import {
   GET_USERS,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
-import {member, company, admin} from "../utils/profilesHardCore";
+import {member, company, admin} from "../utils/profilesHarcode";
 
 // const provisoryActiveUser = {
 //   id:1,
@@ -73,7 +73,7 @@ const initialState = {
   categories: [],
   users:[],
   allItems: [],
-  activeUser: company,
+  activeUser: admin,
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {

@@ -38,8 +38,8 @@ export const member = {
         },
         user: {
           id: 3,
-          email: "pizzahat@gmail.com",
-          password: "pizza hat",
+          email: "pizzahut@gmail.com",
+          password: "pizza hut",
           enabled: true,
           role: "COMPANY",
           dni_cuit: "30383062410",
@@ -591,6 +591,71 @@ export const company = {
   name: "McDonalds",
   email: "mcdonalds@gmail.com",
   role: "COMPANY",
+  cuit: "33134366027",
+  enabled: true,
+  address: "41622 Ratke Glens",
+  phoneNumber: "873-382-9467",
+  description:
+    "Cadena de restaurantes de comida rápida, conocida por sus hamburguesas y papas fritas.",
+  imageUrl:
+    "https://guiatodoberazategui.com.ar/wp-content/uploads/2020/03/Logo-de-McDonald%C2%B4s-1-1-1.png",
+  items: [
+    {
+      id: 16,
+      name: "Hamburguesa de Pollo",
+      category: "comida",
+      price: 0,
+      discount: 20,
+      enabled: true,
+      imageUrl:
+        "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg",
+      vouchers: [],
+      shoppings: [],
+    },
+    {
+      id: 33,
+      name: "Masaje relajante 45 min",
+      category: "cosmetica",
+      price: 5.99,
+      discount: 30,
+      enabled: true,
+      imageUrl:
+        "https://www.materialestetica.com/blog/wp-content/uploads/2019/03/cremas-para-masajes-y-sus-caracteristicas.jpg",
+      vouchers: [
+        {
+          id: 32,
+          code: "q7rx5eu42ju1yc9r707q",
+          enabled: true,
+          expirationDate: "2023-08-09T05:14:16.234Z",
+          user: {
+            id: 29,
+            email: "Shanelle65@yahoo.com",
+            name: "Arvid",
+          },
+        },
+      ],
+      shoppings: [],
+    },
+    {
+      id: 71,
+      name: "Masaje antiesters 45 min",
+      category: "cosmetica",
+      price: 8.99,
+      discount: 45,
+      enabled: true,
+      imageUrl:
+        "https://www.materialestetica.com/blog/wp-content/uploads/2019/03/cremas-para-masajes-y-sus-caracteristicas.jpg",
+      vouchers: [],
+      shoppings: [],
+    },
+  ],
+};
+
+export const admin = {
+  id: 1,
+  name: "McDonalds",
+  email: "mcdonalds@gmail.com",
+  role: "ADMIN",
   cuit: "33134366027",
   enabled: true,
   address: "41622 Ratke Glens",
