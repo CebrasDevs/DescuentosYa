@@ -13,7 +13,6 @@ router.post("/login", async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email },
     });
-    const { password, ...user2 } = user;
     if (!user) {
       return res.status(404).json({ error: "User doesn't exist" });
     }
@@ -28,13 +27,12 @@ router.post("/login", async (req, res) => {
 
     const cookieData = { token, user: { id: user.id, role: user.role } };
 
-    res.cookie(`${user.id}`, cookieData, {
-      maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos (1 hora)
+    res.cookie("accessTrue", cookieData, {
+      // maxAge: 3600000, // Tiempo de vida de la cookie en milisegundos (1 hora)
       httpOnly: true,
     });
 
     res.status(200).json({
-      user2,
       message: "Login successful!",
     }); // Envía un mensaje de éxito
   } catch (error) {
@@ -43,11 +41,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/logout", (req, res) => {
+router.post("/logout", async (req, res) => {
   try {
-    const { id } = req.body;
-
-    res.clearCookie(`${id}`); // Elimina la cookie del token
+    res.clearCookie("accessTrue"); // Elimina la cookie del token
 
     res.status(200).json({ message: "Logout successful!" });
   } catch (error) {
