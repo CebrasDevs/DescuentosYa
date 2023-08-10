@@ -3,7 +3,7 @@ const { getUsersHelper } = require('../../helpers');
 module.exports = async (id) => {
     if (isNaN(id)) throw new Error('Invalid ID');
     const company = (await getUsersHelper({ id: +id }))[0];
-    let {
+    const {
         email,
         enabled,
         role,
@@ -12,8 +12,22 @@ module.exports = async (id) => {
         imageUrl,
         address,
         phoneNumber,
-        description
+        description,
+        Item
     } = company;
+
+    const structuredItems = Item.map((item) => {
+        return {
+            id: item.id,
+            name: item.name,
+            category: item.category.name,
+            price: item.price,
+            discount: item.discount,
+            imageUrl: item.imageUrl
+        };
+    });
+
+
     return {
         id: +id,
         email,
@@ -24,6 +38,8 @@ module.exports = async (id) => {
         imageUrl,
         address,
         phoneNumber,
-        description
+        description,
+        items: structuredItems
     };
+
 };

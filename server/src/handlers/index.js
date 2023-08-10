@@ -13,6 +13,7 @@ const getItemsByIdHandler = require("./itemsHandlers/getItemsByIdHandler")
 const createUsersHandler = require("./usersHandlers/createUsersHandler");
 const updateUsersHandler = require("./usersHandlers/updateUsersHandler");
 const getUsersHandler = require("./usersHandlers/getUsersHandler");
+const getProfileHandler = require("./usersHandlers/getProfileHandler");
 
 // ADMINS HELPERS
 const createAdminsHandler = require("./adminsHandlers/createAdminsHandler");
@@ -52,6 +53,7 @@ module.exports = {
   createUsersHandler,
   updateUsersHandler,
   getUsersHandler,
+  getProfileHandler,
 
   createAdminsHandler,
   updateAdminsHandler,
