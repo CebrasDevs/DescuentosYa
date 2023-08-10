@@ -56,7 +56,7 @@ export function formatItem(item) {
     //!FALTA AGREGAR el companyName cuando tenga manera de chequear cual es el nombre de la empresa que esta logueada
     const {
         name,
-        category,
+        categoryId,
         description,
         price,
         discount,
@@ -68,7 +68,7 @@ export function formatItem(item) {
     return {
         userId: 2,
         name: name,
-        category: category,
+        categoryId: categoryId,
         description: description,
         price: parsedPrice,
         discount: parsedDiscount,

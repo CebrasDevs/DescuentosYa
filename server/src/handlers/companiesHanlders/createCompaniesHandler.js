@@ -1,4 +1,4 @@
-const { updateCompaniesController } = require("../../controllers");
+const { createCompaniesController } = require("../../controllers");
 
 module.exports = async (req, res) => {
   try {
@@ -7,25 +7,23 @@ module.exports = async (req, res) => {
       password,
       cuit,
       imageUrl,
-      companyName,
+      name,
       address,
       phoneNumber,
-      description,
+      description
     } = req.body;
     let dataCompany = {
-      id: req.params.id,
       email,
       password,
-      enabled,
-      cuit,
+      dni_cuit: cuit,
       imageUrl,
-      companyName,
+      name,
       address,
       phoneNumber,
-      description,
+      description
     };
-    const updatedCompany = await updateCompaniesController(dataCompany);
-    return res.status(200).json(updatedCompany);
+    const newCompany = await createCompaniesController(dataCompany);
+    return res.status(200).json(newCompany);
   } catch (error) {
     return res.status(400).json({ error: error.message });
   }

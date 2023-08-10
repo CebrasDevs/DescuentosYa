@@ -1,7 +1,7 @@
 const {
     createVouchersHandler,
     updateVouchersHandler,
-    getVouchersHandler
+    getVouchersHandler,
 } = require("../handlers");
 
 const { Router } = require("express");

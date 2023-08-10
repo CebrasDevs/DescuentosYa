@@ -3,6 +3,7 @@ import { formatCompany } from "@/utils/formatUtils";
 import validateCompany from "@/utils/validateCompany";
 
 export default function SignUpCompany() {
+  const [imageFile, setImageFile] = useState(null);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     email: "",
@@ -21,8 +22,8 @@ export default function SignUpCompany() {
     errors.confirmPassword ||
     errors.companyName ||
     errors.cuit ||
-    errors.address ||
-    errors.imageUrl;
+    errors.address;
+  //errors.imageUrl;
 
   function handleInputChange(e) {
     setInput({
@@ -37,15 +38,38 @@ export default function SignUpCompany() {
     );
   }
 
-  function handleSubmit(e) {
+  function handleImageChange(e) {
+    setImageFile(e.target.files[0]);
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formattedCompany = formatCompany(input);
-    window.alert(
-      `Company ${input.companyName} submitted successfully (provisory)`
-    );
-    //devolver el formattedCompany al backend
-    console.log(formattedCompany);
-  }
+    try {
+      const cloudinaryFormData = new FormData();
+      cloudinaryFormData.append("file", imageFile);
+      cloudinaryFormData.append("upload_preset", "DescuentosYa");
+      const cloudinaryResponse = await axios.post(
+        "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
+        cloudinaryFormData
+      );
+
+      formattedCompany.imageUrl =
+        "https://res.cloudinary.com/dwndzlcxp/image/upload/" +
+        cloudinaryResponse.data.public_id;
+
+      // ACA DEBE ESTAR LA RUTA PARA POSTEAR LA COMPAÑIA
+      await axios.post(`http://localhost:3001/companies`, formattedCompany);
+
+      setErrors({});
+
+      window.alert(
+        `Company ${input.companyName} submitted successfully (provisory)`
+      );
+    } catch (error) {
+      alert(`Error creating company`);
+    }
+  };
 
   return (
     <section className=" bg-slate-200 dark:bg-white h-full">
@@ -226,15 +250,14 @@ export default function SignUpCompany() {
                 <div>
                   <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Company logo
-                  </label>{" "}
+                  </label>
                   <input
-                    type="text"
+                    type="file"
                     name="imageUrl"
                     for="Company Logo"
                     placeholder="Company's logo"
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    value={input.imageUrl}
-                    onChange={handleInputChange}
+                    onChange={handleImageChange}
                   />
                   {errors.imageUrl && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -244,7 +267,7 @@ export default function SignUpCompany() {
                 </div>
               </div>
               <button
-                disabled={isNotReady}
+                // disabled={isNotReady}
                 type="submit"
                 className=" mt-2 ml-48 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border "
               >

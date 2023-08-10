@@ -1,47 +1,32 @@
 "use client";
 
 import useCompany from "@/hooks/useCompany";
+import Grid from "./Grid";
 
 export default function CompanyDetail({ id }) {
+    const company = useCompany(id);
 
-    const companyDetail = useCompany(id);
-
+    if (!company.id) {
+        return <p>Loading...</p>;
+    }
     return (
-        <div className="flex m-5">
-            <div className="mr-5">
-                <img src={companyDetail.url_image} />
-                <h1 className="mb-10 justify-center">Company Name: {companyDetail.company_name} </h1>
-                <h1 className="mb-10 justify-center">Email: {companyDetail.email} </h1>
-                <h1 className="mb-10 justify-center">CUIT: {companyDetail.cuit} </h1>
-                <h1 className="mb-10 justify-center">Address: {companyDetail.address} </h1>
-                <h1 className="mb-10 justify-center">Company Description: {companyDetail.description} </h1>
-                <h1 className="mb-10 justify-center">Phone Number: {companyDetail.phone} </h1>
+        <div className="mt-10 pb-10 bg-slate-100 rounded-lg shadow-md w-3/4 mx-auto">
+            <div className="flex flex-col items-center mb-10">
+                <div className="flex mt-5">
+                    <div className="w-[45%] mx-auto">
+                        <img src={company.imageUrl} />
+                    </div>
+                    <div className="w-[45%] mx-auto flex flex-col justify-center">
+                        <h1>Company Name: {company.name} </h1>
+                        <h1>Email: {company.email} </h1>
+                        <h1>CUIT: {company.cuit} </h1>
+                        <h1>Address: {company.address} </h1>
+                        <h1>Company Description: {company.description} </h1>
+                        <h1>Phone Number: {company.phoneNumber} </h1>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                {companyDetail.Item?.map((item, index) => {
-                    return (
-                        <div className="mb-10 p-4 flex flex-col justify-center text-center flex-wrap bg-slate-50 rounded-lg shadow-2xl" key={index}>
-                            <div className="flex justify-center">
-                                    <img src={item.url_image} className="rounded-lg" />
-                            </div>
-                            <div className="flex justify-center">
-                                <h1 className="m-10"> {item.name} </h1>
-                                <h1 className="m-10">
-                                    {item.price === 0 ? (
-                                        <div>{item.discount}% discount</div>
-                                    ) : (
-                                        <div className="flex flex-col">
-                                            <div>{item.discount}% discount</div>
-                                            <div>${item.price}</div>
-                                        </div>
-                                    )}{" "}
-                                </h1>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
+            <Grid value="detail" />
         </div>
     );
 }
