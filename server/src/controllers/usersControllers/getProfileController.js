@@ -8,7 +8,111 @@ module.exports = async (id) => {
     const user = (await getUsersHelper({id: + id}, fullDetail))[0];
 
     if (user.role === 'MEMBER') {
-        
+        const {
+            id,
+            email,
+            enabled,
+            role,
+            dni_cuit,
+            name,
+            imageUrl,
+            address,
+            phoneNumber,
+            lastPayment,
+            Voucher,
+            Shopping
+        } = user;
+
+        const structuredVouchers = Voucher.map((voucher) => {
+            const { item } = voucher;
+            const structuredItem = {
+                id: item.id,
+                name: item.name,
+                category: item.category.name,
+                price: item.price,
+                discount: item.discount,
+                // enabled: item.enabled,
+                // description: item.description,
+                // imageUrl: item.imageUrl,
+            };
+            const { user } = item;
+            const structuredUser = {
+                id: user.id,
+                name: user.name,
+                // imageUrl: user.imageUrl,
+            };
+            return {
+                id: voucher.id,
+                code: voucher.code,
+                enabled: voucher.enabled,
+                expirationDate: voucher.expirationDate,
+                item: structuredItem,
+                company: structuredUser
+            };
+        })
+
+        // Mapeo todos los registros de compra de servicios
+        const structuredShoppings = Shopping.map((shopping) => {
+
+            // Mapeo la tabla intermedia Item_Shopping para acceder al resto de datos
+            const structuredItems = shopping.Item_Shopping.map((databaseRecord) => {
+
+                // Destructuro el servicio, la cantidad y la compañia que lo vendia
+                const { item, quantity } = databaseRecord;
+                const { user } = item;
+
+                // Retorno los datos resumidos de esa compra de servicio
+                return {
+                    id: item.id,
+                    quantity: quantity,
+                    name: item.name,
+                    category: item.category.name,
+                    price: item.price,
+                    discount: item.discount,
+                    // enabled: item.enabled,
+                    // description: item.description,
+                    // imageUrl: item.imageUrl,
+                    company: {
+                        id: user.id,
+                        name: user.name,
+                        // imageUrl: user.imageUrl,
+                    }
+                };
+            });
+
+            return {
+                id: shopping.id,
+                pdfUrl: shopping.pdfUrl,
+                wayToPay: shopping.wayToPay,
+                state: shopping.state,
+                items: structuredItems,
+            }
+        });
+
+        const structuredMember = {
+            id,
+            name,
+            email,
+            role,
+            dni: dni_cuit,
+            address,
+            phoneNumber,
+            enabled,
+            lastPayment,
+            imageUrl,
+            vouchers: structuredVouchers,
+            shoppings: structuredShoppings
+        };
+        return structuredMember;
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------
+
     } else if (user.role === 'COMPANY') {
         const {
             id,
@@ -26,30 +130,33 @@ module.exports = async (id) => {
 
         const structuredItems = Item.map((item) => {
             const structuredVouchers = item.Voucher.map((voucher) => {
+                const { user } = voucher;
                 return {
                     id: voucher.id,
                     code: voucher.code,
                     enabled: voucher.enabled,
                     expirationDate: voucher.expirationDate,
                     user: {
-                        id: voucher.user.id,
-                        email: voucher.user.email,
-                        name: voucher.user.name  
+                        id: user.id,
+                        email: user.email,
+                        name: user.name  
                     }
                 };
             })
 
             const structuredShoppings = item.Item_Shopping.map((item_shopping) => {
+                const { shopping } = item_shopping;
+                const { user } = shopping;
                 return {
-                    id: item_shopping.shopping.id,
+                    id: shopping.id,
                     quantity: item_shopping.quantityItem,
-                    pdfUrl: item_shopping.shopping.pdfUrl,
-                    wayToPay: item_shopping.shopping.wayToPay,
-                    state: item_shopping.shopping.state,
+                    pdfUrl: shopping.pdfUrl,
+                    wayToPay: shopping.wayToPay,
+                    state: shopping.state,
                     user: {
-                        id: item_shopping.shopping.user.id,
-                        email: item_shopping.shopping.user.email,
-                        name: item_shopping.shopping.user.name
+                        id: user.id,
+                        email: user.email,
+                        name: user.name
                     }
                 };
             });
@@ -67,7 +174,6 @@ module.exports = async (id) => {
             };
         })
 
-
         const structuredCompany = {
             id,
             name,
@@ -82,6 +188,39 @@ module.exports = async (id) => {
             items: structuredItems,
         };
         return structuredCompany;
-    };
-    
-}
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------------------
+
+
+    } else if (user.role === 'ADMIN') {
+        const {
+            id,
+            email,
+            enabled,
+            role,
+            name,
+            phoneNumber,
+            imageUrl,
+        } = user;
+        return {
+            id,
+            name,
+            email,
+            role,
+            phoneNumber,
+            enabled,
+            imageUrl
+        };
+    }
+    else if (!user.role) 
+    throw Error("User fetched from database has 'undefined' or 'null' role field");
+    else
+    throw Error("User fetched from database has invalid role value");
+};
