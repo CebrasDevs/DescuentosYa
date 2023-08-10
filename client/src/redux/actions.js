@@ -15,6 +15,8 @@ export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 
+// export const CREATE_PREFERENCE = "CREATE_PREFERENCE";
+
 export const getCompanies = () => {
   return async (dispatch) => {
     try {
@@ -84,6 +86,26 @@ export const getCompanyDetail = (id) => {
     }
   };
 };
+
+// export const createPreference = async () => {
+//   try{
+//       const response = await axios.post("http://localhost:3001/payment/create-order",{
+//           title: "Name",
+//           unit_price: 100,
+//           quantity:1,
+//           currency_id: "ARS",
+//       });
+//       const { id } = response.data;
+//       console.log('actions', response.data)
+//       return {
+//         type: CREATE_PREFERENCE,
+//         payload: id
+//       }
+//       // recibe una id que proviene del servidor ( id de la compra )
+//   } catch (error) {
+//       console.log(error);
+//   }
+// };
 
 export const cleanCompanyDetail = () => {
   return { type: CLEAN_COMPANY_DETAIL };

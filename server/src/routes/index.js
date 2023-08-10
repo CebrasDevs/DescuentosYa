@@ -9,6 +9,7 @@ const companiesRouter = require("./companiesRouter");
 const membersRouter = require("./membersRouter");
 const vouchersRouter = require("./vouchersRouter");
 const categoriesRouter = require("./categoriesRouter");
+const paymentRouter = require("./paymentRouter");
 
 mainRouter.use("/shopping", shoppingRouter);
 mainRouter.use("/items", itemsRouter);
@@ -18,5 +19,6 @@ mainRouter.use("/companies", companiesRouter);
 mainRouter.use("/members", membersRouter);
 mainRouter.use("/vouchers", vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);
+mainRouter.use("/payment", paymentRouter);
 
 module.exports = mainRouter;

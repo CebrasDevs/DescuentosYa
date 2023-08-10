@@ -1,13 +1,21 @@
 "use client";
-import { deleteShoppingCartItem } from "@/redux/actions";
+import { deleteShoppingCartItem, createPreference } from "@/redux/actions";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from "axios";
+
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
   const allShoppingItems = useSelector((state) => state.allShoppingItems);
+  const activeUser = useSelector((state)=> state.activeUser);
   const [counters, setCounters] = useState(allShoppingItems.map(() => 1)); //creo un counter para cada item, iniciado en 1
+
+
+  //aca se coloca la public key de mp
+  initMercadoPago('TEST-ab84421f-0743-4e17-af16-5e47420efd52');
 
   const handleCounter = function (event, index) {
     if (event.target.name === "minus" && counters[index] > 1) {
@@ -25,11 +33,37 @@ export default function ShoppingCart() {
     dispatch(deleteShoppingCartItem(id));
   };
 
+  const products = allShoppingItems?.map((item) => ({
+    title: item.name,
+    unit_price: parseInt(item.price, 10),
+    quantity: 1,
+    category_id:item.category,
+    description: "DescuentosYa",
+  }));
+  console.log(activeUser)
+  const user = {
+    email: activeUser.email,
+    name: activeUser.name,
+    surname: activeUser.surname,
+  }
+  console.log(user)
+  console.log('productos',products)
+
+  const handleCheckout = () => {
+    const response = axios.post("http://localhost:3001/payment/create-order",{ products, user })
+    .then(response => {
+    console.log(response.data)
+    // window.location.href = response.data.response.body.init_point;
+  })
+  .catch((error) => console.log(error.message));  
+  };
+
+
   return (
     <div>
       {allShoppingItems?.map((item, index) => {
         return (
-          <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap bg-violet-200">
+          <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap rounded bg-violet-200" key={index}>
             <h2 className="m-10 justify-center">Product name: {item.name}</h2>
             <h2 className="m-10 justify-center">Price: ${item.price}</h2>
             <h2 className="m-10 justify-center">
@@ -59,7 +93,7 @@ export default function ShoppingCart() {
             </div>
 
             <button
-              className="h-1/4 w-20 mt-10 bg-red-500"
+              className="h-1/4 w-20 mt-10 rounded text-white  bg-gray-400 hover:bg-red-500"
               onClick={() => handleDelete(item.id)}
             >
               Delete
@@ -70,13 +104,18 @@ export default function ShoppingCart() {
 
       <div>
         {allShoppingItems.length ? (
-          <button>Checkout</button>
-        ) : (
-          <Link href={"/"}>
+          <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
+            Checkout
+          </button>
+          
+          ) : (
+            <Link href={"/"}>
             <h2>Shopping Cart is empty, try adding products or services!</h2>
           </Link>
         )}
+        {/* {preferenceId && <Wallet initialization ={{ preferenceId }}/>} */}
       </div>
+      <div id="wallet_container"></div>
     </div>
   );
 }

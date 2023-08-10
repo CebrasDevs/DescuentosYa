@@ -10,6 +10,7 @@ import {
   GET_COMPANY_DETAIL,
   CLEAN_COMPANY_DETAIL,
   GET_ITEM_BY_NAME,
+  CREATE_PREFERENCE
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 
@@ -150,6 +151,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         companyDetail: {},
       };
+    // case CREATE_PREFERENCE:
+    //   return {
+    //     ...state,
+    //     data: action.payload
+    //   }
     default:
       return { ...state };
   }
