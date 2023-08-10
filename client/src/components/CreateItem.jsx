@@ -24,12 +24,12 @@ export default function CreateItem() {
     discount: "",
     imageUrl: "",
   });
-  const isNotReady =
-    errors.name ||
-    errors.categoryId ||
-    errors.price ||
-    errors.discount ||
-    errors.imageUrl;
+  // const isNotReady =
+  //   errors.name ||
+  //   errors.categoryId ||
+  //   errors.price ||
+  //   errors.discount || 
+  //   errors.imageUrl;
 
   useEffect(() => {
     dispatch(getCategories());
@@ -65,7 +65,9 @@ export default function CreateItem() {
         cloudinaryFormData
       );
 
-      formattedItem.imageUrl = "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
+      formattedItem.imageUrl =
+        "https://res.cloudinary.com/dwndzlcxp/image/upload/" +
+        cloudinaryResponse.data.public_id;
 
       await axios.post(`http://localhost:3001/items`, formattedItem);
 
