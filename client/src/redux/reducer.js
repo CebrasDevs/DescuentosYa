@@ -13,67 +13,14 @@ import {
   GET_USERS,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
-import {member, company, admin} from "../utils/profilesHardCore";
-
-// const provisoryActiveUser = {
-//   id:1,
-//   userId: 2,
-//   name: 'Burguer King',
-//   role: "COMPANY",
-//   email: "burgerking@gmail.com",
-//   password: "YOUwellnesslove123",
-//   companyName: "YOU - Wellness & Health",
-//   description: "If you are looking for a",
-//   cuit: 35815505462,
-//   address: "1234 Maple Street, Los Angeles, CA 90001, United States",
-//   phoneNumber: 2135557890,
-//   imageUrl: "https://example.com/logo.png",
-//   Items: [
-//     {
-//       id: 1,
-//       userId: 2,
-//       description: "Bebida carbonatada",
-//       discount: 15,
-//       category: "food",
-//       name: "Bebida Cola",
-//       price: 0,
-//     },
-//     {
-//       id: 8,
-//       userId: 2,
-//       description: "30 minutos de relajacion",
-//       discount: 20,
-//       category: "health",
-//       name: "Sauna",
-//       price: 100,
-//     },
-//     {
-//       id: 10,
-//       userId: 2,
-//       description: null,
-//       discount: 30,
-//       category: "health",
-//       name: "Sport Nutricion",
-//       price: 1000,
-//     },
-//     {
-//       id: 11,
-//       userId: 2,
-//       description: "Galletas de primeras marcas",
-//       discount: 50,
-//       category: "food",
-//       name: "Cookies",
-//       price: 0,
-//     },
-//   ],
-// };
+import {member, company, admin} from "../utils/perfilesPF";
 
 const initialState = {
   companies: [],
   categories: [],
   users:[],
   allItems: [],
-  activeUser: admin,
+  activeUser: company,
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {
