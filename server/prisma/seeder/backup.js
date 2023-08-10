@@ -40,10 +40,10 @@ async function seedData() {
                 password: dataCompanies[i].name,
                 enabled: true,
                 role: dataCompanies[i].role,
-                dni_cuit: dataCompanies[i].cuit.toString(),
+                dni_cuit: dataCompanies[i].cuit,
                 name: dataCompanies[i].name,
-                address: faker.address.streetAddress(false),
-                phoneNumber: faker.phone.phoneNumber(),
+                address: faker.address.streetAddress(),
+                phoneNumber: faker.phone.phoneNumber().toString(),
                 description: dataCompanies[i].description,
                 imageUrl: dataCompanies[i].imageUrl
             }
@@ -74,29 +74,25 @@ async function seedData() {
 
     // Crear Admins
     const dataAdmins = [
-        { email: 'General1@gmail.com', password: 'fCUfY5v8TL98bum', enabled: true, role: 'ADMIN', dni_cuit: null, name: null, address: '8944 Prosacco Rue', phoneNumber: '380-302-8280', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Fern.Kunde8@gmail.com', password: 'm14pXruZPfa_7zb', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '568 Johnson Overpass', phoneNumber: '(924) 566-0524', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Kristina_Koelpin10@hotmail.com', password: 'O2GlXpTu9b6ev9T', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '19160 Ladarius Course', phoneNumber: '348.376.2291 x09209', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Aditya.Miller@hotmail.com', password: '_vkUzkwD4hS230b', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '280 Leuschke Haven', phoneNumber: '1-790-442-5805', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Queen85@hotmail.com', password: 'GzAu_hjSFaTpLWc', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '41025 Jerde Glen', phoneNumber: '817.201.9940', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Santiago_Lubowitz@hotmail.com', password: '2jHK6b5jzXvQfFm', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '259 Harris Pass', phoneNumber: '1-342-372-6257 x855', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Brendan_Schultz@yahoo.com', password: '4KxgCvD9_h3QYWW', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '4938 Powlowski Underpass', phoneNumber: '(289) 589-7932 x3591', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Brant47@yahoo.com', password: 'wfcx0s4cFTGIOip', enabled: true, role: 'ADMIN', dni_cuit: null, name: null, address: '7446 Michael Hill', phoneNumber: '(616) 235-8508', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Annie_Hammes39@gmail.com', password: 'IiE7Zf7ZfN9aq2Y', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '628 Boehm Shore', phoneNumber: '795.862.2705', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Johan14@hotmail.com', password: 'zoQFxVZg70ZSY0U', enabled: true, role: 'ADMIN', dni_cuit: null, name: null, address: '522 Donnelly Fort', phoneNumber: '(795) 364-4507', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Patsy46@gmail.com', password: 'QVPNmhRCGxVtPE2', enabled: false, role: 'ADMIN', dni_cuit: null, name: null, address: '145 Howell Roads', phoneNumber: '618-545-7817 x7747', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' },
-        { email: 'Pinkie.Krajcik@hotmail.com', password: 'gcxH0Jijlw8H7uk', enabled: true, role: 'ADMIN', dni_cuit: null, name: null, address: '03510 Rath Hollow', phoneNumber: '(473) 521-6203 x898', lastPayment: null, description: null, imageUrl: 'https://picsum.photos/300' }
+        { email: 'SnowDevLC@gmail.com', password: 'SnowDevLC', enabled: true, role: 'ADMIN', dni_cuit: null, name: 'SnowDevLC', address: '8944 Prosacco Rue', phoneNumber: '380-302-8280', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
+        { email: 'PabloBestani@gmail.com', password: 'PabloBestani', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'PabloBestani', address: '568 Johnson Overpass', phoneNumber: '(924) 566-0524', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
+        { email: 'misaelc98@hotmail.com', password: 'misaelc98', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'misaelc98', address: '19160 Ladarius Course', phoneNumber: '348.376.2291 x09209', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129080836?s=60&v=4' },
+        { email: 'wtfranco22@hotmail.com', password: 'wtfranco22', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'wtfranco22', address: '280 Leuschke Haven', phoneNumber: '1-790-442-5805', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/13934218?s=60&v=4' },
+        { email: 'AlbertoMallar@hotmail.com', password: 'AlbertoMallar', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'AlbertoMallar', address: '41025 Jerde Glen', phoneNumber: '817.201.9940', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
+        { email: 'NicoGarcia12@hotmail.com', password: 'NicoGarcia12', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'NicoGarcia12', address: '259 Harris Pass', phoneNumber: '1-342-372-6257 x855', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
+        { email: 'DelHoyoLorenzo@yahoo.com', password: 'DelHoyoLorenzo', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'DelHoyoLorenzo', address: '4938 Powlowski Underpass', phoneNumber: '(289) 589-7932 x3591', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
+        { email: 'AGAlbertoGentile@yahoo.com', password: 'AGAlbertoGentile', enabled: true, role: 'ADMIN', dni_cuit: null, name: 'AGAlbertoGentile', address: '7446 Michael Hill', phoneNumber: '(616) 235-8508', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
     ];
     for (let i = 0; i < dataAdmins.length; i++) {
-        await prisma.dataAdmins.create({
+        await prisma.user.create({
             data: {
-                email: faker.internet.email(),
-                password: faker.internet.password(),
+                email: dataAdmins[i].email.toLowerCase(),
+                password: dataAdmins[i].password.toLocaleLowerCase(),
                 enabled: true,
-                role: dataAdmins[i].role,
+                role: 'ADMIN',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
-                name: faker.name.firstName(),
-                imageUrl: 'https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg',
+                name: dataAdmins[i].name.toLocaleLowerCase(),
+                imageUrl: dataAdmins[i].imageUrl,
                 address: faker.address.streetAddress(),
                 phoneNumber: faker.phone.phoneNumber(),
                 lastPayment: null
@@ -106,21 +102,22 @@ async function seedData() {
 
     // Es un objeto que contiene userId : [arreglo de objetos items](index coincide con userId del item)
     const dataItems = {
-        14: [{ // puma
-            userId: 14,
-            categoryId: 4,
-            description: "Men's Sports Shorts",
-            name: "Men's Sports Shorts",
-            price: 18.99,
-            imageUrl: "https://woker.vtexassets.com/arquivos/ids/365231-800-800?v=638219310712830000&width=800&height=800&aspect=true"
-        }, {
-            userId: 14,
-            categoryId: 4,
-            description: "3 months discount for swimming",
-            name: "Swimming pass",
-            price: 0,
-            imageUrl: "https://imagenes.elpais.com/resizer/O_nfQn8L8LXpvOp_dWjVveDA2fo=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/XQDJC5BR4ZE45KALPCWSHUXYLY.jpg"
-        }],
+        14: [
+            { // puma
+                userId: 14,
+                categoryId: 4,
+                description: "Men's Sports Shorts",
+                name: "Men's Sports Shorts",
+                price: 18.99,
+                imageUrl: "https://woker.vtexassets.com/arquivos/ids/365231-800-800?v=638219310712830000&width=800&height=800&aspect=true"
+            }, {
+                userId: 14,
+                categoryId: 4,
+                description: "3 months discount for swimming",
+                name: "Swimming pass",
+                price: 0,
+                imageUrl: "https://imagenes.elpais.com/resizer/O_nfQn8L8LXpvOp_dWjVveDA2fo=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/XQDJC5BR4ZE45KALPCWSHUXYLY.jpg"
+            }],
         13: [{ //adidas
             userId: 13,
             categoryId: 4,
@@ -140,7 +137,7 @@ async function seedData() {
         11: [{ //Ibel cosmeticos
             userId: 11,
             categoryId: 3,
-            description: "Moisturizing face cream.",
+            description: "Moisturizing face cream",
             name: "Moisturizing Face Cream",
             price: 15.99,
             imageUrl: "https://http2.mlstatic.com/D_NQ_NP_910266-MLA43462195134_092020-O.webp"
@@ -175,8 +172,7 @@ async function seedData() {
             description: "Makeups that are offered these days, enjoy the DTO.",
             name: "L'bel Makeups",
             price: 25.99,
-            imageUrl: "https://trends.lbel.com/pe/wp-content/uploads/sites/13/2021/02/articulo-15-1.jpg",
-            discount: 0,
+            imageUrl: "https://trends.lbel.com/pe/wp-content/uploads/sites/13/2021/02/articulo-15-1.jpg"
         },
         {
             userId: 11,
@@ -379,8 +375,7 @@ async function seedData() {
             description: "Spicy chicken sandwich with ranch dressing and fresh vegetables.",
             name: "Spicy Chicken",
             price: 7.99,
-            imageUrl: "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg",
-            discount: 15,
+            imageUrl: "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg"
         },],
         3: [{ //Pizza Hut
             userId: 3,
@@ -445,8 +440,7 @@ async function seedData() {
             description: "Pizza with chicken, bacon, mushrooms and mozzarella cheese.",
             name: "Chicken and Bacon Pizza",
             price: 14.99,
-            imageUrl: "https://i.blogs.es/40c9b7/pizza-casera-champinon/650_1200.jpg",
-            discount: 0,
+            imageUrl: "https://i.blogs.es/40c9b7/pizza-casera-champinon/650_1200.jpg"
         },
         {
             userId: 3,
@@ -462,8 +456,7 @@ async function seedData() {
             description: "Burger with beef, American cheese and bacon.",
             name: "Whopper",
             price: 6.49,
-            imageUrl: "http://bk-latam-prod.s3.amazonaws.com/sites/burgerking.latam/files/BK_Web_DOBLE_WHOPPER_500X540px.png",
-            discount: 5,
+            imageUrl: "http://bk-latam-prod.s3.amazonaws.com/sites/burgerking.latam/files/BK_Web_DOBLE_WHOPPER_500X540px.png"
         },
         {
             userId: 2,
@@ -484,7 +477,8 @@ async function seedData() {
         {
             userId: 2,
             categoryId: 1,
-            description: "Enjoy the Beef, American Cheese and Bacon Burger Combo", name: "3x2 Whopper",
+            description: "Enjoy the Beef, American Cheese and Bacon Burger Combo",
+            name: "3x2 Whopper",
             price: 6.99,
             imageUrl: "https://cazaofertas.com.mx/wp-content/uploads/2019/12/Burger-King-201219-01.jpg"
         }],
