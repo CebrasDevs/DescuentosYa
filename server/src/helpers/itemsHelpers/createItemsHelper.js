@@ -11,7 +11,7 @@ module.exports = async (item) => {
             name: item.name,
             price: + item.price,
             discount: + item.discount,
-            url_image: item.imageUrl
+            imageUrl: item.imageUrl
             
         }
     });
