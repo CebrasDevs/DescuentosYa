@@ -16,22 +16,22 @@ async function seedData() {
     // Estos son los datos de las empresas que vamos a cargar
     const dataCompanies = [
         // 14 objetos
-        { email: 'mcdonalds@gmail.com', password: 'mcdonalds', enabled: true, role: 'COMPANY', dni_cuit: '33134366027', name: 'McDonalds', address: '41622 Ratke Glens', phoneNumber: '873-382-9467', lastPayment: null, description: 'Cadena de restaurantes de comida rápida, conocida por sus hamburguesas y papas fritas.', imageUrl: 'https://guiatodoberazategui.com.ar/wp-content/uploads/2020/03/Logo-de-McDonald%C2%B4s-1-1-1.png' },
-        { email: 'burgerking@gmail.com', password: 'burgerking', enabled: true, role: 'COMPANY', dni_cuit: '35815505462', name: 'Burger King', address: '72572 Aurore Shoals', phoneNumber: '504-605-7317 x07965', lastPayment: null, description: 'Cadena de restaurantes de hamburguesas y comida rápida, con un menú variado.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj79lhBWamZcx9gN7RY5eXkec3_qXZDeZ6Ig&usqp=CAU' },
-        { email: 'pizzahut@gmail.com', password: 'pizzahut', enabled: true, role: 'COMPANY', dni_cuit: '30383062410', name: 'Pizza Hut', address: '27310 O Kon Glen', phoneNumber: '(402) 805-4751 x62082', lastPayment: null, description: 'Famosa cadena de pizzerías con una amplia variedad de pizzas y platos italianos.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoMuRtRkpmAo44JrCOBYs1ByMl6XqfYx_tNw&usqp=CAU' },
-        { email: 'subway@gmail.com', password: 'subway', enabled: true, role: 'COMPANY', dni_cuit: '30127761460', name: 'Subway', address: '651 Sporer Forge', phoneNumber: '933.214.3426', lastPayment: null, description: 'Franquicia de sándwiches y bocadillos, conocida por sus opciones de comida fresca y personalizable', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleUahmc9LVW6C4ShvKOiqixTpk2IuXijyAw&usqp=CAU' },
-        { email: 'kfc@gmail.com', password: 'kfc', enabled: true, role: 'COMPANY', dni_cuit: '32286160887', name: 'KFC', address: '392 Trenton Circles', phoneNumber: '275-813-0556 x477', lastPayment: null, description: 'Cadena de restaurantes especializada en pollo frito y platos de comida rápida.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbvPg-rZKBadrmmUB9tDX-xMLDnFMcKGbqzg&usqp=CAU' },
-        { email: 'laserenísima@gmail.com', password: 'laserenísima', enabled: true, role: 'COMPANY', dni_cuit: '34041763086', name: 'La Serenísima', address: '3794 Elsa Cove', phoneNumber: '946-238-7158 x2570', lastPayment: null, description: 'Líder en productos lácteos y lácteos frescos en Argentina, ofrece leche, yogur, quesos y más.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU9FweeNUqegx-MHySU_aUnFelsQrqv4xVdA&usqp=CAU' },
-        { email: 'danone@gmail.com', password: 'danone', enabled: true, role: 'COMPANY', dni_cuit: '32887216101', name: 'Danone', address: '127 Armstrong Brook', phoneNumber: '1-649-811-4079', lastPayment: null, description: 'Marca internacional de productos lácteos y alimentos saludables.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwMKb9qjza3naK6nSdKdmHFSJfg8Z52VR0cg&usqp=CAU' },
-        { email: 'sancor@gmail.com', password: 'saitemId: voucherncor', enabled: true, role: 'COMPANY', dni_cuit: '38609893845', name: 'Sancor', address: '2863 Lance Crescent', phoneNumber: '1-837-865-5733 x21165', lastPayment: null, description: 'Empresa argentina de lácteos con una amplia variedad de productos lácteos y derivados.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9xErSNroI5-XpXAvuw14Ah8D5xMO9Y3ZI1tBWWT4q_omclWsDUNxjh00iiVpt7cerqIY&usqp=CAU' },
-        { email: 'natura@gmail.com', password: 'natura', enabled: true, role: 'COMPANY', dni_cuit: '37122062358', name: 'Natura', address: '675 Rau Mission', phoneNumber: '797.860.8703', lastPayment: null, description: 'Empresa de productos de belleza y cuidado personal con enfoque en ingredientes naturales.', imageUrl: 'https://i.pinimg.com/736x/f2/33/16/f2331671f28fdd9e5f27dfad463d8bbc.jpg' },
-        { email: 'avon@gmail.com', password: 'avon', enabled: true, role: 'COMPANY', dni_cuit: '36681061529', name: 'Avon', address: '50320 Mante Avenue', phoneNumber: '(504) 587-2580', lastPayment: null, description: 'Empresa de venta directa de productos de belleza y cosméticos.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2gV0XN44i7eKJZrtmAO6K16yG8qZIBl-QQ&usqp=CAU' },
-        { email: 'lbel@gmail.com', password: 'lbel', enabled: true, role: 'COMPANY', dni_cuit: '31522149325', name: 'L Bel', address: '3858 Braun Village', phoneNumber: '666.710.6610 x76747', lastPayment: null, description: 'Marca de productos de belleza y cuidado personal, con líneas de maquillaje y perfumería.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy03pAPMNRqftBBsRQiALvVK33yWuNn4q4Mw&usqp=CAU' },
-        { email: 'nike@gmail.com', password: 'nike', enabled: true, role: 'COMPANY', dni_cuit: '33482514064', name: 'Nike', address: '9505 May Cliff', phoneNumber: '247-788-1735 x229', lastPayment: null, description: 'Marca líder en calzado y ropa deportiva, con una amplia gama de productos para atletas.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOFFUcd-e_1Dvl_4Ib58po4FVpMj7NyCb1JQ&usqp=CAU' },
-        { email: 'adidas@gmail.com', password: 'adidas', enabled: true, role: 'COMPANY', dni_cuit: '30614878834', name: 'Adidas', address: '648 Rogahn Passage', phoneNumber: '(988) 847-0931 x6627', lastPayment: null, description: 'Otra marca líder en calzado y ropa deportiva, con énfasis en diseño y tecnología.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1dtlrN5hP1x-m9AwA-NqGuUv2rwyehMoIkg&usqp=CAU' },
-        { email: 'puma@gmail.com', password: 'puma', enabled: true, role: 'COMPANY', dni_cuit: '35140923855', name: 'Puma', address: '37758 Konopelski Centers', phoneNumber: '692-790-8155', lastPayment: null, description: 'Empresa internacional de ropa deportiva y calzado, con una línea de productos modernos y elegantes.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-VXT0dnlBIoMrg9ZR3XE9ddKrcqXAzBXz0w&usqp=CAU' }
+        { email: 'mcdonalds@gmail.com', password: 'mcdonalds', enabled: true, role: 'COMPANY', dni_cuit: '33134366027', name: 'McDonalds', address: '41622 Ratke Glens', phoneNumber: '873-382-9467', lastPayment: null, description: 'Fast food restaurant chain, known for its hamburgers and fries', imageUrl: 'https://guiatodoberazategui.com.ar/wp-content/uploads/2020/03/Logo-de-McDonald%C2%B4s-1-1-1.png' },
+        { email: 'burgerking@gmail.com', password: 'burgerking', enabled: true, role: 'COMPANY', dni_cuit: '35815505462', name: 'Burger King', address: '72572 Aurore Shoals', phoneNumber: '504-605-7317 x07965', lastPayment: null, description: 'Hamburger and fast food restaurant chain, with a varied menu', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj79lhBWamZcx9gN7RY5eXkec3_qXZDeZ6Ig&usqp=CAU' },
+        { email: 'pizzahut@gmail.com', password: 'pizzahut', enabled: true, role: 'COMPANY', dni_cuit: '30383062410', name: 'Pizza Hut', address: '27310 O Kon Glen', phoneNumber: '(402) 805-4751 x62082', lastPayment: null, description: 'Famous pizzeria chain with a wide variety of pizzas and Italian dishes', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoMuRtRkpmAo44JrCOBYs1ByMl6XqfYx_tNw&usqp=CAU' },
+        { email: 'subway@gmail.com', password: 'subway', enabled: true, role: 'COMPANY', dni_cuit: '30127761460', name: 'Subway', address: '651 Sporer Forge', phoneNumber: '933.214.3426', lastPayment: null, description: 'Sandwich and snack franchise, known for its fresh and customizable food options', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleUahmc9LVW6C4ShvKOiqixTpk2IuXijyAw&usqp=CAU' },
+        { email: 'kfc@gmail.com', password: 'kfc', enabled: true, role: 'COMPANY', dni_cuit: '32286160887', name: 'KFC', address: '392 Trenton Circles', phoneNumber: '275-813-0556 x477', lastPayment: null, description: 'Restaurant chain specializing in fried chicken and fast food dishes', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbvPg-rZKBadrmmUB9tDX-xMLDnFMcKGbqzg&usqp=CAU' },
+        { email: 'laserenísima@gmail.com', password: 'laserenísima', enabled: true, role: 'COMPANY', dni_cuit: '34041763086', name: 'La Serenísima', address: '3794 Elsa Cove', phoneNumber: '946-238-7158 x2570', lastPayment: null, description: 'Leader in dairy and fresh dairy products in Argentina, offers milk, yogurt, cheeses and more', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU9FweeNUqegx-MHySU_aUnFelsQrqv4xVdA&usqp=CAU' },
+        { email: 'danone@gmail.com', password: 'danone', enabled: true, role: 'COMPANY', dni_cuit: '32887216101', name: 'Danone', address: '127 Armstrong Brook', phoneNumber: '1-649-811-4079', lastPayment: null, description: 'International dairy and health food brand', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwMKb9qjza3naK6nSdKdmHFSJfg8Z52VR0cg&usqp=CAU' },
+        { email: 'sancor@gmail.com', password: 'saitemId: voucherncor', enabled: true, role: 'COMPANY', dni_cuit: '38609893845', name: 'Sancor', address: '2863 Lance Crescent', phoneNumber: '1-837-865-5733 x21165', lastPayment: null, description: 'Argentine dairy company with a wide variety of dairy products and derivatives', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9xErSNroI5-XpXAvuw14Ah8D5xMO9Y3ZI1tBWWT4q_omclWsDUNxjh00iiVpt7cerqIY&usqp=CAU' },
+        { email: 'natura@gmail.com', password: 'natura', enabled: true, role: 'COMPANY', dni_cuit: '37122062358', name: 'Natura', address: '675 Rau Mission', phoneNumber: '797.860.8703', lastPayment: null, description: 'Beauty and personal care company with a focus on natural ingredients', imageUrl: 'https://i.pinimg.com/736x/f2/33/16/f2331671f28fdd9e5f27dfad463d8bbc.jpg' },
+        { email: 'avon@gmail.com', password: 'avon', enabled: true, role: 'COMPANY', dni_cuit: '36681061529', name: 'Avon', address: '50320 Mante Avenue', phoneNumber: '(504) 587-2580', lastPayment: null, description: 'Direct sales company of beauty products and cosmetics', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2gV0XN44i7eKJZrtmAO6K16yG8qZIBl-QQ&usqp=CAU' },
+        { email: 'lbel@gmail.com', password: 'lbel', enabled: true, role: 'COMPANY', dni_cuit: '31522149325', name: 'L Bel', address: '3858 Braun Village', phoneNumber: '666.710.6610 x76747', lastPayment: null, description: 'Brand of beauty and personal care products, with lines of makeup and perfumery', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy03pAPMNRqftBBsRQiALvVK33yWuNn4q4Mw&usqp=CAU' },
+        { email: 'nike@gmail.com', password: 'nike', enabled: true, role: 'COMPANY', dni_cuit: '33482514064', name: 'Nike', address: '9505 May Cliff', phoneNumber: '247-788-1735 x229', lastPayment: null, description: 'Leading brand in sports footwear and clothing, with a wide range of products for athletes', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOFFUcd-e_1Dvl_4Ib58po4FVpMj7NyCb1JQ&usqp=CAU' },
+        { email: 'adidas@gmail.com', password: 'adidas', enabled: true, role: 'COMPANY', dni_cuit: '30614878834', name: 'Adidas', address: '648 Rogahn Passage', phoneNumber: '(988) 847-0931 x6627', lastPayment: null, description: 'Another leading sportswear and footwear brand, with an emphasis on design and technology', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1dtlrN5hP1x-m9AwA-NqGuUv2rwyehMoIkg&usqp=CAU' },
+        { email: 'puma@gmail.com', password: 'puma', enabled: true, role: 'COMPANY', dni_cuit: '35140923855', name: 'Puma', address: '37758 Konopelski Centers', phoneNumber: '692-790-8155', lastPayment: null, description: 'International sportswear and footwear company, with a line of modern and elegant products', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-VXT0dnlBIoMrg9ZR3XE9ddKrcqXAzBXz0w&usqp=CAU' }
     ];
-    const companies = []; //coleccionmos los objetos insertados
+    const companies = []; //coleccionamos los usuarios companies para crear sus items mas adelante
     for (let i = 0; i < dataCompanies.length; i++) {
         // recorremos el arreglo para insertar las companias en la tabla
         const company = await prisma.user.create({ //guardamos el objeto insertado en la tabla
@@ -52,8 +52,9 @@ async function seedData() {
         companies.push(company);
     };
 
+    // le damos un valor a la cantidad de usuarios members que queremos agregar 
     const membersQuantity = 20;
-    const members = [];
+    const members = []; //coleccionamos a los members insertados para utilizarlos como compradores
     for (let i = 0; i < membersQuantity; i++) {
         const member = await prisma.user.create({
             data: {
@@ -66,22 +67,22 @@ async function seedData() {
                 imageUrl: 'https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg',
                 address: faker.address.streetAddress(),
                 phoneNumber: faker.phone.phoneNumber(),
-                lastPayment: faker.date.past()
+                lastPayment: faker.date.between(new Date('2023-01-01'), new Date())
             },
         });
         members.push(member);
     };
 
-    // Crear Admins
+    // Creamos un arreglo para guardar los datos de los admins del equipo
     const dataAdmins = [
-        { email: 'SnowDevLC@gmail.com', password: 'SnowDevLC', enabled: true, role: 'ADMIN', dni_cuit: null, name: 'SnowDevLC', address: '8944 Prosacco Rue', phoneNumber: '380-302-8280', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
-        { email: 'PabloBestani@gmail.com', password: 'PabloBestani', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'PabloBestani', address: '568 Johnson Overpass', phoneNumber: '(924) 566-0524', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
-        { email: 'misaelc98@hotmail.com', password: 'misaelc98', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'misaelc98', address: '19160 Ladarius Course', phoneNumber: '348.376.2291 x09209', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129080836?s=60&v=4' },
-        { email: 'wtfranco22@hotmail.com', password: 'wtfranco22', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'wtfranco22', address: '280 Leuschke Haven', phoneNumber: '1-790-442-5805', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/13934218?s=60&v=4' },
-        { email: 'AlbertoMallar@hotmail.com', password: 'AlbertoMallar', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'AlbertoMallar', address: '41025 Jerde Glen', phoneNumber: '817.201.9940', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
-        { email: 'NicoGarcia12@hotmail.com', password: 'NicoGarcia12', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'NicoGarcia12', address: '259 Harris Pass', phoneNumber: '1-342-372-6257 x855', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
-        { email: 'DelHoyoLorenzo@yahoo.com', password: 'DelHoyoLorenzo', enabled: false, role: 'ADMIN', dni_cuit: null, name: 'DelHoyoLorenzo', address: '4938 Powlowski Underpass', phoneNumber: '(289) 589-7932 x3591', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
-        { email: 'AGAlbertoGentile@yahoo.com', password: 'AGAlbertoGentile', enabled: true, role: 'ADMIN', dni_cuit: null, name: 'AGAlbertoGentile', address: '7446 Michael Hill', phoneNumber: '(616) 235-8508', lastPayment: null, description: null, imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
+        { email: 'SnowDevLC@gmail.com', password: 'SnowDevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
+        { email: 'PabloBestani@gmail.com', password: 'PabloBestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
+        { email: 'misaelc98@hotmail.com', password: 'misaelc98', name: 'misaelc98', imageUrl: 'https://avatars.githubusercontent.com/u/129080836?s=60&v=4' },
+        { email: 'wtfranco22@hotmail.com', password: 'wtfranco22', name: 'wtfranco22', imageUrl: 'https://avatars.githubusercontent.com/u/13934218?s=60&v=4' },
+        { email: 'AlbertoMallar@hotmail.com', password: 'AlbertoMallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
+        { email: 'NicoGarcia12@hotmail.com', password: 'NicoGarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
+        { email: 'DelHoyoLorenzo@yahoo.com', password: 'DelHoyoLorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
+        { email: 'AGAlbertoGentile@yahoo.com', password: 'AGAlbertoGentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
     ];
     for (let i = 0; i < dataAdmins.length; i++) {
         await prisma.user.create({
@@ -110,12 +111,13 @@ async function seedData() {
                 name: "Men's Sports Shorts",
                 price: 18.99,
                 imageUrl: "https://woker.vtexassets.com/arquivos/ids/365231-800-800?v=638219310712830000&width=800&height=800&aspect=true"
-            }, {
+            },
+            {
                 userId: 14,
                 categoryId: 4,
-                description: "3 months discount for swimming",
+                description: "1 month discount for swimming",
                 name: "Swimming pass",
-                price: 0,
+                price: 34.99,
                 imageUrl: "https://imagenes.elpais.com/resizer/O_nfQn8L8LXpvOp_dWjVveDA2fo=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/XQDJC5BR4ZE45KALPCWSHUXYLY.jpg"
             }],
         13: [{ //adidas
@@ -161,7 +163,7 @@ async function seedData() {
         {
             userId: 11,
             categoryId: 3,
-            description: "Liquid hand soap with lavender scent.",
+            description: "Liquid hand soap with lavender scent",
             name: "Lavender Liquid Soap",
             price: 7.99,
             imageUrl: "https://http2.mlstatic.com/D_NQ_NP_831077-MLM49175132171_022022-O.webp"
@@ -169,7 +171,7 @@ async function seedData() {
         {
             userId: 11,
             categoryId: 3,
-            description: "Makeups that are offered these days, enjoy the DTO.",
+            description: "Makeups that are offered these days, enjoy the DTO",
             name: "L'bel Makeups",
             price: 25.99,
             imageUrl: "https://trends.lbel.com/pe/wp-content/uploads/sites/13/2021/02/articulo-15-1.jpg"
@@ -272,7 +274,7 @@ async function seedData() {
             price: 1.99,
             imageUrl: "https://www.sancoryoguresypostres.com.ar/wp-content/uploads/2018/07/6515-FRI-firme-entero-frutilla-fortificado-con-hierro-190g.png"
         }],
-        7: [,
+        7: [
             { //danone
                 userId: 7,
                 categoryId: 2,
@@ -376,7 +378,7 @@ async function seedData() {
             name: "Spicy Chicken",
             price: 7.99,
             imageUrl: "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg"
-        },],
+        }],
         3: [{ //Pizza Hut
             userId: 3,
             categoryId: 1,
@@ -492,15 +494,17 @@ async function seedData() {
                 imageUrl: "https://i.ytimg.com/vi/cpcc5ApbURE/maxresdefault.jpg"
             }]
     };
-    let allItems = [];
+    let allItems = []; // coleccionamos todos los objetos items agregados a la BD para generarles un voucher o shopping
     for (const companyId in dataItems) {
+        //recorremos los items anteriores y el index coindide con el id de la compania creada
         const items = dataItems[companyId];
         for (const item of items) {
+            //agregamos todos los items a la compania que corresponde
             const addItem = await prisma.item.create({
                 data: {
                     userId: +companyId,
                     categoryId: item.categoryId,
-                    description: item.descripcion,
+                    description: item.description,
                     name: item.name,
                     imageUrl: item.imageUrl,
                     price: item.price,
@@ -511,18 +515,21 @@ async function seedData() {
         }
     }
 
-    // Crear vouchers o SHOPPING
+    // Generamos un vouchers o shopping 
     const transactionQuantity = 150;
     for (let i = 0; i < transactionQuantity; i++) {
         let item = faker.random.arrayElement(allItems)
         if (!item.price) {
-            // entra a este if en caso de que el precio sea 0
-            // por lo tanto creamos un voucher con su codigo al azar
+            // entra a este if en caso de que el precio sea 0, por lo tanto creamos un voucher con su codigo al azar
+            let expirationDate = faker.date.between(new Date('2023-01-01'), new Date('2023-09-01'));
+            let enabled = expirationDate > new Date();
             await prisma.voucher.create({
                 data: {
                     item: { connect: { id: item.id } },
                     user: { connect: { id: faker.random.arrayElement(members).id } },
                     code: faker.random.alphaNumeric(20),
+                    enabled: enabled,
+                    expirationDate: expirationDate
                 },
             });
         } else {
@@ -540,7 +547,7 @@ async function seedData() {
                 data: {
                     item: { connect: { id: item.id } },
                     shopping: { connect: { id: shopping.id } },
-                    quantity: faker.datatype.number({ min: 1, max: 10 }),
+                    quantityItem: faker.datatype.number({ min: 1, max: 10 }),
                 },
             });
         }
