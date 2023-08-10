@@ -246,7 +246,7 @@ export default function SignUpMember() {
                     type="file"
                     name="imageUrl"
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    onChange={handleInputChange}
+                    onChange={handleImageChange}
                   />
                   {errors.imageUrl && (
                     <p className=" text-red-600 text-sm font-semibold ">
