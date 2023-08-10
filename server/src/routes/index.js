@@ -9,23 +9,17 @@ const prisma = new PrismaClient();
 // Middleware para verificar el token en rutas protegidas
 async function verificarToken(req, res, next) {
   try {
-    if(!req.cookies.accessTrue){
+    if (!req.cookies.accessTrue || !req.cookies.accessTrue.token) {
       return res.status(401).json({ message: "Token not provided" });
     }
 
     const token = req.cookies.accessTrue.token;
 
-    if (!token) {
-      return res.status(401).json({ message: "Token not provided" });
-    }
-
     const id = req.cookies.accessTrue.user.id;
-console.log(req.cookies)
+
     const user = await prisma.user.findUnique({
       where: { id }, // Buscar al usuario por su ID
     });
-
-
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err || user.id !== decodedToken.userId) {
