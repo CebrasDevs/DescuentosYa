@@ -13,7 +13,7 @@ import {
   GET_USERS,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
-import {member, company, admin} from "../utils/profilesHarcode";
+import {member, company, admin} from "../utils/profilesHardCore";
 
 // const provisoryActiveUser = {
 //   id:1,
