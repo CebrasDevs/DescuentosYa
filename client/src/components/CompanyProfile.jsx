@@ -52,9 +52,9 @@ export default function CompanyProfile() {
           </div>
         </div>
 
-        {/* <div id="sales" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md h-[400px]">
+        <div id="sales" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md h-[400px]">
           <h1 className="border-b-2 p-4 font-bold text-xl">SALES</h1>
-          {activeUser.items.map((item) => {
+          {/* {activeUser.items.map((item) => {
             return (
               <div className="flex items-center border border-black rounded-lg m-2">
                 <img
@@ -69,8 +69,8 @@ export default function CompanyProfile() {
                 <h2 className="ml-2">Buy again</h2>
               </div>
             );
-          })}
-        </div> */}
+          })} */}
+        </div>
       </div>
     );
   }
