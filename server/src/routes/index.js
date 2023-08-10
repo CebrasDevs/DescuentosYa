@@ -57,6 +57,5 @@ mainRouter.use("/vouchers", verificarToken, vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);
 mainRouter.use("/", authRouter);
 mainRouter.use("/profile", profileRouter);
-mainRouter.use("/", authRouter);
 
 module.exports = mainRouter;
