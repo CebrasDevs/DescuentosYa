@@ -32,6 +32,7 @@ export const getCompanies = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("http://localhost:3001/companies");
+      console.log(data)
       return dispatch({
         type: GET_COMPANIES,
         payload: data,
@@ -90,7 +91,7 @@ export const getCompanyDetail = (id) => {
       const { data } = await axios.get(`http://localhost:3001/companies/${id}`);
       return dispatch({
         type: GET_COMPANY_DETAIL,
-        payload: data[0],
+        payload: data,
       });
     } catch (error) {
       console.log("error");

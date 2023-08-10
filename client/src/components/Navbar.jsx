@@ -77,19 +77,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center w-full h-12 bg-neutral-800 mt-16">
                 <div className=" flex w-3/4 m-auto">
-                    {role !== "COMPANY" ? (
-                        <div className="flex h-full mr-auto text-white">
-                            <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">
-                                Find Companies
-                            </Link>
-                            <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
-                                Find Services
-                            </Link>
-                            <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
-                                About
-                            </Link>
-                        </div>
-                    ) : (
+                    {role !== "COMPANY" || (
                         <div className="flex h-full mr-auto text-white">
                             <div className="ml-10 py-3 px-6 border-x-2">MY PROFILE</div>
                             <a href={"#data"} className="hover:bg-neutral-600 py-3 px-6">
@@ -103,8 +91,34 @@ export default function Navbar() {
                             </a>
                         </div>
                     )}
+                    {role !== "MEMBER" || (<div className="flex h-full mr-auto text-white">
+                        <div className="ml-10 py-3 px-6 border-x-2">MY PROFILE</div>
+                            <a href={"#data"} className="hover:bg-neutral-600 py-3 px-6">
+                                My Data
+                            </a>
+                            <a href={"#orders"} className="hover:bg-neutral-600 py-3 px-6">
+                                My Orders
+                            </a>
+                            </div>)
+                        
+                    }
+                    { (role !== 'MEMBER' && role !== 'COMPANY') && (
+                    <div className="flex h-full mr-auto text-white">
+                            <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">
+                                Find Companies
+                            </Link>
+                            <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                                Find Services
+                            </Link>
+                            <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                                About
+                            </Link>
+                        </div>)
+                        
+                    }
                 </div>
-            </div>
+                </div>
+            
         </>
     );
 }
