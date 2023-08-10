@@ -5,17 +5,17 @@ import useCompany from "@/hooks/useCompany";
 export default function CompanyDetail({ id }) {
 
     const companyDetail = useCompany(id);
-
+    
     return (
         <div className="flex m-5">
             <div className="mr-5">
-                <img src={companyDetail.url_image} />
-                <h1 className="mb-10 justify-center">Company Name: {companyDetail.company_name} </h1>
+                <img src={companyDetail.imageUrl} />
+                <h1 className="mb-10 justify-center">Company Name: {companyDetail.name} </h1>
                 <h1 className="mb-10 justify-center">Email: {companyDetail.email} </h1>
                 <h1 className="mb-10 justify-center">CUIT: {companyDetail.cuit} </h1>
                 <h1 className="mb-10 justify-center">Address: {companyDetail.address} </h1>
                 <h1 className="mb-10 justify-center">Company Description: {companyDetail.description} </h1>
-                <h1 className="mb-10 justify-center">Phone Number: {companyDetail.phone} </h1>
+                <h1 className="mb-10 justify-center">Phone Number: {companyDetail.phoneNumber} </h1>
             </div>
 
             <div>
