@@ -6,7 +6,7 @@ module.exports = async (id) => {
     const itemsInfo = result.map((item) => {
         return {
             id:+item.id,
-            imageUrl: item.url_image,
+            imageUrl: item.imageUrl,
             name: item.name,
             description: item.description,
             category: item.category.name,
