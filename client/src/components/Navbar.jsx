@@ -63,12 +63,12 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link
+                {activeUser.role === "COMPANY" && <Link
                   href={"/create"}
                   className="mr-10 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
                 >
                   Post a Discount
-                </Link>
+                </Link>}
                 {activeUser.role === "MEMBER" && (
                   <Link
                     href={"/shoppingcart"}
@@ -86,7 +86,10 @@ export default function Navbar() {
                   className=" flex items-center font-medium hover:text-blue-500"
                 >
                   <IoPerson className=" mr-3" />
-                  <h1>{activeUser.name}</h1>
+                  <div>
+                    <h1>{activeUser.name}</h1>
+                    <h1>{activeUser.role.toLowerCase()}</h1>
+                  </div>
                 </Link>
 
                 <Link
