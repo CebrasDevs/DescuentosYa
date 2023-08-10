@@ -15,11 +15,9 @@ module.exports = async (voucher) => {
 
         //obtengo el ultimo voucher agregado
         const lastVoucher = previousVouchers[previousVouchers.length - 1];
-        console.log('soy el lastvOUCHER', lastVoucher)
 
         //obtengo la expiration date del ultimo voucher agregado
         const lastExpirationDate = lastVoucher.expirationDate;
-        console.log('soy la ultima date', lastExpirationDate);
 
         // Calculo el número de milisegundos que hay en dos días
         const twoDaysInMilliseconds = 2 * 24 * 60 * 60 * 1000;
@@ -32,14 +30,22 @@ module.exports = async (voucher) => {
         if (dateDifference >= twoDaysInMilliseconds) {
             // Hay dos días de diferencia entre las fechas
 
-            const res = await createVouchersHelper(voucher);
-            return res;
+            let { id, userId, itemId, code, expirationDate } = res;
 
-        } else throw new Error("voucher already exist");
+            return {
+                id, userId, itemId, code, expirationDate
+            };
+
+        } else throw new Error("voucher already exists");
     }
 
     const res = await createVouchersHelper(voucher);
-    return res;
+
+    let { id, userId, itemId, code, expirationDate } = res;
+
+    return {
+        id, userId, itemId, code, expirationDate
+    };
 
 
 } // vamos a dejar pendiente aplicar la funcionalidad de la propiedad enabled 
