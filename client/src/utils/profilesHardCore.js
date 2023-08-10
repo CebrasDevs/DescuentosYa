@@ -1,3 +1,331 @@
+//ESTE ES EL NUEVO LUIS!!! EL COMENTADO:
+// export const member = {
+//   "id": 22,
+//   "name": "Emily",
+//   "email": "Eveline1@yahoo.com",
+//   "role": "MEMBER",
+//   "dni": "35158803",
+//   "address": "849 Elena Square",
+//   "phoneNumber": "319.883.6132",
+//   "enabled": true,
+//   "lastPayment": "2023-04-17T18:51:50.660Z",
+//   "imageUrl": "https://picsum.photos/300",
+//   "vouchers": [
+//     {
+//       "id": 7,
+//       "code": "k9w07r7snyu1h2506gsm",
+//       "enabled": true,
+//       "expirationDate": "2023-08-09T05:14:16.187Z",
+//       "item": {
+//         "id": 40,
+//         "name": "Limpieza facial desincrustante",
+//         "category": "cosmetica",
+//         "price": 15.99,
+//         "discount": 20
+//       },
+//       "company": {
+//         "id": 3,
+//         "name": "Pizza Hut"
+//       }
+//     },
+//     {
+//       "id": 21,
+//       "code": "6jsu4s814bfa0i5i4wvu",
+//       "enabled": true,
+//       "expirationDate": "2023-08-09T05:14:16.212Z",
+//       "item": {
+//         "id": 46,
+//         "name": "Pantalones de Yoga Mujer",
+//         "category": "deporte",
+//         "price": 0,
+//         "discount": 30
+//       },
+//       "company": {
+//         "id": 18,
+//         "name": null
+//       }
+//     },
+//     {
+//       "id": 22,
+//       "code": "puxwxg1r4neevnz0rrlj",
+//       "enabled": true,
+//       "expirationDate": "2023-08-09T05:14:16.215Z",
+//       "item": {
+//         "id": 13,
+//         "name": "Masajes",
+//         "category": "cosmetica",
+//         "price": 29.99,
+//         "discount": 30
+//       },
+//       "company": {
+//         "id": 17,
+//         "name": null
+//       }
+//     },
+//     {
+//       "id": 24,
+//       "code": "dmpy1gnmq519wz11z3tm",
+//       "enabled": true,
+//       "expirationDate": "2023-08-09T05:14:16.219Z",
+//       "item": {
+//         "id": 29,
+//         "name": "Pizza",
+//         "category": "comida",
+//         "price": 0,
+//         "discount": 15
+//       },
+//       "company": {
+//         "id": 12,
+//         "name": "Nike"
+//       }
+//     },
+//     {
+//       "id": 29,
+//       "code": "slfbaclvwl9bqkl5a6kc",
+//       "enabled": true,
+//       "expirationDate": "2023-08-09T05:14:16.229Z",
+//       "item": {
+//         "id": 69,
+//         "name": "Labial Líquido",
+//         "category": "cosmetica",
+//         "price": 12.99,
+//         "discount": 25
+//       },
+//       "company": {
+//         "id": 13,
+//         "name": "Adidas"
+//       }
+//     },
+//     {
+//       "id": 35,
+//       "code": "3524bnkoat1970st74xz",
+//       "enabled": true,
+//       "expirationDate": "2023-08-09T05:14:16.240Z",
+//       "item": {
+//         "id": 4,
+//         "name": "Yogur de Durazno",
+//         "category": "lacteos",
+//         "price": 0,
+//         "discount": 35
+//       },
+//       "company": {
+//         "id": 7,
+//         "name": "Danone"
+//       }
+//     }
+//   ],
+//   "shoppings": [
+//     {
+//       "id": 8,
+//       "pdfUrl": "http://mabelle.com",
+//       "wayToPay": "CARD",
+//       "state": "SUCCESS",
+//       "items": [
+//         {
+//           "id": 41,
+//           "name": "Masajes",
+//           "category": "cosmetica",
+//           "price": 54.99,
+//           "discount": 20,
+//           "company": {
+//             "id": 17,
+//             "name": null
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       "id": 14,
+//       "pdfUrl": "http://seth.info",
+//       "wayToPay": "CARD",
+//       "state": "PENDING",
+//       "items": [
+//         {
+//           "id": 54,
+//           "name": "Mochila Deportiva",
+//           "category": "deporte",
+//           "price": 0,
+//           "discount": 15,
+//           "company": {
+//             "id": 20,
+//             "name": null
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       "id": 16,
+//       "pdfUrl": "http://molly.name",
+//       "wayToPay": "CASH",
+//       "state": "SUCCESS",
+//       "items": [
+//         {
+//           "id": 56,
+//           "name": "Depilacion con cera",
+//           "category": "cosmetica",
+//           "price": 11.99,
+//           "discount": 20,
+//           "company": {
+//             "id": 11,
+//             "name": "L Bel"
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       "id": 19,
+//       "pdfUrl": "https://abigayle.biz",
+//       "wayToPay": "CASH",
+//       "state": "PENDING",
+//       "items": [
+//         {
+//           "id": 23,
+//           "name": "Pavo y Mostaza",
+//           "category": "comida",
+//           "price": 0,
+//           "discount": 15,
+//           "company": {
+//             "id": 4,
+//             "name": "Subway"
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       "id": 21,
+//       "pdfUrl": "http://rudy.name",
+//       "wayToPay": "CASH",
+//       "state": "PENDING",
+//       "items": [
+//         {
+//           "id": 49,
+//           "name": "Zapatillas Deportivas Hombre",
+//           "category": "deporte",
+//           "price": 0,
+//           "discount": 45,
+//           "company": {
+//             "id": 20,
+//             "name": null
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       "id": 44,
+//       "pdfUrl": "http://hobart.biz",
+//       "wayToPay": "CARD",
+//       "state": "SUCCESS",
+//       "items": [
+//         {
+//           "id": 47,
+//           "name": "Leggings de Compresión",
+//           "category": "deporte",
+//           "price": 0,
+//           "discount": 40,
+//           "company": {
+//             "id": 19,
+//             "name": null
+//           }
+//         }
+//       ]
+//     },
+//     {
+//       "id": 45,
+//       "pdfUrl": "http://jermain.biz",
+//       "wayToPay": "CASH",
+//       "state": "SUCCESS",
+//       "items": [
+//         {
+//           "id": 50,
+//           "name": "Zapatillas de Running",
+//           "category": "deporte",
+//           "price": 0,
+//           "discount": 45,
+//           "company": {
+//             "id": 20,
+//             "name": null
+//           }
+//         }
+//       ]
+//     }
+//   ]
+// }
+
+
+
+
+
+// export const company = {
+//   "id": 1,
+//   "name": "McDonalds",
+//   "email": "mcdonalds@gmail.com",
+//   "role": "COMPANY",
+//   "cuit": "33134366027",
+//   "enabled": true,
+//   "address": "41622 Ratke Glens",
+//   "phoneNumber": "873-382-9467",
+//   "description": "Cadena de restaurantes de comida rápida, conocida por sus hamburguesas y papas fritas.",
+//   "imageUrl": "https://guiatodoberazategui.com.ar/wp-content/uploads/2020/03/Logo-de-McDonald%C2%B4s-1-1-1.png",
+//   "items": [
+//     {
+//       "id": 16,
+//       "name": "Hamburguesa de Pollo",
+//       "category": "comida",
+//       "price": 0,
+//       "discount": 20,
+//       "enabled": true,
+//       "imageUrl": "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg",
+//       "vouchers": [],
+//       "shoppings": []
+//     },
+//     {
+//       "id": 33,
+//       "name": "Masaje relajante 45 min",
+//       "category": "cosmetica",
+//       "price": 5.99,
+//       "discount": 30,
+//       "enabled": true,
+//       "imageUrl": "https://www.materialestetica.com/blog/wp-content/uploads/2019/03/cremas-para-masajes-y-sus-caracteristicas.jpg",
+//       "vouchers": [
+//         {
+//           "id": 32,
+//           "code": "q7rx5eu42ju1yc9r707q",
+//           "enabled": true,
+//           "expirationDate": "2023-08-09T05:14:16.234Z",
+//           "user": {
+//             "id": 29,
+//             "email": "Shanelle65@yahoo.com",
+//             "name": "Arvid"
+//           }
+//         }
+//       ],
+//       "shoppings": []
+//     },
+//     {
+//       "id": 71,
+//       "name": "Masaje antiesters 45 min",
+//       "category": "cosmetica",
+//       "price": 8.99,
+//       "discount": 45,
+//       "enabled": true,
+//       "imageUrl": "https://www.materialestetica.com/blog/wp-content/uploads/2019/03/cremas-para-masajes-y-sus-caracteristicas.jpg",
+//       "vouchers": [],
+//       "shoppings": []
+//     }
+//   ]
+// }
+
+
+
+// export const admin = {
+//   "id": 25,
+//   "name": "Brendan Schultz",
+//   "email": "Brendan_Schultz@yahoo.com",
+//   "role": "ADMIN",
+//   "phoneNumber": "(289) 589-7932 x3591",
+//   "enabled": false,
+//   "imageUrl": "https://picsum.photos/300"
+// }
 export const member = {
   id: 22,
   email: "Eveline1@yahoo.com",
