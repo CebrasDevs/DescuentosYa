@@ -31,7 +31,7 @@ export default function UserProfile() {
           </div>
         </div>
 {/* PARTE DE LOS VOUCHER DEL USUARIO */}
-        <div id="orders" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
+        <div id="vouchers" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
           <h1 className="border-b-2 p-4 font-bold text-xl">My Vouchers</h1>
           <div className="flex justify-center h-10">
             <input type="search" name="search" placeholder="Search by Name" />

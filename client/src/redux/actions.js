@@ -32,7 +32,6 @@ export const getCompanies = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("http://localhost:3001/companies");
-      console.log(data)
       return dispatch({
         type: GET_COMPANIES,
         payload: data,
