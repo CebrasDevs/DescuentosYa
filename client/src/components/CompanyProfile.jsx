@@ -28,7 +28,7 @@ export default function CompanyProfile() {
                 <div id="data" className=" w-3/4 mt-10 mb-12 bg-slate-50 rounded-lg shadow-md">
                     <div className='flex justify-between border-b-2'>
                         <h1 className="p-4 font-bold text-xl">DATA</h1>
-                        <TiArrowBack onClick={()=>{setModify(false)}} className="m-5 text-xl hover: cursor-pointer"/>
+                        <TiArrowBack onClick={()=>{setModify(false)}} className="m-5 text-2xl hover: cursor-pointer"/>
                     </div>
                     <div className="flex h-[550px] ">
                         <div className="flex justify-center items-center w-1/2">
