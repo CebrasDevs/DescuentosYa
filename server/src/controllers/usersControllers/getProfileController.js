@@ -16,7 +16,7 @@ module.exports = async (id) => {
         return structureMember(user);
 
     } else if (user.role === 'COMPANY') {
-        return structureCompany(user);
+        return user;
         //const company = structureCompany(user);
         //const itemIds = company.items.map(({ id }) => id);
         //let shoppingIds = [];
