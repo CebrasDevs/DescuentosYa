@@ -20,7 +20,7 @@ const updateMembersController = require("./membersControllers/updateMembersContr
 
 // VOUCHERS CONTROLLERS
 const createVouchersController = require("./vouchersControllers/createVouchersController");
-const updateVouchersController = require("./vouchersControllers/updateVouchersController");
+const disableVouchersController = require("./vouchersControllers/disableVouchersController");
 const getVouchersController = require("./vouchersControllers/getVouchersController");
 
 // SHOPPING CONTROLLERS
@@ -65,7 +65,7 @@ module.exports = {
 
   //VOUCHERS CONTROLLERS
   createVouchersController,
-  updateVouchersController,
+  disableVouchersController,
   getVouchersController,
 
   //SHOPPING CONTROLLERS

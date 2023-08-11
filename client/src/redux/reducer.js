@@ -20,7 +20,7 @@ const initialState = {
   categories: [],
   users:[],
   allItems: [],
-  activeUser: company,
+  activeUser: member,
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {
@@ -107,6 +107,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         companyDetail: {},
       };
+    // case CREATE_PREFERENCE:
+    //   return {
+    //     ...state,
+    //     data: action.payload
+    //   }
     default:
       return { ...state };
   }

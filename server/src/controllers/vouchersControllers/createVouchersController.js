@@ -1,5 +1,5 @@
 const { createVouchersHelper, getVouchersHelper } = require('../../helpers');
-//2023-04-14T17:36:40.426
+
 module.exports = async (voucher) => {
     if (
         isNaN(voucher.itemId) ||
@@ -8,35 +8,25 @@ module.exports = async (voucher) => {
     ) throw new Error("Incomplete data or incorrect");
 
 
+
     const previousVouchers = await getVouchersHelper({ userId: + voucher.userId, itemId: + voucher.itemId });
 
-    // si no viene vacio
-    if (previousVouchers.length !== 0) {
+    if (previousVouchers.length === 0) {
 
-        //obtengo el ultimo voucher agregado
-        const lastVoucher = previousVouchers[previousVouchers.length - 1];
+        const newVoucher = await createVouchersHelper(voucher);
 
-        //obtengo la expiration date del ultimo voucher agregado
-        const lastExpirationDate = lastVoucher.expirationDate;
+        let { id, userId, itemId, code, expirationDate } = newVoucher;
 
-        // Calculo el número de milisegundos que hay en dos días
-        const twoDaysInMilliseconds = 2 * 24 * 60 * 60 * 1000;
+        return {
+            id, userId, itemId, code, expirationDate
+        };
+    };
 
-        const currentDate = new Date(); // obtengo la fecha actual
+    if (previousVouchers[previousVouchers.length - 1].expirationDate > new Date() &&
+        previousVouchers[previousVouchers.length - 1].enabled) {
 
-        // calculo en milisegundos la diferencia entre las fechas de expiracion
-        const dateDifference = Math.abs(currentDate - lastExpirationDate);
+        throw new Error("voucher already exists");
 
-        if (dateDifference >= twoDaysInMilliseconds) {
-            // Hay dos días de diferencia entre las fechas
-
-            let { id, userId, itemId, code, expirationDate } = res;
-
-            return {
-                id, userId, itemId, code, expirationDate
-            };
-
-        } else throw new Error("voucher already exists");
     }
 
     const res = await createVouchersHelper(voucher);
@@ -47,5 +37,4 @@ module.exports = async (voucher) => {
         id, userId, itemId, code, expirationDate
     };
 
-
-} // vamos a dejar pendiente aplicar la funcionalidad de la propiedad enabled 
+} 

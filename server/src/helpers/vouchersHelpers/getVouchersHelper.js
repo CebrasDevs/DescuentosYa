@@ -1,13 +1,15 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
-// condition = {userId: + voucher.userId, itemId: + voucher.itemId}
 module.exports = async (condition = {}) => {
     const vouchers = await prisma.voucher.findMany({
-        where: condition || true,
+        where: condition,
         include: {
-            item: true,
+            item: {
+                include: {
+                    category: true
+                }
+            },
             user: true
         }
     });
