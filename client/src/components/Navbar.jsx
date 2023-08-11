@@ -29,7 +29,7 @@ export default function Navbar() {
     const handleLogOut = () => {
         localStorage.clear();
         axios.get(`${URL_BASE}/logout`);
-        window.location.href = "http://localhost:3000";
+        window.location.href = "https://descuentos-ya.vercel.app/";
     }
 
     return (
