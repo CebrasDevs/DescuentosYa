@@ -11,16 +11,17 @@ import {
   CLEAN_COMPANY_DETAIL,
   GET_ITEM_BY_NAME,
   GET_USERS,
+  SET_ACTIVE_USER,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
-import {member, company, admin} from "../utils/perfilesPF";
+import { member, company, admin } from "../utils/perfilesPF";
 
 const initialState = {
   companies: [],
   categories: [],
-  users:[],
+  users: [],
   allItems: [],
-  activeUser: company,
+  activeUser: {},
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {
@@ -36,7 +37,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS:
-      return{
+      return {
         ...state,
         users: action.payload
       }
@@ -59,7 +60,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_ITEM_BY_NAME:
       return {
         ...state,
-          filteredItems: action.payload,
+        filteredItems: action.payload,
       };
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);
@@ -101,11 +102,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         companyDetail: action.payload,
       };
-
     case CLEAN_COMPANY_DETAIL:
       return {
         ...state,
         companyDetail: {},
+      };
+    case SET_ACTIVE_USER:
+      return {
+        ...state,
+        activeUser: action.payload,
       };
     default:
       return { ...state };

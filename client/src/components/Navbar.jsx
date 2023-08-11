@@ -4,14 +4,31 @@ import { BsCart3 } from "react-icons/bs";
 import { IoPerson } from "react-icons/io5";
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
+import { setActiveUser } from "@/redux/actions";
+import { useEffect } from "react";
+import { URL_BASE } from "@/utils/const";
+import axios from "axios";
 
 export default function Navbar() {
     const activeUser = useSelector((state) => state.activeUser);
 
+    const dispatch = useDispatch();
+
     const params = useSearchParams();
     const profile = params.get("profile");
+
+    useEffect(() => {
+        dispatch(setActiveUser(localStorage.getItem("id")))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch]);
+
+    const handleLogOut = () => {
+        localStorage.clear();
+        axios.get(`${URL_BASE}/logout`);
+        window.location.href = URL_BASE;
+    }
 
     return (
         <>
@@ -77,9 +94,9 @@ export default function Navbar() {
                                     </div>
                                 </Link>
 
-                                <Link href={"/logout"} className="ml-10 font-medium hover:text-blue-500">
+                                <h2 onClick={handleLogOut} className="ml-10 font-medium hover:text-blue-500 hover:cursor-pointer">
                                     Log Out
-                                </Link>
+                                </h2>
                             </>
                         )}
                     </div>
