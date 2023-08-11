@@ -23,7 +23,8 @@ export default function Login() {
         });
     };
 
-    const handleLogIn = async function () {
+    const handleLogIn = async function (event) {
+        event.preventDefault();
         try {
             const response = await axios.post(
                 `${URL_BASE}/login`,
