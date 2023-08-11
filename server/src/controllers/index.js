@@ -1,35 +1,40 @@
-const createAdminsController = require("./usersControllers/createAdminsController");
-const updateAdminsController = require("./usersControllers/updateAdminsController");
-const getAdminsController = require("./usersControllers/getAdminsController");
-const getAdminsByIdController = require("./usersControllers/getAdminsByIdController");
+// ADMINS CONTROLLERS
+const createAdminsController = require("./adminsControllers/createAdminsController");
+const updateAdminsController = require("./adminsControllers/updateAdminsController");
 
+// USERS CONTROLLERS
 const createUsersController = require("./usersControllers/createUsersController");
 const updateUsersController = require("./usersControllers/updateUsersController");
 const getUsersController = require("./usersControllers/getUsersController");
+const getProfileController = require("./usersControllers/getProfileController");
 
-const createCompaniesController = require("./usersControllers/createCompaniesController");
-const updateCompaniesController = require("./usersControllers/updateCompaniesController");
-const getCompaniesController = require("./usersControllers/getCompaniesController");
-const getCompaniesByIdController = require("./usersControllers/getCompaniesByIdController");
+// COMPANIES CONTROLLERS
+const createCompaniesController = require("./companiesControllers/createCompaniesController");
+const updateCompaniesController = require("./companiesControllers/updateCompaniesController");
+const getCompaniesController = require("./companiesControllers/getCompaniesController");
+const getCompaniesByIdController = require("./companiesControllers/getCompaniesByIdController");
 
-const createMembersController = require("./usersControllers/createMembersController");
-const updateMembersController = require("./usersControllers/updateMembersController");
-const getMembersController = require("./usersControllers/getMembersController");
-const getMembersByIdController = require("./usersControllers/getMembersByIdController");
+// MEMBERS CONTROLLERS
+const createMembersController = require("./membersControllers/createMembersController");
+const updateMembersController = require("./membersControllers/updateMembersController");
 
+// VOUCHERS CONTROLLERS
 const createVouchersController = require("./vouchersControllers/createVouchersController");
-const updateVouchersController = require("./vouchersControllers/updateVouchersController");
+const disableVouchersController = require("./vouchersControllers/disableVouchersController");
 const getVouchersController = require("./vouchersControllers/getVouchersController");
 
+// SHOPPING CONTROLLERS
 const getShoppingController = require("./shoppingControllers/getShoppingController");
 const createShoppingController = require("./shoppingControllers/createShoppingController");
 const updateShoppingController = require("./shoppingControllers/updateShoppingController");
 
+// ITEMS CONTROLLERS
 const getItemsController = require("./itemsControllers/getItemsController");
 const createItemsController = require("./itemsControllers/createItemsController");
 const updateItemsController = require("./itemsControllers/updateItemsController");
 const getItemsByIdController = require("./itemsControllers/getItemsByIdController");
 
+// CATEGORIES CONTROLLERS
 const createCategoryController = require("./categoriesControllers/createCategoryController");
 const deleteCategoryController = require("./categoriesControllers/deleteCategoryController");
 const getCategoriesController = require("./categoriesControllers/getCategoriesController");
@@ -38,38 +43,43 @@ const getCategoriesDisabledController = require("./categoriesControllers/getCate
 const updateCategoryController = require("./categoriesControllers/updateCategoryController");
 
 module.exports = {
+  //USERS CONTROLLER
   createUsersController,
   updateUsersController,
   getUsersController,
+  getProfileController,
 
+  //ADMINS CONTROLLERS
   createAdminsController,
   updateAdminsController,
-  getAdminsController,
-  getAdminsByIdController,
 
+  //COMPANIES CONTROLLERS
   createCompaniesController,
   updateCompaniesController,
   getCompaniesController,
   getCompaniesByIdController,
 
+  //MEMBERS CONTROLLERS
   createMembersController,
   updateMembersController,
-  getMembersController,
-  getMembersByIdController,
 
+  //VOUCHERS CONTROLLERS
   createVouchersController,
-  updateVouchersController,
+  disableVouchersController,
   getVouchersController,
 
+  //SHOPPING CONTROLLERS
   getShoppingController,
   createShoppingController,
   updateShoppingController,
 
+  //ITEMS CONTROLLERS
   getItemsController,
   createItemsController,
   updateItemsController,
   getItemsByIdController,
 
+  //CATEGORIES CONTROLLERS
   createCategoryController,
   deleteCategoryController,
   getCategoriesController,

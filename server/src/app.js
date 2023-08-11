@@ -9,7 +9,8 @@ const bodyParser = require('body-parser');
 
 // nos ayuda a resolver las métricas con la información que nos ofrece, nos sirve para dev y en producción hay que tener cuidado con los datos sensibles
 const morgan = require('morgan');
-
+// Importando rutas de mercado de pago
+const mercadoPagoRoutes = require('./routes/paymentRouter')
 // Intanciamos las rutas
 const routes = require('./routes/index.js');
 
@@ -28,6 +29,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE, PATCH');
   next();
 });
+
+app.use('/payment', mercadoPagoRoutes);
 
 // Importar y utilizar las rutas
 app.use('/', routes);

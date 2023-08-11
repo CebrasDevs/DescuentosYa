@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { formatMember } from "@/utils/formatUtils";
 import validateMember from "@/utils/validateMember";
+import { URL_BASE } from "@/utils/const";
 
 export default function SignUpMember() {
+  const [imageFile, setImageFile] = useState(null);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     email: "",
@@ -15,15 +17,15 @@ export default function SignUpMember() {
     phoneNumber: "",
     imageUrl: "",
   });
-  const isNotReady =
-    errors.email ||
-    errors.password ||
-    errors.confirmPassword ||
-    errors.dni ||
-    errors.firstName ||
-    errors.lastName ||
-    errors.address ||
-    errors.imageUrl;
+  // const isNotReady =
+  //   errors.email ||
+  //   errors.password ||
+  //   errors.confirmPassword ||
+  //   errors.dni ||
+  //   errors.firstName ||
+  //   errors.lastName ||
+  //   errors.address ||
+  //   errors.imageUrl;
 
   function handleInputChange(e) {
     setInput({
@@ -38,17 +40,38 @@ export default function SignUpMember() {
     );
   }
 
-  function handleSubmit(e) {
+  function handleImageChange(e) {
+    setImageFile(e.target.files[0]);
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formattedMember = formatMember(input);
-    window.alert(
-      `Member ${
-        (input.firstName, input.lastName)
-      } submitted successfully (provisory)`
-    );
-    //devolver el formattedMember al backend
-    console.log(formattedMember);
-  }
+    try {
+      const cloudinaryFormData = new FormData();
+      cloudinaryFormData.append("file", imageFile);
+      cloudinaryFormData.append("upload_preset", "DescuentosYa");
+      const cloudinaryResponse = await axios.post(
+        "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
+        cloudinaryFormData
+      );
+
+      formattedMember.imageUrl =
+        "https://res.cloudinary.com/dwndzlcxp/image/upload/" +
+        cloudinaryResponse.data.public_id;
+
+      await axios.post(`${URL_BASE}/members`, formattedMember);
+
+      setErrors({});
+      window.alert(
+        `Member ${
+          (input.firstName, input.lastName)
+        } creado correctamente (provisory)`
+      );
+    } catch (error) {
+      window.alert("No se pudo crear el usuario");
+    }
+  };
 
   return (
     <section className=" bg-slate-200 dark:bg-white h-full">
@@ -112,7 +135,6 @@ export default function SignUpMember() {
                     value={input.password}
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    
                   />
                   {errors.password && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -131,7 +153,6 @@ export default function SignUpMember() {
                     placeholder="••••••••"
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    
                   />
                   {errors.confirmPassword && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -152,7 +173,6 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your first name"
-                    
                   />
                   {errors.firstName && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -171,7 +191,6 @@ export default function SignUpMember() {
                     onChange={handleInputChange}
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     placeholder="Your last name"
-                    
                   />
                   {errors.lastName && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -222,14 +241,13 @@ export default function SignUpMember() {
                 <div>
                   <label className="block mb-2 text-m font-medium text-gray-900 ">
                     Profile Picture
-                  </label>{" "}
+                  </label>
                   <input
-                  placeholder="Your picture"
-                    type="text"
+                    placeholder="Your picture"
+                    type="file"
                     name="imageUrl"
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    value={input.imageUrl}
-                    onChange={handleInputChange}
+                    onChange={handleImageChange}
                   />
                   {errors.imageUrl && (
                     <p className=" text-red-600 text-sm font-semibold ">
@@ -239,7 +257,7 @@ export default function SignUpMember() {
                 </div>
               </div>
               <button
-                disabled={isNotReady}
+                // disabled={isNotReady}
                 type="submit"
                 className=" mt-2 ml-48 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border "
               >

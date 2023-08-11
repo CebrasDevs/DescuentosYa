@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import Carousel from "./Carousel";
-import { getCompanies, getDiscounts } from "@/redux/actions";
+import { getCompanies, getDiscounts, setActiveUser } from "@/redux/actions";
 import { useDispatch } from "react-redux";
+
 
 const slides = [
     {

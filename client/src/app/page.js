@@ -1,10 +1,11 @@
-import Home from "@/components/Home"
+'use client'
+import Home from "@/components/Home";
 
+export default function HomePage() {
 
-export default function HomePage(){
-  return(
-    <main className="flex min-h-screen flex-col items-center justify-between">
-      <Home/>
+  return (
+    <main>
+      <Home />
     </main>
   )
 };

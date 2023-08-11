@@ -6,12 +6,13 @@ module.exports = async (name) => {
     const itemsInfo = result.map((item) => {
         return {
             id: item.id,
-            imageUrl: item.url_image,
+            imageUrl: item.imageUrl,
             name: item.name,
-            company: item.user.company_name,
             category: item.category.name,
             price: item.price,
-            discount: item.discount
+            discount: item.discount,
+            companyId: item.userId,
+            companyName: item.user.company_name,
         }
     })
 

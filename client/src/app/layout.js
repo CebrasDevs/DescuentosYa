@@ -12,6 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
   return (
     <html lang="en">
       <Providers>
@@ -20,9 +21,7 @@ export default function RootLayout({ children }) {
             <Navbar />
           </header>
           {children}
-          <footer>
-            <Footer/>
-          </footer>
+          <Footer />
         </body>
       </Providers>
     </html>

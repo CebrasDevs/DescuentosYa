@@ -1,3 +1,4 @@
+import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
@@ -9,11 +10,25 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const ADD_SHOPPING_CART_ITEM = "ADD_SHOPPING_CART_ITEM";
 export const DELETE_SHOPPING_CART_ITEM = "DELETE_SHOPPING_CART_ITEM";
 export const DELETE_COMPANY_ITEM = "DELETE_COMPANY_ITEM";
-
+export const GET_USERS = 'GET_USERS'
 export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
-
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
+export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+
+export const getUsers = () => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_BASE}/users`);
+      return dispatch({
+        type: GET_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log("error");
+    }
+  };
+};
 
 const URL_BASE = "https://desceuntosya-back.onrender.com";
 
@@ -79,13 +94,33 @@ export const getCompanyDetail = (id) => {
       const { data } = await axios.get(`${URL_BASE}/companies/${id}`);
       return dispatch({
         type: GET_COMPANY_DETAIL,
-        payload: data[0],
+        payload: data,
       });
     } catch (error) {
       console.log("error");
     }
   };
 };
+
+// export const createPreference = async () => {
+//   try{
+//       const response = await axios.post("http://localhost:3001/payment/create-order",{
+//           title: "Name",
+//           unit_price: 100,
+//           quantity:1,
+//           currency_id: "ARS",
+//       });
+//       const { id } = response.data;
+//       console.log('actions', response.data)
+//       return {
+//         type: CREATE_PREFERENCE,
+//         payload: id
+//       }
+//       // recibe una id que proviene del servidor ( id de la compra )
+//   } catch (error) {
+//       console.log(error);
+//   }
+// };
 
 export const cleanCompanyDetail = () => {
   return { type: CLEAN_COMPANY_DETAIL };
@@ -108,4 +143,19 @@ export const deleteShoppingCartItem = (id) => {
 
 export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
+};
+
+
+export const setActiveUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_BASE}/profile/${id}`);
+      return dispatch({
+        type: SET_ACTIVE_USER,
+        payload: data,
+      });
+    } catch (error) {
+      console.log("error");
+    }
+  };
 };

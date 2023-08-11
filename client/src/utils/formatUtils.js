@@ -25,6 +25,48 @@ export function formatCompany(company) {
     };
 };
 
+export function formatModifyCompany(company) {
+    const {
+        email, 
+        password, 
+        companyName, 
+        description, 
+        cuit, 
+        address, 
+        phoneNumber, 
+        imageUrl
+    } = company;
+
+    return {
+        email: email,
+        companyName: companyName,
+        description: description,
+        cuit: cuit,
+        address: address,
+        phoneNumber: phoneNumber,
+        imageUrl: imageUrl
+    };
+};
+
+export function phoneNumberWithoutHyphens(company){
+    return{
+        phoneNumber: company.phoneNumber.split('-').join('')
+    }
+}
+
+export function splitName(member){
+  let splitedName = member.name.split(', ')
+    return{
+        firstName: splitedName[0],
+        lastName: splitedName[1],
+    }
+}
+
+export function phoneNumberWithoutDots(member){
+    return{
+        phoneNumber: member.phoneNumber.split('.').join('')
+    }
+}
 export function formatMember(member) {
     const {
         email,
@@ -39,7 +81,7 @@ export function formatMember(member) {
 
     const parsedDni = Number(dni);
     const parsedPhoneNumber = Number(phoneNumber);
-    const fullName = `${lastName}, ${firstName}`;
+    const fullName = `${firstName}, ${lastName}`;
 
     return {
         email: email,
@@ -52,11 +94,35 @@ export function formatMember(member) {
     };
 };
 
+export function formatModifyMember(member){
+    const {
+        email,
+        password,
+        dni,
+        firstName,
+        lastName,
+        address,
+        phoneNumber,
+        imageUrl
+    } = member;
+
+    const fullName = `${firstName}, ${lastName}`;
+
+    return {
+        email: email,
+        dni: dni,
+        name: fullName,
+        address: address,
+        phoneNumber: phoneNumber,
+        imageUrl: imageUrl
+    };
+};
+
 export function formatItem(item) {
     //!FALTA AGREGAR el companyName cuando tenga manera de chequear cual es el nombre de la empresa que esta logueada
     const {
         name,
-        category,
+        categoryId,
         description,
         price,
         discount,
@@ -68,7 +134,7 @@ export function formatItem(item) {
     return {
         userId: 2,
         name: name,
-        category: category,
+        categoryId: categoryId,
         description: description,
         price: parsedPrice,
         discount: parsedDiscount,

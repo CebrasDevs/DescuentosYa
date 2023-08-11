@@ -11,7 +11,7 @@ const createItemsHelper = require("./itemsHelpers/createItemsHelper");
 const updateItemsHelper = require("./itemsHelpers/updateItemsHelper");
 
 const getVouchersHelper = require("./vouchersHelpers/getVouchersHelper");
-const updateVouchersHelper = require("./vouchersHelpers/updateVouchersHelper");
+const disableVouchersHelper = require("./vouchersHelpers/disableVouchersHelper");
 const createVouchersHelper = require("./vouchersHelpers/createVouchersHelper");
 
 const createCategoryHelper = require("./categoriesHelpers/createCategoryHelper");
@@ -36,7 +36,7 @@ module.exports = {
   //getUsersByIdHelper,
 
   getVouchersHelper,
-  updateVouchersHelper,
+  disableVouchersHelper,
   createVouchersHelper,
 
   createCategoryHelper,

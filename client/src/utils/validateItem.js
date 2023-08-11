@@ -16,11 +16,11 @@ export default function validateItem(item) {
     let errors = {};
     const {
         name,
-        category,
+        categoryId,
         description,
         price,
         discount,
-        imageUrl
+        //imageUrl
     } = item;
 
 
@@ -36,8 +36,8 @@ export default function validateItem(item) {
         };
     };
     // VALIDO CATEGORY
-    if (category === 'Choose category') {
-        errors.category = 'Please choose a category';
+    if (categoryId === 'Choose category') {
+        errors.categoryId = 'Please choose a category';
     };
     // VALIDO DESCRIPTION
     if (description.length) {
@@ -65,13 +65,13 @@ export default function validateItem(item) {
         };
     };
     // VALIDO IMAGEURL
-    if (!imageUrl.length) {
-        errors.imageUrl = 'Required field';
-    } else {
-        if (!urlRegex.test(imageUrl)) {
-            errors.imageUrl = 'Must be a valid url';
-        };
-    };
+    // if (!imageUrl.length) {
+    //     errors.imageUrl = 'Required field';
+    // } else {
+    //     if (!urlRegex.test(imageUrl)) {
+    //         errors.imageUrl = 'Must be a valid url';
+    //     };
+    // };
     return errors;
 };
 

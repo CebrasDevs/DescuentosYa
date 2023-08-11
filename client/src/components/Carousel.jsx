@@ -13,7 +13,7 @@ export default function Carousel({ value }) {
     const companies = useSelector((state) => state.companies);
 
     return value === "discounts" ? (
-        <div className="carousel flex items-center justify-start overflow-x-auto relative">
+        <div className="carousel flex items-center justify-start overflow-x-auto relative py-5">
             {items.map((item, index) => {
                 return (
                     <div key={index}>

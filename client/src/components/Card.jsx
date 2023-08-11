@@ -5,6 +5,9 @@ import Link from "next/link";
 export default function Card({ item }) {
     return (
         <div className="card bg-white w-[270px] h-[400px] rounded-lg m-2 shadow-md hover:shadow-xl hover:scale-105 transition-transform ease-in-out duration-300">
+            <Link href={`/${item.id}`} className="text-blue-600">
+                Edit
+            </Link>
             <div className="top border-b flex justify-center">
                 <img src={item.imageUrl} alt="" className="w-[270px] h-[250px] rounded-t-lg object-cover" />
             </div>

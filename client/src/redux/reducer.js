@@ -10,65 +10,18 @@ import {
   GET_COMPANY_DETAIL,
   CLEAN_COMPANY_DETAIL,
   GET_ITEM_BY_NAME,
+  GET_USERS,
+  SET_ACTIVE_USER,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
-
-const provisoryActiveUser = {
-  userId: 2,
-  role: "company",
-  email: "burgerking@gmail.com",
-  password: "YOUwellnesslove123",
-  companyName: "YOU - Wellness & Health",
-  description: "If you are looking for a",
-  cuit: 35815505462,
-  address: "1234 Maple Street, Los Angeles, CA 90001, United States",
-  phoneNumber: 2135557890,
-  imageUrl: "https://example.com/logo.png",
-  Items: [
-    {
-      id: 1,
-      userId: 2,
-      description: "Bebida carbonatada",
-      discount: 15,
-      category: "food",
-      name: "Bebida Cola",
-      price: 0,
-    },
-    {
-      id: 8,
-      userId: 2,
-      description: "30 minutos de relajacion",
-      discount: 20,
-      category: "health",
-      name: "Sauna",
-      price: 100,
-    },
-    {
-      id: 10,
-      userId: 2,
-      description: null,
-      discount: 30,
-      category: "health",
-      name: "Sport Nutricion",
-      price: 1000,
-    },
-    {
-      id: 11,
-      userId: 2,
-      description: "Galletas de primeras marcas",
-      discount: 50,
-      category: "food",
-      name: "Cookies",
-      price: 0,
-    },
-  ],
-};
+import { member, company, admin } from "../utils/perfilesPF";
 
 const initialState = {
   companies: [],
   categories: [],
+  users: [],
   allItems: [],
-  activeUser: provisoryActiveUser,
+  activeUser: {},
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {
@@ -83,6 +36,11 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_USERS:
+      return {
+        ...state,
+        users: action.payload
+      }
     case GET_COMPANIES:
       return {
         ...state,
@@ -102,7 +60,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_ITEM_BY_NAME:
       return {
         ...state,
-          filteredItems: action.payload,
+        filteredItems: action.payload,
       };
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);
@@ -144,12 +102,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         companyDetail: action.payload,
       };
-
     case CLEAN_COMPANY_DETAIL:
       return {
         ...state,
         companyDetail: {},
       };
+    case SET_ACTIVE_USER:
+      return {
+        ...state,
+        activeUser: action.payload,
+      };
+    // case CREATE_PREFERENCE:
+    //   return {
+    //     ...state,
+    //     data: action.payload
+    //   }
+
     default:
       return { ...state };
   }
