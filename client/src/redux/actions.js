@@ -1,3 +1,4 @@
+import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
@@ -13,11 +14,12 @@ export const GET_USERS = 'GET_USERS'
 export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
+export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
 
 export const getUsers = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/users");
+      const { data } = await axios.get(`${URL_BASE}/users`);
       return dispatch({
         type: GET_USERS,
         payload: data,
@@ -31,7 +33,7 @@ export const getUsers = () => {
 export const getCompanies = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/companies");
+      const { data } = await axios.get(`${URL_BASE}/companies`);
       return dispatch({
         type: GET_COMPANIES,
         payload: data,
@@ -45,7 +47,7 @@ export const getCompanies = () => {
 export const getDiscounts = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/items");
+      const { data } = await axios.get(`${URL_BASE}/items`);
       return dispatch({
         type: GET_DISCOUNTS,
         payload: data,
@@ -59,7 +61,7 @@ export const getDiscounts = () => {
 export const getCategories = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("http://localhost:3001/categories");
+      const { data } = await axios.get(`${URL_BASE}/categories`);
       return dispatch({
         type: GET_CATEGORIES,
         payload: data,
@@ -73,7 +75,7 @@ export const getCategories = () => {
 export const getItemsByName = (value) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/items?name=${value}`);
+      const { data } = await axios.get(`${URL_BASE}/items?name=${value}`);
       return dispatch({
         type: GET_ITEM_BY_NAME,
         payload: data,
@@ -87,7 +89,7 @@ export const getItemsByName = (value) => {
 export const getCompanyDetail = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/companies/${id}`);
+      const { data } = await axios.get(`${URL_BASE}/companies/${id}`);
       return dispatch({
         type: GET_COMPANY_DETAIL,
         payload: data,
@@ -139,4 +141,19 @@ export const deleteShoppingCartItem = (id) => {
 
 export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
+};
+
+
+export const setActiveUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_BASE}/profile/${id}`);
+      return dispatch({
+        type: SET_ACTIVE_USER,
+        payload: data,
+      });
+    } catch (error) {
+      console.log("error");
+    }
+  };
 };

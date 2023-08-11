@@ -9,11 +9,11 @@ const prisma = new PrismaClient();
 // Middleware para verificar el token en rutas protegidas
 async function verificarToken(req, res, next) {
   try {
-    if (!req.cookies.accessTrue || !req.cookies.accessTrue.token) {
+    if (req.authorization.token || !req.cookies.accessTrue || !req.cookies.accessTrue.token) {
       return res.status(401).json({ message: "Token not provided" });
     }
 
-    const token = req.cookies.accessTrue.token;
+    const token = req.authorization.token.split(' ')[1] || req.cookies.accessTrue.token;
 
     const id = req.cookies.accessTrue.user.id;
 
@@ -52,7 +52,7 @@ mainRouter.use("/shopping", verificarToken, shoppingRouter);
 mainRouter.use("/items", itemsRouter);
 mainRouter.use("/users", verificarToken, usersRouter);
 mainRouter.use("/admins", verificarToken, adminsRouter);
-mainRouter.use("/companies", verificarToken, companiesRouter);
+mainRouter.use("/companies", companiesRouter);
 mainRouter.use("/members", membersRouter);
 mainRouter.use("/vouchers", verificarToken, vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);

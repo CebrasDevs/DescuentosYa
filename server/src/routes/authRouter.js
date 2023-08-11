@@ -32,9 +32,14 @@ router.post("/login", async (req, res) => {
       httpOnly: true,
     });
 
-    res.status(200).json({
+    const data = {
       message: "Login successful!",
-    }); // Envía un mensaje de éxito
+      id: user.id,
+      role: user.role,
+      token: token
+    }
+
+    res.status(200).json({data}); // Envía un mensaje de éxito
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error authenticating the user" });
