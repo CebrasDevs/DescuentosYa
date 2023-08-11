@@ -1,5 +1,6 @@
 "use client";
 import { FaUserEdit } from "react-icons/fa";
+import { TiArrowBack } from 'react-icons/ti'
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useState } from "react";
@@ -17,7 +18,10 @@ export default function UserProfile() {
         return (
             <div className="flex flex-col items-center">
                 <div id="data" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
-                    <h1 className="border-b-2 p-4 font-bold text-xl">DATA</h1>
+                    <div className='flex justify-between border-b-2'>
+                        <h1 className="border-b-2 p-4 font-bold text-xl">DATA</h1>
+                        <TiArrowBack onClick={()=>{setModify(false)}} className="m-5 text-xl hover: cursor-pointer"/>
+                    </div>
                     <div className="flex h-[550px] ">
                         <div className="flex justify-center items-center w-1/2">
                             <img src={activeUser.imageUrl} className="p-5 w-[300px] rounded-lg" />
