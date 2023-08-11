@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { formatMember } from "@/utils/formatUtils";
 import validateMember from "@/utils/validateMember";
+import { URL_BASE } from "@/utils/const";
 
 export default function SignUpMember() {
   const [imageFile, setImageFile] = useState(null);
@@ -59,7 +60,7 @@ export default function SignUpMember() {
         "https://res.cloudinary.com/dwndzlcxp/image/upload/" +
         cloudinaryResponse.data.public_id;
 
-      await axios.post(`http://localhost:3001/members`, formattedMember);
+      await axios.post(`${URL_BASE}/members`, formattedMember);
 
       setErrors({});
       window.alert(

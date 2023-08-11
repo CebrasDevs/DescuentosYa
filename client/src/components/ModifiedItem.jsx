@@ -7,6 +7,7 @@ import validateModifiedItem from "@/utils/validateModifiedItem";
 import { getCategories, getDiscounts } from "@/redux/actions";
 
 import axios from "axios";
+import { URL_BASE } from "@/utils/const";
 
 export default function ModifiedItem({ data, type }) {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ export default function ModifiedItem({ data, type }) {
       const formattedItem = formatItem(input);
     try {
       const response = await axios.patch(
-        `http://localhost:3001/items/${data.id}`,
+        `${URL_BASE}/items/${data.id}`,
         formattedItem
       );
       if (response.status === 200) {

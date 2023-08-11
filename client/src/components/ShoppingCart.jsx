@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from "axios";
+import { URL_BASE } from "@/utils/const";
 
 
 export default function ShoppingCart() {
@@ -49,7 +50,7 @@ export default function ShoppingCart() {
   
 
   const handleCheckout = () => {
-    const response = axios.post("http://localhost:3001/payment/create-order", { products, user })
+    const response = axios.post(`${URL_BASE}/payment/create-order`, { products, user })
       .then(response => {
         console.log(response.data)
         window.location.href = response.data.response.body.init_point; // redirecciona la pagina a la ventana de Mercado de Pago

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { formatCompany } from "@/utils/formatUtils";
 import validateCompany from "@/utils/validateCompany";
+import { URL_BASE } from "@/utils/const";
 
 export default function SignUpCompany() {
   const [imageFile, setImageFile] = useState(null);
@@ -59,7 +60,7 @@ export default function SignUpCompany() {
         cloudinaryResponse.data.public_id;
 
       // ACA DEBE ESTAR LA RUTA PARA POSTEAR LA COMPAÑIA
-      await axios.post(`http://localhost:3001/companies`, formattedCompany);
+      await axios.post(`${URL_BASE}/companies`, formattedCompany);
 
       setErrors({});
 

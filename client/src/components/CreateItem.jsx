@@ -8,6 +8,7 @@ import { getCategories } from "@/redux/actions";
 //import styles from "../styles/Login.module.css";
 
 import axios from "axios";
+import { URL_BASE } from "@/utils/const";
 
 export default function CreateItem() {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ export default function CreateItem() {
         "https://res.cloudinary.com/dwndzlcxp/image/upload/" +
         cloudinaryResponse.data.public_id;
 
-      await axios.post(`http://localhost:3001/items`, formattedItem);
+      await axios.post(`${URL_BASE}/items`, formattedItem);
 
       setErrors({});
       setInput({

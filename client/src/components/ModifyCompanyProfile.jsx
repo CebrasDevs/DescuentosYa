@@ -5,6 +5,7 @@ import {
 } from "@/utils/formatUtils";
 import validateModifyCompany from "@/utils/validateModifyCompany";
 import axios from "axios";
+import { URL_BASE } from "@/utils/const";
 
 export default function ModifyCompanyProfile({ companyData }) {
   console.log(companyData);
@@ -69,7 +70,7 @@ export default function ModifyCompanyProfile({ companyData }) {
           cloudinaryResponse.data.public_id;
 
         await axios.patch(
-          `http://localhost:3001/companies/${companyData.id}`,
+          `${URL_BASE}/companies/${companyData.id}`,
           formattedCompany
         );
         window.alert(
@@ -79,7 +80,7 @@ export default function ModifyCompanyProfile({ companyData }) {
         );
       } else {
         await axios.patch(
-          `http://localhost:3001/companies/${companyData.id}`,
+          `${URL_BASE}/companies/${companyData.id}`,
           formattedCompany
         );
         window.alert(

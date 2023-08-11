@@ -6,6 +6,7 @@ import {
 } from "@/utils/formatUtils";
 import axios from "axios";
 import validateModifyMember from "@/utils/validateModifyMember";
+import { URL_BASE } from "@/utils/const";
 
 export default function ModifyMemberProfile({ memberData }) {
   console.log(memberData);
@@ -73,7 +74,7 @@ export default function ModifyMemberProfile({ memberData }) {
           cloudinaryResponse.data.public_id;
 
         await axios.patch(
-          `http://localhost:3001/members/${memberData.id}`,
+          `${URL_BASE}/members/${memberData.id}`,
           formattedMember
         );
         window.alert(
@@ -83,7 +84,7 @@ export default function ModifyMemberProfile({ memberData }) {
         );
       } else {
         await axios.patch(
-          `http://localhost:3001/members/${memberData.id}`,
+          `${URL_BASE}/members/${memberData.id}`,
           formattedMember
         );
         window.alert(
