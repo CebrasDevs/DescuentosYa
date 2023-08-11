@@ -521,7 +521,7 @@ async function seedData() {
         let item = faker.random.arrayElement(allItems)
         if (!item.price) {
             // entra a este if en caso de que el precio sea 0, por lo tanto creamos un voucher con su codigo al azar
-            let expirationDate = faker.date.between(new Date('2023-01-01'), new Date('2023-09-01'));
+            let expirationDate = faker.date.between(new Date('2023-07-01'), new Date('2023-09-01'));
             let enabled = expirationDate > new Date();
             await prisma.voucher.create({
                 data: {
