@@ -9,15 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mercadopago/sdk-react": "^0.0.13",
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.11.1",
+    "@mercadopago/sdk-react": "^0.0.13",
     "@reduxjs/toolkit": "^1.9.5",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "cloudinary": "^1.40.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
+    "js-cookie": "^3.0.5",
     "mercadopago": "^1.5.17",
     "next": "13.4.12",
     "next-auth": "^4.22.3",
