@@ -42,6 +42,7 @@ const companiesRouter = require("./companiesRouter");
 const membersRouter = require("./membersRouter");
 const vouchersRouter = require("./vouchersRouter");
 const categoriesRouter = require("./categoriesRouter");
+const paymentRouter = require("./paymentRouter");
 const authRouter = require("./authRouter");
 // const authRouterCookie = require("./authRouterCookie");
 const profileRouter = require("./profileRouter");
@@ -55,6 +56,7 @@ mainRouter.use("/companies", companiesRouter);
 mainRouter.use("/members", membersRouter);
 mainRouter.use("/vouchers", verificarToken, vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);
+mainRouter.use("/payment", paymentRouter);
 mainRouter.use("/", authRouter);
 mainRouter.use("/profile", profileRouter);
 

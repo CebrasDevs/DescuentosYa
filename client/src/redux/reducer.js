@@ -112,6 +112,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activeUser: action.payload,
       };
+    // case CREATE_PREFERENCE:
+    //   return {
+    //     ...state,
+    //     data: action.payload
+    //   }
+
     default:
       return { ...state };
   }

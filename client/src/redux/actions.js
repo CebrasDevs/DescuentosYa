@@ -100,6 +100,26 @@ export const getCompanyDetail = (id) => {
   };
 };
 
+// export const createPreference = async () => {
+//   try{
+//       const response = await axios.post("http://localhost:3001/payment/create-order",{
+//           title: "Name",
+//           unit_price: 100,
+//           quantity:1,
+//           currency_id: "ARS",
+//       });
+//       const { id } = response.data;
+//       console.log('actions', response.data)
+//       return {
+//         type: CREATE_PREFERENCE,
+//         payload: id
+//       }
+//       // recibe una id que proviene del servidor ( id de la compra )
+//   } catch (error) {
+//       console.log(error);
+//   }
+// };
+
 export const cleanCompanyDetail = () => {
   return { type: CLEAN_COMPANY_DETAIL };
 };
