@@ -23,9 +23,9 @@ function structureMember(user) {
             category: item.category.name,
             price: item.price,
             discount: item.discount,
+            imageUrl: item.imageUrl,
             // enabled: item.enabled,
             // description: item.description,
-            // imageUrl: item.imageUrl,
         };
         const { user } = item;
         const structuredUser = {
@@ -61,9 +61,9 @@ function structureMember(user) {
                 category: item.category.name,
                 price: item.price,
                 discount: item.discount,
+                imageUrl: item.imageUrl,
                 // enabled: item.enabled,
                 // description: item.description,
-                // imageUrl: item.imageUrl,
                 company: {
                     id: user.id,
                     name: user.name,
@@ -114,52 +114,28 @@ function structureCompany(user) {
     } = user;
 
     const structuredItems = Item.map((item) => {
-        const structuredVouchers = item.Voucher.map((voucher) => {
-            const { user } = voucher;
-            return {
-                id: voucher.id,
-                code: voucher.code,
-                enabled: voucher.enabled,
-                expirationDate: voucher.expirationDate,
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name  
-                }
-            };
-        })
-
-        const structuredShoppings = item.Item_Shopping.map((item_shopping) => {
-            const { shopping } = item_shopping;
-            const { user } = shopping;
-            return {
-                id: shopping.id,
-                quantity: item_shopping.quantityItem,
-                pdfUrl: shopping.pdfUrl,
-                wayToPay: shopping.wayToPay,
-                state: shopping.state,
-                user: {
-                    id: user.id,
-                    email: user.email,
-                    name: user.name
-                }
-            };
-        });
-
+        const {
+            id,
+            name,
+            price,
+            discount,
+            enabled,
+            imageUrl
+        } = item;
+        const category = item.category.name;
         return {
-            id: item.id,
-            name: item.name,
-            category: item.category.name,
-            price: item.price,
-            discount: item.discount,
-            enabled: item.enabled,
-            imageUrl: item.imageUrl,
-            vouchers: structuredVouchers,
-            shoppings: structuredShoppings
+            id,
+            name,
+            category,
+            price,
+            discount,
+            enabled,
+            imageUrl
         };
     })
 
-    const structuredCompany = {
+
+    return {
         id,
         name,
         email,
@@ -172,8 +148,84 @@ function structureCompany(user) {
         imageUrl,
         items: structuredItems,
     };
-    return structuredCompany;
 };
+
+function structureVouchers(vouchers) {
+    const structuredVouchers = vouchers.map((voucher) => {
+        const {
+            id,
+            code,
+            enabled,
+            expirationDate,
+            item,
+            user
+        } = voucher;
+        return {
+            id,
+            code,
+            enabled,
+            expirationDate,
+            user: {
+                id: user.id,
+                name: user.id
+            },
+            item: {
+                id: item.id,
+                name: item.name,
+                category: item.category.name,
+                price: item.price,
+                discount: item.discount,
+                imageUrl: item.imageUrl
+            }
+        };
+    });
+    return structuredVouchers;
+}
+
+function structureShoppings(shoppings) {
+
+    const structuredShoppings = shoppings.map((shopping) => {
+        const {
+            id,
+            pdfUrl,
+            wayToPay,
+            state,
+            user,
+            Item_Shopping
+        } = shopping;
+
+        const structuredItems = Item_Shopping.map((databaseRecord) => {
+            const {
+                quantityItem,
+                item
+            } = databaseRecord;
+
+            return {
+                id: item.id,
+                quantity: quantityItem,
+                name: item.name,
+                category: item.category.name,
+                price: item.price,
+                discount: item.discount,
+                imageUrl: item.imageUrl
+            };
+        });
+
+        return {
+            id,
+            pdfUrl,
+            wayToPay,
+            state,
+            user: {
+                id: user.id,
+                name: user.name
+            },
+            items: structuredItems
+        };
+    });
+
+    return structuredShoppings;
+}
 
 function structureAdmin(user) {
     const {
@@ -197,9 +249,10 @@ function structureAdmin(user) {
 };
 
 
-
 module.exports = {
     structureMember,
     structureCompany,
-    structureAdmin
+    structureAdmin,
+    structureVouchers,
+    structureShoppings
 };

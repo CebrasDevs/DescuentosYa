@@ -1,24 +1,42 @@
-const { getUsersHelper } = require('../../helpers');
+const { getUsersHelper, getVouchersHelper, getShoppingHelper } = require('../../helpers');
 const {
     structureMember,
     structureCompany,
-    structureAdmin
+    structureAdmin,
+    structureVouchers,
+    structureShoppings
 } = require("../../utils/profileUtils");
 
 module.exports = async (id) => {
-    // El booleano fullDetail permite recibir la cascada completa de informacion
-    // Recibo el combo completo de informacion de usuario (usar con cautela)
+    // Con este booleano recibo info mas detallada (usar con cautela)
     const fullDetail = true;
-
-    
-
     const user = (await getUsersHelper({id: + id}, fullDetail))[0];
 
     if (user.role === 'MEMBER') {
         return structureMember(user);
 
     } else if (user.role === 'COMPANY') {
-        return structureCompany(user);
+        const company = structureCompany(user);
+        const itemIds = company.items.map(({ id }) => id);
+        let shoppingIds = [];
+
+        user.Item.map((item) => {
+            item.Item_Shopping.map((record) => {
+                shoppingIds.push(record.shoppingId);
+            });
+        });
+
+        let vouchers = await getVouchersHelper({itemId: {in: itemIds}});
+        vouchers = structureVouchers(vouchers);
+
+        let shoppings = await getShoppingHelper({id: {in: shoppingIds}});
+        shoppings = structureShoppings(shoppings);
+        
+        return {
+            ...company,
+            sales: shoppings,
+            vouchers,
+        };
         
     } else if (user.role === 'ADMIN') {
         return structureAdmin(user);
