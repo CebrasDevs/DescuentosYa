@@ -31,7 +31,7 @@ const updateMembersHandler = require("./membersHandlers/updateMembersHandler");
 
 // VOUCHERS HELPERS
 const createVouchersHandler = require("./vouchersHandlers/createVouchersHandler");
-const updateVouchersHandler = require("./vouchersHandlers/updateVouchersHandler");
+const disableVouchersHandler = require("./vouchersHandlers/disableVouchersHandler");
 const getVouchersHandler = require("./vouchersHandlers/getVouchersHandler");
 
 // CATEGORIES HELPERS
@@ -68,7 +68,7 @@ module.exports = {
 
   createVouchersHandler,
   getVouchersHandler,
-  updateVouchersHandler,
+  disableVouchersHandler,
 
   createCategoryHandler,
   deleteCategoryHandler,
