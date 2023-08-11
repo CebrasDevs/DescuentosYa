@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
     let {
       email,
       password,
+      enabled,
       cuit,
       imageUrl,
       name,
