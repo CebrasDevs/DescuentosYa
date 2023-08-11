@@ -50,13 +50,13 @@ function structureMember(user) {
         const structuredItems = shopping.Item_Shopping.map((databaseRecord) => {
 
             // Destructuro el servicio, la cantidad y la compañia que lo vendia
-            const { item, quantity } = databaseRecord;
+            const { item, quantityItem } = databaseRecord;
             const { user } = item;
 
             // Retorno los datos resumidos de esa compra de servicio
             return {
                 id: item.id,
-                quantity: quantity,
+                quantity: quantityItem,
                 name: item.name,
                 category: item.category.name,
                 price: item.price,
@@ -167,7 +167,7 @@ function structureVouchers(vouchers) {
             expirationDate,
             user: {
                 id: user.id,
-                name: user.id
+                name: user.name
             },
             item: {
                 id: item.id,
