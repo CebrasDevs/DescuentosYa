@@ -1,3 +1,4 @@
+"use client"
 import ItemDetail from "@/components/ItemDetail";
 import axios from "axios";
 
