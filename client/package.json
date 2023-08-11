@@ -9,12 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@mercadopago/sdk-react": "^0.0.13",
-=======
     "@cloudinary/react": "^1.11.2",
     "@cloudinary/url-gen": "^1.11.1",
->>>>>>> 2042a5467b0cc1a142d57782e713d9a22f863fcb
     "@reduxjs/toolkit": "^1.9.5",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",

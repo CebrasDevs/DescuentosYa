@@ -8,40 +8,39 @@ mercadopago.configure({
 
 const createOrder = async (req, res) => {
   try {
-  const { products, user } = req.body;
+    const { products, user } = req.body;
 
-  let preference = {
-    items: products,
-    payer: user,
-    //indica hacia donde se retornan las respuestas
-    back_urls: {
-      success: "https://localhost:3000",
-      failure: "https://c6dc-2803-9800-9847-758a-7508-30b3-cfb4-f077.ngrok.io/payment/webhook",
-      pending: "https://c6dc-2803-9800-9847-758a-7508-30b3-cfb4-f077.ngrok.io/payment/webhook"
-    },
-    notification_url: "https://6995-2803-9800-9847-758a-b085-f394-f7d-83bc.ngrok.io/payment/webhook",
-    auto_return: "approved",
-  };
-  // console.log('preference', preference)
-  const response = await mercadopago.preferences.create(preference);
-  console.log('response', response)
-  res.status(200).json({response});
-  
-}catch(error){
-      console.log(error);
+    let preference = {
+      items: products,
+      payer: user,
+      //indica hacia donde se retornan las respuestas
+      back_urls: {
+        success: "http://localhost:3000",
+        failure: "http://localhost:3000",
+        pending: "http://localhost:3000"
+      },
+      notification_url: "https://f1e8-2803-9800-9847-758a-a18d-1407-e6f-25d4.ngrok.io/payment/webhook",
+      auto_return: "approved",
+    };
+    const response = await mercadopago.preferences.create(preference);
+    res.status(200).json({ response });
+
+  } catch (error) {
+    console.log(error);
   };
 };
 
 // voy a recibir los datos de la transaccion
 const receiveWebhook = async (req, res) => {
   const payment = req.query;
-  console.log(payment)
-  try {
 
+  try {
+    let data;
     if (payment.type === 'payment') {
-      const data = await mercadopago.payment.findById(payment['data.id']);
-      console.log('receive W', data.response)
-      console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
+      data = await mercadopago.payment.findById(payment['data.id']);
+
+      // console.log('Items comprados', data.response.additional_info.items)
+      // console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
     }
     res.redirect(204); // investigar, redirecciona a un archivo o un URL
 

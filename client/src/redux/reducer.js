@@ -20,7 +20,7 @@ const initialState = {
   categories: [],
   users:[],
   allItems: [],
-  activeUser: company,
+  activeUser: member,
   allShoppingItems: [],
   filteredItems: [],
   activeFilters: {

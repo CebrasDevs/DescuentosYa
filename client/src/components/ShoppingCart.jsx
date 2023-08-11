@@ -10,7 +10,7 @@ import axios from "axios";
 export default function ShoppingCart() {
   const dispatch = useDispatch();
   const allShoppingItems = useSelector((state) => state.allShoppingItems);
-  const activeUser = useSelector((state)=> state.activeUser);
+  const activeUser = useSelector((state) => state.activeUser);
   const [counters, setCounters] = useState(allShoppingItems.map(() => 1)); //creo un counter para cada item, iniciado en 1
 
 
@@ -34,28 +34,27 @@ export default function ShoppingCart() {
   };
 
   const products = allShoppingItems?.map((item) => ({
+    id: item.id,
     title: item.name,
-    unit_price: parseInt(item.price, 10),
+    unit_price: Math.ceil(item.price),
     quantity: 1,
-    category_id:item.category,
+    category_id: item.category,
     description: "DescuentosYa",
   }));
-  console.log(activeUser)
+
   const user = {
     email: activeUser.email,
     name: activeUser.name,
-    surname: activeUser.surname,
-  }
-  console.log(user)
-  console.log('productos',products)
+  };
+  
 
   const handleCheckout = () => {
-    const response = axios.post("http://localhost:3001/payment/create-order",{ products, user })
-    .then(response => {
-    console.log(response.data)
-    // window.location.href = response.data.response.body.init_point;
-  })
-  .catch((error) => console.log(error.message));  
+    const response = axios.post("http://localhost:3001/payment/create-order", { products, user })
+      .then(response => {
+        console.log(response.data)
+        window.location.href = response.data.response.body.init_point; // redirecciona la pagina a la ventana de Mercado de Pago
+      })
+      .catch((error) => console.log(error.message));
   };
 
 
@@ -107,13 +106,12 @@ export default function ShoppingCart() {
           <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
             Checkout
           </button>
-          
-          ) : (
-            <Link href={"/"}>
+
+        ) : (
+          <Link href={"/"}>
             <h2>Shopping Cart is empty, try adding products or services!</h2>
           </Link>
         )}
-        {/* {preferenceId && <Wallet initialization ={{ preferenceId }}/>} */}
       </div>
       <div id="wallet_container"></div>
     </div>
