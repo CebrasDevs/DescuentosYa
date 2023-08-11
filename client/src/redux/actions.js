@@ -30,8 +30,6 @@ export const getUsers = () => {
   };
 };
 
-const URL_BASE = "https://desceuntosya-back.onrender.com";
-
 export const getCompanies = () => {
   return async (dispatch) => {
     try {
