@@ -39,7 +39,7 @@ export default function Login() {
                     name: "",
                     password: "",
                 });
-                window.location.href = "http://localhost:3000";
+                window.location.href = "https://descuentos-ya.vercel.app/";
             }
         } catch (error) {
             window.alert(error.response.data.error);
