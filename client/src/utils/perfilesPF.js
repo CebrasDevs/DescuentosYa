@@ -1,6 +1,6 @@
 export const member = {
   "id": 22,
-  "name": "Emily",
+  "name": "Emily, James Franco",
   "email": "Eveline1@yahoo.com",
   "role": "MEMBER",
   "dni": "35158803",

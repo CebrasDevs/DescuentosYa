@@ -5,6 +5,7 @@ import { deleteCompanyItem } from "@/redux/actions";
 import Link from "next/link";
 import Grid from "./Grid";
 import { useState } from "react";
+import ModifyCompanyProfile from "./ModifyCompanyProfile";
 
 export default function CompanyProfile() {
     const dispatch = useDispatch();
@@ -23,15 +24,17 @@ export default function CompanyProfile() {
     if (activeUser.role === "COMPANY") {
         return (
             <div className="flex flex-col items-center">
-                <div id="data" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
+                <div id="data" className=" w-3/4 mt-10 mb-12 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">DATA</h1>
-                    <div className="flex h-[300px] ">
+                    <div className="flex h-[550px] ">
                         <div className="flex justify-center items-center w-1/2">
                             <img src={activeUser.imageUrl} className="w-[300px]" />
                         </div>
                         <div className="w-1/2 flex flex-col justify-center">
                             {modify ? (
-                                <div>ACA HAY QUE IMPORTAR UNA COPIA DEL FORM DE SING UP COMPANY</div>
+                                <div className="h-full">
+                                    <ModifyCompanyProfile companyData={activeUser}/>
+                                </div>
                             ) : (
                                 <div className="w-3/4">
                                     <div>
