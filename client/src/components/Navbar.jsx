@@ -19,12 +19,12 @@ export default function Navbar() {
     const params = useSearchParams();
     const profile = params.get("profile");
 
-    //useEffect(() => {
-    //   if(localStorage.getItem("id")){
-    //        dispatch(setActiveUser(localStorage.getItem("id")))
-    //    }
-    //    // eslint-disable-next-line react-hooks/exhaustive-deps
-    //}, [dispatch]);
+    useEffect(() => {
+       if(localStorage.getItem("id")){
+            dispatch(setActiveUser(localStorage.getItem("id")))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch]);
 
     const handleLogOut = () => {
         localStorage.clear();
