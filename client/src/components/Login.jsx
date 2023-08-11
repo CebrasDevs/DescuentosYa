@@ -39,7 +39,7 @@ export default function Login() {
                     name: "",
                     password: "",
                 });
-                window.location.href = URL_BASE;
+                window.location.href = "http://localhost:3000";
             }
         } catch (error) {
             window.alert(error.response.data.error);

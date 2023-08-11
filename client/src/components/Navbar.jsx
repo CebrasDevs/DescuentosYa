@@ -20,14 +20,16 @@ export default function Navbar() {
     const profile = params.get("profile");
 
     useEffect(() => {
-        dispatch(setActiveUser(localStorage.getItem("id")))
+        if(localStorage.getItem("id")){
+            dispatch(setActiveUser(localStorage.getItem("id")))
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     const handleLogOut = () => {
         localStorage.clear();
         axios.get(`${URL_BASE}/logout`);
-        window.location.href = URL_BASE;
+        window.location.href = "http://localhost:3000";
     }
 
     return (
