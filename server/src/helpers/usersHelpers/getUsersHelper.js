@@ -3,26 +3,13 @@ const prisma = new PrismaClient();
 
 module.exports = async ( condition = {}, fullDetail = false ) => {
     const users = await prisma.user.findMany({
-        where: condition || true,
+        where: condition,
         include: {
             // Cascada de datos de una company
             Item: {
                 include: {
                     category: true,
-                    Voucher: fullDetail && {
-                        include: {
-                            user: true
-                        }
-                    },
-                    Item_Shopping: fullDetail && {
-                        include: {
-                            shopping: {
-                                include: {
-                                    user: true
-                                }
-                            }
-                        }
-                    }
+                    Item_Shopping: fullDetail
                 }
             },
 
