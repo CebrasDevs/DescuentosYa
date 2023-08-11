@@ -6,10 +6,8 @@ import styles from "../styles/Login.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { URL_BASE } from "@/utils/const";
-import { useDispatch } from "react-redux";
 
 export default function Login() {
-    const dispatch = useDispatch();
 
     const [input, setInput] = useState({
         email: "",
@@ -23,12 +21,12 @@ export default function Login() {
         });
     };
 
-    const handleLogIn = async function () {
+    const handleLogIn = async function (event) {
+        event.preventDefault();
         try {
             const response = await axios.post(
                 `${URL_BASE}/login`,
                 input
-                // {withCredentials: true}
             );
             if (response.status === 200) {
                 localStorage.setItem("token", response.data.data.token)

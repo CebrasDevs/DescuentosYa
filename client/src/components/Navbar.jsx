@@ -24,11 +24,11 @@ export default function Navbar() {
             dispatch(setActiveUser(localStorage.getItem("id")))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
+    }, []);
 
     const handleLogOut = () => {
         localStorage.clear();
-        axios.get(`${URL_BASE}/logout`);
+        axios.post(`${URL_BASE}/logout`);
         window.location.href = "http://localhost:3000";
     }
 

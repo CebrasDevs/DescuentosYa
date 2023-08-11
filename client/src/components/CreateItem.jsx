@@ -5,7 +5,6 @@ import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateItem from "@/utils/validateItem";
 import { getCategories } from "@/redux/actions";
-//import styles from "../styles/Login.module.css";
 
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
@@ -25,12 +24,12 @@ export default function CreateItem() {
     discount: "",
     imageUrl: "",
   });
-  // const isNotReady =
-  //   errors.name ||
-  //   errors.categoryId ||
-  //   errors.price ||
-  //   errors.discount || 
-  //   errors.imageUrl;
+  const isNotReady =
+    errors.name ||
+    errors.categoryId ||
+    errors.price ||
+    errors.discount || 
+    errors.imageUrl;
 
   useEffect(() => {
     dispatch(getCategories());
@@ -122,7 +121,7 @@ export default function CreateItem() {
                   <select
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     name="categoryId"
-                    // value={input.category}
+                    value={input.categoryId}
                     onChange={handleChange}
                   >
                     {allCategories?.map((category, index) => {
@@ -220,10 +219,10 @@ export default function CreateItem() {
               </div>
 
               <button
-                // disabled={
-                //   !Object.values(input).every((value) => value !== "") ||
-                //   isNotReady
-                // }
+                disabled={
+                  !Object.values(input).every((value) => value !== "") ||
+                  isNotReady
+                }
                 type="submit"
                 className="flex justify-center items-center w-1/2 h-12 mx-auto text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed "
               >
@@ -236,38 +235,3 @@ export default function CreateItem() {
     </section>
   );
 }
-// <form onSubmit={handleSubmit}>
-//     <h2>Submit new Item</h2>
-
-//     <p>Product name:</p>
-//     <input type="text" name="name" value={input.name} onChange={handleChange}/>
-//     {errors.name && <p>{errors.name}</p>}
-
-//     <p>Category:</p>
-//     <select name="category" value={input.category} onChange={handleChange}>
-//         {
-//             allCategories?.map((category) => {
-//                 return <option key={category}>{category}</option>
-//             })
-//         }
-//     </select>
-//     {errors.category && <p>{errors.category}</p>}
-
-//     <p>Product description:</p>
-//     <input type="text" name="description" value={input.description} onChange={handleChange}/>
-//     {errors.description && <p>{errors.description}</p>}
-
-//     <p>Original price:</p>
-//     <input type="text" name="price" value={input.price} onChange={handleChange}/>
-//     {errors.price && <p>{errors.price}</p>}
-
-//     <p>Discount applied:</p>
-//     <input type="text" name="discount" value={input.discount} onChange={handleChange}/>
-//     {errors.discount && <p>{errors.discount}</p>}
-
-//     <p>Item image:</p>
-//     <input type="text" name="imageUrl" value={input.imageUrl} onChange={handleChange}/>
-//     {errors.imageUrl && <p>{errors.imageUrl}</p>}
-
-//     <button disabled={isNotReady}>Create</button>
-// </form>

@@ -48,7 +48,7 @@ export default function ItemDetail({ data }) {
             <div className=" w-1/2 h-full">
               <img
                 className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
-                src={data.url_image}
+                src={data.imageUrl}
               ></img>
             </div>
             <div className=" w-1/2 p-6 pr-16">
@@ -108,7 +108,7 @@ export default function ItemDetail({ data }) {
           <div className=" w-1/2 h-full">
             <img
               className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
-              src={data.url_image}
+              src={data.imageUrl}
             ></img>
           </div>
           <div className=" w-1/2 p-6 pr-16">

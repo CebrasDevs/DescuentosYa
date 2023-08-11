@@ -15,17 +15,17 @@ export default function SignUpMember() {
     lastName: "",
     address: "",
     phoneNumber: "",
-    imageUrl: "",
+    // imageUrl: "",
   });
-  // const isNotReady =
-  //   errors.email ||
-  //   errors.password ||
-  //   errors.confirmPassword ||
-  //   errors.dni ||
-  //   errors.firstName ||
-  //   errors.lastName ||
-  //   errors.address ||
-  //   errors.imageUrl;
+  const isNotReady =
+    errors.email ||
+    errors.password ||
+    errors.confirmPassword ||
+    errors.dni ||
+    errors.firstName ||
+    errors.lastName ||
+    errors.address;
+    // errors.imageUrl;
 
   function handleInputChange(e) {
     setInput({
@@ -249,17 +249,20 @@ export default function SignUpMember() {
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                     onChange={handleImageChange}
                   />
-                  {errors.imageUrl && (
+                  {/* {errors.imageUrl && (
                     <p className=" text-red-600 text-sm font-semibold ">
                       {errors.imageUrl}
                     </p>
-                  )}
+                  )} */}
                 </div>
               </div>
               <button
-                // disabled={isNotReady}
+                disabled={
+                  !Object.values(input).every((value) => value !== "") ||
+                  isNotReady
+                }
                 type="submit"
-                className=" mt-2 ml-48 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border "
+                className="flex justify-center items-center w-1/2 h-12 mx-auto text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed "
               >
                 Create an account
               </button>

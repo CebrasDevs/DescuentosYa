@@ -22,8 +22,7 @@ export default function validateMember(member) {
     firstName,
     lastName,
     address,
-    phoneNumber,
-    imageUrl
+    phoneNumber
     } = member;
 
     // VALIDO EMAIL
@@ -105,13 +104,13 @@ export default function validateMember(member) {
         };
     };
     // VALIDO IMAGEURL
-    if (!imageUrl.length) {
-        errors.imageUrl = 'Required field';
-    } else {
-        if (!urlRegex.test(imageUrl)) {
-            errors.imageUrl = 'Must be a valid url';
-        };
-    };
+    // if (!imageUrl.length) {
+    //     errors.imageUrl = 'Required field';
+    // } else {
+    //     if (!urlRegex.test(imageUrl)) {
+    //         errors.imageUrl = 'Must be a valid url';
+    //     };
+    // };
     return errors;
 };
 
