@@ -180,7 +180,7 @@ async function seedData() {
             categoryId: 3,
             description: "Revive your skin with our invigorating Face Scrub, revealing a fresh, radiant complexion with every use.",
             name: "Face Scrub",
-            price: 14.99,
+            price: 0,
             imageUrl: "https://d3ugyf2ht6aenh.cloudfront.net/stores/001/144/045/products/exfoliante-facial1-e3fa5bb55e5ef6bd9416401223103867-640-0.jpg"
         }],
         10: [ // avon
@@ -294,7 +294,7 @@ async function seedData() {
                 userId: 7,
                 categoryId: 2,
                 description: "Experience a crunchy twist. Our Yogurt with Nuts and Cereals blends textures for a satisfying, nutritious treat.",
-                name: "Yogurt with nuts and cereals",
+                name: "Yogurt nuts&cereals",
                 price: 0,
                 imageUrl: "https://www.danone.com.mx/wp-content/uploads/2023/05/productos.png"
             }],
@@ -336,7 +336,7 @@ async function seedData() {
             description: "Savor the crunch of Wing Buckets. A feast of succulent wings in assorted flavors, perfect for sharing and indulging.",
             name: "Wing Buckets",
             price: 0,
-            imageUrl: "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg"
+            imageUrl: "https://kfc.ee/wp-content/uploads/2021/10/Chicken-bucket.png"
         }],
         4: [{ //subway
             userId: 4,
