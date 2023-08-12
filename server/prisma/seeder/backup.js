@@ -376,7 +376,7 @@ async function seedData() {
             description: "Ignite your taste buds with Spicy Chicken. A fiery sensation that adds a thrilling kick to your meal.",
             name: "Spicy Chicken",
             price: 0,
-            imageUrl: "https://www.vivepalmira.com/wp-content/uploads/2019/03/post_id_8015_91551_700x362.jpg"
+            imageUrl: "https://cdn.foodbeast.com/content/wp-content/uploads/2012/07/subway-featured-footlong-buffalo-chicken.jpg"
         }],
         3: [{ //Pizza Hut
             userId: 3,
@@ -408,7 +408,7 @@ async function seedData() {
             description: "Transport your taste buds with Creole Pizza. A zesty fusion of spices and ingredients that captures the essence of Creole cuisine.",
             name: "Creole Pizza",
             price: 0,
-            imageUrl: "https://instagram.fmdq7-1.fna.fbcdn.net/v/t51.2885-15/296302189_764602274963631_4480315473084707217_n.jpg?stp=dst-jpg_e35_s1080x1080&_nc_ht=instagram.fmdq7-1.fna.fbcdn.net&_nc_cat=103&_nc_ohc=JwRZUpGOvbgAX8GfXyV&edm=AP_V10EBAAAA&ccb=7-5&oh=00_AfB4bNsjBdJjdLpoRfCOa5OeIhURj7LcjfiyUWIKK9CLfw&oe=64D9DC11&_nc_sid=2999b8",
+            imageUrl: "https://www.carolinacreole.com/assets/cc-recipe-left-01.png",
             discount: 5,
         },
         {
@@ -447,9 +447,9 @@ async function seedData() {
             userId: 3,
             categoryId: 1,
             description: "Exclusive deal alert! Enjoy a delectable 2 for 1 offer on pizzas, our treat for valued members.",
-            name: "Pizza 2 for 1 for members",
+            name: "Pizza 2x1 for members",
             price: 0,
-            imageUrl: "https://instagram.fmdq7-1.fna.fbcdn.net/v/t51.2885-15/283488435_739061367139101_1194088822873350154_n.jpg?stp=dst-jpg_e15_fr_s1080x1080&_nc_ht=instagram.fmdq7-1.fna.fbcdn.net&_nc_cat=109&_nc_ohc=-izz7U3Uc4YAX8qiIVl&edm=AP_V10EBAAAA&ccb=7-5&oh=00_AfCUVYzSDsiZlZeqbGe-yl0fOmTCDlYyCoxns2vTvwVghw&oe=64D8ED27&_nc_sid=2999b8"
+            imageUrl: "https://cnnespanol.cnn.com/wp-content/uploads/2020/11/201110065232-pizza-hut-beyond-sausage-full-169.jpg?quality=100&strip=info"
         }],
         2: [{ //burgerking
             userId: 2,
