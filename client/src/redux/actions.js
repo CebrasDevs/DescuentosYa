@@ -15,10 +15,12 @@ export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+export const SET_LOADING = "SET_LOADING";
 
 export const getUsers = () => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const { data } = await axios.get(`${URL_BASE}/users`);
       return dispatch({
         type: GET_USERS,
@@ -26,6 +28,8 @@ export const getUsers = () => {
       });
     } catch (error) {
       console.log("error");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 };
@@ -47,6 +51,7 @@ export const getCompanies = () => {
 export const getDiscounts = () => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const { data } = await axios.get(`${URL_BASE}/items`);
       return dispatch({
         type: GET_DISCOUNTS,
@@ -54,6 +59,8 @@ export const getDiscounts = () => {
       });
     } catch (error) {
       console.log("error");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 };
@@ -75,6 +82,7 @@ export const getCategories = () => {
 export const getItemsByName = (value) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const { data } = await axios.get(`${URL_BASE}/items?name=${value}`);
       return dispatch({
         type: GET_ITEM_BY_NAME,
@@ -82,6 +90,8 @@ export const getItemsByName = (value) => {
       });
     } catch (error) {
       console.log("error");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 };
@@ -89,6 +99,7 @@ export const getItemsByName = (value) => {
 export const getCompanyDetail = (id) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const { data } = await axios.get(`${URL_BASE}/companies/${id}`);
       return dispatch({
         type: GET_COMPANY_DETAIL,
@@ -96,6 +107,8 @@ export const getCompanyDetail = (id) => {
       });
     } catch (error) {
       console.log("error");
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 };
@@ -141,6 +154,10 @@ export const deleteShoppingCartItem = (id) => {
 
 export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
+};
+
+export const setLoading = (bool) => {
+  return { type: SET_LOADING, payload: bool };
 };
 
 

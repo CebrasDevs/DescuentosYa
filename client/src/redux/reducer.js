@@ -12,6 +12,7 @@ import {
   GET_ITEM_BY_NAME,
   GET_USERS,
   SET_ACTIVE_USER,
+  SET_LOADING,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 import { member, company, admin } from "../utils/perfilesPF";
@@ -30,6 +31,7 @@ const initialState = {
     chosenCategory: "All categories",
     chosenSorting: "Alphabetical",
   },
+  loading: false,
   currentPage: 1,
   companyDetail: {},
 };
@@ -112,6 +114,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activeUser: action.payload,
       };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
+        };
+
     // case CREATE_PREFERENCE:
     //   return {
     //     ...state,
