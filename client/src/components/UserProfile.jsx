@@ -34,7 +34,7 @@ export default function UserProfile() {
                             ) : (
                                 <div className="w-3/4">
                                     <div>
-                                        <h1>Company Name: {activeUser.name} </h1>
+                                        <h1>Name: {activeUser.name} </h1>
                                         <h1>Email: {activeUser.email} </h1>
                                         <h1>DNI: {activeUser.dni} </h1>
                                         <h1>Address: {activeUser.address} </h1>

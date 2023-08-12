@@ -6,24 +6,39 @@ import Link from "next/link";
 import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
 import { FaEdit } from "react-icons/fa";
+import Cookies from "js-cookie";
+
+import { useRouter } from "next/navigation";
 
 export default function ItemDetail({ data }) {
     const dispatch = useDispatch();
     const allShoppingItems = useSelector((state) => state.allShoppingItems);
     const activeUser = useSelector((state) => state.activeUser);
 
+    const router = useRouter();
+
     const [modify, setModify] = useState(false);
 
     const handleAddItem = function (itemFound) {
-        if (!allShoppingItems.includes(itemFound)) {
-            dispatch(addShoppinCartItem(itemFound));
-        } else {
-            alert("Item already added in shopping cart");
+        const retrievedCookie = Cookies.get("accessTrue");
+        if (!retrievedCookie) {
+            router.push(`/login?detail=true&itemId=${data.id}`);
+        }else{
+            if (!allShoppingItems.includes(itemFound)) {
+                dispatch(addShoppinCartItem(itemFound));
+            } else {
+                alert("Item already added in shopping cart");
+            }
         }
     };
 
     const handleGenerateCode = function () {
-        //logica de generacion de codigo, charlar
+        const retrievedCookie = Cookies.get("accessTrue");
+        if (!retrievedCookie) {
+            router.push(`/login?detail=true&itemId=${data.id}`);
+        }else{
+            //logica de generacion de codigo, charlar
+        }
     };
 
     const modifyHandler = () => {
@@ -72,13 +87,14 @@ export default function ItemDetail({ data }) {
                                     <button
                                         className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                                         onClick={() => handleAddItem(data)}
-                                        disabled={activeUser.role !== "MEMBER" && true}
                                     >
                                         Add to Cart <BsCart3 className=" text-xl" />
                                     </button>
                                 </Link>
                                 {activeUser.id === data.companyId || activeUser.role === "ADMIN" ? (
-                                    <button onClick={modifyHandler}><FaEdit /></button>
+                                    <button onClick={modifyHandler}>
+                                        <FaEdit />
+                                    </button>
                                 ) : null}
                             </div>
                         </div>
@@ -127,7 +143,7 @@ export default function ItemDetail({ data }) {
                                 <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">${data.price} </h1>
                             )}
                         </div>
-                        <div className=" absolute right-10 bottom-10 flex" >
+                        <div className=" absolute right-10 bottom-10 flex">
                             <button
                                 className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                                 onClick={handleGenerateCode}
@@ -135,7 +151,9 @@ export default function ItemDetail({ data }) {
                                 Get Voucher
                             </button>
                             {activeUser.id === data.companyId || activeUser.role === "ADMIN" ? (
-                                <button onClick={modifyHandler}><FaEdit size={30} className="ml-6"/></button>
+                                <button onClick={modifyHandler}>
+                                    <FaEdit size={30} className="ml-6" />
+                                </button>
                             ) : null}
                         </div>
                     </div>

@@ -7,7 +7,15 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { URL_BASE } from "@/utils/const";
 
+
+import { useSearchParams, useRouter } from "next/navigation";
+
 export default function Login() {
+
+    const router = useRouter();
+    const params = useSearchParams();
+    const detail = params.get("detail");
+    const itemId = params.get("itemId");
 
     const [input, setInput] = useState({
         email: "",
@@ -37,7 +45,11 @@ export default function Login() {
                     name: "",
                     password: "",
                 });
-                window.location.href = "http://localhost:3000";
+                if(detail === 'true'){
+                    router.push(`/${itemId}`);
+                }else{
+                    router.push("/");
+                }
             }
         } catch (error) {
             window.alert(error.response.data.error);

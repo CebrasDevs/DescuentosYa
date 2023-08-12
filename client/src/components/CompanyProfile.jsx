@@ -22,6 +22,14 @@ export default function CompanyProfile() {
         dispatch(deleteCompanyItem(id));
     }
 
+    function formatedCuit(cuit){
+        if (cuit.length !== 11) {
+            return "El CUIT debe tener 11 caracteres";
+        }
+        const cuitFormated = `${cuit.substr(0, 2)}-${cuit.substr(2, 8)}-${cuit.substr(10, 1)}`;
+        return cuitFormated;
+    }
+
     if (activeUser.role === "COMPANY") {
         return (
             <div className="flex flex-col items-center">
@@ -44,7 +52,7 @@ export default function CompanyProfile() {
                                     <div>
                                         <h1>Company Name: {activeUser.name} </h1>
                                         <h1>Email: {activeUser.email} </h1>
-                                        <h1>CUIT: {activeUser.cuit} </h1>
+                                        <h1>CUIT: {formatedCuit(activeUser.cuit)} </h1>
                                         <h1>Address: {activeUser.address} </h1>
                                         <h1>Company Description: {activeUser.description} </h1>
                                         <h1>Phone Number: {activeUser.phoneNumber} </h1>

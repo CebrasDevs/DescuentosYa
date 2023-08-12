@@ -6,6 +6,14 @@ import Grid from "./Grid";
 export default function CompanyDetail({ id }) {
     const company = useCompany(id);
 
+    function formatedCuit(cuit){
+        if (cuit.length !== 11) {
+            return "El CUIT debe tener 11 caracteres";
+        }
+        const cuitFormated = `${cuit.substr(0, 2)}-${cuit.substr(2, 8)}-${cuit.substr(10, 1)}`;
+        return cuitFormated;
+    }
+
     if (!company.id) {
         return <p>Loading...</p>;
     }
@@ -19,7 +27,7 @@ export default function CompanyDetail({ id }) {
                     <div className="w-[45%] mx-auto flex flex-col justify-center">
                         <h1>Company Name: {company.name} </h1>
                         <h1>Email: {company.email} </h1>
-                        <h1>CUIT: {company.cuit} </h1>
+                        <h1>CUIT: {formatedCuit(company.cuit)} </h1>
                         <h1>Address: {company.address} </h1>
                         <h1>Company Description: {company.description} </h1>
                         <h1>Phone Number: {company.phoneNumber} </h1>

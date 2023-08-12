@@ -47,23 +47,26 @@ export default function SignUpMember() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formattedMember = formatMember(input);
+        const imageInput = document.getElementById("imageInput");
         try {
-            const cloudinaryFormData = new FormData();
-            cloudinaryFormData.append("file", imageFile);
-            cloudinaryFormData.append("upload_preset", "DescuentosYa");
-            console.log(cloudinaryFormData);
-            const cloudinaryResponse = await axios.post(
-                "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
-                cloudinaryFormData
-            );
-
-            formattedMember.imageUrl =
-                "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
+            if (imageInput.files.length === 0) {
+                formattedMember.imageUrl = "https://res.cloudinary.com/dwndzlcxp/image/upload/profileDefault_kxeuo5";
+            } else {
+                const cloudinaryFormData = new FormData();
+                cloudinaryFormData.append("file", imageFile);
+                cloudinaryFormData.append("upload_preset", "DescuentosYa");
+                const cloudinaryResponse = await axios.post(
+                    "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
+                    cloudinaryFormData
+                );
+                formattedMember.imageUrl =
+                    "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
+            }
 
             const response = await axios.post(`${URL_BASE}/members`, formattedMember);
             if (response.status === 200) {
                 setErrors({});
-                window.alert(`Member ${(input.firstName, input.lastName)} creado correctamente (provisory)`);
+                window.alert(`Member ${formattedMember.firstName}` `${formattedMember.lastName} creado correctamente (provisory)`);
                 window.location.href = "http://localhost:3000";
             }
         } catch (error) {
@@ -212,6 +215,7 @@ export default function SignUpMember() {
                                         placeholder="Your picture"
                                         type="file"
                                         name="imageUrl"
+                                        id="imageInput"
                                         className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         onChange={handleImageChange}
                                     />
