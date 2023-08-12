@@ -33,8 +33,8 @@ export default function Navbar() {
     }
 
     return (
-        <>
-            <div className="flex fixed top-0 left-0 right-0 items-center w-full h-16 bg-slate-50 shadow-md z-10">
+        <div className="fixed top-0 left-0 right-0 z-10 shadow-lg">
+            <div className="flex items-center w-full h-16 bg-slate-50">
                 <div className=" flex w-3/4 m-auto items-center">
                     <div className="flex items-center h-full ml-10 mr-auto">
                         <Link href={"/"} className="flex items-center">
@@ -104,7 +104,7 @@ export default function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className="flex items-center w-full h-12 bg-neutral-800 mt-16">
+            <div className="flex items-center w-full h-12 bg-neutral-800">
                 <div className=" flex w-3/4 m-auto">
                     {profile === "true" ? (
                         <>
@@ -165,6 +165,6 @@ export default function Navbar() {
                     )}
                 </div>
             </div>
-        </>
+        </div>
     );
 }

@@ -62,9 +62,9 @@ export default function CompanyProfile() {
                     
                 </div>
 
-                <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
+                <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md pb-10">
                     <h1 className="border-b-2 p-4 font-bold text-xl">ITEMS</h1>
-                    <div className="flex justify-center h-10">
+                    <div className="flex justify-center h-10 my-10">
                         <input type="search" name="search" placeholder="Search by Name" />
                         {/* <button onClick={handleClick}>Search</button> */}
                     </div>
@@ -76,7 +76,7 @@ export default function CompanyProfile() {
 
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">SALES</h1>
-                    <div className="flex justify-center h-10">
+                    <div className="flex justify-center h-10 my-10">
                         <input type="search" name="search" placeholder="Search by Name" />
                         {/* <button onClick={handleClick}>Search</button> */}
                     </div>
@@ -112,7 +112,7 @@ export default function CompanyProfile() {
                 
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">VOUCHERS</h1>
-                    <div className="flex justify-center h-10">
+                    <div className="flex justify-center h-10 my-10">
                         <input type="search" name="search" placeholder="Search by Name" />
                         {/* <button onClick={handleClick}>Search</button> */}
                     </div>

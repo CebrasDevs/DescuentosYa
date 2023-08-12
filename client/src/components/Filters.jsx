@@ -16,7 +16,7 @@ export default function Filters() {
     const allCategories = ["All categories", ...categories];
 
     useEffect(() => {
-        dispatch(getCategories());
+        dispatch(getCategories())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
@@ -30,7 +30,7 @@ export default function Filters() {
     }
 
     return (
-        <div className="sticky top-20">
+        <div className="sticky top-28">
             <div className="flex flex-col justify-center text-center ">
                 <div className=" p-5">
                     <p className="font-medium mb-2 text-lg">Type:</p>
