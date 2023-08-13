@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import {
   formatModifyCompany,
@@ -6,11 +7,12 @@ import {
 import validateModifyCompany from "@/utils/validateModifyCompany";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
+import { useDispatch } from "react-redux";
+import { setActiveUser } from "@/redux/actions";
 
 export default function ModifyCompanyProfile({ companyData }) {
-  console.log(companyData);
   const { phoneNumber } = phoneNumberWithoutHyphens(companyData);
-
+  const dispatch = useDispatch()
   const [imageFile, setImageFile] = useState(null);
   const [editImage, setEditImage] = useState(false);
   const [errors, setErrors] = useState({});
@@ -61,38 +63,27 @@ export default function ModifyCompanyProfile({ companyData }) {
         const cloudinaryFormData = new FormData();
         cloudinaryFormData.append("file", imageFile);
         cloudinaryFormData.append("upload_preset", "DescuentosYa");
-        const cloudinaryResponse = await axios.post(
-          "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
-          cloudinaryFormData
-        );
-        formattedCompany.imageUrl =
-          "https://res.cloudinary.com/dwndzlcxp/image/upload/" +
-          cloudinaryResponse.data.public_id;
+        const cloudinaryResponse = await axios.post("https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",cloudinaryFormData);
+        formattedCompany.imageUrl = "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
 
         await axios.patch(
           `${URL_BASE}/companies/${companyData.id}`,
           formattedCompany
         );
-        window.alert(
-          `Member ${
-            (input.firstName, input.lastName)
-          } creado correctamente (provisory)`
-        );
+        dispatch(setActiveUser(companyData.id))
+        alert(`Company successfully modified`);
       } else {
         await axios.patch(
           `${URL_BASE}/companies/${companyData.id}`,
           formattedCompany
         );
-        window.alert(
-          `Member ${
-            (input.firstName, input.lastName)
-          } creado correctamente (provisory)`
-        );
+        dispatch(setActiveUser(companyData.id))
+        alert(`Company successfully modified`);
       }
 
       setErrors({});
     } catch (error) {
-      alert(`Error creating company`);
+      alert(`Error modifying company`);
     }
   };
 
