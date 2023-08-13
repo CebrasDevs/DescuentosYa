@@ -24,7 +24,7 @@ const initialState = {
   users: [],
   allItems: [],
   activeUser: {},
-  ShoppingCart: [],
+  shoppingCart: [],
   filteredItems: [],
   activeFilters: {
     chosenItemType: "All types",
@@ -84,12 +84,12 @@ const rootReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        ShoppingCart: [...state.ShoppingCart, newItem], // en vez de action.payload va newItem
+        shoppingCart: [...state.shoppingCart, newItem], // en vez de action.payload va newItem
       };
     case DELETE_SHOPPING_CART_ITEM:
       return {
         ...state,
-        ShoppingCart: state.ShoppingCart.filter(
+        shoppingCart: state.shoppingCart.filter(
           (item) => item.id !== action.payload
         ),
       };
@@ -119,7 +119,7 @@ const rootReducer = (state = initialState, action) => {
         activeUser: action.payload,
       };
     case INCREASE_ITEM_QUANTITY:
-      let objectToIncrease = state.ShoppingCart[action.payload]
+      let objectToIncrease = state.shoppingCart[action.payload]
 
       objectToIncrease = {
         item: objectToIncrease.item,
@@ -129,7 +129,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     case DECREASE_ITEM_QUANTITY:
-      let objectToDecrease = state.ShoppingCart[action.payload]
+      let objectToDecrease = state.shoppingCart[action.payload]
 
       objectToDecrease = {
         item: objectToDecrease.item,

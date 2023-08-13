@@ -10,9 +10,9 @@ import { URL_BASE } from "@/utils/const";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
-  const ShoppingCart = useSelector((state) => state.ShoppingCart);
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   const activeUser = useSelector((state) => state.activeUser);
-  const [counters, setCounters] = useState(ShoppingCart.map(() => 1)); //creo un counter para cada item, iniciado en 1
+  const [counters, setCounters] = useState(shoppingCart.map(() => 1)); //creo un counter para cada item, iniciado en 1
 
 
   //aca se coloca la public key de mp
@@ -20,7 +20,7 @@ export default function ShoppingCart() {
 
 
   const handleCounter = function (event, index) { //cada vez que clickea el counter local y el quantity global cambian, el esta local hace que React actualice componentes y evita que el renderizado del esta global se vea con demoras.
-    if (event.target.name === "minus" && ShoppingCart[index].quantity > 1 ) {
+    if (event.target.name === "minus" && shoppingCart[index].quantity > 1 ) {
       let countersCopy = [...counters];
       countersCopy[index] = counters[index] - 1;
       setCounters(countersCopy);
@@ -37,16 +37,16 @@ export default function ShoppingCart() {
     dispatch(deleteShoppingCartItem(id));
   };
 
-  const products = ShoppingCart?.map((element, index) => ({
+  const products = shoppingCart?.map((element, index) => ({
     id: element.item.id,
     title: element.item.name,
     unit_price: Math.ceil(element.item.price),
-    quantity: ShoppingCart[index].quantity,
+    quantity: shoppingCart[index].quantity,
     category_id: element.item.category,
     description: "DescuentosYa",
   }));
 
-  console.log(products)
+  
 
   const user = {
     email: activeUser.email,
@@ -66,26 +66,26 @@ export default function ShoppingCart() {
 
   return (
     <div>
-      {ShoppingCart?.map((item, index) => {
+      {shoppingCart?.map((item, index) => {
         return (
           <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap rounded bg-violet-200" key={index}>
             <h2 className="m-10 justify-center">Product name: {item.item.name}</h2>
             <h2 className="m-10 justify-center">Price: ${item.item.price}</h2>
             <h2 className="m-10 justify-center">
-            Total Price: ${ (item.item.price * ShoppingCart[index].quantity).toFixed(2) }
+            Total Price: ${ (item.item.price * shoppingCart[index].quantity).toFixed(2) }
             </h2>
             <div>
               <button
                 className="m-10"
                 name="minus"
                 onClick={(event) => handleCounter(event, index)}
-                disabled={ShoppingCart[index].quantity === 1}
+                disabled={shoppingCart[index].quantity === 1}
               >
                 {" "}
                 -{" "}
               </button>
 
-              {ShoppingCart[index].quantity}
+              {shoppingCart[index].quantity}
 
               <button
                 className="m-10"
@@ -108,7 +108,7 @@ export default function ShoppingCart() {
       })}
 
       <div>
-        {ShoppingCart.length ? (
+        {shoppingCart.length ? (
           <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
             Checkout
           </button>

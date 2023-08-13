@@ -8,13 +8,13 @@ import ModifiedItem from "./ModifiedItem";
 
 export default function ItemDetail({ data }) {
   const dispatch = useDispatch();
-  const ShoppingCart = useSelector((state) => state.ShoppingCart);
+  const shoppingCart = useSelector((state) => state.shoppingCart);
   const activeUser = useSelector((state) => state.activeUser);
 
   const [modify, setModify] = useState(false);
 
   const handleAddItem = function (itemFound) {
-    if (!ShoppingCart.includes(itemFound)) {
+    if (!shoppingCart.includes(itemFound)) {
       dispatch(addShoppingCartItem(itemFound));
     } else {
       alert("Item already added in shopping cart");
