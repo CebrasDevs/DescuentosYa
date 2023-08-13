@@ -15,6 +15,8 @@ export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
+export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -100,26 +102,6 @@ export const getCompanyDetail = (id) => {
   };
 };
 
-// export const createPreference = async () => {
-//   try{
-//       const response = await axios.post("http://localhost:3001/payment/create-order",{
-//           title: "Name",
-//           unit_price: 100,
-//           quantity:1,
-//           currency_id: "ARS",
-//       });
-//       const { id } = response.data;
-//       console.log('actions', response.data)
-//       return {
-//         type: CREATE_PREFERENCE,
-//         payload: id
-//       }
-//       // recibe una id que proviene del servidor ( id de la compra )
-//   } catch (error) {
-//       console.log(error);
-//   }
-// };
-
 export const cleanCompanyDetail = () => {
   return { type: CLEAN_COMPANY_DETAIL };
 };
@@ -131,8 +113,8 @@ export const setCurrentPage = (page) => {
   return { type: SET_CURRENT_PAGE, payload: page };
 };
 
-export const addShoppinCartItem = (item) => {
-  return { type: ADD_SHOPPING_CART_ITEM, payload: item };
+export const addShoppingCartItem = (item) => {
+  return { type: ADD_SHOPPING_CART_ITEM,payload: item };
 };
 
 export const deleteShoppingCartItem = (id) => {
@@ -142,7 +124,6 @@ export const deleteShoppingCartItem = (id) => {
 export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
 };
-
 
 export const setActiveUser = (id) => {
   return async (dispatch) => {
@@ -157,3 +138,12 @@ export const setActiveUser = (id) => {
     }
   };
 };
+
+export const increaseItemQuantity = (index) => {
+  return { type: INCREASE_ITEM_QUANTITY, payload: index };
+};
+
+export const decreaseItemQuantity = (index) => {
+  return { type: DECREASE_ITEM_QUANTITY, payload: index };
+};
+

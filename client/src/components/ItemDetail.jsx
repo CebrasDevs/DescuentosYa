@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { addShoppinCartItem } from "@/redux/actions";
+import { addShoppingCartItem } from "@/redux/actions";
 import { BsCart3 } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,14 +8,14 @@ import ModifiedItem from "./ModifiedItem";
 
 export default function ItemDetail({ data }) {
   const dispatch = useDispatch();
-  const allShoppingItems = useSelector((state) => state.allShoppingItems);
+  const ShoppingCart = useSelector((state) => state.ShoppingCart);
   const activeUser = useSelector((state) => state.activeUser);
 
   const [modify, setModify] = useState(false);
 
   const handleAddItem = function (itemFound) {
-    if (!allShoppingItems.includes(itemFound)) {
-      dispatch(addShoppinCartItem(itemFound));
+    if (!ShoppingCart.includes(itemFound)) {
+      dispatch(addShoppingCartItem(itemFound));
     } else {
       alert("Item already added in shopping cart");
     }

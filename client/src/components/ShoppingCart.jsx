@@ -1,5 +1,5 @@
 "use client";
-import { deleteShoppingCartItem, createPreference } from "@/redux/actions";
+import { deleteShoppingCartItem, createPreference, increaseItemQuantity, decreaseItemQuantity } from "@/redux/actions";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,23 +10,31 @@ import { URL_BASE } from "@/utils/const";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
-  const allShoppingItems = useSelector((state) => state.allShoppingItems);
+  const ShoppingCart = useSelector((state) => state.ShoppingCart);
   const activeUser = useSelector((state) => state.activeUser);
-  const [counters, setCounters] = useState(allShoppingItems.map(() => 1)); //creo un counter para cada item, iniciado en 1
+  // const [counters, setCounters] = useState(allShoppingItems.map(() => 1)); //creo un counter para cada item, iniciado en 1
 
 
   //aca se coloca la public key de mp
   initMercadoPago('TEST-ab84421f-0743-4e17-af16-5e47420efd52');
 
+  // const handleCounter = function (event, index) {
+  //   if (event.target.name === "minus" && counters[index] > 1) {
+  //     let countersCopy = [...counters];
+  //     countersCopy[index] = counters[index] - 1;
+  //     setCounters(countersCopy);
+  //   } else {
+  //     let countersCopy = [...counters];
+  //     countersCopy[index] = counters[index] + 1;
+  //     setCounters(countersCopy);
+  //   }
+  // };
+
   const handleCounter = function (event, index) {
-    if (event.target.name === "minus" && counters[index] > 1) {
-      let countersCopy = [...counters];
-      countersCopy[index] = counters[index] - 1;
-      setCounters(countersCopy);
+    if (event.target.name === "minus" && ShoppingCart[index].quantity > 1 ) {
+      dispatch(decreaseItemQuantity(index))
     } else {
-      let countersCopy = [...counters];
-      countersCopy[index] = counters[index] + 1;
-      setCounters(countersCopy);
+      dispatch(increaseItemQuantity(index))
     }
   };
 
@@ -34,14 +42,16 @@ export default function ShoppingCart() {
     dispatch(deleteShoppingCartItem(id));
   };
 
-  const products = allShoppingItems?.map((item) => ({
-    id: item.id,
-    title: item.name,
-    unit_price: Math.ceil(item.price),
-    quantity: 1,
-    category_id: item.category,
+  const products = ShoppingCart?.map((item, index) => ({
+    id: item.item.id,
+    title: item.item.name,
+    unit_price: Math.ceil(item.item.price),
+    quantity: ShoppingCart[index].quantity,
+    category_id: item.item.category,
     description: "DescuentosYa",
   }));
+
+  console.log(products)
 
   const user = {
     email: activeUser.email,
@@ -61,26 +71,26 @@ export default function ShoppingCart() {
 
   return (
     <div>
-      {allShoppingItems?.map((item, index) => {
+      {ShoppingCart?.map((item, index) => {
         return (
           <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap rounded bg-violet-200" key={index}>
-            <h2 className="m-10 justify-center">Product name: {item.name}</h2>
-            <h2 className="m-10 justify-center">Price: ${item.price}</h2>
+            <h2 className="m-10 justify-center">Product name: {item.item.name}</h2>
+            <h2 className="m-10 justify-center">Price: ${item.item.price}</h2>
             <h2 className="m-10 justify-center">
-              Total Price: ${item.price * counters[index]}
+              Total Price: ${item.item.price * ShoppingCart[index].quantity}
             </h2>
             <div>
               <button
                 className="m-10"
                 name="minus"
                 onClick={(event) => handleCounter(event, index)}
-                disabled={counters[index] === 1}
+                disabled={ShoppingCart[index].quantity === 1}
               >
                 {" "}
                 -{" "}
               </button>
 
-              {counters[index]}
+              {ShoppingCart[index].quantity}
 
               <button
                 className="m-10"
@@ -103,7 +113,7 @@ export default function ShoppingCart() {
       })}
 
       <div>
-        {allShoppingItems.length ? (
+        {ShoppingCart.length ? (
           <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
             Checkout
           </button>
