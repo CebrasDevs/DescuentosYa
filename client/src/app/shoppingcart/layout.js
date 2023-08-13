@@ -1,10 +1,8 @@
-import ShoppingCart from "../../components/ShoppingCart";
 
-
-export default function Layout(){
+export default function Layout({children}){
     return(
         <div>
-            <ShoppingCart/>
+            {children}
         </div>
     )
 };

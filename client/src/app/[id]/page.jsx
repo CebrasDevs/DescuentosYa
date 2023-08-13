@@ -1,10 +1,16 @@
+"use client"
+import ItemDetail from "@/components/ItemDetail";
+import { URL_BASE } from "@/utils/const";
+import axios from "axios";
 
+export default async function detail( {params} ) {
 
-export default function detail( {id} ) {
-
+  const { id } = params;
+  const { data } = await axios(`${URL_BASE}/items/${id}`);
 
     return (
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      </main>
+      <div>
+      <ItemDetail data={data} />
+    </div>
     )
   }
