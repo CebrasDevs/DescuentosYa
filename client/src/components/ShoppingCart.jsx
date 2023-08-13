@@ -12,28 +12,23 @@ export default function ShoppingCart() {
   const dispatch = useDispatch();
   const ShoppingCart = useSelector((state) => state.ShoppingCart);
   const activeUser = useSelector((state) => state.activeUser);
-  // const [counters, setCounters] = useState(allShoppingItems.map(() => 1)); //creo un counter para cada item, iniciado en 1
+  const [counters, setCounters] = useState(ShoppingCart.map(() => 1)); //creo un counter para cada item, iniciado en 1
 
 
   //aca se coloca la public key de mp
   initMercadoPago('TEST-ab84421f-0743-4e17-af16-5e47420efd52');
 
-  // const handleCounter = function (event, index) {
-  //   if (event.target.name === "minus" && counters[index] > 1) {
-  //     let countersCopy = [...counters];
-  //     countersCopy[index] = counters[index] - 1;
-  //     setCounters(countersCopy);
-  //   } else {
-  //     let countersCopy = [...counters];
-  //     countersCopy[index] = counters[index] + 1;
-  //     setCounters(countersCopy);
-  //   }
-  // };
 
-  const handleCounter = function (event, index) {
+  const handleCounter = function (event, index) { //cada vez que clickea el counter local y el quantity global cambian, el esta local hace que React actualice componentes y evita que el renderizado del esta global se vea con demoras.
     if (event.target.name === "minus" && ShoppingCart[index].quantity > 1 ) {
+      let countersCopy = [...counters];
+      countersCopy[index] = counters[index] - 1;
+      setCounters(countersCopy);
       dispatch(decreaseItemQuantity(index))
     } else {
+      let countersCopy = [...counters];
+      countersCopy[index] = counters[index] + 1;
+      setCounters(countersCopy);
       dispatch(increaseItemQuantity(index))
     }
   };
@@ -42,12 +37,12 @@ export default function ShoppingCart() {
     dispatch(deleteShoppingCartItem(id));
   };
 
-  const products = ShoppingCart?.map((item, index) => ({
-    id: item.item.id,
-    title: item.item.name,
-    unit_price: Math.ceil(item.item.price),
+  const products = ShoppingCart?.map((element, index) => ({
+    id: element.item.id,
+    title: element.item.name,
+    unit_price: Math.ceil(element.item.price),
     quantity: ShoppingCart[index].quantity,
-    category_id: item.item.category,
+    category_id: element.item.category,
     description: "DescuentosYa",
   }));
 
@@ -77,7 +72,7 @@ export default function ShoppingCart() {
             <h2 className="m-10 justify-center">Product name: {item.item.name}</h2>
             <h2 className="m-10 justify-center">Price: ${item.item.price}</h2>
             <h2 className="m-10 justify-center">
-              Total Price: ${item.item.price * ShoppingCart[index].quantity}
+            Total Price: ${ (item.item.price * ShoppingCart[index].quantity).toFixed(2) }
             </h2>
             <div>
               <button
