@@ -10,8 +10,8 @@ export function formatCompany(company) {
         phoneNumber, 
         imageUrl
     } = company;
-    const parsedCuit = Number(cuit);
-    const parsedPhoneNumber = Number(phoneNumber);
+    const parsedCuit = String(cuit);
+    const parsedPhoneNumber = String(phoneNumber);
 
     return {
         email: email,

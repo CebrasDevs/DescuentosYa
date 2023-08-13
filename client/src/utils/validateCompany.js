@@ -40,7 +40,7 @@ export default function validateCompany(company) {
             errors.password = 'Must contain only letters andnumbers';
         };
         if (password.length < 6 || password.length > 18) {
-            errors.password = 'Must contain between 6 and 18characters';
+            errors.password = 'Must contain between 6 and 18 characters';
         };
     };
     // VALIDO CONFIRMPASSWORD
@@ -56,7 +56,9 @@ export default function validateCompany(company) {
         };
     };
     // VALIDO DESCRIPTION
-    if (description.length) {
+    if (!description.length) {
+        errors.description = 'Required field';
+    } else {
         if (!descriptionRegex.test(description)) {
             errors.description = 'Invalid character';
         };
@@ -86,7 +88,9 @@ export default function validateCompany(company) {
         };
     };
     // VALIDO PHONENUMBER
-    if (phoneNumber.length) {
+    if (!phoneNumber.length) {
+        errors.phoneNumber = 'Required field';
+    } else {
         if (phoneNumber.length < 6) {
             errors.phoneNumber = 'Phone number too short';
         };
@@ -97,13 +101,5 @@ export default function validateCompany(company) {
             errors.phoneNumber = 'Must contain only numbers';
         };
     };
-    // VALIDO IMAGEURL
-    // if (!imageUrl.length) {
-    //     errors.imageUrl = 'Required field';
-    // } else {
-    //     if (!urlRegex.test(imageUrl)) {
-    //         errors.imageUrl = 'Must be a valid url';
-    //     };
-    // };
     return errors;
 };

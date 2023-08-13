@@ -1,13 +1,14 @@
 const { createCompaniesController } = require("../../controllers");
 
 module.exports = async (req, res) => {
+  console.log("handler")
   try {
     let {
       email,
       password,
       cuit,
       imageUrl,
-      name,
+      companyName,
       address,
       phoneNumber,
       description
@@ -17,7 +18,7 @@ module.exports = async (req, res) => {
       password,
       dni_cuit: cuit,
       imageUrl,
-      name,
+      name: companyName,
       address,
       phoneNumber,
       description

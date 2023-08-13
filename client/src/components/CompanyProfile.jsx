@@ -1,6 +1,6 @@
 "use client";
 import { FaUserEdit } from "react-icons/fa";
-import { TiArrowBack } from 'react-icons/ti'
+import { TiArrowBack } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCompanyItem } from "@/redux/actions";
 import Link from "next/link";
@@ -15,14 +15,14 @@ export default function CompanyProfile() {
 
     const [modify, setModify] = useState(false);
     const modifyHandler = () => {
-            setModify(true);
+        setModify(true);
     };
 
     function handleDelete(id) {
         dispatch(deleteCompanyItem(id));
     }
 
-    function formatedCuit(cuit){
+    function formatedCuit(cuit) {
         if (cuit.length !== 11) {
             return "El CUIT debe tener 11 caracteres";
         }
@@ -34,9 +34,14 @@ export default function CompanyProfile() {
         return (
             <div className="flex flex-col items-center">
                 <div id="data" className=" w-3/4 mt-10 mb-12 bg-slate-50 rounded-lg shadow-md">
-                    <div className='flex justify-between border-b-2'>
+                    <div className="flex justify-between border-b-2">
                         <h1 className="p-4 font-bold text-xl">DATA</h1>
-                        <TiArrowBack onClick={()=>{setModify(false)}} className="m-5 text-2xl hover: cursor-pointer"/>
+                        <TiArrowBack
+                            onClick={() => {
+                                setModify(false);
+                            }}
+                            className="m-5 text-2xl hover: cursor-pointer"
+                        />
                     </div>
                     <div className="flex h-[550px] ">
                         <div className="flex justify-center items-center w-1/2">
@@ -45,7 +50,7 @@ export default function CompanyProfile() {
                         <div className="w-1/2 flex flex-col justify-center">
                             {modify ? (
                                 <div className="h-full">
-                                    <ModifyCompanyProfile companyData={activeUser}/>
+                                    <ModifyCompanyProfile companyData={activeUser} />
                                 </div>
                             ) : (
                                 <div className="w-3/4">
@@ -67,76 +72,114 @@ export default function CompanyProfile() {
                             <div id="items"></div>
                         </div>
                     </div>
-                    
                 </div>
 
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md pb-10">
                     <h1 className="border-b-2 p-4 font-bold text-xl">ITEMS</h1>
-                    <div className="flex justify-center h-10 my-10">
-                        <input type="search" name="search" placeholder="Search by Name" />
-                        {/* <button onClick={handleClick}>Search</button> */}
-                    </div>
-                    <div>
-                        <Grid value="profile" />
-                    </div>
+                    {activeUser.items.length !== 0 ? (
+                        <>
+                            <div className="flex justify-center h-10 my-10">
+                                <input type="search" name="search" placeholder="Search by Name" />
+                                {/* <button onClick={handleClick}>Search</button> */}
+                            </div>
+                            <div>
+                                <Grid value="profile" />
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't items</h1>
+                        </>
+                    )}
+
                     <div id="sales"></div>
                 </div>
 
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">SALES</h1>
-                    <div className="flex justify-center h-10 my-10">
-                        <input type="search" name="search" placeholder="Search by Name" />
-                        {/* <button onClick={handleClick}>Search</button> */}
-                    </div>
-                    <div className="items-center">
-                        {activeUser.sales?.map((sale, index) => {
-                            return (
-                                <div key={index} className="flex items-center border border-black rounded-lg m-2">
-                                    {sale.items?.map((item, index) => {
-                                        return (
-                                            <img
-                                                key={index}
-                                                className="w-[100px] h-[100px] m-5 rounded-lg"
-                                                src={item.imageUrl}
-                                                alt=""
-                                            />
-                                        );
-                                    })}
-                                    <h1 className="ml-2">Way to Pay: {sale.wayToPay}</h1>
-                                    <h1 className="ml-2">| State: {sale.state}</h1>
-                                    <h1 className="ml-2">| User: {sale.user.name}</h1>
-                                    <h2 className="ml-2">
-                                        |{" "}
-                                        <Link className="hover:text-blue-500" href={"#"}>
-                                            Detail
-                                        </Link>
-                                    </h2>
-                                </div>
-                            );
-                        })}
-                        <div id="vouchers"></div>
-                    </div>
+                    {activeUser.sales.length !== 0 ? (
+                        <>
+                            <div className="flex justify-center h-10 my-10">
+                                <input type="search" name="search" placeholder="Search by Name" />
+                                {/* <button onClick={handleClick}>Search</button> */}
+                            </div>
+                            <div className="items-center">
+                                {activeUser.sales?.map((sale, index) => {
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex items-center border border-black rounded-lg m-2"
+                                        >
+                                            {sale.items?.map((item, index) => {
+                                                return (
+                                                    <img
+                                                        key={index}
+                                                        className="w-[100px] h-[100px] m-5 rounded-lg"
+                                                        src={item.imageUrl}
+                                                        alt=""
+                                                    />
+                                                );
+                                            })}
+                                            <h1 className="ml-2">Way to Pay: {sale.wayToPay}</h1>
+                                            <h1 className="ml-2">| State: {sale.state}</h1>
+                                            <h1 className="ml-2">| User: {sale.user.name}</h1>
+                                            <h2 className="ml-2">
+                                                |{" "}
+                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                    Detail
+                                                </Link>
+                                            </h2>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't sales</h1>
+                            <div id="vouchers"></div>
+                        </>
+                    )}
                 </div>
-                
+
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">VOUCHERS</h1>
-                    <div className="flex justify-center h-10 my-10">
-                        <input type="search" name="search" placeholder="Search by Name" />
-                        {/* <button onClick={handleClick}>Search</button> */}
-                    </div>
-                    <div className="items-center">
-                        {activeUser.vouchers?.map((voucher, index) => {
-                            return (
-                                <div key={index} className="flex items-center border border-black rounded-lg m-2">
-                                    <img className="w-[100px] h-[100px] m-5 rounded-lg" src={voucher.item.imageUrl} />
-                                    <h2 className="ml-2">Voucher: {voucher.item.name}</h2>
-                                    <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
-                                    <h1 className="ml-2">| User: {voucher.user.name}</h1>
-                                    <h2 className="ml-2">| <Link className="hover:text-blue-500" href={"#"}>Detail</Link></h2>
-                                </div>
-                            );
-                        })}
-                    </div>
+                    {activeUser.vouchers.length !== 0 ? (
+                        <>
+                            <div className="flex justify-center h-10 my-10">
+                                <input type="search" name="search" placeholder="Search by Name" />
+                                {/* <button onClick={handleClick}>Search</button> */}
+                            </div>
+                            <div className="items-center">
+                                {activeUser.vouchers?.map((voucher, index) => {
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex items-center border border-black rounded-lg m-2"
+                                        >
+                                            <img
+                                                className="w-[100px] h-[100px] m-5 rounded-lg"
+                                                src={voucher.item.imageUrl}
+                                            />
+                                            <h2 className="ml-2">Voucher: {voucher.item.name}</h2>
+                                            <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
+                                            <h1 className="ml-2">| User: {voucher.user.name}</h1>
+                                            <h2 className="ml-2">
+                                                |{" "}
+                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                    Detail
+                                                </Link>
+                                            </h2>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className="text-center my-10 font-semibold text-xl">you haven't vouchers</h1>
+                        </>
+                    )}
                 </div>
             </div>
         );

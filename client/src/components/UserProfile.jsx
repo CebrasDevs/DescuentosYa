@@ -1,6 +1,6 @@
 "use client";
 import { FaUserEdit } from "react-icons/fa";
-import { TiArrowBack } from 'react-icons/ti'
+import { TiArrowBack } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useState } from "react";
@@ -18,9 +18,14 @@ export default function UserProfile() {
         return (
             <div className="flex flex-col items-center">
                 <div id="data" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
-                    <div className='flex justify-between border-b-2'>
+                    <div className="flex justify-between border-b-2">
                         <h1 className="p-4 font-bold text-xl">DATA</h1>
-                        <TiArrowBack onClick={()=>{setModify(false)}} className="m-5 text-2xl hover: cursor-pointer"/>
+                        <TiArrowBack
+                            onClick={() => {
+                                setModify(false);
+                            }}
+                            className="m-5 text-2xl hover: cursor-pointer"
+                        />
                     </div>
                     <div className="flex h-[550px] ">
                         <div className="flex justify-center items-center w-1/2">
@@ -29,7 +34,7 @@ export default function UserProfile() {
                         <div className="w-1/2 flex flex-col justify-center">
                             {modify ? (
                                 <div>
-                                    <ModifyMemberProfile memberData={activeUser}/>
+                                    <ModifyMemberProfile memberData={activeUser} />
                                 </div>
                             ) : (
                                 <div className="w-3/4">
@@ -56,58 +61,108 @@ export default function UserProfile() {
                 {/* PARTE DE LOS VOUCHER DEL USUARIO */}
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">My Vouchers</h1>
-                    <div className="flex justify-center h-10 my-10">
-                        <input type="search" name="search" placeholder="Search by Name" />
-                        {/* <button onClick={handleClick}>Search</button> */}
-                    </div>
-                    <div className="items-center">
-                        {activeUser.vouchers?.map((voucher, index) => {
-                            return (
-                                <div key={index} className="flex items-center border border-black rounded-lg m-2">
-                                    <img className="w-[100px] h-[100px] m-5 rounded-lg" src={voucher.item.imageUrl} />
-                                    <h2 className="ml-2">Voucher: {voucher.item.name}</h2>
-                                    <h2 className="ml-2">
-                                        | Company:{" "}
-                                        <Link className="hover:text-blue-500" href={`/brands/${voucher.company.id}`}>{voucher.company.name}</Link>
-                                    </h2>
-                                    <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
-                                    <h2 className="ml-2">| <Link className="hover:text-blue-500" href={"#"}>Detail</Link></h2>
-                                    <h2 className="ml-2">| <Link className="hover:text-blue-500" href={"#"}>Renew</Link></h2>
-                                </div>
-                            );
-                        })}
-                        <div id="orders"></div>
-                    </div>
+                    {activeUser.vouchers.length !== 0 ? (
+                        <>
+                            <div className="flex justify-center h-10 my-10">
+                                <input type="search" name="search" placeholder="Search by Name" />
+                                {/* <button onClick={handleClick}>Search</button> */}
+                            </div>
+                            <div className="items-center">
+                                {activeUser.vouchers?.map((voucher, index) => {
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex items-center border border-black rounded-lg m-2"
+                                        >
+                                            <img
+                                                className="w-[100px] h-[100px] m-5 rounded-lg"
+                                                src={voucher.item.imageUrl}
+                                            />
+                                            <h2 className="ml-2">Voucher: {voucher.item.name}</h2>
+                                            <h2 className="ml-2">
+                                                | Company:{" "}
+                                                <Link
+                                                    className="hover:text-blue-500"
+                                                    href={`/brands/${voucher.company.id}`}
+                                                >
+                                                    {voucher.company.name}
+                                                </Link>
+                                            </h2>
+                                            <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
+                                            <h2 className="ml-2">
+                                                |{" "}
+                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                    Detail
+                                                </Link>
+                                            </h2>
+                                            <h2 className="ml-2">
+                                                |{" "}
+                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                    Renew
+                                                </Link>
+                                            </h2>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't vouchers</h1>
+                            <div id="orders"></div>
+                        </>
+                    )}
                 </div>
                 {/* PARTE DE LAS COMPRAS DEL USUARIO */}
                 <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
                     <h1 className="border-b-2 p-4 font-bold text-xl">My Orders</h1>
-                    <div className="flex justify-center h-10 my-10">
-                        <input type="search" name="search" placeholder="Search by Name" />
-                        {/* <button onClick={handleClick}>Search</button> */}
-                    </div>
-                    <div className="items-center">
-                        {activeUser.shoppings?.map((buys, index) => {
-                            return (
-                                <div key={index} className="flex items-center border border-black rounded-lg m-2">
-                                    {buys.items?.map((item, index) => {
-                                        return (
-                                            <img
-                                                key={index}
-                                                className="w-[100px] h-[100px] m-5 rounded-lg"
-                                                src={item.imageUrl}
-                                                alt=""
-                                            />
-                                        );
-                                    })}
-                                    <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
-                                    <h1 className="ml-2">| State: {buys.state}</h1>
-                                    <h2 className="ml-2">| <Link className="hover:text-blue-500" href={"#"}>Detail</Link></h2>
-                                    <h2 className="ml-2">| <Link className="hover:text-blue-500" href={"#"}>Buy again</Link></h2>
-                                </div>
-                            );
-                        })}
-                    </div>
+                    {activeUser.shoppings.length !== 0 ? (
+                        <>
+                            <div className="flex justify-center h-10 my-10">
+                                <input type="search" name="search" placeholder="Search by Name" />
+                                {/* <button onClick={handleClick}>Search</button> */}
+                            </div>
+                            <div className="items-center">
+                                {activeUser.shoppings?.map((buys, index) => {
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex items-center border border-black rounded-lg m-2"
+                                        >
+                                            {buys.items?.map((item, index) => {
+                                                return (
+                                                    <img
+                                                        key={index}
+                                                        className="w-[100px] h-[100px] m-5 rounded-lg"
+                                                        src={item.imageUrl}
+                                                        alt=""
+                                                    />
+                                                );
+                                            })}
+                                            <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
+                                            <h1 className="ml-2">| State: {buys.state}</h1>
+                                            <h2 className="ml-2">
+                                                |{" "}
+                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                    Detail
+                                                </Link>
+                                            </h2>
+                                            <h2 className="ml-2">
+                                                |{" "}
+                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                    Buy again
+                                                </Link>
+                                            </h2>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't shoppings</h1>
+                        </>
+                    )}
                 </div>
             </div>
         );

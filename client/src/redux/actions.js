@@ -15,6 +15,7 @@ export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+export const CLEAN_ACTIVE_USER = "CLEAN_ACTIVE_USER";
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -25,7 +26,7 @@ export const getUsers = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -155,4 +156,8 @@ export const setActiveUser = (id) => {
       console.log("error");
     }
   };
+};
+
+export const cleanActiveUser = () => {
+  return { type: CLEAN_ACTIVE_USER };
 };

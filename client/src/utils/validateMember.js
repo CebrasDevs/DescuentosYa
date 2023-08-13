@@ -92,7 +92,9 @@ export default function validateMember(member) {
         };
     };
     // VALIDO PHONENUMBER
-    if (phoneNumber.length) {
+    if (!phoneNumber.length) {
+        errors.phoneNumber = 'Required field';
+    } else {
         if (phoneNumber.length < 6) {
             errors.phoneNumber = 'Phone number too short';
         };
@@ -103,14 +105,6 @@ export default function validateMember(member) {
             errors.phoneNumber = 'Must contain only numbers';
         };
     };
-    // VALIDO IMAGEURL
-    // if (!imageUrl.length) {
-    //     errors.imageUrl = 'Required field';
-    // } else {
-    //     if (!urlRegex.test(imageUrl)) {
-    //         errors.imageUrl = 'Must be a valid url';
-    //     };
-    // };
     return errors;
 };
 

@@ -12,6 +12,7 @@ import {
   GET_ITEM_BY_NAME,
   GET_USERS,
   SET_ACTIVE_USER,
+  CLEAN_ACTIVE_USER
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 import { member, company, admin } from "../utils/perfilesPF";
@@ -111,6 +112,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         activeUser: action.payload,
+      };
+    case CLEAN_ACTIVE_USER:
+      return {
+        ...state,
+        activeUser: {},
       };
     // case CREATE_PREFERENCE:
     //   return {

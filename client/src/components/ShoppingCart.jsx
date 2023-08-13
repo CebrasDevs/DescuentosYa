@@ -60,7 +60,7 @@ export default function ShoppingCart() {
 
 
   return (
-    <div>
+    <div className="min-h-[60vh]">
       {allShoppingItems?.map((item, index) => {
         return (
           <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap rounded bg-violet-200" key={index}>
@@ -101,13 +101,11 @@ export default function ShoppingCart() {
           </div>
         );
       })}
-
       <div>
         {allShoppingItems.length ? (
           <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
             Checkout
           </button>
-
         ) : (
           <Link href={"/"}>
             <h2>Shopping Cart is empty, try adding products or services!</h2>
