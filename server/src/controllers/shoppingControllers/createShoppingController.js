@@ -1,17 +1,7 @@
-const {createShoppingHelper, createItemShoppingHelper} = require('../../helpers');
+const { createShoppingHelper, createItemShoppingHelper, getItemsHelper, getUsersHelper } = require('../../helpers');
+const { registerShoppingPDF } = require('../../utils/pdfUtils');
 
 module.exports = async (data) => {
-    // Modelo input ideal
-    // const data = {
-    //     userId,
-    //     wayToPay,
-    //     state,
-    //     totalPrice,
-    //     items: [{
-    //         id,
-    //         quantity
-    //     }],
-    // }
     const {
         userId,
         wayToPay,
@@ -19,9 +9,20 @@ module.exports = async (data) => {
         totalPrice,
         items
     } = data;
-
-    // Reemplazar por la url del PDF generado
-    const pdfUrl = '';
+    const shopper = (await getUsersHelper({ id: +userId }))[0];
+    //obtenemos todos los ID de los items comprados
+    const itemsIds = items.map(({ id }) => id);
+    //obtenemos toda la info de cada item comprado
+    const itemsDB = await getItemsHelper({ id: { in: itemsIds } });
+    const itemsWithQuantities = items.map((itemShop) => {
+        // le agregamos a cada item, la cantidad que se compro para detallar el PDF
+        const item = (itemsDB.find((itemDB) => itemDB.id === itemShop.id ))
+        return {
+            ...item,
+            quantity: itemShop.quantity
+        }
+    });
+    const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithQuantities, totalPrice, wayToPay, state, shopper.email);
     const shopping = {
         userId,
         pdfUrl,
