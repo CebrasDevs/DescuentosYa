@@ -55,7 +55,6 @@ export default function Login() {
                 }else{
                     router.push("/");
                 }
-
     } catch (error) {
       window.alert(error.response.data.error);
     }

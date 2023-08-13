@@ -4,6 +4,7 @@ const createUsersHelper = require("./usersHelpers/createUsersHelper");
 
 const getShoppingHelper = require("./shoppingHelpers/getShoppingHelper");
 const createShoppingHelper = require("./shoppingHelpers/createShoppingHelper");
+const createItemShoppingHelper = require("./itemsShoppingHelpers/createItemShoppingHelper");
 const updateShoppingHelper = require("./shoppingHelpers/updateShoppingHelper");
 
 const getItemsHelper = require("./itemsHelpers/getItemsHelper");
@@ -28,6 +29,7 @@ module.exports = {
 
   getItemsHelper,
   createItemsHelper,
+  createItemShoppingHelper,
   updateItemsHelper,
 
   getUsersHelper,

@@ -5,10 +5,11 @@ const prisma = new PrismaClient();
 module.exports = async (shopping) => {
     const res = await prisma.shopping.create({
         data: {
-            userId: shopping.user_id,
-            url_PDF: shopping.url_PDF,
-            way_to_pay: shopping.way_to_pay,
-            state: shopping.state
+            userId: shopping.userId,
+            pdfUrl: shopping.pdfUrl,
+            wayToPay: shopping.wayToPay,
+            state: shopping.state,
+            // totalPrice: shopping.totalPrice
         }
     })
 

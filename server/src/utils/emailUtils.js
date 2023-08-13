@@ -55,6 +55,22 @@ const registerCompanies = async (toEmail, companyName) => {
 };
 
 /**
+ * al generarse una compra, enviamos los avisos por email 
+ * @param {string} toEmail email del usuario miembro o la compania
+ * @param {html} htmlContent html generado en el paso anterior a la hora de crear el pdf
+ */
+const registerShopping = async (toEmail, htmlContent, objectPdf) => {
+    await transporter.sendMail({
+        from: "DescuentosYa-noreply@descuentosya.com",
+        to: `${toEmail}`,
+        subject: "DescuentosYa!",
+        html: htmlContent,
+        attachments: [{ filename: objectPdf.namePdf + ".pdf", content: objectPdf.pdf }]
+    });
+}
+
+
+/**
  * @param {string} toEmail 
  * @param {string} title titulo <h1> para el html
  * @param {string} message mensaje para el cuerpo del html
@@ -76,4 +92,4 @@ const sendMail = async (toEmail, userName, title, message, link, linkText) => {
     });
 };
 
-module.exports = { registerMembers, registerCompanies };
+module.exports = { registerMembers, registerCompanies, registerShopping };
