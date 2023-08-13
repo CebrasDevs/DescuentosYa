@@ -79,9 +79,9 @@ export function formatMember(member) {
         imageUrl
     } = member;
 
-    const parsedDni = Number(dni);
-    const parsedPhoneNumber = Number(phoneNumber);
-    const fullName = `${firstName}, ${lastName}`;
+    const parsedDni = String(dni);
+    const parsedPhoneNumber = String(phoneNumber);
+    const fullName = `${firstName} ${lastName}`;
 
     return {
         email: email,
