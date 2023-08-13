@@ -1,4 +1,3 @@
 export default function Layout({ children }) {
-    return <div>{children}</div>;
-  }
-  
+  return <div className="min-h-[60vh]">{children}</div>;
+}

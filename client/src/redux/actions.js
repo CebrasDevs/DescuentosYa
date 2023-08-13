@@ -15,8 +15,12 @@ export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
+
+export const CLEAN_ACTIVE_USER = "CLEAN_ACTIVE_USER";
+
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
 export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
+
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -27,7 +31,7 @@ export const getUsers = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -139,6 +143,11 @@ export const setActiveUser = (id) => {
   };
 };
 
+
+export const cleanActiveUser = () => {
+  return { type: CLEAN_ACTIVE_USER };
+};
+
 export const increaseItemQuantity = (index) => {
   return { type: INCREASE_ITEM_QUANTITY, payload: index };
 };
@@ -146,4 +155,5 @@ export const increaseItemQuantity = (index) => {
 export const decreaseItemQuantity = (index) => {
   return { type: DECREASE_ITEM_QUANTITY, payload: index };
 };
+
 

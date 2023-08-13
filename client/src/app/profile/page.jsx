@@ -3,14 +3,16 @@ import CompanyProfile from "@/components/CompanyProfile";
 import UserProfile from "@/components/UserProfile";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function profile() {
-    // useEffect(() => {
-    //     const retrievedCookie = Cookies.get("accessTrue");
-    //     if (!retrievedCookie) {
-    //         window.location.href = "http://localhost:3000/";
-    //     }
-    // }, []);
+    const router = useRouter();
+    useEffect(() => {
+        const retrievedCookie = Cookies.get("accessTrue");
+        if (!retrievedCookie) {
+            router.push("/");
+        }
+    }, []);
 
     return (
         <>

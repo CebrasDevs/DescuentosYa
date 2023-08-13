@@ -1,14 +1,17 @@
+"use client";
 import ShoppingCart from "../../components/ShoppingCart";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
-export default function ShoppingCart() {
+export default function pageShoppingCart() {
+    const router = useRouter();
     useEffect(() => {
         const retrievedCookie = Cookies.get("accessTrue");
         if (!retrievedCookie) {
-          window.location.href = "http://localhost:3000/";
+            router.push("/");
         }
-      }, []);
+    }, []);
 
     return (
         <>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { formatCompany } from "@/utils/formatUtils";
 import validateCompany from "@/utils/validateCompany";
 import { URL_BASE } from "@/utils/const";
+import axios from "axios";
 
 export default function SignUpCompany() {
     const [imageFile, setImageFile] = useState(null);
@@ -14,8 +15,7 @@ export default function SignUpCompany() {
         description: "",
         cuit: "",
         address: "",
-        phoneNumber: "",
-        imageUrl: "",
+        phoneNumber: ""
     });
     const isNotReady =
         errors.email ||
@@ -23,8 +23,8 @@ export default function SignUpCompany() {
         errors.confirmPassword ||
         errors.companyName ||
         errors.cuit ||
-        errors.address;
-    //errors.imageUrl;
+        errors.address ||
+        errors.phoneNumber;
 
     function handleInputChange(e) {
         setInput({
@@ -61,7 +61,7 @@ export default function SignUpCompany() {
                 formattedCompany.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-
+            console.log(formattedCompany)
             // ACA DEBE ESTAR LA RUTA PARA POSTEAR LA COMPAÑIA
             const response = await axios.post(`${URL_BASE}/companies`, formattedCompany);
             if (response.status === 200) {
@@ -70,6 +70,7 @@ export default function SignUpCompany() {
                 window.location.href = "http://localhost:3000";
             }
         } catch (error) {
+            console.log(error)
             alert(`Error creating company`);
         }
     };
@@ -164,7 +165,6 @@ export default function SignUpCompany() {
                                         value={input.description}
                                         onChange={handleInputChange}
                                         type="text"
-                                        id="companyName"
                                         className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         placeholder="Company's description"
                                         required=""
@@ -229,17 +229,11 @@ export default function SignUpCompany() {
                                     <input
                                         type="file"
                                         name="imageUrl"
-                                        for="Company Logo"
                                         id="imageInput"
                                         placeholder="Company's logo"
                                         className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         onChange={handleImageChange}
                                     />
-                                    {/* {errors.imageUrl && (
-                    <p className=" text-red-600 text-sm font-semibold ">
-                      {errors.imageUrl}
-                    </p>
-                  )} */}
                                 </div>
                             </div>
                             <button

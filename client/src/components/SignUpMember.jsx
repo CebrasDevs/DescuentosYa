@@ -3,6 +3,7 @@ import { formatMember } from "@/utils/formatUtils";
 import validateMember from "@/utils/validateMember";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function SignUpMember() {
     const [imageFile, setImageFile] = useState(null);
@@ -24,8 +25,10 @@ export default function SignUpMember() {
         errors.dni ||
         errors.firstName ||
         errors.lastName ||
-        errors.address;
-    // errors.imageUrl;
+        errors.address ||
+        errors.phoneNumber;
+
+    const router = useRouter();
 
     function handleInputChange(e) {
         setInput({
@@ -66,11 +69,11 @@ export default function SignUpMember() {
             const response = await axios.post(`${URL_BASE}/members`, formattedMember);
             if (response.status === 200) {
                 setErrors({});
-                window.alert(`Member ${formattedMember.firstName}` `${formattedMember.lastName} creado correctamente (provisory)`);
-                window.location.href = "http://localhost:3000";
+                window.alert(`Member ${input.firstName} ${input.lastName} creado correctamente (provisory)`);
+                router.push("/");
             }
         } catch (error) {
-            window.alert("No se pudo crear el usuario");
+            window.alert("Error creating member");
         }
     };
 
@@ -219,11 +222,6 @@ export default function SignUpMember() {
                                         className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         onChange={handleImageChange}
                                     />
-                                    {/* {errors.imageUrl && (
-                    <p className=" text-red-600 text-sm font-semibold ">
-                      {errors.imageUrl}
-                    </p>
-                  )} */}
                                 </div>
                             </div>
                             <button

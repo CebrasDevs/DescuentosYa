@@ -12,6 +12,7 @@ import {
   GET_ITEM_BY_NAME,
   GET_USERS,
   SET_ACTIVE_USER,
+  CLEAN_ACTIVE_USER
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY
 } from "./actions";
@@ -118,6 +119,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activeUser: action.payload,
       };
+    case CLEAN_ACTIVE_USER:
+      return {
+        ...state,
+        activeUser: {},
+      };
+
     case INCREASE_ITEM_QUANTITY:
       let objectToIncrease = state.shoppingCart[action.payload]
 
@@ -130,7 +137,6 @@ const rootReducer = (state = initialState, action) => {
       };
     case DECREASE_ITEM_QUANTITY:
       let objectToDecrease = state.shoppingCart[action.payload]
-
       objectToDecrease = {
         item: objectToDecrease.item,
         quantity: --objectToDecrease.quantity
