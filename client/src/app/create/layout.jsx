@@ -1,9 +1,8 @@
-import CreateItem from "@/components/CreateItem"
 
-export default function Layout () {
+export default function Layout ({children}) {
     return (
         <div>
-            <CreateItem/>
+            {children}
         </div>
     )
 }

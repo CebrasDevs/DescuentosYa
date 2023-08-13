@@ -11,7 +11,7 @@ export default function Grid({value}) {
         <>
             <div className={styles.container}>
                 {items.map((item, index) => {
-                    return <Card item={item} key={index} />;
+                    return <Card item={item} key={index} value={value}/>;
                 })}
             </div>
         </>

@@ -143,7 +143,6 @@ export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
 };
 
-
 export const setActiveUser = (id) => {
   return async (dispatch) => {
     try {

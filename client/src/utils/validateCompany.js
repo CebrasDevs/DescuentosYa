@@ -21,8 +21,7 @@ export default function validateCompany(company) {
     description,
     cuit,
     address,
-    phoneNumber,
-    imageUrl
+    phoneNumber
     } = company;
 
     // VALIDO EMAIL
@@ -99,12 +98,12 @@ export default function validateCompany(company) {
         };
     };
     // VALIDO IMAGEURL
-    if (!imageUrl.length) {
-        errors.imageUrl = 'Required field';
-    } else {
-        if (!urlRegex.test(imageUrl)) {
-            errors.imageUrl = 'Must be a valid url';
-        };
-    };
+    // if (!imageUrl.length) {
+    //     errors.imageUrl = 'Required field';
+    // } else {
+    //     if (!urlRegex.test(imageUrl)) {
+    //         errors.imageUrl = 'Must be a valid url';
+    //     };
+    // };
     return errors;
 };

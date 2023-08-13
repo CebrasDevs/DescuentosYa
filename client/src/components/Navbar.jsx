@@ -171,36 +171,68 @@ export default function Navbar() {
                     My Orders
                   </a>
                 </div>
-              )}
-              {activeUser.role === "ADMIN" && (
-                <div className="flex h-full mr-auto text-white">
-                  <div className="ml-10 py-3 px-6 border-x-2">MY PROFILE</div>
-                  <a href={"#users"} className="hover:bg-neutral-600 py-3 px-6">
-                    Users
-                  </a>
+            </div>
+            <div className="flex items-center w-full h-12 bg-neutral-800">
+                <div className=" flex w-3/4 m-auto">
+                    {profile === "true" ? (
+                        <>
+                            {activeUser.role === "COMPANY" && (
+                                <div className="flex h-full mr-auto text-white">
+                                    <div className="ml-10 py-3 px-6 border-x-2">MY PROFILE</div>
+                                    <a href={"#data"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Data
+                                    </a>
+                                    <a href={"#items"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Items
+                                    </a>
+                                    <a href={"#sales"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Sales
+                                    </a>
+                                    <a href={"#vouchers"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Vouchers
+                                    </a>
+                                </div>
+                            )}
+                            {activeUser.role === "MEMBER" && (
+                                <div className="flex h-full mr-auto text-white">
+                                    <div className="ml-10 py-3 px-6 border-x-2">MY PROFILE</div>
+                                    <a href={"#data"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Data
+                                    </a>
+                                    <a href={"#vouchers"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Vouchers
+                                    </a>
+                                    <a href={"#orders"} className="hover:bg-neutral-600 py-3 px-6">
+                                        My Orders
+                                    </a>
+                                </div>
+                            )}
+                            {activeUser.role === "ADMIN" && (
+                                <div className="flex h-full mr-auto text-white">
+                                    <div className="ml-10 py-3 px-6 border-x-2">MY PROFILE</div>
+                                    <a href={"#users"} className="hover:bg-neutral-600 py-3 px-6">
+                                        Users
+                                    </a>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>
+                            <div className="flex h-full mr-auto text-white">
+                                <Link href={"/brands"} className="ml-10 hover:bg-neutral-600 py-3 px-6">
+                                    Find Companies
+                                </Link>
+                                <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                                    Find Services
+                                </Link>
+                                <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
+                                    About
+                                </Link>
+                            </div>
+                        </>
+                    )}
                 </div>
-              )}
-            </>
-          ) : (
-            <>
-              <div className="flex h-full mr-auto text-white">
-                <Link
-                  href={"/brands"}
-                  className="ml-10 hover:bg-neutral-600 py-3 px-6"
-                >
-                  Find Companies
-                </Link>
-                <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
-                  Find Services
-                </Link>
-                <Link href={"#"} className="hover:bg-neutral-600 py-3 px-6">
-                  About
-                </Link>
-              </div>
-            </>
-          )}
+            </div>
         </div>
-      </div>
-    </>
-  );
+    );
 }

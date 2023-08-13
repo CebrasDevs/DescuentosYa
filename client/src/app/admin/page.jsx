@@ -2,9 +2,20 @@
 import Dashboard from "@/components/Dashboard";
 import { useSelector } from "react-redux";
 import Link from "next/link"
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 export default function AdminPage() {
   const activeUser = useSelector((state) => state.activeUser);
+
+  useEffect(() => {
+    const retrievedCookie = Cookies.get("accessTrue");
+    if (!retrievedCookie) {
+      window.location.href = "http://localhost:3000/";
+    }
+  }, []);
+
+
   if (activeUser.role === "ADMIN") { // el role del activeUser en el reducer tiene que ser 'ADMIN'
     return (
       <div>
