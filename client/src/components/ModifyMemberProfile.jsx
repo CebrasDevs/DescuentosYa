@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import {
   formatModifyMember,
@@ -7,9 +8,11 @@ import {
 import axios from "axios";
 import validateModifyMember from "@/utils/validateModifyMember";
 import { URL_BASE } from "@/utils/const";
+import { useDispatch } from "react-redux";
+import { setActiveUser } from "@/redux/actions";
 
 export default function ModifyMemberProfile({ memberData }) {
-  console.log(memberData);
+  const dispatch = useDispatch()
   const { firstName, lastName } = splitName(memberData);
   const { phoneNumber } = phoneNumberWithoutDots(memberData);
   const [imageFile, setImageFile] = useState(null);
@@ -77,26 +80,20 @@ export default function ModifyMemberProfile({ memberData }) {
           `${URL_BASE}/members/${memberData.id}`,
           formattedMember
         );
-        window.alert(
-          `Member ${
-            (input.firstName, input.lastName)
-          } creado correctamente (provisory)`
-        );
+        dispatch(setActiveUser(memberData.id))
+        alert('Member successfully modified');
       } else {
         await axios.patch(
           `${URL_BASE}/members/${memberData.id}`,
           formattedMember
         );
-        window.alert(
-          `Member ${
-            (input.firstName, input.lastName)
-          } creado correctamente (provisory)`
-        );
+        dispatch(setActiveUser(memberData.id))
+        alert('Member successfully modified');
       }
 
       setErrors({});
     } catch (error) {
-      window.alert("No se pudo modificar el usuario");
+      alert("Error modifying member");
     }
   };
 
