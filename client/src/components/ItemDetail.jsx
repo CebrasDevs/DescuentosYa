@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { addShoppinCartItem } from "@/redux/actions";
+import { addShoppingCartItem } from "@/redux/actions";
 import { BsCart3 } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
@@ -11,20 +11,21 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function ItemDetail({ data }) {
-    const dispatch = useDispatch();
-    const allShoppingItems = useSelector((state) => state.allShoppingItems);
-    const activeUser = useSelector((state) => state.activeUser);
+  const dispatch = useDispatch();
+  const shoppingCart = useSelector((state) => state.shoppingCart);
+  const activeUser = useSelector((state) => state.activeUser);
 
     const router = useRouter();
 
     const [modify, setModify] = useState(false);
+
 
     const handleAddItem = function (itemFound) {
         const retrievedCookie = Cookies.get("accessTrue");
         if (!retrievedCookie) {
             router.push(`/login?detail=true&itemId=${data.id}`);
         }else{
-            if (!allShoppingItems.includes(itemFound)) {
+            if (!shoppingCart.includes(itemFound)) {
                 dispatch(addShoppinCartItem(itemFound));
             } else {
                 alert("Item already added in shopping cart");

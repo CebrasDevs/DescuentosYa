@@ -13,6 +13,8 @@ import {
   GET_USERS,
   SET_ACTIVE_USER,
   CLEAN_ACTIVE_USER
+  INCREASE_ITEM_QUANTITY,
+  DECREASE_ITEM_QUANTITY
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 import { member, company, admin } from "../utils/perfilesPF";
@@ -23,7 +25,7 @@ const initialState = {
   users: [],
   allItems: [],
   activeUser: {},
-  allShoppingItems: [],
+  shoppingCart: [],
   filteredItems: [],
   activeFilters: {
     chosenItemType: "All types",
@@ -77,14 +79,18 @@ const rootReducer = (state = initialState, action) => {
         currentPage: action.payload,
       };
     case ADD_SHOPPING_CART_ITEM:
+      const newItem = {
+        item: action.payload,
+        quantity: 1
+      }
       return {
         ...state,
-        allShoppingItems: [action.payload, ...state.allShoppingItems],
+        shoppingCart: [...state.shoppingCart, newItem], // en vez de action.payload va newItem
       };
     case DELETE_SHOPPING_CART_ITEM:
       return {
         ...state,
-        allShoppingItems: state.allShoppingItems.filter(
+        shoppingCart: state.shoppingCart.filter(
           (item) => item.id !== action.payload
         ),
       };
@@ -118,12 +124,26 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activeUser: {},
       };
-    // case CREATE_PREFERENCE:
-    //   return {
-    //     ...state,
-    //     data: action.payload
-    //   }
 
+    case INCREASE_ITEM_QUANTITY:
+      let objectToIncrease = state.shoppingCart[action.payload]
+
+      objectToIncrease = {
+        item: objectToIncrease.item,
+        quantity: ++objectToIncrease.quantity
+      }
+      return {
+        ...state,
+      };
+    case DECREASE_ITEM_QUANTITY:
+      let objectToDecrease = state.shoppingCart[action.payload]
+      objectToDecrease = {
+        item: objectToDecrease.item,
+        quantity: --objectToDecrease.quantity
+      }
+      return {
+        ...state,
+      };
     default:
       return { ...state };
   }

@@ -19,10 +19,11 @@ const createOrder = async (req, res) => {
         failure: "http://localhost:3000",
         pending: "http://localhost:3000"
       },
-      notification_url: "https://f1e8-2803-9800-9847-758a-a18d-1407-e6f-25d4.ngrok.io/payment/webhook",
+      notification_url: "https://descuentos-ya.vercel.app/payment/webhook",
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
+    console.log('response preference', response)
     res.status(200).json({ response });
 
   } catch (error) {
@@ -39,6 +40,9 @@ const receiveWebhook = async (req, res) => {
     if (payment.type === 'payment') {
       data = await mercadopago.payment.findById(payment['data.id']);
 
+      console.log('Toda la info', data.response)
+      // console.log('Pago', data.response.status)
+      // console.log('Metodo de pago', data.response.payment_method.type)
       // console.log('Items comprados', data.response.additional_info.items)
       // console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
     }
