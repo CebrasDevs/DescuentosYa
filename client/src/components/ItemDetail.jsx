@@ -20,6 +20,10 @@ export default function ItemDetail({ data }) {
 
     const [modify, setModify] = useState(false);
 
+    const handleSetModify = () => {
+        setModify(false)
+    }
+
 
     const handleAddItem = function (itemFound) {
         const retrievedCookie = Cookies.get("accessTrue");
@@ -59,7 +63,7 @@ export default function ItemDetail({ data }) {
                                 src={data.imageUrl}
                             ></img>
                         </div>
-                        <ModifiedItem data={data} type={"service"} />
+                        <ModifiedItem data={data} type={"service"} handleSave={handleSetModify}/>
                         {activeUser.items.find((item)=> item.id === data.id)? <TiArrowBack
                             onClick={() => {
                                 setModify(false);
