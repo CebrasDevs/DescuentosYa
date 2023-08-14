@@ -81,7 +81,7 @@ export function formatMember(member) {
 
     const parsedDni = String(dni);
     const parsedPhoneNumber = String(phoneNumber);
-    const fullName = `${firstName} ${lastName}`;
+    const fullName = `${firstName}, ${lastName}`;
 
     return {
         email: email,
@@ -121,6 +121,7 @@ export function formatModifyMember(member){
 export function formatItem(item) {
 
     const {
+        userId,
         id: id,
         name,
         categoryId,
@@ -134,6 +135,7 @@ export function formatItem(item) {
     const parsedDiscount = Number(discount);
     
     return {
+        userId: userId,
         id: id,
         name: name,
         categoryId: categoryId,

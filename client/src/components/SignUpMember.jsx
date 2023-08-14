@@ -69,7 +69,7 @@ export default function SignUpMember() {
             const response = await axios.post(`${URL_BASE}/members`, formattedMember);
             if (response.status === 200) {
                 setErrors({});
-                window.alert(`Member ${input.firstName} ${input.lastName} creado correctamente (provisory)`);
+                window.alert(`Member ${input.firstName}, ${input.lastName} creado correctamente (provisory)`);
                 router.push("/");
             }
         } catch (error) {

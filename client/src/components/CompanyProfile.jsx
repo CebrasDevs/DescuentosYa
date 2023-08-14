@@ -18,6 +18,10 @@ export default function CompanyProfile() {
         setModify(true);
     };
 
+    const handleSetModify = () => {
+        setModify(false);
+    }
+
     function handleDelete(id) {
         dispatch(deleteCompanyItem(id));
     }
@@ -50,7 +54,7 @@ export default function CompanyProfile() {
                         <div className="w-1/2 flex flex-col justify-center">
                             {modify ? (
                                 <div className="h-full">
-                                    <ModifyCompanyProfile companyData={activeUser} />
+                                    <ModifyCompanyProfile companyData={activeUser} handleSave={handleSetModify}/>
                                 </div>
                             ) : (
                                 <div className="w-3/4">
@@ -88,7 +92,7 @@ export default function CompanyProfile() {
                         </>
                     ) : (
                         <>
-                            <h1 className="text-center my-10 font-semibold text-xl">You haven't items</h1>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't added any items yet</h1>
                         </>
                     )}
 
@@ -136,7 +140,7 @@ export default function CompanyProfile() {
                         </>
                     ) : (
                         <>
-                            <h1 className="text-center my-10 font-semibold text-xl">You haven't sales</h1>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't made any sales yet</h1>
                             <div id="vouchers"></div>
                         </>
                     )}
@@ -177,7 +181,7 @@ export default function CompanyProfile() {
                         </>
                     ) : (
                         <>
-                            <h1 className="text-center my-10 font-semibold text-xl">you haven't vouchers</h1>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't made any vouchers yet</h1>
                         </>
                     )}
                 </div>

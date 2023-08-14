@@ -14,6 +14,10 @@ export default function UserProfile() {
         setModify(true);
     };
 
+    const handleSetModify = () => {
+        setModify(false);
+    }
+
     if (activeUser.role === "MEMBER") {
         return (
             <div className="flex flex-col items-center">
@@ -34,7 +38,7 @@ export default function UserProfile() {
                         <div className="w-1/2 flex flex-col justify-center">
                             {modify ? (
                                 <div>
-                                    <ModifyMemberProfile memberData={activeUser} />
+                                    <ModifyMemberProfile memberData={activeUser} handleSave={handleSetModify} />
                                 </div>
                             ) : (
                                 <div className="w-3/4">
@@ -108,7 +112,7 @@ export default function UserProfile() {
                         </>
                     ) : (
                         <>
-                            <h1 className="text-center my-10 font-semibold text-xl">You haven't vouchers</h1>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't generated vouchers</h1>
                             <div id="orders"></div>
                         </>
                     )}
@@ -160,7 +164,7 @@ export default function UserProfile() {
                         </>
                     ) : (
                         <>
-                            <h1 className="text-center my-10 font-semibold text-xl">You haven't shoppings</h1>
+                            <h1 className="text-center my-10 font-semibold text-xl">You haven't bought anything</h1>
                         </>
                     )}
                 </div>

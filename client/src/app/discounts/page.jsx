@@ -28,7 +28,7 @@ export default function discounts() {
             </div>
             <div className="col-span-3">
                 <div className="flex justify-center h-10 my-4">
-                    <input type="search" onInput={handleChange}name="search" placeholder="Search by Name" />
+                    <input type="search" onInput={handleChange} name="search" placeholder="Search by Name" className="text-center"/>
                     {/* <button onClick={handleClick}>Search</button> */}
                 </div>
                 <Grid />

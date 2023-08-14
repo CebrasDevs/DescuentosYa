@@ -9,7 +9,7 @@ module.exports = async (dataCompany) => {
     (dataCompany.password && !isNaN(dataCompany.password)) ||
     dataCompany.enabled ||
     (dataCompany.cuit && isNaN(dataCompany.dni_cuit)) ||
-    (dataCompany.name && regexName.test(dataCompany.name)) ||
+    (dataCompany.name && !regexName.test(dataCompany.name)) ||
     (dataCompany.address && !isNaN(dataCompany.address))
   )
     throw new Error("Incomplete data or incorrect");

@@ -4,14 +4,17 @@ import { useSelector } from "react-redux";
 import Link from "next/link"
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function AdminPage() {
   const activeUser = useSelector((state) => state.activeUser);
 
+  const router = useRouter();
+
   useEffect(() => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
-      window.location.href = "http://localhost:3000/";
+      router.push("/");
     }
   }, []);
 

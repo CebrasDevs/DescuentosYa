@@ -3,6 +3,7 @@ import { formatCompany } from "@/utils/formatUtils";
 import validateCompany from "@/utils/validateCompany";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function SignUpCompany() {
     const [imageFile, setImageFile] = useState(null);
@@ -25,6 +26,8 @@ export default function SignUpCompany() {
         errors.cuit ||
         errors.address ||
         errors.phoneNumber;
+
+    const router = useRouter();
 
     function handleInputChange(e) {
         setInput({
@@ -61,13 +64,12 @@ export default function SignUpCompany() {
                 formattedCompany.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            console.log(formattedCompany)
             // ACA DEBE ESTAR LA RUTA PARA POSTEAR LA COMPAÑIA
             const response = await axios.post(`${URL_BASE}/companies`, formattedCompany);
             if (response.status === 200) {
                 setErrors({});
                 window.alert(`Company ${formattedCompany.companyName} submitted successfully (provisory)`);
-                window.location.href = "http://localhost:3000";
+                router.push("/");
             }
         } catch (error) {
             console.log(error)
