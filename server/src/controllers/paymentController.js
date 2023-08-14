@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
         failure: "http://localhost:3000",
         pending: "http://localhost:3000"
       },
-      notification_url: "https://descuentos-ya.vercel.app/payment/webhook",
+      notification_url: "https://descuentosya.onrender.com/payment/webhook",
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
