@@ -4,24 +4,26 @@ import { useEffect, useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateModifiedItem from "@/utils/validateModifiedItem";
-import { getCategories, getDiscounts } from "@/redux/actions";
+import { getCategories, getDiscounts, getItemDetail } from "@/redux/actions";
 
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
 
 export default function ModifiedItem({ data, type }) {
   const dispatch = useDispatch();
-
+  
   const categories = useSelector((state) => state.categories);
   const allCategories = ["Choose category", ...categories];
+  const [imageFile, setImageFile] = useState(null);
+  const [editImage, setEditImage] = useState(false);
   const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: data.name,
-    category: data.category,
+    categoryId: data.category,
     description: data.description,
     price: data.price,
     discount: data.discount,
-    imageUrl: data.url_image,
+    imageUrl: data.imageUrl,
   });
   const isNotReady =
     errors.name ||
@@ -51,6 +53,13 @@ export default function ModifiedItem({ data, type }) {
       e.preventDefault();
       const formattedItem = formatItem(input);
     try {
+      if (editImage) {
+        const cloudinaryFormData = new FormData();
+        cloudinaryFormData.append("file", imageFile);
+        cloudinaryFormData.append("upload_preset", "DescuentosYa");
+        const cloudinaryResponse = await axios.post("https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",cloudinaryFormData);
+        formattedItem.imageUrl = "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
+      }
       const response = await axios.patch(
         `${URL_BASE}/items/${data.id}`,
         formattedItem
@@ -58,27 +67,27 @@ export default function ModifiedItem({ data, type }) {
       if (response.status === 200) {
         window.alert("The item was modified successfully");
         setErrors({});
-        setInput({
-          name: "",
-          category: "Choose category",
-          description: "",
-          price: "",
-          discount: "",
-          imageUrl: "",
-        });
+        dispatch(getItemDetail(data.id))
         dispatch(getDiscounts())
       }
     } catch (error) {
-        console.log(error.message)
-      window.alert(error.response.data);
+        console.log(error)
+      window.alert('error');
     }
   };
 
+  function handleImageChange(e) {
+    setImageFile(e.target.files[0]);
+  }
+
+  function handleEditImage() {
+    setEditImage(true);
+  }
   return (
     <section className=" bg-slate-200 dark:bg-white h-full">
-      <div className="flex  justify-center mt-12 pb-12 bg-slate-200 ">
-        <div className=" w-8/12 rounded-lg shadow dark:border bg-white">
-          <div className="w-220 p-6 space-y-4 md:space-y-6 sm:p-8">
+      <div className="flex  justify-center mt-12 pb-12 ">
+        <div className="rounded-lg shadow dark:border bg-white">
+          <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
               Modify Item
             </h1>
@@ -108,13 +117,13 @@ export default function ModifiedItem({ data, type }) {
                   </label>
                   <select
                     className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    name="category"
-                    value={input.category}
+                    name="categoryId"
+                    value={input.categoryId}
                     onChange={handleChange}
                   >
                     {allCategories?.map((category, index) => {
                       return (
-                        <option key={category}>
+                        <option key={index}>
                           {category}
                         </option>
                       );
@@ -188,26 +197,25 @@ export default function ModifiedItem({ data, type }) {
                     </p>
                   )}
                 </div>
-                <div className=" w-2/5">
-                  <label className="block mb-2 text-m font-medium text-gray-900 ">
-                    Product image
-                  </label>
-                  <input
-                    name="imageUrl"
-                    value={input.imageUrl}
-                    onChange={handleChange}
-                    type="text"
-                    className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                    placeholder=" Product image"
-                  />
-
-                  {errors.imageUrl && (
-                    <p className=" text-red-600 text-sm font-semibold ">
-                      {errors.imageUrl}
-                    </p>
-                  )}
-                </div>
               </div>
+                {!editImage ? (
+                  <button className="m-5" onClick={handleEditImage}>Edit Image</button>
+                ) : (
+                  <div>
+                    <input
+                      type="file"
+                      name="imageUrl"
+                      for="Company Logo"
+                      className="m-2 bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                      onChange={handleImageChange}
+                    />
+                    {errors.imageUrl && (
+                      <p className=" text-red-600 text-sm font-semibold ">
+                        {errors.imageUrl}
+                      </p>
+                    )}
+                  </div>
+                )}
 
               <button
                 disabled={

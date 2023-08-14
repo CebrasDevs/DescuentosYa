@@ -12,7 +12,6 @@ module.exports = async (name) => {
             price: item.price,
             discount: item.discount,
             companyId: item.userId,
-            companyName: item.user.company_name,
         }
     })
 

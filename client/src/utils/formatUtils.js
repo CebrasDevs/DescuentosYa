@@ -119,8 +119,9 @@ export function formatModifyMember(member){
 };
 
 export function formatItem(item) {
-    //!FALTA AGREGAR el companyName cuando tenga manera de chequear cual es el nombre de la empresa que esta logueada
+
     const {
+        id: id,
         name,
         categoryId,
         description,
@@ -131,8 +132,9 @@ export function formatItem(item) {
 
     const parsedPrice = parseFloat(price).toFixed(2);
     const parsedDiscount = Number(discount);
+    
     return {
-        userId: 2,
+        id: id,
         name: name,
         categoryId: categoryId,
         description: description,

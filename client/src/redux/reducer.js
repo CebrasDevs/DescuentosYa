@@ -14,7 +14,9 @@ import {
   SET_ACTIVE_USER,
   CLEAN_ACTIVE_USER,
   INCREASE_ITEM_QUANTITY,
-  DECREASE_ITEM_QUANTITY
+  DECREASE_ITEM_QUANTITY,
+  GET_ITEM_DETAIL,
+  CLEAN_ITEM_DETAIL
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 import { member, company, admin } from "../utils/perfilesPF";
@@ -35,6 +37,7 @@ const initialState = {
   },
   currentPage: 1,
   companyDetail: {},
+  itemDetail: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -144,6 +147,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case GET_ITEM_DETAIL:
+      return {
+        ...state,
+        itemDetail: action.payload
+      }
+    case CLEAN_ITEM_DETAIL:
+      return{
+        ...state,
+        itemDetail: {}
+      }
     default:
       return { ...state };
   }

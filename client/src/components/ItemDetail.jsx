@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
 import { FaEdit } from "react-icons/fa";
+import { TiArrowBack } from "react-icons/ti";
 import Cookies from "js-cookie";
 
 import { useRouter } from "next/navigation";
@@ -14,7 +15,7 @@ export default function ItemDetail({ data }) {
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state) => state.shoppingCart);
   const activeUser = useSelector((state) => state.activeUser);
-
+  
     const router = useRouter();
 
     const [modify, setModify] = useState(false);
@@ -26,7 +27,7 @@ export default function ItemDetail({ data }) {
             router.push(`/login?detail=true&itemId=${data.id}`);
         }else{
             if (!shoppingCart.includes(itemFound)) {
-                dispatch(addShoppinCartItem(itemFound));
+                dispatch(addShoppingCartItem(itemFound));
             } else {
                 alert("Item already added in shopping cart");
             }
@@ -59,6 +60,12 @@ export default function ItemDetail({ data }) {
                             ></img>
                         </div>
                         <ModifiedItem data={data} type={"service"} />
+                        {activeUser.items.find((item)=> item.id === data.id)? <TiArrowBack
+                            onClick={() => {
+                                setModify(false);
+                            }}
+                            className="m-5 text-2xl hover: cursor-pointer"
+                        />: null}
                     </div>
                 ) : (
                     <div className=" relative flex justify-center w-3/5 min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
@@ -94,7 +101,7 @@ export default function ItemDetail({ data }) {
                                 </Link>
                                 {activeUser.id === data.companyId || activeUser.role === "ADMIN" ? (
                                     <button onClick={modifyHandler}>
-                                        <FaEdit />
+                                        <FaEdit className="ml-5 text-2xl hover: cursor-pointer"/>
                                     </button>
                                 ) : null}
                             </div>

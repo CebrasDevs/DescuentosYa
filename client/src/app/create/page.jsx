@@ -1,3 +1,5 @@
+'use client'
+
 import CreateItem from "@/components/CreateItem";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
