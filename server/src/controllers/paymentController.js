@@ -46,7 +46,7 @@ const receiveWebhook = async (req, res) => {
       // console.log('Items comprados', data.response.additional_info.items)
       // console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
     }
-    res.redirect(204); // investigar, redirecciona a un archivo o un URL
+    // res.redirect(204); // investigar, redirecciona a un archivo o un URL
 
   } catch (error) {
     return res.sendStatus(500).json({ error: error.message });
