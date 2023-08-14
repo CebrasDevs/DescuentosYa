@@ -2,9 +2,12 @@
 
 import useCompany from "@/hooks/useCompany";
 import Grid from "./Grid";
+import Map from "./Map";
+import { useLoadScript } from "@react-google-maps/api";
 
 export default function CompanyDetail({ id }) {
     const company = useCompany(id);
+    const { isLoaded } = useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
 
     function formatedCuit(cuit){
         if (cuit.length !== 11) {
@@ -31,6 +34,9 @@ export default function CompanyDetail({ id }) {
                         <h1>Address: {company.address} </h1>
                         <h1>Company Description: {company.description} </h1>
                         <h1>Phone Number: {company.phoneNumber} </h1>
+                    </div>
+                    <div>
+                        {isLoaded && <Map location={company.location} />}
                     </div>
                 </div>
             </div>
