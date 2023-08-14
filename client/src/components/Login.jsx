@@ -86,7 +86,7 @@ export default function Login() {
                     Log in
                 </button>
             </div>
-            <div>----- OR -----</div>
+            <div>---- OR ----</div>
             <div className="input-button">
                 <button type="button" className={styles.button_custom}>
                     Sign In with Google
