@@ -15,7 +15,8 @@ export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
-
+export const GET_ITEM_DETAIL = 'GET_ITEM_DETAIL';
+export const CLEAN_ITEM_DETAIL = 'CLEAN_ITEM_DETAIL'
 export const CLEAN_ACTIVE_USER = "CLEAN_ACTIVE_USER";
 
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
@@ -106,6 +107,10 @@ export const getCompanyDetail = (id) => {
   };
 };
 
+export const cleanItemDetail = () => {
+  return { type: CLEAN_ITEM_DETAIL };
+};
+
 export const cleanCompanyDetail = () => {
   return { type: CLEAN_COMPANY_DETAIL };
 };
@@ -143,6 +148,20 @@ export const setActiveUser = (id) => {
   };
 };
 
+export const getItemDetail = (id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(`${URL_BASE}/items/${id}`);
+
+      return dispatch({
+        type: GET_ITEM_DETAIL,
+        payload: data,
+      });
+    } catch (error) {
+      console.log("error");
+    }
+  };
+};
 
 export const cleanActiveUser = () => {
   return { type: CLEAN_ACTIVE_USER };

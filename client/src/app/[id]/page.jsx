@@ -1,12 +1,12 @@
 "use client"
-import ItemDetail from "@/components/ItemDetail";
-import { URL_BASE } from "@/utils/const";
-import axios from "axios";
 
-export default async function detail( {params} ) {
+import ItemDetail from "@/components/ItemDetail";
+import useItemDetail from "@/hooks/useItemDetail";
+
+export default function detail( {params} ) {
 
   const { id } = params;
-  const { data } = await axios(`${URL_BASE}/items/${id}`);
+  const data = useItemDetail(id)
 
     return (
       <div>
