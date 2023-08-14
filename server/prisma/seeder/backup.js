@@ -37,10 +37,10 @@ async function seedData() {
         const company = await prisma.user.create({ //guardamos el objeto insertado en la tabla
             data: {
                 email: dataCompanies[i].email,
-                password: dataCompanies[i].name,
+                password: dataCompanies[i].password,
                 enabled: true,
                 role: dataCompanies[i].role,
-                dni_cuit: dataCompanies[i].cuit,
+                dni_cuit: dataCompanies[i].dni_cuit,
                 name: dataCompanies[i].name,
                 address: faker.address.streetAddress(),
                 phoneNumber: faker.phone.phoneNumber().toString(),
@@ -59,7 +59,7 @@ async function seedData() {
         const member = await prisma.user.create({
             data: {
                 email: faker.internet.email(),
-                password: faker.internet.password(),
+                password: "123456",
                 enabled: true,
                 role: 'MEMBER',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
