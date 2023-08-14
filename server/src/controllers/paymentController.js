@@ -2,7 +2,7 @@ const mercadopago = require("mercadopago");
 
 
 mercadopago.configure({
-  access_token: "TEST-90730220802583-081403-0a09b9306deac819c65bde1003879a3a-153200552",
+  access_token: "TEST-4063843005379415-080715-6157199ac5560f6f8c251612d3f57169-1443618271",
 });
 
 
@@ -46,7 +46,7 @@ const receiveWebhook = async (req, res) => {
       // console.log('Items comprados', data.response.additional_info.items)
       // console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
     }
-    // res.redirect(204); // investigar, redirecciona a un archivo o un URL
+    res.redirect(204); // investigar, redirecciona a un archivo o un URL
 
   } catch (error) {
     return res.sendStatus(500).json({ error: error.message });
