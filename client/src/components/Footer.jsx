@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <footer>
-            <div className="relative mt-16 bg-violet-600">
+            <div className=" sticky mt-16 pb-5 bg-violet-600">
                 <svg
                     className="absolute top-0 w-full h-6 -mt-5 sm:-mt-10 sm:h-16 text-violet-600"
                     preserveAspectRatio="none"

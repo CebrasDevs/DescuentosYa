@@ -7,9 +7,17 @@ import { FcGoogle } from "react-icons/fc";
 import { BsFacebook } from "react-icons/bs";
 import { URL_BASE } from "@/utils/const";
 import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
+
+import { useSearchParams, useRouter } from "next/navigation";
+import { setActiveUser } from "@/redux/actions";
 
 export default function Login() {
     const dispatch = useDispatch();
+    const router = useRouter();
+    const params = useSearchParams();
+    const detail = params.get("detail");
+    const itemId = params.get("itemId");
 
     const [input, setInput] = useState({
         email: "",
@@ -26,21 +34,27 @@ export default function Login() {
     const handleLogIn = async function (event) {
         event.preventDefault();
         try {
-            const response = await axios.post(
-                `${URL_BASE}/login`,
-                input
-                // {withCredentials: true}
-            );
+            const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
-                localStorage.setItem("token", response.data.data.token)
-                localStorage.setItem("id", JSON.stringify(response.data.data.id))
-                localStorage.setItem("role", JSON.stringify(response.data.data.role))
+                // Establecer una cookie
+                const cookieName = "accessTrue";
+                const cookieValue = {
+                    id: response.data.data.id,
+                    role: response.data.data.role,
+                    token: response.data.data.token,
+                };
+                Cookies.set(cookieName, JSON.stringify(cookieValue));
+                dispatch(setActiveUser(cookieValue.id))
                 window.alert(response.data.data.message);
                 setInput({
                     name: "",
                     password: "",
                 });
-                window.location.href = "https://descuentos-ya.vercel.app/";
+                if (detail === "true") {
+                    router.push(`/${itemId}`);
+                } else {
+                    router.push("/");
+                }
             }
         } catch (error) {
             window.alert(error.response.data.error);

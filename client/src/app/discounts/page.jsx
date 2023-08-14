@@ -22,13 +22,13 @@ export default function discounts() {
     }
 
     return (
-        <div className=" grid grid-cols-4 gap-4 w-4/5 m-auto my-10">
-            <div className=" mt-16 bg-gradient-to-b from-violet-200 to-slate-200 rounded-lg sticky">
+        <div className="grid grid-cols-4 gap-4 w-4/5 m-auto pb-32">
+            <div className=" mt-20 bg-gradient-to-b from-violet-200 to-slate-200 rounded-lg sticky">
                 <Filters />
             </div>
             <div className="col-span-3">
-                <div className="flex justify-center h-10 mb-5">
-                    <input type="search" onInput={handleChange}name="search" placeholder="Search by Name" />
+                <div className="flex justify-center h-10 my-4">
+                    <input type="search" onInput={handleChange} name="search" placeholder="Search by Name" className="text-center"/>
                     {/* <button onClick={handleClick}>Search</button> */}
                 </div>
                 <Grid />

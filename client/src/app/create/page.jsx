@@ -1,6 +1,21 @@
+'use client'
+
+import CreateItem from "@/components/CreateItem";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+
 export default function Create() {
-  return <div>
-    <h2>I'M A REGISTRATION FORM</h2>
-    
-  </div>;
+    const router = useRouter();
+    useEffect(() => {
+        const retrievedCookie = Cookies.get("accessTrue");
+        if (!retrievedCookie) {
+            router.push("/");
+        }
+    }, []);
+    return (
+        <div>
+            <CreateItem />
+        </div>
+    );
 }

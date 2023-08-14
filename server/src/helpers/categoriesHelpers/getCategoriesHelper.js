@@ -1,12 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-module.exports = async () => {
+module.exports = async (condition = {}) => {
   try {
     const categories = await prisma.category.findMany({
-      select: {
+      where: condition || true
+      /* select: {
         name: true,
-      },
+      }, */
     });
     await prisma.$disconnect();
     return categories;

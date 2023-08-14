@@ -10,8 +10,8 @@ export function formatCompany(company) {
         phoneNumber, 
         imageUrl
     } = company;
-    const parsedCuit = Number(cuit);
-    const parsedPhoneNumber = Number(phoneNumber);
+    const parsedCuit = String(cuit);
+    const parsedPhoneNumber = String(phoneNumber);
 
     return {
         email: email,
@@ -79,8 +79,8 @@ export function formatMember(member) {
         imageUrl
     } = member;
 
-    const parsedDni = Number(dni);
-    const parsedPhoneNumber = Number(phoneNumber);
+    const parsedDni = String(dni);
+    const parsedPhoneNumber = String(phoneNumber);
     const fullName = `${firstName}, ${lastName}`;
 
     return {
@@ -119,8 +119,10 @@ export function formatModifyMember(member){
 };
 
 export function formatItem(item) {
-    //!FALTA AGREGAR el companyName cuando tenga manera de chequear cual es el nombre de la empresa que esta logueada
+
     const {
+        userId,
+        id: id,
         name,
         categoryId,
         description,
@@ -131,8 +133,10 @@ export function formatItem(item) {
 
     const parsedPrice = parseFloat(price).toFixed(2);
     const parsedDiscount = Number(discount);
+    
     return {
-        userId: 2,
+        userId: userId,
+        id: id,
         name: name,
         categoryId: categoryId,
         description: description,

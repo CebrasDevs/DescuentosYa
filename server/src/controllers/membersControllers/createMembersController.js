@@ -4,13 +4,12 @@ const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const regexName = /^[a-zA-ZÀ-ÿ\s'-]*$/;
 
 module.exports = async (dataMember) => {
-  console.log(dataMember)
   if (
     !regexEmail.test(dataMember.email) ||
     !isNaN(dataMember.password) || !dataMember.password ||
     isNaN(+dataMember.dni_cuit) ||
     !dataMember.dni_cuit ||
-    !regexName.test(dataMember.name) ||
+    regexName.test(dataMember.name) ||
     !isNaN(dataMember.address) || !dataMember.address ||
     !isNaN(dataMember.imageUrl) || !dataMember.imageUrl
   )

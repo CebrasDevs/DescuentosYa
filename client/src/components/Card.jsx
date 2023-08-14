@@ -1,13 +1,16 @@
 "use client";
 import Link from "next/link";
+import {FaEdit} from "react-icons/fa";
 
 // action que me llene un arreglo EG de items ni bien se levante el front, me traigo ese EG
-export default function Card({ item }) {
+export default function Card({ item, value }) {
     return (
-        <div className="card bg-white w-[270px] h-[400px] rounded-lg m-2 shadow-md hover:shadow-xl hover:scale-105 transition-transform ease-in-out duration-300">
-            <Link href={`/${item.id}`} className="text-blue-600">
-                Edit
-            </Link>
+        <div className="relative card bg-white w-[270px] h-[400px] rounded-lg m-2 shadow-md hover:shadow-xl hover:scale-105 transition-transform ease-in-out duration-300">
+            {value === "profile" && (
+                <Link href={`/${item.id}`} className="absolute -right-4 -top-4 hover:text-blue-600">
+                    <FaEdit size={30}/>
+                </Link>
+            )}
             <div className="top border-b flex justify-center">
                 <img src={item.imageUrl} alt="" className="w-[270px] h-[250px] rounded-t-lg object-cover" />
             </div>

@@ -1,15 +1,9 @@
-import CompanyProfile from "@/components/CompanyProfile";
-import UserProfile from "@/components/UserProfile";
-import Link from "next/link";
-import {FaUserEdit} from "react-icons/fa"
 
-export default function profileView() {
-
+export default function profileView({children}) {
 
   return (
-    <div>
-      <UserProfile/>
-      <CompanyProfile/>
+    <div className="min-h-[60vh]">
+      {children}
     </div>
   );
 }

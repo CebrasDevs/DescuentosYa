@@ -48,13 +48,13 @@ const authRouter = require("./authRouter");
 const profileRouter = require("./profileRouter");
 
 // Usamos el middleware para verificar el token en rutas protegidas
-mainRouter.use("/shopping", verificarToken, shoppingRouter);
+mainRouter.use("/shopping", shoppingRouter);
 mainRouter.use("/items", itemsRouter);
-mainRouter.use("/users", verificarToken, usersRouter);
-mainRouter.use("/admins", verificarToken, adminsRouter);
+mainRouter.use("/users", usersRouter);
+mainRouter.use("/admins", adminsRouter);
 mainRouter.use("/companies", companiesRouter);
 mainRouter.use("/members", membersRouter);
-mainRouter.use("/vouchers", verificarToken, vouchersRouter);
+mainRouter.use("/vouchers", vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);
 mainRouter.use("/payment", paymentRouter);
 mainRouter.use("/", authRouter);

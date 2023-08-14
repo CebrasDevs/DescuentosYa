@@ -20,7 +20,7 @@ module.exports = async (dataItem) => {
         categoryId,
         description,
         price,
-        image_url: imageUrl,
+        imageUrl,
         discount
     } = newItem;
 

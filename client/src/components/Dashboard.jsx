@@ -22,15 +22,16 @@ export default function Dashboard() {
               <div className="flex bg-violet-200 m-5">
                 <h1 className="m-2">{user.name}</h1>
                 <h1 className="m-2">{user.email}</h1>
-                <h1 className="m-2">{user.role}</h1>
                 <Link href={`/admin/${user.id}`}>
                   <h1 className="mt-2">View detail</h1>
                 </Link>
                 <h1 className="m-2">
                   Status: {user.enabled ? "active" : "disabled"}
                 </h1>
-                {user.enabled && (
+                {user.enabled ? (
                   <button className="m-2 bg-red-500">Disable</button>
+                ): (
+                  <button className="m-2 bg-green-500">Enable</button>
                 )}
               </div>
             );
@@ -46,15 +47,16 @@ export default function Dashboard() {
               <div className="flex bg-violet-200 m-5">
                 <h1 className="m-2">{user.name}</h1>
                 <h1 className="m-2">{user.email}</h1>
-                <h1 className="m-2">{user.role}</h1>
                 <Link href={`/admin/${user.id}`}>
                   <h1 className="mt-2">View detail</h1>
                 </Link>
                 <h1 className="m-2">
                   Status: {user.enabled ? "active" : "disabled"}
                 </h1>
-                {user.enabled && (
+                {user.enabled ? (
                   <button className="m-2 bg-red-500">Disable</button>
+                ): (
+                  <button className="m-2 bg-green-500">Enable</button>
                 )}
               </div>
             );
