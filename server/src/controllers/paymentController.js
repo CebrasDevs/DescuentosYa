@@ -15,9 +15,9 @@ const createOrder = async (req, res) => {
       payer: user,
       //indica hacia donde se retornan las respuestas
       back_urls: {
-        success: "http://localhost:3000",
-        failure: "http://localhost:3000",
-        pending: "http://localhost:3000"
+        success: "https://descuentos-ya.vercel.app",
+        failure: "https://descuentos-ya.vercel.app",
+        pending: "https://descuentos-ya.vercel.app"
       },
       notification_url: "https://descuentosya.onrender.com/payment/webhook",
       auto_return: "approved",
