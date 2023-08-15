@@ -39,6 +39,10 @@ module.exports = async ( condition = {}, fullDetail = false ) => {
                         }
                     }
                 }
+            },
+
+            Review: {
+                include: fullDetail 
             }
         }
     });
