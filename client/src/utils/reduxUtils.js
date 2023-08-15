@@ -41,6 +41,9 @@ export function filterArray(items, filters) {
         case 'Highest discount':
             filtered.sort((a, b) => b.discount - a.discount);
             break;
+        case 'Closest first':
+            // filtered.sort(());
+            break;
         default:
             console.log('ERROR: invalid sorting method chosen (at reduxUtils)');
     };
