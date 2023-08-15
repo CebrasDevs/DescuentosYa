@@ -67,6 +67,7 @@ model Review {
   star4         Boolean         @default(false)
   star5         Boolean         @default(false)
   enabled       Boolean         @default(true)
+
 }
 
 model Category {
