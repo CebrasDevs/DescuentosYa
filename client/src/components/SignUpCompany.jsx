@@ -9,6 +9,9 @@ import Map from "./Map";
 import { useLoadScript } from '@react-google-maps/api';
 import SuccessModal from "./Modals/Company/Success";
 import FailureModal from "./Modals/Company/Failure";
+//llamado a los nuevos componentes para agregar ubicacion a las comañias que se registren
+import Map from "./Map";
+import { useLoadScript } from '@react-google-maps/api';
 
 export default function SignUpCompany() {
     const [companyCreated, setCompanyCreated] = useState("pending");
