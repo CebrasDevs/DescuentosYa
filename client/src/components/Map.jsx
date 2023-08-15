@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
+import { GoogleMap, Marker, DistanceMatrixService } from '@react-google-maps/api';
 import getUserLocation from '@/utils/getUserLocation';
 /**
  * @PabloBestani
@@ -8,17 +8,17 @@ import getUserLocation from '@/utils/getUserLocation';
 */
 export default function Map({ location, locationChange, editable = false }) {
     // Codigo para obtener y renderizar la ubicacion del usuario
-    // const [userLocation, setUserLocation] = useState({});
-    // useEffect(() => {
-    //     getUserLocation()
-    //         .then((coords) => setUserLocation({
-    //             lat: coords[1],
-    //             lng: coords[0]
-    //         })
-    //         )
-    // }, []);
+    const [userLocation, setUserLocation] = useState({});
+    useEffect(() => {
+        getUserLocation()
+            .then((coords) => setUserLocation({
+                lat: coords[1],
+                lng: coords[0]
+            })
+            )
+    }, []);
     // const center = useMemo(() => (userLocation), [userLocation]);
-
+    const [distance, setDistance] = useState();
 
     // const center = useMemo(() => (location), [location]);
     
@@ -58,6 +58,30 @@ export default function Map({ location, locationChange, editable = false }) {
                 onClick={handleClick}
             >
                 <Marker position={center} />
+                <DistanceMatrixService
+                    options={
+                        {
+                            origins: [userLocation],
+                            destinations: [{
+                                lat: -32.894868, 
+                                lng: -68.831799
+                            },
+                            {
+                                lat: -35.894868, 
+                                lng: -68.831799
+                            },
+                            {
+                                lat: -32.893868, 
+                                lng: -63.831799
+                            }],
+                            travelMode: 'DRIVING'
+                        }
+                    }
+                    callback={(res) => {
+                        console.log("LLEGO", res);
+                        // setDistance(res);
+                    }}
+                />
             </GoogleMap>
         </div>
     )
