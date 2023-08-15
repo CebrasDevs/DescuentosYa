@@ -44,6 +44,7 @@ const updateCategoryController = require("./categoriesControllers/updateCategory
 
 // REVIEW CONTROLLERS
 const postReviewController = require("./reviewControllers/postReviewController");
+const updateReviewController = require("./reviewControllers/updateReviewController");
 
 module.exports = {
   //USERS CONTROLLER
@@ -92,4 +93,5 @@ module.exports = {
 
   //REVIEW CONTROLLERS
   postReviewController,
+  updateReviewController,
 };

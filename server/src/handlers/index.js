@@ -42,6 +42,7 @@ const updateCategoryHandler = require("./categoriesHandler/updateCategoryHandler
 
 // REVIEW HANDLERS
 const postReviewHandler = require("./reviewHandlers/postReviewHandler");
+const updateReviewHandler = require("./reviewHandlers/updateReviewHandler");
 
 module.exports = {
   getShoppingHandler,
@@ -79,4 +80,5 @@ module.exports = {
   updateCategoryHandler,
 
   postReviewHandler,
+  updateReviewHandler,
 };

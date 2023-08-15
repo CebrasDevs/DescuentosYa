@@ -1,8 +1,9 @@
 const { Router } = require("express");
-const  { postReviewHandler }  = require("../handlers");
+const  { postReviewHandler, updateReviewHandler }  = require("../handlers");
 const reviewRouter = Router();
 
 reviewRouter.post("/", postReviewHandler);
+reviewRouter.patch("/:id", updateReviewHandler);
 
 
 
