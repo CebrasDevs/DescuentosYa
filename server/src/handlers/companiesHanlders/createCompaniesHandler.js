@@ -10,6 +10,7 @@ module.exports = async (req, res) => {
       imageUrl,
       companyName,
       address,
+      location, // extraemos la propiedad de la peticion
       phoneNumber,
       description
     } = req.body;
@@ -20,6 +21,8 @@ module.exports = async (req, res) => {
       imageUrl,
       name: companyName,
       address,
+      longitude: location.lng, // separamos los datos para validarlos en el controlador
+      latitude: location.lat,
       phoneNumber,
       description
     };
