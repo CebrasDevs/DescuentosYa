@@ -21,6 +21,7 @@ const getCategoriesHelper = require("./categoriesHelpers/getCategoriesHelper");
 //const getCategoriesEnabledHelper = require("./categoriesHelpers/getCategoriesEnabledHelper");
 //const getCategoriesDisabledHelper = require("./categoriesHelpers/getCategoriesDisabledHelper");
 //const updateCategoryHelper = require("./categoriesHelpers/updateCategoryHelper");
+const postReviewHelper = require('./reviewHelpers/postReviewHelper')
 
 module.exports = {
   getShoppingHelper,
@@ -47,4 +48,6 @@ module.exports = {
   //getCategoriesDisabledHelper,
   //getCategoriesEnabledHelper,
   //updateCategoryHelper,
+
+  postReviewHelper,
 };
