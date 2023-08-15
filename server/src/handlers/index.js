@@ -40,6 +40,9 @@ const deleteCategoryHandler = require("./categoriesHandler/deleteCategoryHandler
 const getCategoriesHandler = require("./categoriesHandler/getCategoriesHandler");
 const updateCategoryHandler = require("./categoriesHandler/updateCategoryHandler");
 
+// REVIEW HANDLERS
+const postReviewHandler = require("./reviewHandlers/postReviewHandler");
+
 module.exports = {
   getShoppingHandler,
   createShoppingHandler,
@@ -74,4 +77,6 @@ module.exports = {
   deleteCategoryHandler,
   getCategoriesHandler,
   updateCategoryHandler,
+
+  postReviewHandler,
 };

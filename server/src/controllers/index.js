@@ -42,6 +42,9 @@ const getCategoriesEnabledController = require("./categoriesControllers/getCateg
 const getCategoriesDisabledController = require("./categoriesControllers/getCategoriesDisabledController");
 const updateCategoryController = require("./categoriesControllers/updateCategoryController");
 
+// REVIEW CONTROLLERS
+const postReviewController = require("./reviewControllers/postReviewController");
+
 module.exports = {
   //USERS CONTROLLER
   createUsersController,
@@ -86,4 +89,7 @@ module.exports = {
   getCategoriesDisabledController,
   getCategoriesEnabledController,
   updateCategoryController,
+
+  //REVIEW CONTROLLERS
+  postReviewController,
 };
