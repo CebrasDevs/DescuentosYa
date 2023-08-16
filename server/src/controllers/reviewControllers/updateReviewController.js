@@ -1,7 +1,7 @@
 const { updateReviewHelper } = require('../../helpers')
 
 module.exports = async (review, id) => {
-    const {userId, itemId, comment, star1, star2, star3, star4, star5} = review
+    const {userId, itemId, comment, star1, star2, star3, star4, star5, enabled} = review
     // userId, itemId : numero
     // comment: string
     // stars: boolean
@@ -13,7 +13,8 @@ module.exports = async (review, id) => {
         (typeof star2 !== 'boolean') ||
         (typeof star3 !== 'boolean') ||
         (typeof star4 !== 'boolean') ||
-        (typeof star5 !== 'boolean')
+        (typeof star5 !== 'boolean') ||
+        (typeof enabled !== 'boolean')
     )  throw new Error("Incomplete data or incorrect");
     let res = await updateReviewHelper(review, id)
     
