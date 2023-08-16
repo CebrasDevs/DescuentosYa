@@ -39,7 +39,9 @@ module.exports = async ( condition = {}, fullDetail = false ) => {
                         }
                     }
                 }
-            }
+            },
+
+            Review: fullDetail
         }
     });
     await prisma.$disconnect();
