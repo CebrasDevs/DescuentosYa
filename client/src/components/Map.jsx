@@ -1,24 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
-import { GoogleMap, Marker, DistanceMatrixService } from '@react-google-maps/api';
-import getUserLocation from '@/utils/getUserLocation';
+import { useMemo, useState } from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
+// import sortItemsByDistance from '@/utils/sortItemsByDistance';
+
 /**
  * @PabloBestani
  * location para mostrar en el mapa, locationChange es para el formulario signup y
 /* editable es para que no se mueva la marca cuando se renderiza en CompanyDetail.jsx
 */
 export default function Map({ location, locationChange, editable = false }) {
-    // Codigo para obtener y renderizar la ubicacion del usuario
-    const [userLocation, setUserLocation] = useState({});
-    useEffect(() => {
-        getUserLocation()
-            .then((coords) => setUserLocation({
-                lat: coords[1],
-                lng: coords[0]
-            })
-            )
-    }, []);
     // const center = useMemo(() => (userLocation), [userLocation]);
-    const [distance, setDistance] = useState();
 
     // const center = useMemo(() => (location), [location]);
     
@@ -49,6 +39,40 @@ export default function Map({ location, locationChange, editable = false }) {
             })
         }
     }
+
+    
+    //* Items provisorios para probar el ordenamiento segun distancia
+    // const testItems = [
+    //     {
+    //         deberiaQuedarEnLugar: 1,
+    //         name: 'Piercing en la nariz',
+    //         companyLocation: {
+    //             lat: -30.894868, 
+    //             lng: -68.831799
+    //         }
+    //     },
+    //     {
+    //         deberiaQuedarEnLugar: 2,
+    //         name: 'Entradas al parque de diversiones',
+    //         companyLocation: {
+    //             lat: -32.893868, 
+    //             lng: -63.831799
+    //         }
+    //     },
+    //     {
+    //         deberiaQuedarEnLugar: 0,
+    //         name: 'Salidita con tu ex',
+    //         companyLocation: {
+                // lat: -32.894868, 
+                // lng: -68.831799
+    //         }
+    //     },
+    // ]
+    // sortItemsByDistance(testItems)
+    //     .then(data => console.log("ITEMS ORDENADOS", data));
+
+
+    
     return (
         <div>
             <GoogleMap
@@ -58,30 +82,6 @@ export default function Map({ location, locationChange, editable = false }) {
                 onClick={handleClick}
             >
                 <Marker position={center} />
-                <DistanceMatrixService
-                    options={
-                        {
-                            origins: [userLocation],
-                            destinations: [{
-                                lat: -32.894868, 
-                                lng: -68.831799
-                            },
-                            {
-                                lat: -35.894868, 
-                                lng: -68.831799
-                            },
-                            {
-                                lat: -32.893868, 
-                                lng: -63.831799
-                            }],
-                            travelMode: 'DRIVING'
-                        }
-                    }
-                    callback={(res) => {
-                        console.log("LLEGO", res);
-                        // setDistance(res);
-                    }}
-                />
             </GoogleMap>
         </div>
     )
