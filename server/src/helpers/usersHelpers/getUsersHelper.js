@@ -41,9 +41,7 @@ module.exports = async ( condition = {}, fullDetail = false ) => {
                 }
             },
 
-            Review: {
-                include: fullDetail 
-            }
+            Review: fullDetail
         }
     });
     await prisma.$disconnect();
