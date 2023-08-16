@@ -8,7 +8,7 @@ import ModifyMemberProfile from "./ModifyMemberProfile";
 
 export default function UserProfile() {
     const activeUser = useSelector((state) => state.activeUser);
-
+    
     const [modify, setModify] = useState(false);
     const modifyHandler = () => {
         setModify(true);
@@ -95,7 +95,7 @@ export default function UserProfile() {
                                             <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
                                             <h2 className="ml-2">
                                                 |{" "}
-                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                <Link className="hover:text-blue-500" href={`/profile/myPurchase/${voucher.item.id}`}>
                                                     Detail
                                                 </Link>
                                             </h2>
@@ -147,7 +147,7 @@ export default function UserProfile() {
                                             <h1 className="ml-2">| State: {buys.state}</h1>
                                             <h2 className="ml-2">
                                                 |{" "}
-                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                <Link className="hover:text-blue-500" href={`/profile/myPurchase/${buys.items[0].id}`}>
                                                     Detail
                                                 </Link>
                                             </h2>
