@@ -57,7 +57,7 @@ export function phoneNumberWithoutHyphens(company){
 }
 
 export function splitName(member){
-  let splitedName = member.name.split(', ')
+  let splitedName = member.name.split(' ')
     return{
         firstName: splitedName[0],
         lastName: splitedName[1],
@@ -83,7 +83,7 @@ export function formatMember(member) {
 
     const parsedDni = String(dni);
     const parsedPhoneNumber = String(phoneNumber);
-    const fullName = `${firstName}, ${lastName}`;
+    const fullName = `${firstName} ${lastName}`;
 
     return {
         email: email,
@@ -108,7 +108,7 @@ export function formatModifyMember(member){
         imageUrl
     } = member;
 
-    const fullName = `${firstName}, ${lastName}`;
+    const fullName = `${firstName} ${lastName}`;
 
     return {
         email: email,

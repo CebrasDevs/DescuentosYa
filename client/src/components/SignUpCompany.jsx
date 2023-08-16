@@ -214,7 +214,7 @@ export default function SignUpCompany() {
                             </div>
                             <div className="flex flex-row h-28 justify-between">
                                 <div className=" w-2/5">
-                                    <label className="block mb-2 text-m font-medium text-gray-900 ">Adress</label>
+                                    <label className="block mb-2 text-m font-medium text-gray-900 ">Address</label>
                                     <input
                                         type="text"
                                         name="address"

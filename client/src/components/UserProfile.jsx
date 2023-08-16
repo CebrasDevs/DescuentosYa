@@ -5,9 +5,12 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useState } from "react";
 import ModifyMemberProfile from "./ModifyMemberProfile";
+import { splitName } from "@/utils/formatUtils";
 
 export default function UserProfile() {
     const activeUser = useSelector((state) => state.activeUser);
+    
+    
 
     const [modify, setModify] = useState(false);
     const modifyHandler = () => {
@@ -19,6 +22,7 @@ export default function UserProfile() {
     }
 
     if (activeUser.role === "MEMBER") {
+        const { firstName, lastName } = splitName(activeUser);
         return (
             <div className="flex flex-col items-center">
                 <div id="data" className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
@@ -43,7 +47,7 @@ export default function UserProfile() {
                             ) : (
                                 <div className="w-3/4">
                                     <div>
-                                        <h1>Name: {activeUser.name} </h1>
+                                        <h1>Name: {lastName}, {firstName} </h1>
                                         <h1>Email: {activeUser.email} </h1>
                                         <h1>DNI: {activeUser.dni} </h1>
                                         <h1>Address: {activeUser.address} </h1>
@@ -92,7 +96,7 @@ export default function UserProfile() {
                                                     {voucher.company.name}
                                                 </Link>
                                             </h2>
-                                            <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
+                                            <h2 className="ml-2">| Expiration date: {voucher.expirationDate}</h2>
                                             <h2 className="ml-2">
                                                 |{" "}
                                                 <Link className="hover:text-blue-500" href={"#"}>
