@@ -12,24 +12,23 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
 export default function ItemDetail({ data }) {
-  const dispatch = useDispatch();
-  const shoppingCart = useSelector((state) => state.shoppingCart);
-  const activeUser = useSelector((state) => state.activeUser);
-  
+    const dispatch = useDispatch();
+    const shoppingCart = useSelector((state) => state.shoppingCart);
+    const activeUser = useSelector((state) => state.activeUser);
+
     const router = useRouter();
 
     const [modify, setModify] = useState(false);
 
     const handleSetModify = () => {
-        setModify(false)
-    }
-
+        setModify(false);
+    };
 
     const handleAddItem = function (itemFound) {
         const retrievedCookie = Cookies.get("accessTrue");
         if (!retrievedCookie) {
             router.push(`/login?detail=true&itemId=${data.id}`);
-        }else{
+        } else {
             if (!shoppingCart.includes(itemFound)) {
                 dispatch(addShoppingCartItem(itemFound));
             } else {
@@ -42,7 +41,7 @@ export default function ItemDetail({ data }) {
         const retrievedCookie = Cookies.get("accessTrue");
         if (!retrievedCookie) {
             router.push(`/login?detail=true&itemId=${data.id}`);
-        }else{
+        } else {
             //logica de generacion de codigo, charlar
         }
     };
@@ -63,13 +62,15 @@ export default function ItemDetail({ data }) {
                                 src={data.imageUrl}
                             ></img>
                         </div>
-                        <ModifiedItem data={data} type={"service"} handleSave={handleSetModify}/>
-                        {activeUser.items.find((item)=> item.id === data.id)? <TiArrowBack
-                            onClick={() => {
-                                setModify(false);
-                            }}
-                            className="m-5 text-2xl hover: cursor-pointer"
-                        />: null}
+                        <ModifiedItem data={data} type={"service"} handleSave={handleSetModify} />
+                        {activeUser.items.find((item) => item.id === data.id) ? (
+                            <TiArrowBack
+                                onClick={() => {
+                                    setModify(false);
+                                }}
+                                className="m-5 text-2xl hover: cursor-pointer"
+                            />
+                        ) : null}
                     </div>
                 ) : (
                     <div className=" relative flex justify-center w-3/5 min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
@@ -94,18 +95,23 @@ export default function ItemDetail({ data }) {
                                 </h1>
                                 <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">${data.price} </h1>
                             </div>
+                            <div className="font-semibold mt-10">
+                                <h2>{data.description}</h2>
+                            </div>
                             <div className=" absolute right-10 bottom-10 flex">
-                                <Link href={"/shoppingcart"}>
-                                    <button
-                                        className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
-                                        onClick={() => handleAddItem(data)}
-                                    >
-                                        Add to Cart <BsCart3 className=" text-xl" />
-                                    </button>
-                                </Link>
+                                {activeUser.role === "ADMIN" || activeUser.role === "COMPANY" ? null : (
+                                    <Link href={"/shoppingcart"}>
+                                        <button
+                                            className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
+                                            onClick={() => handleAddItem(data)}
+                                        >
+                                            Add to Cart <BsCart3 className=" text-xl" />
+                                        </button>
+                                    </Link>
+                                )}
                                 {activeUser.id === data.companyId || activeUser.role === "ADMIN" ? (
                                     <button onClick={modifyHandler}>
-                                        <FaEdit className="ml-5 text-2xl hover: cursor-pointer"/>
+                                        <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
                                     </button>
                                 ) : null}
                             </div>
@@ -151,17 +157,22 @@ export default function ItemDetail({ data }) {
                                 <span className=" text-red-600"> {data.discount}% </span>
                                 de descuento en la seccion {data.category} en {data.name}
                             </h1>
+                            <div className="font-semibold mt-10">
+                                <h2>{data.description}</h2>
+                            </div>
                             {data.price > 0 && (
                                 <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">${data.price} </h1>
                             )}
                         </div>
                         <div className=" absolute right-10 bottom-10 flex">
-                            <button
-                                className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
-                                onClick={handleGenerateCode}
-                            >
-                                Get Voucher
-                            </button>
+                            {activeUser.role === "ADMIN" || activeUser.role === "COMPANY" ? null : (
+                                <button
+                                    className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
+                                    onClick={handleGenerateCode}
+                                >
+                                    Get Voucher
+                                </button>
+                            )}
                             {activeUser.id === data.companyId || activeUser.role === "ADMIN" ? (
                                 <button onClick={modifyHandler}>
                                     <FaEdit size={30} className="ml-6" />
