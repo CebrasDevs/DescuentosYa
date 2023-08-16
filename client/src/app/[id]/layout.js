@@ -1,7 +1,10 @@
+import Loading from "@/components/loading";
+import { Suspense } from "react";
+
 export default function Layout({ children }) {
   return (
-    <div>
-      {children}
-    </div>
+    <Suspense fallback={<Loading />}>
+      <div>{children}</div>
+    </Suspense>
   );
 }

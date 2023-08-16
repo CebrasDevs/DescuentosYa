@@ -22,18 +22,18 @@ export default function Card({ item, value }) {
         </a>
         <div className=" mt-2 mb-5 flex flex-col gap-y-3 items-center justify-between">
           <div>
-            <p>
-              <span className="text-3xl font-bold text-slate-900">
-                {item.price === 0 ? (
-                  <div>{item.discount}% OFF</div>
-                ) : (
-                  <div className="flex flex-row gap-8">
-                    <div className=" font-normal text-red-600 tracking-tighter">{item.discount}% OFF</div>
-                    <div>${item.price}</div>
+            <span className="text-3xl font-bold text-slate-900">
+              {item.price === 0 ? (
+                <div>{item.discount}% OFF</div>
+              ) : (
+                <div className="flex flex-row gap-8">
+                  <div className=" font-normal text-red-600 tracking-tighter">
+                    {item.discount}% OFF
                   </div>
-                )}
-              </span>
-            </p>
+                  <div>${item.price}</div>
+                </div>
+              )}
+            </span>
           </div>
           <div>
             <div className="flex items-center">
