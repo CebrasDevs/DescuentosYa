@@ -43,7 +43,7 @@ export default function Home() {
 
     return (
         <div className="w-full pb-10">
-            <div className="max-w-[1600px] h-[340px] w-full m-auto px-4 relative group">
+            <div className="max-w-full h-[340px] w-full m-auto px-4 relative group">
                 <div
                     style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
                     className="w-full h-full bg-center bg-cover ease-out duration-500"

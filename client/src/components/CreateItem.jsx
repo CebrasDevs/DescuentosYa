@@ -90,8 +90,8 @@ export default function CreateItem() {
 
     return (
         <section className=" bg-slate-200 dark:bg-white h-full">
-            <div className="flex  justify-center mt-12 pb-12 bg-slate-200 ">
-                <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
+            <div className="flex justify-center mt-12 pb-12 bg-slate-200 ">
+                <div className=" w-5/12 mt-10 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
                             Create Item
