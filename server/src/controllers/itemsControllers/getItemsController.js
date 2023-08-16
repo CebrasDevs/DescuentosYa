@@ -1,7 +1,7 @@
 const { getItemsHelper } = require('../../helpers')
 
 module.exports = async (name) => {
-    const result = await getItemsHelper({name: {contains: name, mode:"insensitive"}});
+    const result = await getItemsHelper({ name: { contains: name, mode: "insensitive" } });
 
     const itemsInfo = result.map((item) => {
         return {
@@ -12,6 +12,10 @@ module.exports = async (name) => {
             price: item.price,
             discount: item.discount,
             companyId: item.userId,
+            companyLocation: {
+                lat: item.user.latitude,
+                lng: item.user.longitude
+            }
         }
     })
 
