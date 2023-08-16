@@ -166,7 +166,7 @@ export default function CompanyProfile() {
                                                 src={voucher.item.imageUrl}
                                             />
                                             <h2 className="ml-2">Voucher: {voucher.item.name}</h2>
-                                            <h2 className="ml-2">| Expired: {voucher.expirationDate}</h2>
+                                            <h2 className="ml-2">| Expiration date: {voucher.expirationDate}</h2>
                                             <h1 className="ml-2">| User: {voucher.user.name}</h1>
                                             <h2 className="ml-2">
                                                 |{" "}
