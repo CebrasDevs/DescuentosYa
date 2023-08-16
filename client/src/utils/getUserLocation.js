@@ -1,5 +1,6 @@
 
 export default async function getUserLocation() {
+    // Consigue la ubicacion actual del navegador del usuario
     return new Promise((resolve, reject) => {
 
         navigator.geolocation.getCurrentPosition(
@@ -12,5 +13,11 @@ export default async function getUserLocation() {
                 reject();
             }
         )
+    })
+    .then((coords) => {
+        return {
+            lat: coords[1],
+            lng: coords[0]
+        }
     });
 };
