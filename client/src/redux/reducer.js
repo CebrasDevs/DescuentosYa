@@ -18,8 +18,7 @@ import {
   GET_ITEM_DETAIL,
   CLEAN_ITEM_DETAIL
 } from "./actions";
-import { filterArray } from "@/utils/reduxUtils";
-import { member, company, admin } from "../utils/perfilesPF";
+import { filterArray } from "@/utils/filterArray";
 
 const initialState = {
   companies: [],
