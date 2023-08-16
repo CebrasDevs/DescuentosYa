@@ -13,6 +13,7 @@ module.exports = async (review, id) => {
           star3: review.star3,
           star4: review.star4,
           star5: review.star5,
+          enabled: review.enabled
         },
       });
 if(res){
