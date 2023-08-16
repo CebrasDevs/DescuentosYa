@@ -4,8 +4,11 @@ import validateMember from "@/utils/validateMember";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import SuccessModal from "./Modals/Success";
+import FailureModal from "./Modals/Failure";
 
 export default function SignUpMember() {
+    const [userCreated, setUserCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
@@ -69,16 +72,22 @@ export default function SignUpMember() {
             const response = await axios.post(`${URL_BASE}/members`, formattedMember);
             if (response.status === 200) {
                 setErrors({});
-                window.alert(`Member ${input.firstName}, ${input.lastName} creado correctamente (provisory)`);
-                router.push("/");
+                setUserCreated("success");
             }
         } catch (error) {
-            window.alert("Error creating member");
+           setUserCreated("failure");
         }
     };
 
+    const close = (status) => {
+        setUserCreated("pending");
+    }
+
     return (
+        
         <section className=" bg-slate-200 dark:bg-white h-full">
+            { userCreated === "success" && <SuccessModal/> }
+            { userCreated === "failure" && <FailureModal close={close} /> }
             <div className="flex  justify-center   pb-32 bg-slate-200 ">
                 <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">

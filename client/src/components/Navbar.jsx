@@ -39,7 +39,7 @@ export default function Navbar() {
     };
 
     return (
-        <div className=" fixed top-0 left-0 right-0 z-10  shadow-lg"> 
+        <div className=" fixed top-0 left-0 right-0 z-50  shadow-lg"> 
             <div className="flex items-center w-full h-16 bg-slate-50">
                 <div className=" flex w-3/4 m-auto items-center">
                     <div className="flex items-center h-full ml-10 mr-auto">
