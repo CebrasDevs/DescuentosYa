@@ -30,7 +30,7 @@ export default function Filters() {
     }
 
     return (
-        <div className="sticky top-28">
+        <div className="sticky top-40 ml-20 py-10 w-3/4 rounded-lg border border-gray-100 bg-white shadow-md">
             <div className="flex flex-col justify-center text-center ">
                 <div className=" p-5">
                     <p className="font-medium mb-2 text-lg">Type:</p>
@@ -62,6 +62,7 @@ export default function Filters() {
                     <p className="font-medium mb-2 text-lg">Discount:</p>
                     {discountOptions.map((discount) => {
                         return (
+                            
                             <label className="flex justify-center mt-2" key={discount}>
                                 <input
                                     className=" w-10 cursor-pointer"

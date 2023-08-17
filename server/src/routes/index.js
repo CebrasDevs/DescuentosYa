@@ -46,6 +46,7 @@ const paymentRouter = require("./paymentRouter");
 const authRouter = require("./authRouter");
 // const authRouterCookie = require("./authRouterCookie");
 const profileRouter = require("./profileRouter");
+const reviewRouter = require("./reviewRouter");
 
 // Usamos el middleware para verificar el token en rutas protegidas
 mainRouter.use("/shopping", shoppingRouter);
@@ -59,5 +60,7 @@ mainRouter.use("/categories", categoriesRouter);
 mainRouter.use("/payment", paymentRouter);
 mainRouter.use("/", authRouter);
 mainRouter.use("/profile", profileRouter);
+mainRouter.use("/review", reviewRouter);
+
 
 module.exports = mainRouter;
