@@ -31,15 +31,15 @@ export default function Navbar() {
         }
         const cart = Cookies.get("shoppingCart");
         if (cart) {
-          const sinJSON = JSON.parse(cart);
-          console.log(sinJSON)
-          dispatch(setShoppingCart(sinJSON));
+          const cartValue = JSON.parse(cart);
+          dispatch(setShoppingCart(cartValue));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     const handleLogOut = () => {
         Cookies.remove("accessTrue");
+        Cookies.remove("shoppingCart");
         axios.post(`${URL_BASE}/logout`);
         router.push("/");
         dispatch(cleanActiveUser());
