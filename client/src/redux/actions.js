@@ -10,18 +10,18 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const ADD_SHOPPING_CART_ITEM = "ADD_SHOPPING_CART_ITEM";
 export const DELETE_SHOPPING_CART_ITEM = "DELETE_SHOPPING_CART_ITEM";
 export const DELETE_COMPANY_ITEM = "DELETE_COMPANY_ITEM";
-export const GET_USERS = 'GET_USERS'
+export const GET_USERS = "GET_USERS";
 export const GET_COMPANY_DETAIL = "GET_COMPANY_DETAIL";
 export const CLEAN_COMPANY_DETAIL = "CLEAN_COMPANY_DETAIL";
 export const GET_ITEM_DETAILS = "GET_ITEM_DETAILS";
 export const SET_ACTIVE_USER = "SET_ACTIVE_USER";
-export const GET_ITEM_DETAIL = 'GET_ITEM_DETAIL';
-export const CLEAN_ITEM_DETAIL = 'CLEAN_ITEM_DETAIL'
+export const GET_ITEM_DETAIL = "GET_ITEM_DETAIL";
+export const CLEAN_ITEM_DETAIL = "CLEAN_ITEM_DETAIL";
 export const CLEAN_ACTIVE_USER = "CLEAN_ACTIVE_USER";
+export const SET_SHOPPING_CART = "SET_SHOPPING_CART";
 
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
 export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
-
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -123,7 +123,7 @@ export const setCurrentPage = (page) => {
 };
 
 export const addShoppingCartItem = (item) => {
-  return { type: ADD_SHOPPING_CART_ITEM,payload: item };
+  return { type: ADD_SHOPPING_CART_ITEM, payload: item };
 };
 
 export const deleteShoppingCartItem = (id) => {
@@ -146,6 +146,10 @@ export const setActiveUser = (id) => {
       console.log("error");
     }
   };
+};
+
+export const setShoppingCart = (shoppingCart) => {
+  return { type: SET_SHOPPING_CART, payload: shoppingCart };
 };
 
 export const getItemDetail = (id) => {
@@ -174,5 +178,3 @@ export const increaseItemQuantity = (index) => {
 export const decreaseItemQuantity = (index) => {
   return { type: DECREASE_ITEM_QUANTITY, payload: index };
 };
-
-
