@@ -47,7 +47,7 @@ export const getCompanies = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -61,7 +61,7 @@ export const getDiscounts = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -75,7 +75,7 @@ export const getCategories = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -89,7 +89,7 @@ export const getItemsByName = (value) => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -103,7 +103,7 @@ export const getCompanyDetail = (id) => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -144,7 +144,7 @@ export const setActiveUser = (id) => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -163,7 +163,7 @@ export const getItemDetail = (id) => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };

@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCategories, getCompanies, getDiscounts, setActiveUser, setShoppingCart } from "@/redux/actions";
+import Cookies from "js-cookie";
 
 export default function RootConfig() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function RootConfig() {
       const cartValue = JSON.parse(cart);
       dispatch(setShoppingCart(cartValue));
     }
+    // agregar el loadscript de gmaps
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

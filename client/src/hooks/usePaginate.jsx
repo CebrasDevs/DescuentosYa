@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function usePaginate(value) {
     const dispatch = useDispatch();
- 
+    const allItems = useSelector((state) => state.allItems);
     const filteredItems = useSelector((state) => state.filteredItems);
     const currentPage = useSelector((state) => state.currentPage);
 
@@ -14,11 +14,13 @@ export default function usePaginate(value) {
 
     const detailUser = useSelector((state) => state.companyDetail);
     const activeFilters = useSelector((state) => state.activeFilters);
-
+    
     useEffect(() => {
-        dispatch(filterCards(activeFilters));
+        if (allItems.length) {
+            dispatch(filterCards(activeFilters));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [allItems]);
 
     const itemsPerPage = 12;
     const maxIndex = currentPage * itemsPerPage;

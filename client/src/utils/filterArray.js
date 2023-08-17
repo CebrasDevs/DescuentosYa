@@ -2,7 +2,7 @@
 export function filterArray(items, filters) {
     // Codigo defensivo
     if (!items.length) {
-        console.log("ERROR: no items available to filter (at utils/reduxUtils)");
+        console.log("ERROR: no items available to filter (at utils/filterArray)");
         return items;
     }
     // Preparo los items a filtrar, y los criterios de filtrado
@@ -45,7 +45,7 @@ export function filterArray(items, filters) {
             filtered.sort((a, b) => a.distance.value - b.distance.value)
             break;
         default:
-            console.log('ERROR: invalid sorting method chosen (at reduxUtils)');
+            console.log('ERROR: invalid sorting method chosen (at utils/filterArray)');
     };
     
     return filtered;

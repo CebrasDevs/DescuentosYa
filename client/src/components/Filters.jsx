@@ -1,12 +1,13 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { filterCards } from "@/redux/actions";
 import Pagination from "./Pagination";
 
 export default function Filters({ showModal }) {
     const activeFilters = useSelector((state) => state.activeFilters);
     const categories = useSelector((state) => state.categories);
+    const dispatch = useDispatch();
 
     const discountOptions = ["All", "25% or more", "35% or more", "45% or more"];
     const itemTypeOptions = ["All types", "Products", "Services"];
