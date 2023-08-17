@@ -1,6 +1,9 @@
 import { useMemo, useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
-// import sortItemsByDistance from '@/utils/sortItemsByDistance';
+// import { useSelector } from 'react-redux';
+// import getCompanyDistances from '@/utils/getCompanyDistances';
+// import setCompanyDistances from '@/utils/setCompanyDistances';
+// import setItemDistances from '@/utils/setItemDistances';
 
 /**
  * @PabloBestani
@@ -11,11 +14,6 @@ export default function Map({ location, locationChange, editable = false }) {
     // const center = useMemo(() => (userLocation), [userLocation]);
 
     // const center = useMemo(() => (location), [location]);
-    
-    // Ubicacion de prueba (provisoria)
-    // const center = useMemo(() => ({ lat: -32.894868, lng: -68.831799 }), []);
-    //Ubicacion recibida desde la base de datos
-    // const center = useMemo(() => ({ lat: location.lat, lng: location.lng }), []);
     /** 
      * @PabloBestani
      * cambios para reutilizar el componente tambien en el formulario
@@ -40,38 +38,19 @@ export default function Map({ location, locationChange, editable = false }) {
         }
     }
 
-    
-    //* Items provisorios para probar el ordenamiento segun distancia
-    // const testItems = [
-    //     {
-    //         deberiaQuedarEnLugar: 1,
-    //         name: 'Piercing en la nariz',
-    //         companyLocation: {
-    //             lat: -30.894868, 
-    //             lng: -68.831799
-    //         }
-    //     },
-    //     {
-    //         deberiaQuedarEnLugar: 2,
-    //         name: 'Entradas al parque de diversiones',
-    //         companyLocation: {
-    //             lat: -32.893868, 
-    //             lng: -63.831799
-    //         }
-    //     },
-    //     {
-    //         deberiaQuedarEnLugar: 0,
-    //         name: 'Salidita con tu ex',
-    //         companyLocation: {
-                // lat: -32.894868, 
-                // lng: -68.831799
-    //         }
-    //     },
-    // ]
-    // sortItemsByDistance(testItems)
-    //     .then(data => console.log("ITEMS ORDENADOS", data));
-
-
+    // Para probar las utils ::: descomentar las importaciones tambien
+    // const {allItems, companies} = useSelector((state) => state);
+    // async function getDistances() {
+    //     let distances = await fetch('http://localhost:3001/companies').then(data => data.json());
+    //     distances = await getCompanyDistances(distances);
+    //     return distances;
+    // }
+    // getDistances()
+    //     .then(() => {
+    //         // return setItemDistances(allItems);
+    //         return setCompanyDistances(companies);
+    //     })
+    //     .then((data) => console.log("ITEMS C DISTANCA", data));
     
     return (
         <div>
