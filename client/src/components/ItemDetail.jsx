@@ -126,46 +126,7 @@ export default function ItemDetail({ data }) {
             </section>
         );
     }
-  };
-
-
-                        <div className=" text-center p-6 pr-16 ">
-                            <p className=" font-bold text-4xl">{data.name}</p>
-                        </div>
-                        <div>
-                            <h1 className=" font-semibold text-lg mt-12">
-                                Aprovecha el
-                                <span className=" text-red-600"> {data.discount}% </span>
-                                de descuento en la seccion {data.category} en {data.name}
-                            </h1>
-                            <div className="font-semibold mt-10">
-                                <h2>{data.description}</h2>
-                            </div>
-                            {data.price > 0 && (
-                                <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">${data.price} </h1>
-                            )}
-                        </div>
-                        <div className=" absolute right-10 bottom-10 flex">
-                            {activeUser.role === "ADMIN" || activeUser.role === "COMPANY" ? null : (
-                                <button
-                                    className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
-                                    onClick={handleGenerateCode}
-                                >
-                                    Get Voucher
-                                </button>
-                            )}
-                            {activeUser.id === data.companyId || activeUser.role === "ADMIN" ? (
-                                <button onClick={modifyHandler}>
-                                    <FaEdit size={30} className="ml-6" />
-                                </button>
-                            ) : null}
-                        </div>
-                    </div>
-                </div>
-            )}
-        </section>
-    );
-  }
+  
 
   //si la company ofrece productos:
   return (
