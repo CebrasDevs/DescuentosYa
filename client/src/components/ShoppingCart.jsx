@@ -4,13 +4,15 @@ import {
   createPreference,
   increaseItemQuantity,
   decreaseItemQuantity,
+  setShoppingCart,
 } from "@/redux/actions";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
+import Cookies from "js-cookie";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -36,18 +38,24 @@ export default function ShoppingCart() {
       setCounters(countersCopy);
       dispatch(increaseItemQuantity(index));
     }
+    Cookies.set("shoppingCart", JSON.stringify(shoppingCart));
   };
 
   const handleDelete = function (id) {
+    // CAPTURAR COOKIE, SACAR JSON Y CAPTURAR CONTENIDO, FILTRAR TODOS LOS DISTINTOS
+    let shoppingCartDelete = shoppingCart.filter(
+      (shopping) => shopping.item.id !== id
+    );
+    Cookies.set("shoppingCart", JSON.stringify(shoppingCartDelete));
     dispatch(deleteShoppingCartItem(id));
   };
 
   const products = shoppingCart?.map((element, index) => ({
-    id: element.item.id,
-    title: element.item.name,
-    unit_price: Math.ceil(element.item.price),
+    id: element.item?.id,
+    title: element.item?.name,
+    unit_price: Math.ceil(element.item?.price),
     quantity: shoppingCart[index].quantity,
-    category_id: element.item.category,
+    category_id: element.item?.category,
     description: "DescuentosYa",
   }));
 
@@ -122,7 +130,7 @@ export default function ShoppingCart() {
               <div className=" flex items-center ">
                 <button
                   className=" relative rounded-full text-white bg-red-600 hover:bg-red-900 ml-8 w-12 h-12 "
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => handleDelete(item.item.id)}
                 >
                   <BsTrash className=" ml-2 text-3xl" />
                 </button>
