@@ -151,7 +151,7 @@ export default function UserProfile() {
                                             <h1 className="ml-2">| State: {buys.state}</h1>
                                             <h2 className="ml-2">
                                                 |{" "}
-                                                <Link className="hover:text-blue-500" href={`/profile/myPurchase/${buys.items[0].id}`}>
+                                                <Link className="hover:text-blue-500" href={`/profile/myPurchase/${buys.items[0].id}?userId=${activeUser.id}`}>
                                                     Detail
                                                 </Link>
                                             </h2>
