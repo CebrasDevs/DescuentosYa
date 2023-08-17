@@ -4,10 +4,9 @@ import {
   createPreference,
   increaseItemQuantity,
   decreaseItemQuantity,
-  setShoppingCart,
 } from "@/redux/actions";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";

@@ -1,6 +1,6 @@
 "use client";
 
-import { filterCards, getDiscounts, setCurrentPage } from "@/redux/actions";
+import { filterCards, setCurrentPage } from "@/redux/actions";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -16,10 +16,9 @@ export default function usePaginate(value) {
     const activeFilters = useSelector((state) => state.activeFilters);
 
     useEffect(() => {
-        dispatch(getDiscounts())
-        .then (() => dispatch(filterCards(activeFilters)));
+        dispatch(filterCards(activeFilters));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
+    }, []);
 
     const itemsPerPage = 12;
     const maxIndex = currentPage * itemsPerPage;

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateModifiedItem from "@/utils/validateModifiedItem";
-import { getCategories, getDiscounts, getItemDetail, setActiveUser } from "@/redux/actions";
+import { getItemDetail, setActiveUser } from "@/redux/actions";
 
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
@@ -26,11 +26,6 @@ export default function ModifiedItem({ data, type , handleSave}) {
         imageUrl: data.imageUrl,
     });
     const isNotReady = errors.name || errors.category || errors.price || errors.discount || errors.imageUrl;
-
-    useEffect(() => {
-        dispatch(getCategories());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
 
     function handleChange(e) {
         setInput({

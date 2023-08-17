@@ -1,10 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import Carousel from "./Carousel";
-import { getCompanies, getDiscounts, setActiveUser } from "@/redux/actions";
-import { useDispatch } from "react-redux";
-
 
 const slides = [
     {
@@ -20,14 +17,6 @@ const slides = [
 
 export default function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCompanies())
-        .then(() => dispatch(getDiscounts()));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;

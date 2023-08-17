@@ -1,12 +1,10 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { filterCards, getCategories } from "@/redux/actions";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { filterCards } from "@/redux/actions";
 import Pagination from "./Pagination";
 
 export default function Filters({ showModal }) {
-    const dispatch = useDispatch();
     const activeFilters = useSelector((state) => state.activeFilters);
     const categories = useSelector((state) => state.categories);
 
@@ -14,11 +12,6 @@ export default function Filters({ showModal }) {
     const itemTypeOptions = ["All types", "Products", "Services"];
     const sortingOptions = ["Alphabetical", "Highest discount", "Closest first"];
     const allCategories = ["All categories", ...categories];
-
-    useEffect(() => {
-        dispatch(getCategories())
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
 
     function handleChange(e) {
         if (e.target.value === "Closest first" && !localStorage.getItem('userLocation')) {
