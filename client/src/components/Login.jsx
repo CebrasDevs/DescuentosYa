@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
+import LoginFailure from "./Modals/Login/LoginFailure";
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -18,6 +19,9 @@ export default function Login() {
     const params = useSearchParams();
     const detail = params.get("detail");
     const itemId = params.get("itemId");
+
+    const [userLogin, setUserLogin] = useState("pending");
+    const [loginError, setLoginError] = useState(null);
 
     const [input, setInput] = useState({
         email: "",
@@ -30,6 +34,7 @@ export default function Login() {
             [event.target.name]: event.target.value,
         });
     };
+
 
     const handleLogIn = async function (event) {
         event.preventDefault();
@@ -57,11 +62,20 @@ export default function Login() {
                 }
             }
         } catch (error) {
-            window.alert(error.response.data.error);
+            setUserLogin("failure");
+            setLoginError(error);
+            console.log(error);
         }
     };
 
+    const close = (status) => {
+        setUserLogin("pending");
+        setLoginError(null);
+    }
+
     return (
+        <div>
+        { userLogin === "failure" && <LoginFailure error={loginError} close={close} /> }
         <form onSubmit={handleLogIn} className="flex flex-col gap-5">
             <div className={styles.input_group}>
                 <input
@@ -100,5 +114,6 @@ export default function Login() {
                 </button>
             </div>
         </form>
+        </div>
     );
 }
