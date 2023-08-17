@@ -16,7 +16,8 @@ import {
   INCREASE_ITEM_QUANTITY,
   DECREASE_ITEM_QUANTITY,
   GET_ITEM_DETAIL,
-  CLEAN_ITEM_DETAIL
+  CLEAN_ITEM_DETAIL,
+  SET_SHOPPING_CART,
 } from "./actions";
 import { filterArray } from "@/utils/filterArray";
 
@@ -44,8 +45,8 @@ const rootReducer = (state = initialState, action) => {
     case GET_USERS:
       return {
         ...state,
-        users: action.payload
-      }
+        users: action.payload,
+      };
     case GET_COMPANIES:
       return {
         ...state,
@@ -73,7 +74,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredItems: filtered,
         activeFilters: action.payload,
-        currentPage: 1
+        currentPage: 1,
       };
     case SET_CURRENT_PAGE:
       return {
@@ -83,8 +84,8 @@ const rootReducer = (state = initialState, action) => {
     case ADD_SHOPPING_CART_ITEM:
       const newItem = {
         item: action.payload,
-        quantity: 1
-      }
+        quantity: 1,
+      };
       return {
         ...state,
         shoppingCart: [...state.shoppingCart, newItem], // en vez de action.payload va newItem
@@ -93,7 +94,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         shoppingCart: state.shoppingCart.filter(
-          (item) => item.id !== action.payload
+          (shopping) => shopping.item.id !== action.payload
         ),
       };
     case DELETE_COMPANY_ITEM:
@@ -121,6 +122,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         activeUser: action.payload,
       };
+    case SET_SHOPPING_CART:
+      return {
+        ...state,
+        shoppingCart: action.payload,
+      };
     case CLEAN_ACTIVE_USER:
       return {
         ...state,
@@ -128,34 +134,34 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case INCREASE_ITEM_QUANTITY:
-      let objectToIncrease = state.shoppingCart[action.payload]
+      let objectToIncrease = state.shoppingCart[action.payload];
 
       objectToIncrease = {
         item: objectToIncrease.item,
-        quantity: ++objectToIncrease.quantity
-      }
+        quantity: ++objectToIncrease.quantity,
+      };
       return {
         ...state,
       };
     case DECREASE_ITEM_QUANTITY:
-      let objectToDecrease = state.shoppingCart[action.payload]
+      let objectToDecrease = state.shoppingCart[action.payload];
       objectToDecrease = {
         item: objectToDecrease.item,
-        quantity: --objectToDecrease.quantity
-      }
+        quantity: --objectToDecrease.quantity,
+      };
       return {
         ...state,
       };
     case GET_ITEM_DETAIL:
       return {
         ...state,
-        itemDetail: action.payload
-      }
+        itemDetail: action.payload,
+      };
     case CLEAN_ITEM_DETAIL:
-      return{
+      return {
         ...state,
-        itemDetail: {}
-      }
+        itemDetail: {},
+      };
     default:
       return { ...state };
   }
