@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getCategories, getCompanies, getDiscounts, setActiveUser, setShoppingCart } from "@/redux/actions";
 import Cookies from "js-cookie";
+import { useLoadScript } from "@react-google-maps/api";
 
 export default function RootConfig() {
   const dispatch = useDispatch();
+  useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
   useEffect(() => {
     dispatch(getCompanies());
     dispatch(getDiscounts());
