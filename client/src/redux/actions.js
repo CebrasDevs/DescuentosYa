@@ -1,5 +1,5 @@
 import { URL_BASE } from "@/utils/const";
-import getCompanyDistances from "@/utils/getCompanyDistances";
+import getCompanyDistances from "@/utils/geolocationUtils/getCompanyDistances";
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";

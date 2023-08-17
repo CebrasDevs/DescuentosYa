@@ -21,8 +21,8 @@ import {
   SET_DISTANCES
 } from "./actions";
 import { filterArray } from "@/utils/filterArray";
-import setItemDistances from "@/utils/setItemDistances";
-import setCompanyDistances from "@/utils/setCompanyDistances";
+import setItemDistances from "@/utils/geolocationUtils/setItemDistances";
+import setCompanyDistances from "@/utils/geolocationUtils/setCompanyDistances";
 
 const initialState = {
   companies: [],

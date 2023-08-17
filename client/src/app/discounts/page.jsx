@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 //se agrega para la solicitud de ubicacion al usuario
 import LocationRequestModal from "@/components/Modals/Filters/LocationRequest";
-import getUserLocation from "@/utils/getUserLocation";
+import getUserLocation from "@/utils/geolocationUtils/getUserLocation";
 import { useLoadScript } from "@react-google-maps/api";
 
 export default function discounts() {

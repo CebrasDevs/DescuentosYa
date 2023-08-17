@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 // import { useSelector } from 'react-redux';
 // import getCompanyDistances from '@/utils/getCompanyDistances';
@@ -11,9 +11,6 @@ import { GoogleMap, Marker } from '@react-google-maps/api';
 /* editable es para que no se mueva la marca cuando se renderiza en CompanyDetail.jsx
 */
 export default function Map({ location, locationChange, editable = false }) {
-    // const center = useMemo(() => (userLocation), [userLocation]);
-
-    // const center = useMemo(() => (location), [location]);
     /** 
      * @PabloBestani
      * cambios para reutilizar el componente tambien en el formulario
