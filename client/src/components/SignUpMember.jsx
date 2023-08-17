@@ -4,8 +4,8 @@ import validateMember from "@/utils/validateMember";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import SuccessModal from "./Modals/Success";
-import FailureModal from "./Modals/Failure";
+import SuccessModal from "./Modals/User/Success";
+import FailureModal from "./Modals/User/Failure";
 
 export default function SignUpMember() {
     const [userCreated, setUserCreated] = useState("pending");
