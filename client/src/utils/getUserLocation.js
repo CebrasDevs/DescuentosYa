@@ -15,9 +15,11 @@ export default async function getUserLocation() {
         )
     })
     .then((coords) => {
-        return {
+        const userLocation = {
             lat: coords[1],
             lng: coords[0]
         }
+        localStorage.setItem("userLocation", JSON.stringify(userLocation));
+        return userLocation;
     });
 };
