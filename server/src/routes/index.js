@@ -5,15 +5,16 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+// const verifyToken = require("../utils/authMiddleware")
 
-// Middleware para verificar el token en rutas protegidas
-async function verificarToken(req, res, next) {
+async function verifyToken(req, res, next) {
   try {
-    if (req.authorization.token || !req.cookies.accessTrue || !req.cookies.accessTrue.token) {
+    console.log(req.headers);
+    if (!req.cookies.accessTrue || !req.cookies.accessTrue.token) {
       return res.status(401).json({ message: "Token not provided" });
     }
 
-    const token = req.authorization.token.split(' ')[1] || req.cookies.accessTrue.token;
+    const token = req.cookies.accessTrue.token;
 
     const id = req.cookies.accessTrue.user.id;
 
@@ -29,7 +30,6 @@ async function verificarToken(req, res, next) {
       next();
     });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 }

@@ -1,12 +1,18 @@
 "use client";
-import { deleteShoppingCartItem, createPreference, increaseItemQuantity, decreaseItemQuantity } from "@/redux/actions";
+import {
+  deleteShoppingCartItem,
+  createPreference,
+  increaseItemQuantity,
+  decreaseItemQuantity,
+  setShoppingCart,
+} from "@/redux/actions";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
-
+import Cookies from "js-cookie";
 
 export default function ShoppingCart() {
   const dispatch = useDispatch();
@@ -14,66 +20,82 @@ export default function ShoppingCart() {
   const activeUser = useSelector((state) => state.activeUser);
   const [counters, setCounters] = useState(shoppingCart.map(() => 1)); //creo un counter para cada item, iniciado en 1
 
-
   //aca se coloca la public key de mp
-  initMercadoPago('TEST-ab84421f-0743-4e17-af16-5e47420efd52');
+  initMercadoPago("TEST-ab84421f-0743-4e17-af16-5e47420efd52");
 
+  useEffect(() => {
+    // const cart = Cookies.get("shoppingCart");
+    // if (cart) {
+    //   const sinJSON = JSON.parse(cart);
+    //   dispatch(setShoppingCart(sinJSON));
+    // }
+    console.log(shoppingCart);
+  }, []);
 
-  const handleCounter = function (event, index) { //cada vez que clickea el counter local y el quantity global cambian, el esta local hace que React actualice componentes y evita que el renderizado del esta global se vea con demoras.
-    if (event.target.name === "minus" && shoppingCart[index].quantity > 1 ) {
+  const handleCounter = function (event, index) {
+    //cada vez que clickea el counter local y el quantity global cambian, el esta local hace que React actualice componentes y evita que el renderizado del esta global se vea con demoras.
+    if (event.target.name === "minus" && shoppingCart[index].quantity > 1) {
       let countersCopy = [...counters];
       countersCopy[index] = counters[index] - 1;
       setCounters(countersCopy);
-      dispatch(decreaseItemQuantity(index))
+      dispatch(decreaseItemQuantity(index));
     } else {
       let countersCopy = [...counters];
       countersCopy[index] = counters[index] + 1;
       setCounters(countersCopy);
-      dispatch(increaseItemQuantity(index))
+      dispatch(increaseItemQuantity(index));
     }
+    Cookies.set("shoppingCart", JSON.stringify(shoppingCart));
   };
 
   const handleDelete = function (id) {
+    // CAPTURAR COOKIE, SACAR JSON Y CAPTURAR CONTENIDO, FILTRAR TODOS LOS DISTINTOS
+    let shoppingCartDelete = shoppingCart.filter(
+      (shopping) => shopping.item.id !== id
+    );
+    Cookies.set("shoppingCart", JSON.stringify(shoppingCartDelete));
     dispatch(deleteShoppingCartItem(id));
   };
 
   const products = shoppingCart?.map((element, index) => ({
-    id: element.item.id,
-    title: element.item.name,
-    unit_price: Math.ceil(element.item.price),
+    id: element.item?.id,
+    title: element.item?.name,
+    unit_price: Math.ceil(element.item?.price),
     quantity: shoppingCart[index].quantity,
-    category_id: element.item.category,
+    category_id: element.item?.category,
     description: "DescuentosYa",
   }));
-
-  
 
   const user = {
     email: activeUser.email,
     name: activeUser.name,
   };
-  
 
   const handleCheckout = () => {
-    const response = axios.post(`${URL_BASE}/payment/create-order`, { products, user })
-      .then(response => {
-        console.log(response.data)
+    const response = axios
+      .post(`${URL_BASE}/payment/create-order`, { products, user })
+      .then((response) => {
+        console.log(response.data);
         window.location.href = response.data.response.body.init_point; // redirecciona la pagina a la ventana de Mercado de Pago
       })
       .catch((error) => console.log(error.message));
   };
 
-
   return (
     <div className="min-h-[60vh]">
       {shoppingCart?.map((item, index) => {
-
         return (
-          <div className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap rounded bg-violet-200" key={index}>
-            <h2 className="m-10 justify-center">Product name: {item.item.name}</h2>
-            <h2 className="m-10 justify-center">Price: ${item.item.price}</h2>
+          <div
+            className="m-10 mt-10 p-4 flex justify-center text-center flex-wrap rounded bg-violet-200"
+            key={index}
+          >
             <h2 className="m-10 justify-center">
-            Total Price: ${ (item.item.price * shoppingCart[index].quantity).toFixed(2) }
+              Product name: {item.item?.name}
+            </h2>
+            <h2 className="m-10 justify-center">Price: ${item.item?.price}</h2>
+            <h2 className="m-10 justify-center">
+              Total Price: $
+              {(item.item?.price * shoppingCart[index].quantity).toFixed(2)}
             </h2>
             <div>
               <button
@@ -100,7 +122,7 @@ export default function ShoppingCart() {
 
             <button
               className="h-1/4 w-20 mt-10 rounded text-white  bg-gray-400 hover:bg-red-500"
-              onClick={() => handleDelete(item.id)}
+              onClick={() => handleDelete(item.item.id)}
             >
               Delete
             </button>
@@ -109,7 +131,11 @@ export default function ShoppingCart() {
       })}
       <div>
         {shoppingCart.length ? (
-          <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
+          <button
+            id="checkout"
+            onClick={handleCheckout}
+            className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
+          >
             Checkout
           </button>
         ) : (
