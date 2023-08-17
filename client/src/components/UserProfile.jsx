@@ -99,7 +99,7 @@ export default function UserProfile() {
                                             <h2 className="ml-2">| Expiration date: {voucher.expirationDate}</h2>
                                             <h2 className="ml-2">
                                                 |{" "}
-                                                <Link className="hover:text-blue-500" href={`/profile/myVoucher/${voucher.item.id}`}>
+                                                <Link className="hover:text-blue-500" href={`/profile/myVoucher/${voucher.item.id}?userId=${activeUser.id}`}>
                                                     Detail
                                                 </Link>
                                             </h2>
