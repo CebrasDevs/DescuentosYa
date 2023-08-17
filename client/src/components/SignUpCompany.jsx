@@ -7,8 +7,11 @@ import { useRouter } from "next/navigation";
 //llamado a los nuevos componentes para agregar ubicacion a las comañias que se registren
 import Map from "./Map";
 import { useLoadScript } from '@react-google-maps/api';
+import SuccessModal from "./Modals/Company/Success";
+import FailureModal from "./Modals/Company/Failure";
 
 export default function SignUpCompany() {
+    const [companyCreated, setCompanyCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
     // carga de la API google maps, con la key generada
@@ -87,17 +90,22 @@ export default function SignUpCompany() {
             const response = await axios.post(`${URL_BASE}/companies`, formattedCompany);
             if (response.status === 200) {
                 setErrors({});
-                window.alert(`Company ${formattedCompany.companyName} submitted successfully (provisory)`);
-                router.push("/");
+                setCompanyCreated("success");
             }
         } catch (error) {
+            setCompanyCreated("failure")
             console.log(error)
-            alert(`Error creating company`);
         }
     };
 
+    const close = (status) => {
+        setCompanyCreated("pending");
+    }
+
     return (
         <section className=" bg-slate-200 dark:bg-white h-full">
+            { companyCreated === "success" && <SuccessModal/> }
+            { companyCreated === "failure" && <FailureModal close={close} /> }
             <div className="flex  justify-center   pb-32 bg-slate-200 ">
                 <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
