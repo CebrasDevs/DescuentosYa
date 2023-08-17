@@ -19,6 +19,7 @@ export default function Card({ item, value }) {
         <a href={`/${item.id}`}>
           <h5 className="text-xl tracking-tight text-slate-900">{item.name}</h5>
           <h6>{item.category}</h6>
+          <p className="text-xs">{item.distance?.text}</p>
         </a>
         <div className=" mt-2 mb-5 flex flex-col gap-y-3 items-center justify-between">
           <div>

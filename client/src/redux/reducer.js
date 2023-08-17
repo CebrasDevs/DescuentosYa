@@ -18,8 +18,11 @@ import {
   GET_ITEM_DETAIL,
   CLEAN_ITEM_DETAIL,
   SET_SHOPPING_CART,
+  SET_DISTANCES
 } from "./actions";
 import { filterArray } from "@/utils/filterArray";
+import setItemDistances from "@/utils/setItemDistances";
+import setCompanyDistances from "@/utils/setCompanyDistances";
 
 const initialState = {
   companies: [],
@@ -67,6 +70,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredItems: action.payload,
+      };
+    case SET_DISTANCES:
+      const itemsWithDistances = setItemDistances(state.allItems);
+      const companiesWithDistances = setCompanyDistances(action.payload);
+      return {
+        ...state,
+        allItems: itemsWithDistances,
+        filteredItems: itemsWithDistances,
+        companies: companiesWithDistances
       };
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);

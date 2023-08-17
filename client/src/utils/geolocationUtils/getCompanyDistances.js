@@ -49,5 +49,4 @@ export default async function getCompanyDistances(companies) {
         };
     });
     localStorage.setItem("companyDistances", JSON.stringify(companyDistances));
-    return companyDistances;
 }

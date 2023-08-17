@@ -12,8 +12,10 @@ import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { splitName } from "@/utils/formatUtils";
+import { useLoadScript } from "@react-google-maps/api";
 
 export default function Navbar() {
+    useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
     const activeUser = useSelector((state) => state.activeUser);
 
     const dispatch = useDispatch();

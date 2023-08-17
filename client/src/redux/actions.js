@@ -1,4 +1,5 @@
 import { URL_BASE } from "@/utils/const";
+import getCompanyDistances from "@/utils/getCompanyDistances";
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
@@ -19,7 +20,7 @@ export const GET_ITEM_DETAIL = "GET_ITEM_DETAIL";
 export const CLEAN_ITEM_DETAIL = "CLEAN_ITEM_DETAIL";
 export const CLEAN_ACTIVE_USER = "CLEAN_ACTIVE_USER";
 export const SET_SHOPPING_CART = "SET_SHOPPING_CART";
-
+export const SET_DISTANCES = "SET_DISTANCES";
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
 export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
 
@@ -178,3 +179,18 @@ export const increaseItemQuantity = (index) => {
 export const decreaseItemQuantity = (index) => {
   return { type: DECREASE_ITEM_QUANTITY, payload: index };
 };
+
+export const setDistances = () => {
+  return async (dispatch, getState) => {
+    try {
+      const { data } = await axios(`${URL_BASE}/companies`)
+      await getCompanyDistances(data);
+      await dispatch({ type: SET_DISTANCES, payload: data });
+      const currentState = getState();
+      const { activeFilters } = currentState;
+      return dispatch(filterCards(activeFilters));
+    } catch (error) {
+      console.log("Error ", error)
+    }
+  }
+}

@@ -5,14 +5,14 @@ import { filterCards, getCategories } from "@/redux/actions";
 import { useEffect } from "react";
 import Pagination from "./Pagination";
 
-export default function Filters() {
+export default function Filters({ showModal }) {
     const dispatch = useDispatch();
     const activeFilters = useSelector((state) => state.activeFilters);
     const categories = useSelector((state) => state.categories);
 
     const discountOptions = ["All", "25% or more", "35% or more", "45% or more"];
     const itemTypeOptions = ["All types", "Products", "Services"];
-    const sortingOptions = ["Alphabetical", "Highest discount"];
+    const sortingOptions = ["Alphabetical", "Highest discount", "Closest first"];
     const allCategories = ["All categories", ...categories];
 
     useEffect(() => {
@@ -21,14 +21,17 @@ export default function Filters() {
     }, [dispatch]);
 
     function handleChange(e) {
-        dispatch(
-            filterCards({
-                ...activeFilters,
-                [e.target.name]: e.target.value,
-            })
-        );
+        if (e.target.value === "Closest first" && !localStorage.getItem('userLocation')) {
+            showModal(true)
+        } else {
+            dispatch(
+                filterCards({
+                    ...activeFilters,
+                    [e.target.name]: e.target.value,
+                })
+            );
+        }
     }
-
     return (
         <div className="sticky top-40 ml-20 py-10 w-3/4 rounded-lg border border-gray-100 bg-white shadow-md">
             <div className="flex flex-col justify-center text-center ">
