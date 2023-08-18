@@ -10,7 +10,7 @@ const bodyParser = require('body-parser');
 // nos ayuda a resolver las métricas con la información que nos ofrece, nos sirve para dev y en producción hay que tener cuidado con los datos sensibles
 const morgan = require('morgan');
 // Importando rutas de mercado de pago
-const mercadoPagoRoutes = require('./routes/paymentRouter')
+const paymentsRoutes = require('./routes/paymentRouter')
 // Intanciamos las rutas
 const routes = require('./routes/index.js');
 
@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }))
 
 // Establecemos cabeceras de acceso CORS
 app.use((req, res, next) => {
@@ -30,7 +31,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/payment', mercadoPagoRoutes);
+app.use('/payment', paymentsRoutes);
 
 // Importar y utilizar las rutas
 app.use('/', routes);

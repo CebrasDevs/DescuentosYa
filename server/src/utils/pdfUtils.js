@@ -47,7 +47,7 @@ const registerShoppingPDF = async (userName, items, totalPrice, wayToPay, state,
             .replace("${link}", 'https://descuentos-ya.vercel.app/discounts')
             .replace("${linkText}", 'Checkout our new discounts');
         const objectPdf = await createPdf(formattedPdf);
-        await registerShopping(userEmail, formattedPdf, objectPdf);
+        // await registerShopping(userEmail, formattedPdf, objectPdf);
         const url = await uploadCloudinary(objectPdf.pdf, objectPdf.namePdf);
         return url;
     } catch (error) {
@@ -68,7 +68,7 @@ const createPdf = async (htmlContent) => {
         const resultPdf = await pagePdf.pdf({ format: 'A4' });
         await generatePdf.close();
         // instanciamos el nombre del pdf
-        const filename = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}T${date.getHours()}:HS${date.getMinutes()}:MM${date.getSeconds()}:SS`;
+        const filename = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}T${date.getHours()}-HS${date.getMinutes()}-MM${date.getSeconds()}-SS`;
         // por ultimo se genera el archivo en la ruta mencionada
         fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
         return { pdf: resultPdf, namePdf: filename };
