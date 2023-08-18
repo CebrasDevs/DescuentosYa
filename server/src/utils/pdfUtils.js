@@ -47,7 +47,7 @@ const registerShoppingPDF = async (userName, items, totalPrice, wayToPay, state,
             .replace("${link}", 'https://descuentos-ya.vercel.app/discounts')
             .replace("${linkText}", 'Checkout our new discounts');
         const objectPdf = await createPdf(formattedPdf);
-        // await registerShopping(userEmail, formattedPdf, objectPdf);
+        await registerShopping(userEmail, formattedPdf, objectPdf);
         const url = await uploadCloudinary(objectPdf.pdf, objectPdf.namePdf);
         return url;
     } catch (error) {
