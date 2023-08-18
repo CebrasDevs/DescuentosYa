@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -7,12 +7,12 @@ import Card from "./Card";
 import sortItemsCarousel from "@/utils/geolocationUtils/sortItemsCarousel";
 
 export default function Carousel({ value }) {
-  const itemsPerPage = 3;
+
+  const carouselRef = useRef(null);
 
   let items = useSelector((state) => state.allItems);
   let companies = useSelector((state) => state.companies);
 
-  const [currentPage, setCurrentPage] = useState(0);
   const [companiesWithDistance, setCompaniesWithDistance] = useState(null)
   useEffect(() => {
     if (localStorage.getItem("userLocation") &&
@@ -26,42 +26,35 @@ export default function Carousel({ value }) {
   }, [companies]);
 
   const data = value === "discounts" ? items : companiesWithDistance ? companiesWithDistance : companies;
-  const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  const currentView = data.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+        carouselRef.current.scrollLeft -= 400;
+      }
+}
 
-  const nextPage = () => {
-    if (currentPage < totalPages - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+const scrollRight = () => {
+    if (carouselRef.current) {
+        carouselRef.current.scrollLeft += 400;
+      }
+}
 
-  const prevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
 
   return (
-    <div className="flex ">
-      {/* Renderiza los elementos de la página actual */}
-        <button onClick={prevPage} disabled={currentPage === 0}>
-          <FiChevronLeft className=" text-white text-6xl bg-slate-600 rounded-full" />
+    <div className="flex items-center">
+        <button onClick={scrollLeft} className="mr-3">
+          <FiChevronLeft size={60} className=" text-violet-600 bg-white rounded-full hover:shadow-2xl" />
         </button>
-      <div className=" flex flex-wrap w-full min-w-full justify-start">
-        {currentView.map((item, index) => (
-          <div  key={index}>
-            {/* Renderiza tu elemento aquí */}
+      <div ref={carouselRef} className="carousel flex items-center justify-start overflow-x-auto relative py-5 scroll-smooth scrollbar-hide">
+        {data.map((item, index) => (
+          <div  key={index} className="mx-3">
             {value === "discounts" ? (
-              <Card item={item}/>
+              <Card item={item} />
             ) : (
-              <div className=" bg-white w-[400px] rounded-lg m-2 shadow-md hover:shadow-xl">
+              <div className=" bg-white w-[350px] rounded-lg shadow-md hover:shadow-xl">
                 <Link href={`/brands/${item.id}`}>
                   <img
-                    className="card w-full h-[200px] bg-white shadow-xl rounded-lg filter grayscale hover:filter-none transition duration-300"
+                    className="card w-full h-[200px] bg-white rounded-lg hover:scale-105 transition-transform ease-in-out duration-300"
                     src={item.imageUrl}
                     alt={item.companyName}
                   />
@@ -71,8 +64,8 @@ export default function Carousel({ value }) {
           </div>
         ))}
       </div>
-        <button onClick={nextPage} disabled={currentPage === totalPages - 1}>
-          <FiChevronRight className=" text-white text-6xl bg-slate-600 rounded-full"/>
+        <button onClick={scrollRight} className="ml-3">
+          <FiChevronRight size={60} className=" text-violet-600 bg-white rounded-full hover:shadow-lg"/>
         </button>
     </div>
   );

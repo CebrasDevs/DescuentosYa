@@ -27,7 +27,7 @@ export default function Filters({ showModal }) {
         }
     }
     return (
-        <div className="sticky top-40 ml-20 py-10 w-3/4 rounded-lg border border-gray-100 bg-white shadow-md">
+        <div className="sticky top-40 pb-10 rounded-lg border border-gray-100 bg-white shadow-md">
             <div className="flex flex-col justify-center text-center ">
                 <div className=" p-5">
                     <p className="font-medium mb-2 text-lg">Type:</p>
