@@ -6,7 +6,8 @@ export function formatCompany(company) {
         companyName, 
         description, 
         cuit, 
-        address, 
+        address,
+        location, //se agrega la pueda propiedad para la ubicacion de la compañia 
         phoneNumber, 
         imageUrl
     } = company;
@@ -20,6 +21,7 @@ export function formatCompany(company) {
         description: description,
         cuit: parsedCuit,
         address: address,
+        location,
         phoneNumber: parsedPhoneNumber,
         imageUrl: imageUrl
     };

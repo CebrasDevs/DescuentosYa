@@ -2,19 +2,19 @@
 export function filterArray(items, filters) {
     // Codigo defensivo
     if (!items.length) {
-        console.log("ERROR: no items available to filter (at utils/reduxUtils)");
+        console.log("ERROR: no items available to filter (at utils/filterArray)");
         return items;
     }
     // Preparo los items a filtrar, y los criterios de filtrado
     let filtered = [...items];
-    const { 
-        chosenItemType, 
-        chosenDiscount, 
-        chosenCategory, 
-        chosenSorting 
+    const {
+        chosenItemType,
+        chosenDiscount,
+        chosenCategory,
+        chosenSorting
     } = filters;
 
-    
+
 
     //FILTRO POR TIPO DE ITEM
     if (chosenItemType === 'Products') {
@@ -34,15 +34,18 @@ export function filterArray(items, filters) {
         filtered = filtered.filter((item) => item.category === chosenCategory);
     };
     //ORDENAMIENTOS
-    switch(chosenSorting) {
+    switch (chosenSorting) {
         case 'Alphabetical':
             filtered = filtered.sort((a, b) => a.name.localeCompare(b.name));
             break;
         case 'Highest discount':
             filtered.sort((a, b) => b.discount - a.discount);
             break;
+        case 'Closest first':
+            filtered.sort((a, b) => a.distance.value - b.distance.value)
+            break;
         default:
-            console.log('ERROR: invalid sorting method chosen (at reduxUtils)');
+            console.log('ERROR: invalid sorting method chosen (at utils/filterArray)');
     };
     
     return filtered;

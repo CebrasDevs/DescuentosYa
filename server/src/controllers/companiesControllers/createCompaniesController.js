@@ -8,7 +8,9 @@ module.exports = async (dataCompany) => {
     !dataCompany.password || !isNaN(dataCompany.password) ||
     !dataCompany.dni_cuit || isNaN(+dataCompany.dni_cuit) ||
     !regexName.test(dataCompany.name) ||
-    !dataCompany.address || !isNaN(dataCompany.address)
+    !dataCompany.address || !isNaN(dataCompany.address) ||
+    !dataCompany.longitude || isNaN(dataCompany.longitude) || // verificamos que exista, y que sea un numero
+    !dataCompany.latitude || isNaN(dataCompany.latitude)
   )
     throw new Error("Incomplete data or incorrect");
   dataCompany.role = "COMPANY";
@@ -24,6 +26,8 @@ module.exports = async (dataCompany) => {
     name,
     imageUrl,
     address,
+    longitude, //lo obtenemos del resultado de la insercion
+    latitude,
     phoneNumber,
     description
   } = newCompany;
@@ -36,6 +40,7 @@ module.exports = async (dataCompany) => {
     name,
     imageUrl,
     address,
+    location: { lng: longitude, lat: latitude }, // se retorna con el formato esperado en front
     phoneNumber,
     description
   };

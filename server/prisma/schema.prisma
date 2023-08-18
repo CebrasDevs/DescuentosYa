@@ -26,6 +26,8 @@ model User {
   name        String?
   imageUrl    String
   address     String
+  latitude    Float? // se agrega pero no es obligatorio
+  longitude   Float? //lo hacemos obligatorio a la hora de crear una nueva compañia
   phoneNumber String?
   lastPayment DateTime?
   description String?
@@ -65,6 +67,7 @@ model Review {
   star4         Boolean         @default(false)
   star5         Boolean         @default(false)
   enabled       Boolean         @default(true)
+
 }
 
 model Category {

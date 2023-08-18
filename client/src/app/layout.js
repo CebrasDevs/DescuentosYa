@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Providers from "../redux/provider";
 import Navbar from "../components/Navbar";
 import Footer from "@/components/Footer";
+import RootConfig from "@/components/RootConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <Providers>
         <body className={inter.className}>
           <header>
+            <RootConfig/>
             <Navbar />
           </header>
           <main className="mt-28">

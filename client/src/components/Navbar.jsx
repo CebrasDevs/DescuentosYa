@@ -6,14 +6,15 @@ import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
-import { cleanActiveUser, setActiveUser, setShoppingCart } from "@/redux/actions";
-import { useEffect } from "react";
+import { cleanActiveUser } from "@/redux/actions";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { splitName } from "@/utils/formatUtils";
+import { useLoadScript } from "@react-google-maps/api";
 
 export default function Navbar() {
+    useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
     const activeUser = useSelector((state) => state.activeUser);
 
     const dispatch = useDispatch();
@@ -22,20 +23,6 @@ export default function Navbar() {
     const params = useSearchParams();
     const profile = params.get("profile");
 
-    useEffect(() => {
-        // Acceder a una cookie
-        const retrievedCookie = Cookies.get("accessTrue");
-        if (retrievedCookie) {
-            const parsedValue = JSON.parse(retrievedCookie);
-            dispatch(setActiveUser(parsedValue.id));
-        }
-        const cart = Cookies.get("shoppingCart");
-        if (cart) {
-          const cartValue = JSON.parse(cart);
-          dispatch(setShoppingCart(cartValue));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
 
     const handleLogOut = () => {
         Cookies.remove("accessTrue");
