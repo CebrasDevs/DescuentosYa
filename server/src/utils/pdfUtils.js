@@ -68,9 +68,11 @@ const createPdf = async (htmlContent) => {
         const resultPdf = await pagePdf.pdf({ format: 'A4' });
         await generatePdf.close();
         // instanciamos el nombre del pdf
+
         const filename = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}T${date.getHours()}-HS${date.getMinutes()}-MM${date.getSeconds()}-SS`;
+
         // por ultimo se genera el archivo en la ruta mencionada
-        fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
+        // fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
         return { pdf: resultPdf, namePdf: filename };
     } catch (error) {
         console.log('Error pdf: ' + error.message);

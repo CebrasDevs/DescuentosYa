@@ -12,7 +12,8 @@ function structureMember(user) {
         phoneNumber,
         lastPayment,
         Voucher,
-        Shopping
+        Shopping,
+        Review
     } = user;
 
     const structuredVouchers = Voucher.map((voucher) => {
@@ -93,7 +94,8 @@ function structureMember(user) {
         lastPayment,
         imageUrl,
         vouchers: structuredVouchers,
-        shoppings: structuredShoppings
+        shoppings: structuredShoppings,
+        Review
     };
     return structuredMember;
 };

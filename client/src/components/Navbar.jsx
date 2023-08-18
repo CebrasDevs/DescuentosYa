@@ -6,11 +6,12 @@ import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
-import { cleanActiveUser, setActiveUser } from "@/redux/actions";
+import { cleanActiveUser, setActiveUser, setShoppingCart } from "@/redux/actions";
 import { useEffect } from "react";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { splitName } from "@/utils/formatUtils";
 
 export default function Navbar() {
     const activeUser = useSelector((state) => state.activeUser);
@@ -28,18 +29,29 @@ export default function Navbar() {
             const parsedValue = JSON.parse(retrievedCookie);
             dispatch(setActiveUser(parsedValue.id));
         }
+        const cart = Cookies.get("shoppingCart");
+        if (cart) {
+          const cartValue = JSON.parse(cart);
+          dispatch(setShoppingCart(cartValue));
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch]);
 
     const handleLogOut = () => {
         Cookies.remove("accessTrue");
+        Cookies.remove("shoppingCart");
         axios.post(`${URL_BASE}/logout`);
         router.push("/");
-        dispatch(cleanActiveUser())
+        dispatch(cleanActiveUser());
     };
 
+    let fullName;
+    if (activeUser.role === "MEMBER") {
+        fullName = splitName(activeUser);
+    }
+
     return (
-        <div className=" fixed top-0 left-0 right-0 z-10  shadow-lg"> 
+        <div className=" fixed top-0 left-0 right-0 z-50  shadow-lg"> 
             <div className="flex items-center w-full h-16 bg-slate-50">
                 <div className=" flex w-3/4 m-auto items-center">
                     <div className="flex items-center h-full ml-10 mr-auto">
@@ -97,7 +109,11 @@ export default function Navbar() {
                                 >
                                     <IoPerson className=" mr-3" />
                                     <div>
-                                        <h1>{activeUser.name}</h1>
+                                        {activeUser.role === "ADMIN" || activeUser.role === "MEMBER" ? (
+                                            <h1>{fullName.lastName}, {fullName.firstName}</h1>
+                                        ) : (
+                                            <h1>{activeUser.name}</h1>
+                                        )}
                                         <h1>{activeUser.role.toLowerCase()}</h1>
                                     </div>
                                 </Link>

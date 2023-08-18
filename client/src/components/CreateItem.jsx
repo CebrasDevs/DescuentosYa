@@ -8,6 +8,8 @@ import { getCategories, setActiveUser } from "@/redux/actions";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
+import ItemSuccess from "./Modals/Company/ItemSuccess";
+import ItemFailure from "./Modals/Company/ItemFailure";
 
 export default function CreateItem() {
     const dispatch = useDispatch();
@@ -17,6 +19,7 @@ export default function CreateItem() {
 
     const categories = useSelector((state) => state.categories);
     const allCategories = ["Choose category", ...categories];
+    const [itemCreated, setItemCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
@@ -80,18 +83,25 @@ export default function CreateItem() {
                     price: "",
                     discount: "",
                 });
-                window.alert("Creado correctamente");
+                setItemCreated("success");
             }
         } catch (error) {
             console.log(error);
-            window.alert("No se pudo crear el item");
+            setItemCreated("failure");
+            
         }
     };
 
+    const close = (status) => {
+        setItemCreated("pending");
+    }
+
     return (
         <section className=" bg-slate-200 dark:bg-white h-full">
-            <div className="flex  justify-center mt-12 pb-12 bg-slate-200 ">
-                <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
+            { itemCreated === "success" && <ItemSuccess close={close} />}
+            { itemCreated === "failure" && <ItemFailure close={close} /> }
+            <div className="flex justify-center mt-12 pb-12 bg-slate-200 ">
+                <div className=" w-5/12 mt-10 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
                             Create Item

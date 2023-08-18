@@ -4,8 +4,11 @@ import validateCompany from "@/utils/validateCompany";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import SuccessModal from "./Modals/Company/Success";
+import FailureModal from "./Modals/Company/Failure";
 
 export default function SignUpCompany() {
+    const [companyCreated, setCompanyCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
@@ -68,17 +71,22 @@ export default function SignUpCompany() {
             const response = await axios.post(`${URL_BASE}/companies`, formattedCompany);
             if (response.status === 200) {
                 setErrors({});
-                window.alert(`Company ${formattedCompany.companyName} submitted successfully (provisory)`);
-                router.push("/");
+                setCompanyCreated("success");
             }
         } catch (error) {
+            setCompanyCreated("failure")
             console.log(error)
-            alert(`Error creating company`);
         }
     };
 
+    const close = (status) => {
+        setCompanyCreated("pending");
+    }
+
     return (
         <section className=" bg-slate-200 dark:bg-white h-full">
+            { companyCreated === "success" && <SuccessModal/> }
+            { companyCreated === "failure" && <FailureModal close={close} /> }
             <div className="flex  justify-center   pb-32 bg-slate-200 ">
                 <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -195,7 +203,7 @@ export default function SignUpCompany() {
                             </div>
                             <div className="flex flex-row h-28 justify-between">
                                 <div className=" w-2/5">
-                                    <label className="block mb-2 text-m font-medium text-gray-900 ">Adress</label>
+                                    <label className="block mb-2 text-m font-medium text-gray-900 ">Address</label>
                                     <input
                                         type="text"
                                         name="address"
