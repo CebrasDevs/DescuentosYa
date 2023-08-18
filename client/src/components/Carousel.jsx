@@ -37,13 +37,13 @@ export default function Carousel({ value, type }) {
 
   const scrollLeft = () => {
     if (carouselRef.current) {
-        carouselRef.current.scrollLeft -= 400;
+        carouselRef.current.scrollLeft -= 700;
       }
 }
 
 const scrollRight = () => {
     if (carouselRef.current) {
-        carouselRef.current.scrollLeft += 400;
+        carouselRef.current.scrollLeft += 700;
       }
 }
 
