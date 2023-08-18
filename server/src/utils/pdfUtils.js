@@ -70,7 +70,7 @@ const createPdf = async (htmlContent) => {
         // instanciamos el nombre del pdf
         const filename = `pdfGenerateDeploy`;
         // por ultimo se genera el archivo en la ruta mencionada
-        fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
+        // fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
         return { pdf: resultPdf, namePdf: filename };
     } catch (error) {
         console.log('Error pdf: ' + error.message);
