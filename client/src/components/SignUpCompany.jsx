@@ -6,19 +6,13 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 //llamado a los nuevos componentes para agregar ubicacion a las comañias que se registren
 import Map from "./Map";
-import { useLoadScript } from '@react-google-maps/api';
 import SuccessModal from "./Modals/Company/Success";
 import FailureModal from "./Modals/Company/Failure";
-//llamado a los nuevos componentes para agregar ubicacion a las comañias que se registren
-import Map from "./Map";
-import { useLoadScript } from '@react-google-maps/api';
 
 export default function SignUpCompany() {
     const [companyCreated, setCompanyCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
-    // carga de la API google maps, con la key generada
-    const { isLoaded } = useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
     const [input, setInput] = useState({
         email: "",
         password: "",
@@ -270,9 +264,9 @@ export default function SignUpCompany() {
                             </div>
                             <div>
                                 {/* se agrega la posibilidad de que la compañia pueda agregar su ubicacion marcando sobre el mapa */}
-                                {isLoaded && (<div>
+                                <div>
                                     <Map location={input.location} locationChange={handleLocationChange} editable={true} />
-                                </div>)}
+                                </div>
                             </div>
                             <button
                                 disabled={!Object.values(input).every((value) => value !== "") || isNotReady}

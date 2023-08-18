@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { BsCart3, BsWindowSidebar } from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
 import { IoPerson } from "react-icons/io5";
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
@@ -11,10 +11,8 @@ import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { splitName } from "@/utils/formatUtils";
-import { useLoadScript } from "@react-google-maps/api";
 
 export default function Navbar() {
-    useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
     const activeUser = useSelector((state) => state.activeUser);
 
     const dispatch = useDispatch();

@@ -2,15 +2,13 @@
 import Filters from "@/components/Filters";
 import Grid from "@/components/Grid";
 import { getItemsByName, setDistances } from "@/redux/actions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 //se agrega para la solicitud de ubicacion al usuario
 import LocationRequestModal from "@/components/Modals/Filters/LocationRequest";
 import getUserLocation from "@/utils/geolocationUtils/getUserLocation";
-import { useLoadScript } from "@react-google-maps/api";
 
 export default function discounts() {
-  useLoadScript({ googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY });
   // const [search, setSearch] = useState("");
 
   const dispatch = useDispatch();
