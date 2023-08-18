@@ -1,5 +1,6 @@
 import { URL_BASE } from "@/utils/const";
 import getCompanyDistances from "@/utils/geolocationUtils/getCompanyDistances";
+import getDistances from "@/utils/geolocationUtils/getDistances";
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
@@ -97,7 +98,15 @@ export const getItemsByName = (value) => {
 export const getCompanyDetail = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/companies/${id}`);
+      let { data } = await axios.get(`${URL_BASE}/companies/${id}`);
+      const userLocation = localStorage.getItem("userLocation");
+      if (userLocation) {
+        //si se habilito, ya se calculo distancia, la buscamos y si no esta, se calcula con api nuevamente
+        const distance = localStorage.getItem("companyDistances") ?
+          (JSON.parse(localStorage.getItem("companyDistances"))[data.id - 1]).distance :
+          (await getDistances([JSON.parse(userLocation)], [data.location]))[0];
+        data = { ...data, distance: distance };
+      }
       return dispatch({
         type: GET_COMPANY_DETAIL,
         payload: data,
@@ -156,8 +165,12 @@ export const setShoppingCart = (shoppingCart) => {
 export const getItemDetail = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`${URL_BASE}/items/${id}`);
-
+      let { data } = await axios(`${URL_BASE}/items/${id}`);
+      const userLocation = localStorage.getItem("userLocation");
+      if (userLocation) {
+        const distance = await (getDistances([JSON.parse(userLocation)], [data.companyLocation]))
+        data = { ...data, distance: distance[0] }
+      }
       return dispatch({
         type: GET_ITEM_DETAIL,
         payload: data,
@@ -181,8 +194,13 @@ export const decreaseItemQuantity = (index) => {
 };
 
 export const setDistances = (companies) => {
-  return async (dispatch) => {
+  return async (dispatch,getState) => {
     try {
+      if(!companies){
+        // unico caso que sirce, es cuando quiere filtrar por mas cercano, entonces no manda companies
+        const currentState = getState();
+        companies = currentState.companies;
+      }
       await getCompanyDistances(companies);
       return dispatch({ type: SET_DISTANCES, payload: companies });
     } catch (error) {

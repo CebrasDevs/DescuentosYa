@@ -14,6 +14,10 @@ module.exports = async (id) => {
             discount: item.discount,
             companyId: item.userId,
             companyName: item.user.company_name,
+            companyLocation:{
+                lat: item.user.latitude,
+                lng: item.user.longitude
+            }
         }
     })
 

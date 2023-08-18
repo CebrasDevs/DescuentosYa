@@ -163,6 +163,9 @@ export default function ItemDetail({ data }) {
                 <span className=" text-red-600"> {data.discount}% </span>
                 de descuento en la seccion {data.category} en {data.name}
               </h1>
+              {data.distance && (
+                <h1>Distance: {data.distance?.text}</h1>
+              )}
               {data.price > 0 && (
                 <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">
                   ${data.price}{" "}
