@@ -4,23 +4,23 @@ import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import Card from "./Card";
-// import sortItemsCarousel from "@/utils/geolocationUtils/sortItemsCarousel";
+import sortItemsCarousel from "@/utils/geolocationUtils/sortItemsCarousel";
 
 export default function Carousel({ value }) {
   const itemsPerPage = 3;
 
-  const items = useSelector((state) => state.allItems);
-  const companies = useSelector((state) => state.companies);
+  let items = useSelector((state) => state.allItems);
+  let companies = useSelector((state) => state.companies);
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  // useEffect(() => {
-  //   const userLocation = JSON.parse(localStorage.getItem("userLocation"));
-  //   if (userLocation) {
-  //     companies.sort((a, b) => a.distance.value - b.distance.value);
-  //     items = sortItemsCarousel(items);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const userLocation = JSON.parse(localStorage.getItem("userLocation"));
+    if (userLocation) {
+      companies.sort((a, b) => a.distance.value - b.distance.value);
+      items = sortItemsCarousel(items);
+    };
+  }, []);
 
   const data = value === "discounts" ? items : companies;
   const totalPages = Math.ceil(data.length / itemsPerPage);
