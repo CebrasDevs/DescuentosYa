@@ -6,7 +6,7 @@ import Link from "next/link";
 import Card from "./Card";
 import sortItemsCarousel from "@/utils/geolocationUtils/sortItemsCarousel";
 
-export default function Carousel({ value }) {
+export default function Carousel({ value, type }) {
 
   const carouselRef = useRef(null);
 
@@ -25,7 +25,15 @@ export default function Carousel({ value }) {
     };
   }, [companies]);
 
-  const data = value === "discounts" ? items : companiesWithDistance ? companiesWithDistance : companies;
+  let data = value === "discounts" ? items : companiesWithDistance ? companiesWithDistance : companies;
+
+  if(value === "discounts") {
+    if(type === "products"){
+      data = data.filter((item) => item.price === 0)
+    } else {
+      data = data.filter((item) => item.price !== 0)
+    }
+  }
 
   const scrollLeft = () => {
     if (carouselRef.current) {
