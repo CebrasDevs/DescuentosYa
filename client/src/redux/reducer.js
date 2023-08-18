@@ -74,10 +74,11 @@ const rootReducer = (state = initialState, action) => {
     case SET_DISTANCES:
       const itemsWithDistances = setItemDistances(state.allItems);
       const companiesWithDistances = setCompanyDistances(action.payload);
+      const filteredItems = filterArray(itemsWithDistances, state.activeFilters);
       return {
         ...state,
         allItems: itemsWithDistances,
-        filteredItems: itemsWithDistances,
+        filteredItems: filteredItems,
         companies: companiesWithDistances
       };
     case FILTER_CARDS:

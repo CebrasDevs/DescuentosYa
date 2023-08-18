@@ -180,17 +180,13 @@ export const decreaseItemQuantity = (index) => {
   return { type: DECREASE_ITEM_QUANTITY, payload: index };
 };
 
-export const setDistances = () => {
-  return async (dispatch, getState) => {
+export const setDistances = (companies) => {
+  return async (dispatch) => {
     try {
-      const { data } = await axios(`${URL_BASE}/companies`)
-      await getCompanyDistances(data);
-      await dispatch({ type: SET_DISTANCES, payload: data });
-      const currentState = getState();
-      const { activeFilters } = currentState;
-      return dispatch(filterCards(activeFilters));
+      await getCompanyDistances(companies);
+      return dispatch({ type: SET_DISTANCES, payload: companies });
     } catch (error) {
-      console.log("Error ", error)
+      console.log(error)
     }
   }
 }
