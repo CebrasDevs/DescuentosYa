@@ -11,7 +11,7 @@ module.exports = async (data) => {
     } = data;
     const shopper = (await getUsersHelper({ id: +userId }))[0];
     //obtenemos todos los ID de los items comprados
-    const itemsIds = items.map(({ id }) => id);
+    const itemsIds = items.map(({ id }) => +id);
     //obtenemos toda la info de cada item comprado
     const itemsDB = await getItemsHelper({ id: { in: itemsIds } });
     const itemsWithQuantities = items.map((itemShop) => {
