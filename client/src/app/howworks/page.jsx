@@ -15,7 +15,7 @@ export default function howWorks() {
             for with the best discount possible!
           </h3>
         </div>
-        <LiaShoppingBagSolid className=" h-44 w-44"/>
+        <img className=" w-32" src="https://res.cloudinary.com/dwndzlcxp/image/upload/v1692323579/DescuentosYaBrand-03_hbs5xp.png"></img>
       </div>
       <div className=" my-6 w-full flex flex-row justify-center ">
         <AiOutlineShoppingCart className=" h-44 w-40" />
