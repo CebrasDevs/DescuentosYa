@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import validateItem from "@/utils/validateItem";
 import { setActiveUser } from "@/redux/actions";
 import Cookies from "js-cookie";
@@ -12,6 +12,9 @@ import ItemSuccess from "./Modals/Company/ItemSuccess";
 import ItemFailure from "./Modals/Company/ItemFailure";
 
 export default function CreateItem() {
+
+    const dispatch = useDispatch();
+
     const retrievedCookie = Cookies.get("accessTrue");
     const parsedValue = JSON.parse(retrievedCookie);
 
@@ -80,7 +83,7 @@ export default function CreateItem() {
                 setItemCreated("success");
             }
         } catch (error) {
-            console.log(error);
+            console.log("error");
             setItemCreated("failure");
             
         }
