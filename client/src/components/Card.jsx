@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 export default function Card({ item, value }) {
     return (
         <Link href={`/${item.id}`}>
-            <div className="card relative bg-white w-[270px] min-h-[455px] rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform ease-in-out duration-300">
+            <div className="card relative bg-white w-[270px] min-h-[470px] rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform ease-in-out duration-300">
                 {value === "profile" && <FaEdit size={30} className="absolute -right-4 -top-4 hover:text-blue-600" />}
                 <span className="absolute -top-1 -left-1 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
                     {item.discount}% OFF
@@ -17,6 +17,7 @@ export default function Card({ item, value }) {
                 <div className="bottom border-t flex flex-col justify-center px-4">
                     <div className="title font-semibold text-lg">{item.name}</div>
                     <div className="category font-light">{item.category}</div>
+                    <div className="text-xs">{item.distance?.text}</div>
                     <div className=" my-2 flex flex-col gap-y-3 items-center justify-between">
                         <div className="text-2xl text-center font-bold text-slate-900">
                             {item.price === 0 ? (
