@@ -22,7 +22,7 @@ module.exports = async (data) => {
             companyName: item.user.name
         }
     });
-    const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithCompanyName, totalPrice, wayToPay, state, "wtfranco22@gmail.com");
+    const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithCompanyName, totalPrice, wayToPay, state, shopper.email);
     const shopping = {
         userId,
         pdfUrl,
