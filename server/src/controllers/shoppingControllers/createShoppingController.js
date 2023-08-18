@@ -14,15 +14,15 @@ module.exports = async (data) => {
     const itemsIds = items.map(({ id }) => +id);
     //obtenemos toda la info de cada item comprado
     const itemsDB = await getItemsHelper({ id: { in: itemsIds } });
-    const itemsWithQuantities = items.map((itemShop) => {
-        // le agregamos a cada item, la cantidad que se compro para detallar el PDF
+    const itemsWithCompanyName = items.map((itemShop) => {
+        // le agregamos a cada item, la ccompañia a quien le compro para detallar el PDF
         const item = (itemsDB.find((itemDB) => itemDB.id === itemShop.id ))
         return {
-            ...item,
-            quantity: itemShop.quantity
+            ...itemShop,
+            companyName: item.user.name
         }
     });
-    const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithQuantities, totalPrice, wayToPay, state, shopper.email);
+    const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithCompanyName, totalPrice, wayToPay, state, "wtfranco22@gmail.com");
     const shopping = {
         userId,
         pdfUrl,
