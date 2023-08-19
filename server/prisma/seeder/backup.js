@@ -1,6 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const faker = require('faker');
-
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
+const { SALT_ROUNDS } = process.env
+let salt = bcrypt.genSaltSync(+SALT_ROUNDS)
 const prisma = new PrismaClient();
 async function seedData() {
     // Crear categorías
@@ -33,11 +36,12 @@ async function seedData() {
     ];
     const companies = []; //coleccionamos los usuarios companies para crear sus items mas adelante
     for (let i = 0; i < dataCompanies.length; i++) {
+        
         // recorremos el arreglo para insertar las companias en la tabla
         const company = await prisma.user.create({ //guardamos el objeto insertado en la tabla
             data: {
                 email: dataCompanies[i].email,
-                password: dataCompanies[i].password,
+                password: bcrypt.hashSync(dataCompanies[i].password, salt),
                 enabled: true,
                 role: dataCompanies[i].role,
                 dni_cuit: dataCompanies[i].dni_cuit,
@@ -63,7 +67,7 @@ async function seedData() {
         const member = await prisma.user.create({
             data: {
                 email: faker.internet.email(),
-                password: "123456",
+                password: bcrypt.hashSync("123456", salt),
                 enabled: true,
                 role: 'MEMBER',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
@@ -79,20 +83,20 @@ async function seedData() {
 
     // Creamos un arreglo para guardar los datos de los admins del equipo
     const dataAdmins = [
-        { email: 'SnowDevLC@gmail.com', password: 'SnowDevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
-        { email: 'PabloBestani@gmail.com', password: 'PabloBestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
+        { email: 'SnowDevLC@gmail.com', password: 'snowdevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
+        { email: 'PabloBestani@gmail.com', password: 'pablobestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
         { email: 'misaelc98@hotmail.com', password: 'misaelc98', name: 'misaelc98', imageUrl: 'https://avatars.githubusercontent.com/u/129080836?s=60&v=4' },
         { email: 'wtfranco22@hotmail.com', password: 'wtfranco22', name: 'wtfranco22', imageUrl: 'https://avatars.githubusercontent.com/u/13934218?s=60&v=4' },
-        { email: 'AlbertoMallar@hotmail.com', password: 'AlbertoMallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
-        { email: 'NicoGarcia12@hotmail.com', password: 'NicoGarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
-        { email: 'DelHoyoLorenzo@yahoo.com', password: 'DelHoyoLorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
-        { email: 'AGAlbertoGentile@yahoo.com', password: 'AGAlbertoGentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
+        { email: 'AlbertoMallar@hotmail.com', password: 'albertomallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
+        { email: 'NicoGarcia12@hotmail.com', password: 'nicogarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
+        { email: 'DelHoyoLorenzo@yahoo.com', password: 'delhoyolorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
+        { email: 'AGAlbertoGentile@yahoo.com', password: 'agalbertogentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
     ];
     for (let i = 0; i < dataAdmins.length; i++) {
         await prisma.user.create({
             data: {
                 email: dataAdmins[i].email.toLowerCase(),
-                password: dataAdmins[i].password.toLocaleLowerCase(),
+                password: bcrypt.hashSync(dataAdmins[i].password,salt),
                 enabled: true,
                 role: 'ADMIN',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
