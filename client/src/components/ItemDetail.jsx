@@ -19,7 +19,7 @@ export default function ItemDetail({ data }) {
   const activeUser = useSelector((state) => state.activeUser);
   const router = useRouter();
 
-  const { averageRating , reviews } = getAverageRating(data)
+  const { averageRating, reviews } = getAverageRating(data)
 
   const [modify, setModify] = useState(false);
 
@@ -45,6 +45,8 @@ export default function ItemDetail({ data }) {
     }
   };
 
+
+
   const handleGenerateCode = function () {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
@@ -60,6 +62,8 @@ export default function ItemDetail({ data }) {
 
   if (data.price !== 0) {
     //esto es un servicio
+    console.log(data);
+
     return (
       <section className=" flex w-full h-full justify-center">
         {modify ? (
@@ -115,7 +119,7 @@ export default function ItemDetail({ data }) {
                 </div>
                 <div className=" absolute right-10 bottom-10 flex">
                   {activeUser.role === "ADMIN" ||
-                  activeUser.role === "COMPANY" ? null : (
+                    activeUser.role === "COMPANY" ? null : (
                     <Link href={"/shoppingcart"}>
                       <button
                         className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
@@ -126,7 +130,7 @@ export default function ItemDetail({ data }) {
                     </Link>
                   )}
                   {activeUser.id === data.companyId ||
-                  activeUser.role === "ADMIN" ? (
+                    activeUser.role === "ADMIN" ? (
                     <button onClick={modifyHandler}>
                       <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
                     </button>
@@ -149,14 +153,15 @@ export default function ItemDetail({ data }) {
                         return (
                           <div className="border-b-2 m-5 w-full">
                             <div className="flex">
-                              {[1, 2, 3, 4, 5].map((starNumber) => {
-                                return starNumber <= reviews[index] ? (
-                                  <FaStar className="text-yellow-500" />
-                                ) : (
-                                  <FaStar />
-                                );
-                              })}
-                            </div>
+                            {[1, 2, 3, 4, 5].map((starNumber) => {
+                              return starNumber <= reviews[index] ? (
+                                <FaStar className="text-yellow-500" />
+                              ) : (
+                                <FaStar />
+                              );
+                            })}
+                          </div>
+                            <h1 className="m-5"> {review.user.name} </h1>
                             <h1 className="m-5">"{review.comment}"</h1>
                           </div>
                         );
@@ -168,8 +173,22 @@ export default function ItemDetail({ data }) {
                     <h1 className="font-semibold text-4xl text-violet-600 m-1">
                       {averageRating}
                     </h1>
-                    <FaStar className="text-yellow-500 text-2xl" />
                   </div>
+                  <div className="flex">
+                              {[1, 2, 3, 4, 5].map((starNumber) => {
+                                return (
+                                  <div className="m-1">
+                                    <FaStar
+                                      className={
+                                        starNumber <= averageRating
+                                          ? "text-yellow-500 text-2xl m-1"
+                                          : "text-2xl m-1"
+                                      }
+                                    />
+                                  </div>
+                                );
+                              })}
+                            </div>
                   <h1>{reviews.length} reviews</h1>
                 </div>
               </div>
@@ -179,6 +198,7 @@ export default function ItemDetail({ data }) {
       </section>
     );
   }
+  console.log(data);
 
   //si la company ofrece productos:
   return (
@@ -231,7 +251,7 @@ export default function ItemDetail({ data }) {
                   Get Voucher
                 </button>
                 {activeUser.id === data.companyId ||
-                activeUser.role === "ADMIN" ? (
+                  activeUser.role === "ADMIN" ? (
                   <button onClick={modifyHandler}>
                     <FaEdit size={30} className="ml-6" />
                   </button>
@@ -262,6 +282,7 @@ export default function ItemDetail({ data }) {
                               );
                             })}
                           </div>
+                          <h1 className="m-5"> {review.user.name} </h1>
                           <h1 className="m-5">"{review.comment}"</h1>
                         </div>
                       );
@@ -273,12 +294,28 @@ export default function ItemDetail({ data }) {
                   <h1 className="font-semibold text-4xl text-violet-600 m-1">
                     {averageRating}
                   </h1>
-                  <FaStar className="text-yellow-500 text-2xl" />
+                </div>
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((starNumber) => {
+                    return (
+                      <div className="m-1">
+                        <FaStar
+                          className={
+                            starNumber <= averageRating
+                              ? "text-yellow-500 text-2xl m-1"
+                              : "text-2xl m-1"
+                          }
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
                 <h1>{reviews.length} reviews</h1>
               </div>
             </div>
-          ) : null}
+          ) : (
+            <h1> No reviews made yet </h1>
+          )}
         </div>
       )}
     </section>
