@@ -521,11 +521,49 @@ async function seedData() {
             allItems.push(addItem);
         }
     }
+    const positiveComments = [
+        'Excelent Product!',
+        'Good quality',
+        'They are great!',
+        'This brand always knows what they are doing when it comes to products. Great buy',
+        'Good price, good for young people',
+        'Best of the best',
+        'Taste great and good value.',
+        'Always been a great product.',
+        'Has a great scent',
+        "It's exactly what you would expect, nothing more and nothing less",
+        "Very pleased with these",
+        "Got one or two so I stopped stealing my mom’s! ",
+        "Love, Love , Love these. Perfect sizes and great quality!!!!!!!",
+        "I like everything about them",
+        "Bought as gift for my boyfriends birthday"
+    ]
 
+    const negativeComments = [
+        'Lately the quality of this product has gone down.',
+        'Price has increased lately',
+        "Super cheap quality, I didn’t want to spend a lot but didn’t expect them to be this cheap quality. ",
+        "Only pro they’re super pretty. Pretty much everything about them for the price sucks though.",
+        "Terrible product.",
+        "I do not recommend.",
+        "I was excited to get this and it seems like it would be a great one, but the one I received had marks all over. Highly disappointed."
+
+    ]
+    const IntermediateComments = [
+        "'They are well enough, but they ain't as fine as others I've purchased.'",
+        "Affordable, but not perfect",
+        "This one is a great value with all of the pieces you get.",
+        "It was not what I thought it would be. ",
+        "It may sound like a small thing, but it drives me nuts. When I buy these, they never look like the picture!",
+        "Normal quality, good price",
+        "Not even close to my favourite! But the price was ok. They were cheaper",
+        "i love this product!!! the only bad thing is when i received it, it was already late :("
+    ]
     // Generamos un vouchers o shopping 
     const transactionQuantity = 150;
     for (let i = 0; i < transactionQuantity; i++) {
         let item = faker.random.arrayElement(allItems)
+        let shopper = faker.random.arrayElement(members)
         if (!item.price) {
             // entra a este if en caso de que el precio sea 0, por lo tanto creamos un voucher con su codigo al azar
             let expirationDate = faker.date.between(new Date('2023-07-01'), new Date('2023-09-01'));
@@ -533,17 +571,17 @@ async function seedData() {
             await prisma.voucher.create({
                 data: {
                     item: { connect: { id: item.id } },
-                    user: { connect: { id: faker.random.arrayElement(members).id } },
+                    user: { connect: { id: shopper.id } },
                     code: faker.random.alphaNumeric(20),
                     enabled: enabled,
-                    expirationDate: expirationDate
+                    expirationDate: expirationDate,
                 },
             });
         } else {
             //entra en el caso de que el item tenga un precio distinto de 0 y generamos la compra
             const shopping = await prisma.shopping.create({
                 data: {
-                    user: { connect: { id: faker.random.arrayElement(members).id } },
+                    user: { connect: { id: shopper.id } },
                     pdfUrl: faker.internet.url(),
                     wayToPay: faker.random.arrayElement(['CASH', 'CARD']),
                     state: faker.random.arrayElement(['SUCCESS', 'PENDING']),
@@ -557,6 +595,68 @@ async function seedData() {
                     quantityItem: faker.datatype.number({ min: 1, max: 10 }),
                 },
             });
+        }
+        let star = faker.random.arrayElement([1, 2, 3, 4, 5]);
+        let comment = '';
+        let star1 = false
+        let star2 = false
+        let star3 = false
+        let star4 = false
+        let star5 = false
+        if (star < 3) {
+            comment = faker.random.arrayElement(negativeComments);
+            star1 = star == 1;
+            star2 = star == 2;
+        }
+        else {
+            if (star === 3) {
+                comment = faker.random.arrayElement(IntermediateComments)
+                star3 = star == 3;
+            }
+            else {
+                comment = faker.random.arrayElement(positiveComments)
+                star4 = star == 4;
+                star5 = star == 5;
+            }
+        }
+
+        let existentReview = await prisma.review.findFirst({
+            where: {
+                userId: shopper.id,
+                itemId: item.id
+            }
+        })
+
+        if (existentReview) {
+            await prisma.review.update({
+                where: {
+                    id: existentReview.id,
+                },
+                data: {
+                    comment: comment,
+                    star1: star1,
+                    star2: star2,
+                    star3: star3,
+                    star4: star4,
+                    star5: star5,
+                    enabled: true
+                }
+            })
+        } else {
+            await prisma.review.create({
+
+                data: {
+                    user: { connect: { id: shopper.id } },
+                    item: { connect: { id: item.id } },
+                    comment: comment,
+                    star1: star1,
+                    star2: star2,
+                    star3: star3,
+                    star4: star4,
+                    star5: star5,
+                    enabled: true
+                }
+            })
         }
     }
 }

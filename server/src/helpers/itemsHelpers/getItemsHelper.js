@@ -10,7 +10,9 @@ module.exports = async ( condition = {} ) => {
             category: true,
             Voucher: true,
             Item_Shopping: true,
-            Review: true
+            Review: {include: {
+                user: true
+            }}
         }
     })
     await prisma.$disconnect();
