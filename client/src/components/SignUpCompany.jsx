@@ -4,6 +4,8 @@ import validateCompany from "@/utils/validateCompany";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+//llamado a los nuevos componentes para agregar ubicacion a las comañias que se registren
+import Map from "./Map";
 import SuccessModal from "./Modals/Company/Success";
 import FailureModal from "./Modals/Company/Failure";
 
@@ -19,7 +21,11 @@ export default function SignUpCompany() {
         description: "",
         cuit: "",
         address: "",
-        phoneNumber: ""
+        phoneNumber: "",
+        /**
+         * debe haber uno por defecto, el mapa no se renderiza sobre sin tener un valor inicial
+        */
+        location: { lat: -35.2931, lng: -65.5964 }
     });
     const isNotReady =
         errors.email ||
@@ -47,6 +53,16 @@ export default function SignUpCompany() {
 
     function handleImageChange(e) {
         setImageFile(e.target.files[0]);
+    }
+    /**
+     * recibe el objeto {lat: valorFloat, lng: valorFloat }
+     * @param {Object} newLocation 
+     */
+    function handleLocationChange(newLocation) {
+        setInput({
+            ...input,
+            location: newLocation
+        });
     }
 
     const handleSubmit = async (e) => {
@@ -244,6 +260,12 @@ export default function SignUpCompany() {
                                         className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                                         onChange={handleImageChange}
                                     />
+                                </div>
+                            </div>
+                            <div>
+                                {/* se agrega la posibilidad de que la compañia pueda agregar su ubicacion marcando sobre el mapa */}
+                                <div>
+                                    <Map location={input.location} locationChange={handleLocationChange} editable={true} />
                                 </div>
                             </div>
                             <button

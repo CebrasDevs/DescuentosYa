@@ -1,10 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import Carousel from "./Carousel";
-import { getCompanies, getDiscounts, setActiveUser } from "@/redux/actions";
-import { useDispatch } from "react-redux";
-
 
 const slides = [
     {
@@ -20,14 +17,6 @@ const slides = [
 
 export default function Home() {
     const [currentIndex, setCurrentIndex] = useState(0);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getCompanies())
-        .then(() => dispatch(getDiscounts()));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
 
     const prevSlide = () => {
         const isFirstSlide = currentIndex === 0;
@@ -59,13 +48,18 @@ export default function Home() {
             </div>
 
             <div className="w-2/3 m-auto mt-10">
-                <h2 className="mb-3 text-2xl">Discounts</h2>
-                <Carousel value={"discounts"} />
+                <h2 className="mb-3 text-2xl">Companies</h2>
+                <Carousel value={"companies"} />
             </div>
 
             <div className="w-2/3 m-auto mt-10">
-                <h2 className="mb-3 text-2xl">Companies</h2>
-                <Carousel value={"companies"} />
+                <h2 className="mb-3 text-2xl">Products</h2>
+                <Carousel value={"discounts"} type={"products"}/>
+            </div>
+
+            <div className="w-2/3 m-auto mt-10">
+                <h2 className="mb-3 text-2xl">Services</h2>
+                <Carousel value={"discounts"} type={"services"}/>
             </div>
         </div>
     );
