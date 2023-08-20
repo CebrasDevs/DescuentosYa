@@ -26,12 +26,12 @@ const registerShoppingPDF = async (userName, items, totalPrice, wayToPay, state,
             <ul>
             ${items.map((item) => (
             `<li>
-                <b>${item.name}</b>
+                <b>${item.title}</b>
                 <ul>
-                    <li><b>Description:</b> ${item.description}, <br></li>
-                    <li><b>Price:</b> $${item.price} per unit, <br></li>
+                    <li><b>Description:</b> ${item.category_id}, <br></li>
+                    <li><b>Price:</b> $${+item.unit_price} per unit, <br></li>
                     <li><b>Quantity:</b>${item.quantity}, <br></li>
-                    <li><b>Company:</b> ${item.user.name}</li>
+                    <li><b>Company:</b> ${item.companyName}</li>
                 </ul>
             </li>`
         )).join("")}
@@ -59,7 +59,7 @@ const createPdf = async (htmlContent) => {
     try {
         const date = new Date();
         // ejecutamos puppeteer para generar PDF
-        const generatePdf = await puppeteer.launch();
+        const generatePdf = await puppeteer.launch({ headless: "new", args: ["--no-sandbox"] });
         // generamos la pagina en blanco del PDF
         const pagePdf = await generatePdf.newPage();
         // agregamos el contenido del html generado
@@ -68,9 +68,11 @@ const createPdf = async (htmlContent) => {
         const resultPdf = await pagePdf.pdf({ format: 'A4' });
         await generatePdf.close();
         // instanciamos el nombre del pdf
-        const filename = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}T${date.getHours()}:HS${date.getMinutes()}:MM${date.getSeconds()}:SS`;
+
+        const filename = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}T${date.getHours()}-HS${date.getMinutes()}-MM${date.getSeconds()}-SS`;
+
         // por ultimo se genera el archivo en la ruta mencionada
-        fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
+        // fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
         return { pdf: resultPdf, namePdf: filename };
     } catch (error) {
         console.log('Error pdf: ' + error.message);

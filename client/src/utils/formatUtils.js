@@ -6,7 +6,8 @@ export function formatCompany(company) {
         companyName, 
         description, 
         cuit, 
-        address, 
+        address,
+        location, //se agrega la pueda propiedad para la ubicacion de la compañia 
         phoneNumber, 
         imageUrl
     } = company;
@@ -20,6 +21,7 @@ export function formatCompany(company) {
         description: description,
         cuit: parsedCuit,
         address: address,
+        location,
         phoneNumber: parsedPhoneNumber,
         imageUrl: imageUrl
     };
@@ -145,3 +147,29 @@ export function formatItem(item) {
         imageUrl: imageUrl
     };
 };
+
+export function getAverageRating(data){
+    let reviews = data.review
+    ?.filter((review) => review.enabled)
+    .map((review) => {
+      let selectedStars = [
+        review.star1,
+        review.star2,
+        review.star3,
+        review.star4,
+        review.star5,
+      ];
+      return selectedStars.lastIndexOf(true) + 1;
+    });
+  let total = 0;
+  reviews?.map((number) => {
+    total += number;
+  });
+  let averageRating = (total / reviews?.length).toFixed(1);
+
+  return{
+    reviews,
+    averageRating
+  }
+}
+

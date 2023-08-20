@@ -4,10 +4,9 @@ import {
   createPreference,
   increaseItemQuantity,
   decreaseItemQuantity,
-  setShoppingCart,
 } from "@/redux/actions";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
@@ -25,8 +24,9 @@ export default function ShoppingCart() {
   //aca se coloca la public key de mp
   initMercadoPago("TEST-ab84421f-0743-4e17-af16-5e47420efd52");
 
-  const handleCounter = function (event, index) {
-    //cada vez que clickea el counter local y el quantity global cambian, el esta local hace que React actualice componentes y evita que el renderizado del esta global se vea con demoras.
+
+
+  const handleCounter = function (event, index) { //cada vez que clickea el counter local y el quantity global cambian, el esta local hace que React actualice componentes y evita que el renderizado del esta global se vea con demoras.
     if (event.target.name === "minus" && shoppingCart[index].quantity > 1) {
       let countersCopy = [...counters];
       countersCopy[index] = counters[index] - 1;
@@ -60,20 +60,31 @@ export default function ShoppingCart() {
   }));
 
   const user = {
+    id: activeUser.id,
     email: activeUser.email,
     name: activeUser.name,
   };
 
+
+
   const handleCheckout = () => {
-    const response = axios
-      .post(`${URL_BASE}/payment/create-order`, { products, user })
-      .then((response) => {
-        console.log(response.data);
+    axios.post(`${URL_BASE}/payment/create-order`, { products, user })
+      .then(response => {
+        console.log(response.data)
         window.location.href = response.data.response.body.init_point; // redirecciona la pagina a la ventana de Mercado de Pago
       })
       .catch((error) => console.log(error.message));
   };
 
+  const handleCheckoutPP = () => {
+    axios.post(`${URL_BASE}/payment/create-payment`, { products })
+      .then(response => {
+        window.location.href = response.data;
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+ 
   return (
     <div className=" flex">
       <div className=" flex flex-col w-3/4 h-full min-h-[70vh] max-h-[70vh] bg-white border border-gray-200 shadow-lg ml-12 mt-20 rounded-lg items-center overflow-y-auto ">
@@ -143,19 +154,20 @@ export default function ShoppingCart() {
       </div>
       <div className=" flex flex-col w-1/5 h-full min-h-[70vh] rounded-2xl bg-gray-300 border border-gray-200 ml-4 mt-20 text-center items-center">
         {shoppingCart.length ? (
-          <button
-            id="checkout"
-            onClick={handleCheckout}
-            className=" py-3 w-3/4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800"
-          >
-            Checkout
-          </button>
-        ) : (
-          <Link href={"/"}>
-            <h2 className=" font-bold text-4xl">
-              Shopping Cart is empty, try adding products or services!
-            </h2>
-          </Link>
+          <div>
+            <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
+              Checkout Mercado Pago
+            </button>
+
+            <button id='checkoutpp' onClick={handleCheckoutPP} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
+              Checkout PayPal
+            </button>
+          </div>
+
+          ) : (
+            <Link href={"/"}>
+              <h2>Shopping Cart is empty, try adding products or services!</h2>
+            </Link>
         )}
       </div>
     </div>

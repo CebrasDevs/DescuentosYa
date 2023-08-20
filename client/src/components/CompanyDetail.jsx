@@ -2,6 +2,7 @@
 
 import useCompany from "@/hooks/useCompany";
 import Grid from "./Grid";
+import Map from "./Map";
 
 export default function CompanyDetail({ id }) {
     const company = useCompany(id);
@@ -31,6 +32,10 @@ export default function CompanyDetail({ id }) {
                         <h1>Address: {company.address} </h1>
                         <h1>Company Description: {company.description} </h1>
                         <h1>Phone Number: {company.phoneNumber} </h1>
+                        {company.distance && <h1>Distance: {company.distance?.text} </h1>}
+                    </div>
+                    <div>
+                        <Map location={company.location} />
                     </div>
                 </div>
             </div>

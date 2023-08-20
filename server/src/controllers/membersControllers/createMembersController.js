@@ -9,7 +9,7 @@ module.exports = async (dataMember) => {
     !isNaN(dataMember.password) || !dataMember.password ||
     isNaN(+dataMember.dni_cuit) ||
     !dataMember.dni_cuit ||
-    regexName.test(dataMember.name) ||
+    !regexName.test(dataMember.name) ||
     !isNaN(dataMember.address) || !dataMember.address ||
     !isNaN(dataMember.imageUrl) || !dataMember.imageUrl
   )

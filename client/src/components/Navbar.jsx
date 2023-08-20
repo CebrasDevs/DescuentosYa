@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
-import { BsCart3, BsWindowSidebar } from "react-icons/bs";
+import { BsCart3, BsSearch } from "react-icons/bs";
 import { IoPerson } from "react-icons/io5";
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
-import { cleanActiveUser, setActiveUser, setShoppingCart } from "@/redux/actions";
-import { useEffect } from "react";
+import { cleanActiveUser } from "@/redux/actions";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -22,20 +21,6 @@ export default function Navbar() {
     const params = useSearchParams();
     const profile = params.get("profile");
 
-    useEffect(() => {
-        // Acceder a una cookie
-        const retrievedCookie = Cookies.get("accessTrue");
-        if (retrievedCookie) {
-            const parsedValue = JSON.parse(retrievedCookie);
-            dispatch(setActiveUser(parsedValue.id));
-        }
-        const cart = Cookies.get("shoppingCart");
-        if (cart) {
-          const cartValue = JSON.parse(cart);
-          dispatch(setShoppingCart(cartValue));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
 
     const handleLogOut = () => {
         Cookies.remove("accessTrue");
@@ -64,8 +49,11 @@ export default function Navbar() {
                         <Link className="hover:text-blue-500 ml-10" href={"/howworks"}>
                             How It Works
                         </Link>
-                        <Link className="hover:text-blue-500 ml-10" href={"/discounts"}>
-                            Browse Discounts
+                        <Link className="flex items-center hover:text-blue-500 ml-10" href={"/discounts"}>
+                            <BsSearch/>
+                            <div className="ml-2">
+                                Browse Discounts
+                            </div>
                         </Link>
                         {activeUser.role === "ADMIN" && (
                             <Link className="ml-10 font-medium hover:text-blue-500" href={`/admin`}>

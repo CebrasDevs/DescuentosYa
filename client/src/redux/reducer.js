@@ -18,10 +18,12 @@ import {
   GET_ITEM_DETAIL,
   CLEAN_ITEM_DETAIL,
   SET_SHOPPING_CART,
+  SET_DISTANCES
   GET_USERS_BY_NAME,
 } from "./actions";
-import { filterArray } from "@/utils/reduxUtils";
-import { member, company, admin } from "../utils/perfilesPF";
+import { filterArray } from "@/utils/filterArray";
+import setItemDistances from "@/utils/geolocationUtils/setItemDistances";
+import setCompanyDistances from "@/utils/geolocationUtils/setCompanyDistances";
 
 const initialState = {
   companies: [],
@@ -69,6 +71,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredItems: action.payload,
+      };
+    case SET_DISTANCES:
+      const itemsWithDistances = setItemDistances(state.allItems);
+      const companiesWithDistances = setCompanyDistances(action.payload);
+      const filteredItems = filterArray(itemsWithDistances, state.activeFilters);
+      return {
+        ...state,
+        allItems: itemsWithDistances,
+        filteredItems: filteredItems,
+        companies: companiesWithDistances
       };
     case GET_USERS_BY_NAME:
       return {
