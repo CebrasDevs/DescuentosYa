@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
         failure: "http://localhost:3000",
         pending: "http://localhost:3000"
       },
-      notification_url: `https://4aaa-2803-9800-9847-758a-436-4cd6-1899-d531.ngrok.io/payment/webhook/${user.id}`,
+      notification_url: `https://descuentosya-production.up.railway.app/payment/webhook/${user.id}`,
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
