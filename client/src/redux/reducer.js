@@ -18,6 +18,7 @@ import {
   GET_ITEM_DETAIL,
   CLEAN_ITEM_DETAIL,
   SET_SHOPPING_CART,
+  GET_USERS_BY_NAME,
 } from "./actions";
 import { filterArray } from "@/utils/reduxUtils";
 import { member, company, admin } from "../utils/perfilesPF";
@@ -69,6 +70,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredItems: action.payload,
       };
+    case GET_USERS_BY_NAME:
+      return {
+        ...state,
+        users: action.payload
+      }
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);
       return {

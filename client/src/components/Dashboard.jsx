@@ -1,5 +1,5 @@
 "use client";
-import { getUsers, setActiveUser } from "@/redux/actions";
+import { getUsers, getUsersByName } from "@/redux/actions";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -15,6 +15,10 @@ export default function Dashboard() {
   const users = useSelector((state) => state.users);
 
   users.sort((a, b)=> a.id - b.id) // esto lo pongo porque cuando se hacia disabled en un user se volvia a acomodar todo distinto, en cambio aplicando sort se quedan todos en el mismo lugar, es para que se vea bien
+
+  const handleSearch = (e) => {
+    dispatch(getUsersByName(e.target.value));
+  }
 
   const handleDisable = async (userId) => {
     try {
@@ -48,6 +52,13 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col items-center">
+      <input
+        className="h-14 mt-5 rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
+        type="search"
+        name="search"
+        onInput={handleSearch}
+        placeholder="Search by Name"
+      />
       <div
         id="companies"
         className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md"
@@ -59,12 +70,6 @@ export default function Dashboard() {
           <h1 className="font-bold m-2">Detail</h1>
           <h1 className="font-bold m-2">Status</h1>
         </div>
-        <input
-          className="m-2"
-          type="search"
-          name="search"
-          placeholder="Search by Name"
-        />
         {users.map((user) => {
           if (user.role === "COMPANY") {
             return (
@@ -115,12 +120,6 @@ export default function Dashboard() {
           <h1 className="font-bold m-2">Detail</h1>
           <h1 className="font-bold m-2">Status</h1>
         </div>
-        <input
-          className="m-2"
-          type="search"
-          name="search"
-          placeholder="Search by Name"
-        />
         {users.map((user) => {
           if (user.role === "MEMBER") {
             return (
