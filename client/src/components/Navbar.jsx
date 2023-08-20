@@ -15,7 +15,7 @@ import { splitName } from "@/utils/formatUtils";
 
 export default function Navbar() {
     const activeUser = useSelector((state) => state.activeUser);
-
+    
     const dispatch = useDispatch();
 
     const router = useRouter();
@@ -110,7 +110,7 @@ export default function Navbar() {
                                     <IoPerson className=" mr-3" />
                                     <div>
                                         {activeUser.role === "ADMIN" || activeUser.role === "MEMBER" ? (
-                                            <h1>{fullName.lastName}, {fullName.firstName}</h1>
+                                            <h1>{activeUser.name}</h1>
                                         ) : (
                                             <h1>{activeUser.name}</h1>
                                         )}

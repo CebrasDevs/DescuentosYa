@@ -13,12 +13,17 @@ router.post("/login", async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email },
     });
+
     if (!user) {
       return res.status(404).json({ error: "User doesn't exist" });
     }
 
     if (user.password !== password) {
       return res.status(401).json({ error: "Incorrect password" });
+    }
+
+    if (user.enabled !== true) {
+      return res.status(401).json({ error: "User disabled by an admin" });
     }
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
