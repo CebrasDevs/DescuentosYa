@@ -10,7 +10,8 @@ import { TiArrowBack } from "react-icons/ti";
 import { FaStar } from "react-icons/fa";
 import { getAverageRating } from "@/utils/formatUtils";
 import Cookies from "js-cookie";
-
+import axios from "axios";
+import { URL_BASE } from "@/utils/const";
 import { useRouter } from "next/navigation";
 
 export default function ItemDetail({ data }) {
@@ -44,16 +45,19 @@ export default function ItemDetail({ data }) {
       }
     }
   };
-
-
-
-  const handleGenerateCode = function () {
+  const voucher = {
+    userId: activeUser.id,
+    itemId: data.id
+  }
+  
+  const handleGenerateCode = () => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
-    } else {
-      //logica de generacion de codigo, charlar
     }
+    //logica de generacion de codigo, charlar
+    axios.post(`${URL_BASE}/vouchers/`, voucher)
+      .catch((error) => console.log(error.message));
   };
 
   const modifyHandler = () => {
@@ -62,8 +66,6 @@ export default function ItemDetail({ data }) {
 
   if (data.price !== 0) {
     //esto es un servicio
-    console.log(data);
-
     return (
       <section className=" flex w-full h-full justify-center">
         {modify ? (
@@ -198,7 +200,6 @@ export default function ItemDetail({ data }) {
       </section>
     );
   }
-  console.log(data);
 
   //si la company ofrece productos:
   return (
