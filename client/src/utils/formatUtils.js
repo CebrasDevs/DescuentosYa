@@ -147,3 +147,29 @@ export function formatItem(item) {
         imageUrl: imageUrl
     };
 };
+
+export function getAverageRating(data){
+    let reviews = data.review
+    ?.filter((review) => review.enabled)
+    .map((review) => {
+      let selectedStars = [
+        review.star1,
+        review.star2,
+        review.star3,
+        review.star4,
+        review.star5,
+      ];
+      return selectedStars.lastIndexOf(true) + 1;
+    });
+  let total = 0;
+  reviews?.map((number) => {
+    total += number;
+  });
+  let averageRating = (total / reviews?.length).toFixed(1);
+
+  return{
+    reviews,
+    averageRating
+  }
+}
+

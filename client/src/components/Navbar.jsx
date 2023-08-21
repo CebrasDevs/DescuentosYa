@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { BsCart3 } from "react-icons/bs";
+import { BsCart3, BsSearch } from "react-icons/bs";
 import { IoPerson } from "react-icons/io5";
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
@@ -14,7 +14,7 @@ import { splitName } from "@/utils/formatUtils";
 
 export default function Navbar() {
     const activeUser = useSelector((state) => state.activeUser);
-
+    
     const dispatch = useDispatch();
 
     const router = useRouter();
@@ -49,8 +49,11 @@ export default function Navbar() {
                         <Link className="hover:text-blue-500 ml-10" href={"/howworks"}>
                             How It Works
                         </Link>
-                        <Link className="hover:text-blue-500 ml-10" href={"/discounts"}>
-                            Browse Discounts
+                        <Link className="flex items-center hover:text-blue-500 ml-10" href={"/discounts"}>
+                            <BsSearch/>
+                            <div className="ml-2">
+                                Browse Discounts
+                            </div>
                         </Link>
                         {activeUser.role === "ADMIN" && (
                             <Link className="ml-10 font-medium hover:text-blue-500" href={`/admin`}>
@@ -95,7 +98,7 @@ export default function Navbar() {
                                     <IoPerson className=" mr-3" />
                                     <div>
                                         {activeUser.role === "ADMIN" || activeUser.role === "MEMBER" ? (
-                                            <h1>{fullName.lastName}, {fullName.firstName}</h1>
+                                            <h1>{activeUser.name}</h1>
                                         ) : (
                                             <h1>{activeUser.name}</h1>
                                         )}

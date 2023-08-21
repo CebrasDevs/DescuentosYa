@@ -18,7 +18,8 @@ import {
   GET_ITEM_DETAIL,
   CLEAN_ITEM_DETAIL,
   SET_SHOPPING_CART,
-  SET_DISTANCES
+  SET_DISTANCES,
+  GET_USERS_BY_NAME,
 } from "./actions";
 import { filterArray } from "@/utils/filterArray";
 import setItemDistances from "@/utils/geolocationUtils/setItemDistances";
@@ -81,6 +82,11 @@ const rootReducer = (state = initialState, action) => {
         filteredItems: filteredItems,
         companies: companiesWithDistances
       };
+    case GET_USERS_BY_NAME:
+      return {
+        ...state,
+        users: action.payload
+      }
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);
       return {
