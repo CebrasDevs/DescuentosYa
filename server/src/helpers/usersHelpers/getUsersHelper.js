@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 module.exports = async ( condition = {}, fullDetail = false ) => {
     const users = await prisma.user.findMany({
-        where: condition,
+        where: condition || true,
         include: {
             // Cascada de datos de una company
             Item: {
