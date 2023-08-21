@@ -8,11 +8,11 @@ cloudinary.config({
     api_secret: CLOUDINARY_API_SECRET
 });
 
-module.exports = (contentPdf, namePdf) => {
+module.exports = (contentPdf, namePdf, format) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
             {
-                resource_type: "raw",
+                format: format,
                 public_id: namePdf
             },
             (error, result) => {
