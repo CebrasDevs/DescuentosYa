@@ -1,6 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const faker = require('faker');
-
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
+const { SALT_ROUNDS } = process.env
+let salt = bcrypt.genSaltSync(+SALT_ROUNDS)
 const prisma = new PrismaClient();
 async function seedData() {
     // Crear categorías
@@ -16,33 +19,38 @@ async function seedData() {
     // Estos son los datos de las empresas que vamos a cargar
     const dataCompanies = [
         // 14 objetos
-        { email: 'mcdonalds@gmail.com', password: 'mcdonalds', enabled: true, role: 'COMPANY', dni_cuit: '33134366027', name: 'McDonalds', address: '41622 Ratke Glens', phoneNumber: '873-382-9467', lastPayment: null, description: "At McDonald's, we create smiles through flavorful journeys. Every Big Mac, Chicken McNugget, and McFlurry is a taste of nostalgia and innovation, served with a side of golden memories.", imageUrl: 'https://guiatodoberazategui.com.ar/wp-content/uploads/2020/03/Logo-de-McDonald%C2%B4s-1-1-1.png' },
-        { email: 'burgerking@gmail.com', password: 'burgerking', enabled: true, role: 'COMPANY', dni_cuit: '35815505462', name: 'Burger King', address: '72572 Aurore Shoals', phoneNumber: '504-605-7317 x07965', lastPayment: null, description: "Burger King's flame-grilled expertise shines in each Whopper and crispy onion ring. Our commitment to bold flavors and customizable options ensures every visit is uniquely yours.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj79lhBWamZcx9gN7RY5eXkec3_qXZDeZ6Ig&usqp=CAU' },
-        { email: 'pizzahut@gmail.com', password: 'pizzahut', enabled: true, role: 'COMPANY', dni_cuit: '30383062410', name: 'Pizza Hut', address: '27310 O Kon Glen', phoneNumber: '(402) 805-4751 x62082', lastPayment: null, description: "Gather round the Pizza Hut table and relish oven-hot pizzas loaded with premium toppings. A legacy of crafting crave-worthy pies brings families closer, one slice at a time.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoMuRtRkpmAo44JrCOBYs1ByMl6XqfYx_tNw&usqp=CAU' },
-        { email: 'subway@gmail.com', password: 'subway', enabled: true, role: 'COMPANY', dni_cuit: '30127761460', name: 'Subway', address: '651 Sporer Forge', phoneNumber: '933.214.3426', lastPayment: null, description: "Elevate your day with Subway's fresh and customizable subs. From the first bite of oven-baked bread to the final touch of veggies, it's a masterpiece made for you.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleUahmc9LVW6C4ShvKOiqixTpk2IuXijyAw&usqp=CAU' },
-        { email: 'kfc@gmail.com', password: 'kfc', enabled: true, role: 'COMPANY', dni_cuit: '32286160887', name: 'KFC', address: '392 Trenton Circles', phoneNumber: '275-813-0556 x477', lastPayment: null, description: "KFC transforms chicken into an art form, blending secret recipes and skilled preparation. Crispy, tender, and bursting with flavor, our chicken creates moments of shared happiness.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbvPg-rZKBadrmmUB9tDX-xMLDnFMcKGbqzg&usqp=CAU' },
-        { email: 'laserenísima@gmail.com', password: 'laserenísima', enabled: true, role: 'COMPANY', dni_cuit: '34041763086', name: 'La Serenísima', address: '3794 Elsa Cove', phoneNumber: '946-238-7158 x2570', lastPayment: null, description: "La Serenísima stands as a dairy beacon, delivering unmatched quality in milk and dairy delights. Your family's health thrives on our commitment to excellence.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU9FweeNUqegx-MHySU_aUnFelsQrqv4xVdA&usqp=CAU' },
-        { email: 'danone@gmail.com', password: 'danone', enabled: true, role: 'COMPANY', dni_cuit: '32887216101', name: 'Danone', address: '127 Armstrong Brook', phoneNumber: '1-649-811-4079', lastPayment: null, description: "Danone fuels your vitality through nourishing yogurts and treats. Elevate your wellness journey with Danone's wholesome products, nourishing your body and soul.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwMKb9qjza3naK6nSdKdmHFSJfg8Z52VR0cg&usqp=CAU' },
-        { email: 'sancor@gmail.com', password: 'sancor', enabled: true, role: 'COMPANY', dni_cuit: '38609893845', name: 'Sancor', address: '2863 Lance Crescent', phoneNumber: '1-837-865-5733 x21165', lastPayment: null, description: "Sancor nurtures well-being from farm to home, offering an array of dairy essentials. Our dedication to health and taste enriches lives across generations.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9xErSNroI5-XpXAvuw14Ah8D5xMO9Y3ZI1tBWWT4q_omclWsDUNxjh00iiVpt7cerqIY&usqp=CAU' },
-        { email: 'natura@gmail.com', password: 'natura', enabled: true, role: 'COMPANY', dni_cuit: '37122062358', name: 'Natura', address: '675 Rau Mission', phoneNumber: '797.860.8703', lastPayment: null, description: "Discover beauty in nature with Natura's skincare, harnessing botanical wonders for a radiant you. Unleash your inner glow with Natura's natural treasures.", imageUrl: 'https://i.pinimg.com/736x/f2/33/16/f2331671f28fdd9e5f27dfad463d8bbc.jpg' },
-        { email: 'avon@gmail.com', password: 'avon', enabled: true, role: 'COMPANY', dni_cuit: '36681061529', name: 'Avon', address: '50320 Mante Avenue', phoneNumber: '(504) 587-2580', lastPayment: null, description: "Avon empowers self-expression with cosmetics that enhance your unique beauty. Unveil your confidence and embrace your individuality with Avon's versatile range.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2gV0XN44i7eKJZrtmAO6K16yG8qZIBl-QQ&usqp=CAU' },
-        { email: 'lbel@gmail.com', password: 'lbel', enabled: true, role: 'COMPANY', dni_cuit: '31522149325', name: 'L Bel', address: '3858 Braun Village', phoneNumber: '666.710.6610 x76747', lastPayment: null, description: "L'bel epitomizes sophistication, offering luxurious cosmetics for timeless elegance. Elevate your beauty ritual with L'bel's opulent creations, capturing your allure.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy03pAPMNRqftBBsRQiALvVK33yWuNn4q4Mw&usqp=CAU' },
-        { email: 'nike@gmail.com', password: 'nike', enabled: true, role: 'COMPANY', dni_cuit: '33482514064', name: 'Nike', address: '9505 May Cliff', phoneNumber: '247-788-1735 x229', lastPayment: null, description: "Nike epitomizes athletic excellence, crafting high-performance sportswear and footwear that inspire triumph. Pursue your passions and unleash your potential with Nike's dynamic gear.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOFFUcd-e_1Dvl_4Ib58po4FVpMj7NyCb1JQ&usqp=CAU' },
-        { email: 'adidas@gmail.com', password: 'adidas', enabled: true, role: 'COMPANY', dni_cuit: '30614878834', name: 'Adidas', address: '648 Rogahn Passage', phoneNumber: '(988) 847-0931 x6627', lastPayment: null, description: "Adidas embodies sport and style, delivering iconic designs and performance-driven attire. Elevate your lifestyle and achievements with Adidas's innovative creations.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1dtlrN5hP1x-m9AwA-NqGuUv2rwyehMoIkg&usqp=CAU' },
-        { email: 'puma@gmail.com', password: 'puma', enabled: true, role: 'COMPANY', dni_cuit: '35140923855', name: 'Puma', address: '37758 Konopelski Centers', phoneNumber: '692-790-8155', lastPayment: null, description: "Puma seamlessly blends fashion and function, offering sleek sportswear and footwear. Embrace your active side with Puma's contemporary designs, amplifying your energy.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-VXT0dnlBIoMrg9ZR3XE9ddKrcqXAzBXz0w&usqp=CAU' }
+        { email: 'mcdonalds@gmail.com', password: 'mcdonalds', enabled: true, role: 'COMPANY', dni_cuit: '33134366027', name: 'McDonalds', address: 'Mendoza, Argentina', location: { lat: -32.890431, lng: -68.845839 }, phoneNumber: '873-382-9467', lastPayment: null, description: "At McDonald's, we create smiles through flavorful journeys. Every Big Mac, Chicken McNugget, and McFlurry is a taste of nostalgia and innovation, served with a side of golden memories.", imageUrl: 'https://guiatodoberazategui.com.ar/wp-content/uploads/2020/03/Logo-de-McDonald%C2%B4s-1-1-1.png' },
+        { email: 'burgerking@gmail.com', password: 'burgerking', enabled: true, role: 'COMPANY', dni_cuit: '35815505462', name: 'Burger King', address: 'Maipú, Mendoza, Argentina', location: { lat: -32.957872, lng: -68.812875 }, phoneNumber: '504-605-7317 x07965', lastPayment: null, description: "Burger King's flame-grilled expertise shines in each Whopper and crispy onion ring. Our commitment to bold flavors and customizable options ensures every visit is uniquely yours.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj79lhBWamZcx9gN7RY5eXkec3_qXZDeZ6Ig&usqp=CAU' },
+        { email: 'pizzahut@gmail.com', password: 'pizzahut', enabled: true, role: 'COMPANY', dni_cuit: '30383062410', name: 'Pizza Hut', address: 'Godoy Cruz, Mendoza, Argentina', location: { lat: -32.919992, lng: -68.869062 }, phoneNumber: '(402) 805-4751 x62082', lastPayment: null, description: "Gather round the Pizza Hut table and relish oven-hot pizzas loaded with premium toppings. A legacy of crafting crave-worthy pies brings families closer, one slice at a time.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoMuRtRkpmAo44JrCOBYs1ByMl6XqfYx_tNw&usqp=CAU' },
+        { email: 'subway@gmail.com', password: 'subway', enabled: true, role: 'COMPANY', dni_cuit: '30127761460', name: 'Subway', address: 'Luján de Cuyo, Mendoza, Argentina', location: { lat: -33.049141, lng: -68.891839 }, phoneNumber: '933.214.3426', lastPayment: null, description: "Elevate your day with Subway's fresh and customizable subs. From the first bite of oven-baked bread to the final touch of veggies, it's a masterpiece made for you.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSleUahmc9LVW6C4ShvKOiqixTpk2IuXijyAw&usqp=CAU' },
+        { email: 'kfc@gmail.com', password: 'kfc', enabled: true, role: 'COMPANY', dni_cuit: '32286160887', name: 'KFC', address: 'San Martín, Mendoza, Argentina', location: { lat: -33.081490, lng: -68.468599 }, phoneNumber: '275-813-0556 x477', lastPayment: null, description: "KFC transforms chicken into an art form, blending secret recipes and skilled preparation. Crispy, tender, and bursting with flavor, our chicken creates moments of shared happiness.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbvPg-rZKBadrmmUB9tDX-xMLDnFMcKGbqzg&usqp=CAU' },
+        { email: 'laserenísima@gmail.com', password: 'laserenísima', enabled: true, role: 'COMPANY', dni_cuit: '34041763086', name: 'La Serenísima', address: 'Malargüe, Mendoza, Argentina', location: { lat: -35.466364, lng: -69.588091 }, phoneNumber: '946-238-7158 x2570', lastPayment: null, description: "La Serenísima stands as a dairy beacon, delivering unmatched quality in milk and dairy delights. Your family's health thrives on our commitment to excellence.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU9FweeNUqegx-MHySU_aUnFelsQrqv4xVdA&usqp=CAU' },
+        { email: 'danone@gmail.com', password: 'danone', enabled: true, role: 'COMPANY', dni_cuit: '32887216101', name: 'Danone', address: 'Tunuyán, Mendoza, Argentina', location: { lat: -33.576892, lng: -69.045893 }, phoneNumber: '1-649-811-4079', lastPayment: null, description: "Danone fuels your vitality through nourishing yogurts and treats. Elevate your wellness journey with Danone's wholesome products, nourishing your body and soul.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwMKb9qjza3naK6nSdKdmHFSJfg8Z52VR0cg&usqp=CAU' },
+        { email: 'sancor@gmail.com', password: 'sancor', enabled: true, role: 'COMPANY', dni_cuit: '38609893845', name: 'Sancor', address: 'San Rafael, Mendoza, Argentina', location: { lat: -34.617568, lng: -68.330680 }, phoneNumber: '1-837-865-5733 x21165', lastPayment: null, description: "Sancor nurtures well-being from farm to home, offering an array of dairy essentials. Our dedication to health and taste enriches lives across generations.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9xErSNroI5-XpXAvuw14Ah8D5xMO9Y3ZI1tBWWT4q_omclWsDUNxjh00iiVpt7cerqIY&usqp=CAU' },
+        { email: 'natura@gmail.com', password: 'natura', enabled: true, role: 'COMPANY', dni_cuit: '37122062358', name: 'Natura', address: 'La Rioja, Argentina', location: { lat: -29.413329, lng: -66.855173 }, phoneNumber: '797.860.8703', lastPayment: null, description: "Discover beauty in nature with Natura's skincare, harnessing botanical wonders for a radiant you. Unleash your inner glow with Natura's natural treasures.", imageUrl: 'https://i.pinimg.com/736x/f2/33/16/f2331671f28fdd9e5f27dfad463d8bbc.jpg' },
+        { email: 'avon@gmail.com', password: 'avon', enabled: true, role: 'COMPANY', dni_cuit: '36681061529', name: 'Avon', address: 'San Juan, Argentina', location: { lat: -31.537500, lng: -68.536389 }, phoneNumber: '(504) 587-2580', lastPayment: null, description: "Avon empowers self-expression with cosmetics that enhance your unique beauty. Unveil your confidence and embrace your individuality with Avon's versatile range.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd2gV0XN44i7eKJZrtmAO6K16yG8qZIBl-QQ&usqp=CAU' },
+        { email: 'lbel@gmail.com', password: 'lbel', enabled: true, role: 'COMPANY', dni_cuit: '31522149325', name: 'L Bel', address: 'Córdoba, Argentina', location: { lat: -31.420083, lng: -64.188776 }, phoneNumber: '666.710.6610 x76747', lastPayment: null, description: "L'bel epitomizes sophistication, offering luxurious cosmetics for timeless elegance. Elevate your beauty ritual with L'bel's opulent creations, capturing your allure.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy03pAPMNRqftBBsRQiALvVK33yWuNn4q4Mw&usqp=CAU' },
+        { email: 'nike@gmail.com', password: 'nike', enabled: true, role: 'COMPANY', dni_cuit: '33482514064', name: 'Nike', address: 'Buenos Aires, Argentina', location: { lat: -34.603722, lng: -58.381592 }, phoneNumber: '247-788-1735 x229', lastPayment: null, description: "Nike epitomizes athletic excellence, crafting high-performance sportswear and footwear that inspire triumph. Pursue your passions and unleash your potential with Nike's dynamic gear.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOFFUcd-e_1Dvl_4Ib58po4FVpMj7NyCb1JQ&usqp=CAU' },
+        { email: 'adidas@gmail.com', password: 'adidas', enabled: true, role: 'COMPANY', dni_cuit: '30614878834', name: 'Adidas', address: 'Rosario, Santa Fe, Argentina', location: { lat: -32.946818, lng: -60.639317 }, phoneNumber: '(988) 847-0931 x6627', lastPayment: null, description: "Adidas embodies sport and style, delivering iconic designs and performance-driven attire. Elevate your lifestyle and achievements with Adidas's innovative creations.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1dtlrN5hP1x-m9AwA-NqGuUv2rwyehMoIkg&usqp=CAU' },
+        { email: 'puma@gmail.com', password: 'puma', enabled: true, role: 'COMPANY', dni_cuit: '35140923855', name: 'Puma', address: 'Neuquén, Argentina', location: { lat: -38.951611, lng: -68.059096 }, phoneNumber: '692-790-8155', lastPayment: null, description: "Puma seamlessly blends fashion and function, offering sleek sportswear and footwear. Embrace your active side with Puma's contemporary designs, amplifying your energy.", imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-VXT0dnlBIoMrg9ZR3XE9ddKrcqXAzBXz0w&usqp=CAU' }
     ];
     const companies = []; //coleccionamos los usuarios companies para crear sus items mas adelante
     for (let i = 0; i < dataCompanies.length; i++) {
+        
         // recorremos el arreglo para insertar las companias en la tabla
         const company = await prisma.user.create({ //guardamos el objeto insertado en la tabla
             data: {
                 email: dataCompanies[i].email,
-                password: dataCompanies[i].password,
+                password: bcrypt.hashSync(dataCompanies[i].password, salt),
                 enabled: true,
                 role: dataCompanies[i].role,
                 dni_cuit: dataCompanies[i].dni_cuit,
                 name: dataCompanies[i].name,
-                address: faker.address.streetAddress(),
+                // address: faker.address.streetAddress(), genera automaticamente una calle
+                address: dataCompanies[i].address,
+                //se agregan los campos tambien en el arreglo de objetos
+                latitude: dataCompanies[i].location.lat,
+                longitude: dataCompanies[i].location.lng,
                 phoneNumber: faker.phone.phoneNumber().toString(),
                 description: dataCompanies[i].description,
                 imageUrl: dataCompanies[i].imageUrl
@@ -59,7 +67,7 @@ async function seedData() {
         const member = await prisma.user.create({
             data: {
                 email: faker.internet.email(),
-                password: "123456",
+                password: bcrypt.hashSync("123456", salt),
                 enabled: true,
                 role: 'MEMBER',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
@@ -75,20 +83,20 @@ async function seedData() {
 
     // Creamos un arreglo para guardar los datos de los admins del equipo
     const dataAdmins = [
-        { email: 'SnowDevLC@gmail.com', password: 'SnowDevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
-        { email: 'PabloBestani@gmail.com', password: 'PabloBestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
+        { email: 'SnowDevLC@gmail.com', password: 'snowdevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
+        { email: 'PabloBestani@gmail.com', password: 'pablobestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
         { email: 'misaelc98@hotmail.com', password: 'misaelc98', name: 'misaelc98', imageUrl: 'https://avatars.githubusercontent.com/u/129080836?s=60&v=4' },
         { email: 'wtfranco22@hotmail.com', password: 'wtfranco22', name: 'wtfranco22', imageUrl: 'https://avatars.githubusercontent.com/u/13934218?s=60&v=4' },
-        { email: 'AlbertoMallar@hotmail.com', password: 'AlbertoMallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
-        { email: 'NicoGarcia12@hotmail.com', password: 'NicoGarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
-        { email: 'DelHoyoLorenzo@yahoo.com', password: 'DelHoyoLorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
-        { email: 'AGAlbertoGentile@yahoo.com', password: 'AGAlbertoGentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
+        { email: 'AlbertoMallar@hotmail.com', password: 'albertomallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
+        { email: 'NicoGarcia12@hotmail.com', password: 'nicogarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
+        { email: 'DelHoyoLorenzo@yahoo.com', password: 'delhoyolorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
+        { email: 'AGAlbertoGentile@yahoo.com', password: 'agalbertogentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
     ];
     for (let i = 0; i < dataAdmins.length; i++) {
         await prisma.user.create({
             data: {
                 email: dataAdmins[i].email.toLowerCase(),
-                password: dataAdmins[i].password.toLocaleLowerCase(),
+                password: bcrypt.hashSync(dataAdmins[i].password,salt),
                 enabled: true,
                 role: 'ADMIN',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
@@ -104,21 +112,21 @@ async function seedData() {
     // Es un objeto que contiene userId : [arreglo de objetos items](index coincide con userId del item)
     const dataItems = {
         14: [{ // puma
-                userId: 14,
-                categoryId: 4,
-                description: "Unleash peak performance in our Men's Sports Shorts. Engineered for comfort, style, and agility, perfect for dynamic workouts.",
-                name: "Men's Sports Shorts",
-                price: 0,
-                imageUrl: "https://woker.vtexassets.com/arquivos/ids/365231-800-800?v=638219310712830000&width=800&height=800&aspect=true"
-            },
-            {
-                userId: 14,
-                categoryId: 4,
-                description: "Dive into a month of aquatic fun with our Swimming Pass. Enjoy unlimited pool access and make a splash today!",
-                name: "Swimming Pass - 1 Month",
-                price: 34.99,
-                imageUrl: "https://imagenes.elpais.com/resizer/O_nfQn8L8LXpvOp_dWjVveDA2fo=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/XQDJC5BR4ZE45KALPCWSHUXYLY.jpg"
-            }],
+            userId: 14,
+            categoryId: 4,
+            description: "Unleash peak performance in our Men's Sports Shorts. Engineered for comfort, style, and agility, perfect for dynamic workouts.",
+            name: "Men's Sports Shorts",
+            price: 0,
+            imageUrl: "https://woker.vtexassets.com/arquivos/ids/365231-800-800?v=638219310712830000&width=800&height=800&aspect=true"
+        },
+        {
+            userId: 14,
+            categoryId: 4,
+            description: "Dive into a month of aquatic fun with our Swimming Pass. Enjoy unlimited pool access and make a splash today!",
+            name: "Swimming Pass - 1 Month",
+            price: 34.99,
+            imageUrl: "https://imagenes.elpais.com/resizer/O_nfQn8L8LXpvOp_dWjVveDA2fo=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/XQDJC5BR4ZE45KALPCWSHUXYLY.jpg"
+        }],
         13: [{ //adidas
             userId: 13,
             categoryId: 4,
@@ -513,11 +521,49 @@ async function seedData() {
             allItems.push(addItem);
         }
     }
+    const positiveComments = [
+        'Excelent Product!',
+        'Good quality',
+        'They are great!',
+        'This brand always knows what they are doing when it comes to products. Great buy',
+        'Good price, good for young people',
+        'Best of the best',
+        'Taste great and good value.',
+        'Always been a great product.',
+        'Has a great scent',
+        "It's exactly what you would expect, nothing more and nothing less",
+        "Very pleased with these",
+        "Got one or two so I stopped stealing my mom’s! ",
+        "Love, Love , Love these. Perfect sizes and great quality!!!!!!!",
+        "I like everything about them",
+        "Bought as gift for my boyfriends birthday"
+    ]
 
+    const negativeComments = [
+        'Lately the quality of this product has gone down.',
+        'Price has increased lately',
+        "Super cheap quality, I didn’t want to spend a lot but didn’t expect them to be this cheap quality. ",
+        "Only pro they’re super pretty. Pretty much everything about them for the price sucks though.",
+        "Terrible product.",
+        "I do not recommend.",
+        "I was excited to get this and it seems like it would be a great one, but the one I received had marks all over. Highly disappointed."
+
+    ]
+    const IntermediateComments = [
+        "'They are well enough, but they ain't as fine as others I've purchased.'",
+        "Affordable, but not perfect",
+        "This one is a great value with all of the pieces you get.",
+        "It was not what I thought it would be. ",
+        "It may sound like a small thing, but it drives me nuts. When I buy these, they never look like the picture!",
+        "Normal quality, good price",
+        "Not even close to my favourite! But the price was ok. They were cheaper",
+        "i love this product!!! the only bad thing is when i received it, it was already late :("
+    ]
     // Generamos un vouchers o shopping 
     const transactionQuantity = 150;
     for (let i = 0; i < transactionQuantity; i++) {
         let item = faker.random.arrayElement(allItems)
+        let shopper = faker.random.arrayElement(members)
         if (!item.price) {
             // entra a este if en caso de que el precio sea 0, por lo tanto creamos un voucher con su codigo al azar
             let expirationDate = faker.date.between(new Date('2023-07-01'), new Date('2023-09-01'));
@@ -525,17 +571,17 @@ async function seedData() {
             await prisma.voucher.create({
                 data: {
                     item: { connect: { id: item.id } },
-                    user: { connect: { id: faker.random.arrayElement(members).id } },
+                    user: { connect: { id: shopper.id } },
                     code: faker.random.alphaNumeric(20),
                     enabled: enabled,
-                    expirationDate: expirationDate
+                    expirationDate: expirationDate,
                 },
             });
         } else {
             //entra en el caso de que el item tenga un precio distinto de 0 y generamos la compra
             const shopping = await prisma.shopping.create({
                 data: {
-                    user: { connect: { id: faker.random.arrayElement(members).id } },
+                    user: { connect: { id: shopper.id } },
                     pdfUrl: faker.internet.url(),
                     wayToPay: faker.random.arrayElement(['CASH', 'CARD']),
                     state: faker.random.arrayElement(['SUCCESS', 'PENDING']),
@@ -549,6 +595,68 @@ async function seedData() {
                     quantityItem: faker.datatype.number({ min: 1, max: 10 }),
                 },
             });
+        }
+        let star = faker.random.arrayElement([1, 2, 3, 4, 5]);
+        let comment = '';
+        let star1 = false
+        let star2 = false
+        let star3 = false
+        let star4 = false
+        let star5 = false
+        if (star < 3) {
+            comment = faker.random.arrayElement(negativeComments);
+            star1 = star == 1;
+            star2 = star == 2;
+        }
+        else {
+            if (star === 3) {
+                comment = faker.random.arrayElement(IntermediateComments)
+                star3 = star == 3;
+            }
+            else {
+                comment = faker.random.arrayElement(positiveComments)
+                star4 = star == 4;
+                star5 = star == 5;
+            }
+        }
+
+        let existentReview = await prisma.review.findFirst({
+            where: {
+                userId: shopper.id,
+                itemId: item.id
+            }
+        })
+
+        if (existentReview) {
+            await prisma.review.update({
+                where: {
+                    id: existentReview.id,
+                },
+                data: {
+                    comment: comment,
+                    star1: star1,
+                    star2: star2,
+                    star3: star3,
+                    star4: star4,
+                    star5: star5,
+                    enabled: true
+                }
+            })
+        } else {
+            await prisma.review.create({
+
+                data: {
+                    user: { connect: { id: shopper.id } },
+                    item: { connect: { id: item.id } },
+                    comment: comment,
+                    star1: star1,
+                    star2: star2,
+                    star3: star3,
+                    star4: star4,
+                    star5: star5,
+                    enabled: true
+                }
+            })
         }
     }
 }

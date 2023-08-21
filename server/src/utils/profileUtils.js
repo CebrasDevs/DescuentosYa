@@ -38,7 +38,7 @@ function structureMember(user) {
             id: voucher.id,
             code: voucher.code,
             enabled: voucher.enabled,
-            expirationDate: voucher.expirationDate,
+            expirationDate: voucher.expirationDate.toLocaleString(),
             item: structuredItem,
             company: structuredUser
         };

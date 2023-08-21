@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const { PrismaClient } = require("@prisma/client");
 require("dotenv").config();
 
@@ -13,12 +14,18 @@ router.post("/login", async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email },
     });
+
     if (!user) {
       return res.status(404).json({ error: "User doesn't exist" });
     }
-
-    if (user.password !== password) {
+    // comparacion de contraseña con hash
+    const passwordMatch = await bcrypt.compare(password,user.password);
+    if (!passwordMatch) {
       return res.status(401).json({ error: "Incorrect password" });
+    }
+
+    if (user.enabled !== true) {
+      return res.status(401).json({ error: "User disabled by an admin" });
     }
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {

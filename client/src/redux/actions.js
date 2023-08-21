@@ -1,4 +1,6 @@
 import { URL_BASE } from "@/utils/const";
+import getCompanyDistances from "@/utils/geolocationUtils/getCompanyDistances";
+import getDistances from "@/utils/geolocationUtils/getDistances";
 import axios from "axios";
 
 export const GET_COMPANIES = "GET_COMPANIES";
@@ -19,9 +21,10 @@ export const GET_ITEM_DETAIL = "GET_ITEM_DETAIL";
 export const CLEAN_ITEM_DETAIL = "CLEAN_ITEM_DETAIL";
 export const CLEAN_ACTIVE_USER = "CLEAN_ACTIVE_USER";
 export const SET_SHOPPING_CART = "SET_SHOPPING_CART";
-
+export const SET_DISTANCES = "SET_DISTANCES";
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
 export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
+export const GET_USERS_BY_NAME = 'GET_USERS_BY_NAME';
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -29,6 +32,20 @@ export const getUsers = () => {
       const { data } = await axios.get(`${URL_BASE}/users`);
       return dispatch({
         type: GET_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getUsersByName = (value) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_BASE}/users?name=${value}`);
+      return dispatch({
+        type: GET_USERS_BY_NAME,
         payload: data,
       });
     } catch (error) {
@@ -46,7 +63,7 @@ export const getCompanies = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -60,7 +77,7 @@ export const getDiscounts = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -74,7 +91,7 @@ export const getCategories = () => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -88,7 +105,7 @@ export const getItemsByName = (value) => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -96,13 +113,21 @@ export const getItemsByName = (value) => {
 export const getCompanyDetail = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/companies/${id}`);
+      let { data } = await axios.get(`${URL_BASE}/companies/${id}`);
+      const userLocation = localStorage.getItem("userLocation");
+      if (userLocation) {
+        //si se habilito, ya se calculo distancia, la buscamos y si no esta, se calcula con api nuevamente
+        const distance = localStorage.getItem("companyDistances") ?
+          (JSON.parse(localStorage.getItem("companyDistances"))[data.id - 1]).distance :
+          (await getDistances([JSON.parse(userLocation)], [data.location]))[0];
+        data = { ...data, distance: distance };
+      }
       return dispatch({
         type: GET_COMPANY_DETAIL,
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -143,7 +168,7 @@ export const setActiveUser = (id) => {
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -155,14 +180,18 @@ export const setShoppingCart = (shoppingCart) => {
 export const getItemDetail = (id) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`${URL_BASE}/items/${id}`);
-
+      let { data } = await axios(`${URL_BASE}/items/${id}`);
+      const userLocation = localStorage.getItem("userLocation");
+      if (userLocation) {
+        const distance = await (getDistances([JSON.parse(userLocation)], [data.companyLocation]))
+        data = { ...data, distance: distance[0] }
+      }
       return dispatch({
         type: GET_ITEM_DETAIL,
         payload: data,
       });
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   };
 };
@@ -178,3 +207,19 @@ export const increaseItemQuantity = (index) => {
 export const decreaseItemQuantity = (index) => {
   return { type: DECREASE_ITEM_QUANTITY, payload: index };
 };
+
+export const setDistances = (companies) => {
+  return async (dispatch,getState) => {
+    try {
+      if(!companies){
+        // unico caso que sirce, es cuando quiere filtrar por mas cercano, entonces no manda companies
+        const currentState = getState();
+        companies = currentState.companies;
+      }
+      await getCompanyDistances(companies);
+      return dispatch({ type: SET_DISTANCES, payload: companies });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}

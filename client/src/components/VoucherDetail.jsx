@@ -189,7 +189,22 @@ export default function VoucherDetail({ id, activeUser, user }) {
           </button>
 
         }
-      </div>
+    };
+
+    return (
+        <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 mt-10">
+            <h1>Expiration Date: {voucherBought?.expirationDate} </h1>
+            {/* <h1>Code: {voucherBought?.code} </h1> */}
+            <h1>Seller company: {voucherBought?.company.name}</h1>
+            <img src={voucherBought?.code} alt="qrCode"/>
+            <img className="w-[300px]" src={voucherBought?.item.imageUrl} />
+            <button
+        onClick={() => {
+          setEdit(true);
+        }}
+      >
+        Edit your review
+      </button>
       {!edit ? (
         <div>
           {reviewForVoucherBought?.enabled && (

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateItem from "@/utils/validateItem";
-import { getCategories, setActiveUser } from "@/redux/actions";
+import { setActiveUser } from "@/redux/actions";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
@@ -12,6 +12,7 @@ import ItemSuccess from "./Modals/Company/ItemSuccess";
 import ItemFailure from "./Modals/Company/ItemFailure";
 
 export default function CreateItem() {
+
     const dispatch = useDispatch();
 
     const retrievedCookie = Cookies.get("accessTrue");
@@ -31,10 +32,6 @@ export default function CreateItem() {
         discount: "",
     });
     const isNotReady = errors.name || errors.categoryId || errors.price || errors.discount;
-
-    useEffect(() => {
-        dispatch(getCategories());
-    }, [dispatch]);
 
     function handleChange(e) {
         setInput({
@@ -86,7 +83,7 @@ export default function CreateItem() {
                 setItemCreated("success");
             }
         } catch (error) {
-            console.log(error);
+            console.log("error");
             setItemCreated("failure");
             
         }

@@ -50,7 +50,6 @@ export default function Login() {
                 };
                 Cookies.set(cookieName, JSON.stringify(cookieValue));
                 dispatch(setActiveUser(cookieValue.id))
-                window.alert(response.data.data.message);
                 setInput({
                     name: "",
                     password: "",
