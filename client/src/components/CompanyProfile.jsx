@@ -41,25 +41,25 @@ export default function CompanyProfile() {
           className=" w-3/4 mt-4 mb-2 bg-slate-50 rounded-lg shadow-md flex"
         >
           <div className="flex h-full w-full flex-col ">
-          <div className=" flex flex-row w-full">
-            <div className=" w-1/2">
-              <TiArrowBack
-                size={35}
-                onClick={() => {
-                  setModify(false);
-                }}
-                className="ml-5 my-5 text-2xl hover:cursor-pointer hover:text-violet-500 "
-              />
-            </div>
-            <div className=" flex justify-end w-1/2 ">
-              <button onClick={modifyHandler}>
-                <FaUserEdit
+            <div className=" flex flex-row w-full">
+              <div className=" w-1/2">
+                <TiArrowBack
                   size={35}
-                  className=" hover:text-violet-500 mr-5 my-5"
+                  onClick={() => {
+                    setModify(false);
+                  }}
+                  className="ml-5 my-5 text-2xl hover:cursor-pointer hover:text-violet-500 "
                 />
-              </button>
+              </div>
+              <div className=" flex justify-end w-1/2 ">
+                <button onClick={modifyHandler}>
+                  <FaUserEdit
+                    size={35}
+                    className=" hover:text-violet-500 mr-5 my-5"
+                  />
+                </button>
+              </div>
             </div>
-          </div>
             <div className="flex justify-center items-center mt-60">
               <img
                 src={activeUser.imageUrl}

@@ -1,19 +1,8 @@
 "use client"
-
 import Link from "next/link";
 import Login from "../../components/Login";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 export default function login() {
-  const router = useRouter();
-  useEffect(() => {
-    const retrievedCookie = Cookies.get("accessTrue");
-    if (retrievedCookie) {
-      router.push("/");
-    }
-  }, []);
 
   return (
     <div>
