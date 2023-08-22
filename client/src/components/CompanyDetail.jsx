@@ -34,11 +34,6 @@ export default function CompanyDetail({ id }) {
             </div>
             <div className="w-full flex flex-col justify-center">
               <div className=" flex flex-col gap-y-2">
-                {/* <div className=" flex flex-row justify-center">
-                  <h1 className=" tracking-wide font-semibold text-5xl">
-                    {company.name}
-                  </h1>
-                </div> */}
                 <div>
                   <h1 className=" tracking-wide font-semibold text-xl text-center mx-64 mt-4 ">
                     {company.description}
