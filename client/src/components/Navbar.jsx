@@ -101,7 +101,7 @@ export default function Navbar() {
                                 >
                                     <IoPerson className=" mr-3" />
                                     <div>
-                                        {activeUser.role === "ADMIN" || activeUser.role === "MEMBER" ? (
+                                        {activeUser.role === "MEMBER" ? (
                                             <h1>
                                                 {fullName.lastName}, {fullName.firstName}
                                             </h1>
