@@ -50,14 +50,20 @@ export default function ItemDetail({ data }) {
     itemId: data.id
   }
   
-  const handleGenerateCode = () => {
+  const handleGenerateCode = async() => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
     }
-    //logica de generacion de codigo, charlar
-    axios.post(`${URL_BASE}/vouchers/`, voucher)
-      .catch((error) => console.log(error.message));
+    try {
+      //logica de generacion de codigo, charlar
+      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
+      if (response.status === 200) {
+        dispatch(setActiveUser(activeUser.id));
+      }
+    } catch (error) {
+        console.log(error.message)
+    }
   };
 
   const modifyHandler = () => {
