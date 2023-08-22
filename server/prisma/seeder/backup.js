@@ -74,8 +74,8 @@ async function seedData() {
                 name: faker.name.firstName() + " " + faker.name.lastName(),
                 imageUrl: 'https://thumbs.dreamstime.com/b/vector-de-perfil-avatar-predeterminado-foto-usuario-medios-sociales-icono-183042379.jpg',
                 address: faker.address.streetAddress(),
-                phoneNumber: faker.phone.phoneNumber(),
-                lastPayment: faker.date.between(new Date('2023-01-01'), new Date())
+                phoneNumber: faker.datatype.number({ min: 5492235958723, max: 5492235999999 }).toString(),
+                lastPayment: faker.date.between(new Date('2023-07-01'), new Date('2023-09-01'))
             },
         });
         members.push(member);
