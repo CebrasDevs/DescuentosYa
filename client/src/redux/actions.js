@@ -29,7 +29,7 @@ export const GET_USERS_BY_NAME = 'GET_USERS_BY_NAME';
 export const getUsers = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/users`);
+      const { data } = await axios.get(`${URL_BASE}/users`, { withCredentials: true });
       return dispatch({
         type: GET_USERS,
         payload: data,
@@ -159,16 +159,16 @@ export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
 };
 
-export const setActiveUser = (id) => {
+export const setActiveUser = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/profile/${id}`);
+      const { data } = await axios.get(`${URL_BASE}/profile`, { withCredentials: true });
       return dispatch({
         type: SET_ACTIVE_USER,
         payload: data,
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
     }
   };
 };

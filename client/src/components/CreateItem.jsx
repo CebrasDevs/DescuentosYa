@@ -15,16 +15,12 @@ export default function CreateItem() {
 
     const dispatch = useDispatch();
 
-    const retrievedCookie = Cookies.get("accessTrue");
-    const parsedValue = JSON.parse(retrievedCookie);
-
     const categories = useSelector((state) => state.categories);
     const allCategories = ["Choose category", ...categories];
     const [itemCreated, setItemCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
-        userId: parsedValue.id,
         name: "",
         categoryId: "Choose category",
         description: "",
@@ -69,9 +65,9 @@ export default function CreateItem() {
                 formattedItem.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            const response = await axios.post(`${URL_BASE}/items`, formattedItem);
+            const response = await axios.post(`${URL_BASE}/items`, formattedItem, { withCredentials: true });
             if (response.status === 200) {
-                dispatch(setActiveUser(input.userId));
+                dispatch(setActiveUser());
                 setErrors({});
                 setInput({
                     name: "",
