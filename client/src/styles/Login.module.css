@@ -22,3 +22,16 @@
     @apply w-full border py-3 flex justify-center gap-2 hover:bg-gray-200;
     align-items: center;
 }
+
+.input_text + *{
+    color:#CBD5E1;
+}
+
+.input_text:focus + *{
+    color:#6366F1;
+}
+
+.input_group span:hover{
+    color:#6366F1;
+    cursor: pointer;
+}

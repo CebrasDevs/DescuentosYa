@@ -67,9 +67,9 @@ export default function ModifyCompanyProfile({ companyData, handleSave }) {
                 formattedCompany.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany);
+            const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany, { withCredentials: true });
             if (response.status === 200) {
-                dispatch(setActiveUser(companyData.id));
+                dispatch(setActiveUser());
                 alert(`Company successfully modified`);
                 setErrors({});
                 handleSave();
