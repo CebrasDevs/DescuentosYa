@@ -1,6 +1,9 @@
 const { PrismaClient } = require('@prisma/client');
 const faker = require('faker');
-
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
+const { SALT_ROUNDS } = process.env
+let salt = bcrypt.genSaltSync(+SALT_ROUNDS)
 const prisma = new PrismaClient();
 async function seedData() {
     // Crear categorías
@@ -33,11 +36,12 @@ async function seedData() {
     ];
     const companies = []; //coleccionamos los usuarios companies para crear sus items mas adelante
     for (let i = 0; i < dataCompanies.length; i++) {
+        
         // recorremos el arreglo para insertar las companias en la tabla
         const company = await prisma.user.create({ //guardamos el objeto insertado en la tabla
             data: {
                 email: dataCompanies[i].email,
-                password: dataCompanies[i].password,
+                password: bcrypt.hashSync(dataCompanies[i].password, salt),
                 enabled: true,
                 role: dataCompanies[i].role,
                 dni_cuit: dataCompanies[i].dni_cuit,
@@ -63,7 +67,7 @@ async function seedData() {
         const member = await prisma.user.create({
             data: {
                 email: faker.internet.email(),
-                password: "123456",
+                password: bcrypt.hashSync("123456", salt),
                 enabled: true,
                 role: 'MEMBER',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
@@ -79,20 +83,20 @@ async function seedData() {
 
     // Creamos un arreglo para guardar los datos de los admins del equipo
     const dataAdmins = [
-        { email: 'SnowDevLC@gmail.com', password: 'SnowDevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
-        { email: 'PabloBestani@gmail.com', password: 'PabloBestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
+        { email: 'SnowDevLC@gmail.com', password: 'snowdevLC', name: 'SnowDevLC', imageUrl: 'https://avatars.githubusercontent.com/u/129117019?s=60&v=4' },
+        { email: 'PabloBestani@gmail.com', password: 'pablobestani', name: 'PabloBestani', imageUrl: 'https://avatars.githubusercontent.com/u/130400091?s=60&v=4' },
         { email: 'misaelc98@hotmail.com', password: 'misaelc98', name: 'misaelc98', imageUrl: 'https://avatars.githubusercontent.com/u/129080836?s=60&v=4' },
         { email: 'wtfranco22@hotmail.com', password: 'wtfranco22', name: 'wtfranco22', imageUrl: 'https://avatars.githubusercontent.com/u/13934218?s=60&v=4' },
-        { email: 'AlbertoMallar@hotmail.com', password: 'AlbertoMallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
-        { email: 'NicoGarcia12@hotmail.com', password: 'NicoGarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
-        { email: 'DelHoyoLorenzo@yahoo.com', password: 'DelHoyoLorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
-        { email: 'AGAlbertoGentile@yahoo.com', password: 'AGAlbertoGentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
+        { email: 'AlbertoMallar@hotmail.com', password: 'albertomallar', name: 'AlbertoMallar', imageUrl: 'https://avatars.githubusercontent.com/u/129788363?s=60&v=4' },
+        { email: 'NicoGarcia12@hotmail.com', password: 'nicogarcia12', name: 'NicoGarcia12', imageUrl: 'https://avatars.githubusercontent.com/u/67493670?s=60&v=4' },
+        { email: 'DelHoyoLorenzo@yahoo.com', password: 'delhoyolorenzo', name: 'DelHoyoLorenzo', imageUrl: 'https://avatars.githubusercontent.com/u/129763514?s=60&v=4' },
+        { email: 'AGAlbertoGentile@yahoo.com', password: 'agalbertogentile', name: 'AGAlbertoGentile', imageUrl: 'https://avatars.githubusercontent.com/u/65029521?s=60&v=4' }
     ];
     for (let i = 0; i < dataAdmins.length; i++) {
         await prisma.user.create({
             data: {
                 email: dataAdmins[i].email.toLowerCase(),
-                password: dataAdmins[i].password.toLocaleLowerCase(),
+                password: bcrypt.hashSync(dataAdmins[i].password,salt),
                 enabled: true,
                 role: 'ADMIN',
                 dni_cuit: faker.datatype.number({ min: 30999999, max: 44000000 }).toString(),
@@ -517,11 +521,49 @@ async function seedData() {
             allItems.push(addItem);
         }
     }
+    const positiveComments = [
+        'Excelent Product!',
+        'Good quality',
+        'They are great!',
+        'This brand always knows what they are doing when it comes to products. Great buy',
+        'Good price, good for young people',
+        'Best of the best',
+        'Taste great and good value.',
+        'Always been a great product.',
+        'Has a great scent',
+        "It's exactly what you would expect, nothing more and nothing less",
+        "Very pleased with these",
+        "Got one or two so I stopped stealing my mom’s! ",
+        "Love, Love , Love these. Perfect sizes and great quality!!!!!!!",
+        "I like everything about them",
+        "Bought as gift for my boyfriends birthday"
+    ]
 
+    const negativeComments = [
+        'Lately the quality of this product has gone down.',
+        'Price has increased lately',
+        "Super cheap quality, I didn’t want to spend a lot but didn’t expect them to be this cheap quality. ",
+        "Only pro they’re super pretty. Pretty much everything about them for the price sucks though.",
+        "Terrible product.",
+        "I do not recommend.",
+        "I was excited to get this and it seems like it would be a great one, but the one I received had marks all over. Highly disappointed."
+
+    ]
+    const IntermediateComments = [
+        "'They are well enough, but they ain't as fine as others I've purchased.'",
+        "Affordable, but not perfect",
+        "This one is a great value with all of the pieces you get.",
+        "It was not what I thought it would be. ",
+        "It may sound like a small thing, but it drives me nuts. When I buy these, they never look like the picture!",
+        "Normal quality, good price",
+        "Not even close to my favourite! But the price was ok. They were cheaper",
+        "i love this product!!! the only bad thing is when i received it, it was already late :("
+    ]
     // Generamos un vouchers o shopping 
     const transactionQuantity = 150;
     for (let i = 0; i < transactionQuantity; i++) {
         let item = faker.random.arrayElement(allItems)
+        let shopper = faker.random.arrayElement(members)
         if (!item.price) {
             // entra a este if en caso de que el precio sea 0, por lo tanto creamos un voucher con su codigo al azar
             let expirationDate = faker.date.between(new Date('2023-07-01'), new Date('2023-09-01'));
@@ -529,17 +571,17 @@ async function seedData() {
             await prisma.voucher.create({
                 data: {
                     item: { connect: { id: item.id } },
-                    user: { connect: { id: faker.random.arrayElement(members).id } },
+                    user: { connect: { id: shopper.id } },
                     code: faker.random.alphaNumeric(20),
                     enabled: enabled,
-                    expirationDate: expirationDate
+                    expirationDate: expirationDate,
                 },
             });
         } else {
             //entra en el caso de que el item tenga un precio distinto de 0 y generamos la compra
             const shopping = await prisma.shopping.create({
                 data: {
-                    user: { connect: { id: faker.random.arrayElement(members).id } },
+                    user: { connect: { id: shopper.id } },
                     pdfUrl: faker.internet.url(),
                     wayToPay: faker.random.arrayElement(['CASH', 'CARD']),
                     state: faker.random.arrayElement(['SUCCESS', 'PENDING']),
@@ -553,6 +595,68 @@ async function seedData() {
                     quantityItem: faker.datatype.number({ min: 1, max: 10 }),
                 },
             });
+        }
+        let star = faker.random.arrayElement([1, 2, 3, 4, 5]);
+        let comment = '';
+        let star1 = false
+        let star2 = false
+        let star3 = false
+        let star4 = false
+        let star5 = false
+        if (star < 3) {
+            comment = faker.random.arrayElement(negativeComments);
+            star1 = star == 1;
+            star2 = star == 2;
+        }
+        else {
+            if (star === 3) {
+                comment = faker.random.arrayElement(IntermediateComments)
+                star3 = star == 3;
+            }
+            else {
+                comment = faker.random.arrayElement(positiveComments)
+                star4 = star == 4;
+                star5 = star == 5;
+            }
+        }
+
+        let existentReview = await prisma.review.findFirst({
+            where: {
+                userId: shopper.id,
+                itemId: item.id
+            }
+        })
+
+        if (existentReview) {
+            await prisma.review.update({
+                where: {
+                    id: existentReview.id,
+                },
+                data: {
+                    comment: comment,
+                    star1: star1,
+                    star2: star2,
+                    star3: star3,
+                    star4: star4,
+                    star5: star5,
+                    enabled: true
+                }
+            })
+        } else {
+            await prisma.review.create({
+
+                data: {
+                    user: { connect: { id: shopper.id } },
+                    item: { connect: { id: item.id } },
+                    comment: comment,
+                    star1: star1,
+                    star2: star2,
+                    star3: star3,
+                    star4: star4,
+                    star5: star5,
+                    enabled: true
+                }
+            })
         }
     }
 }

@@ -83,3 +83,42 @@ const examples = [
     {
         name: 'Misiones, Argentina',location: { lat: -26.875396, lng: -54.651830 }
     }]
+
+    const positiveComments = [
+        'Excelent Product!',
+        'Good quality',
+        'They are great!',
+        'This brand always knows what they are doing when it comes to products. Great buy',
+        'Good price, good for young people',
+        'Best of the best',
+        'Taste great and good value.',
+        'Always been a great product.',
+        'Has a great scent',
+        "It's exactly what you would expect, nothing more and nothing less",
+        "Very pleased with these",
+        "Got one or two so I stopped stealing my mom’s! ",
+        "Love, Love , Love these. Perfect sizes and great quality!!!!!!!",
+        "I like everything about them",
+        "Bought as gift for my boyfriends birthday"
+     ]
+
+    const negativeComments = [
+        'Lately the quality of this product has gone down.',
+        'Price has increased lately',
+        "Super cheap quality, I didn’t want to spend a lot but didn’t expect them to be this cheap quality. ",
+        "Only pro they’re super pretty. Pretty much everything about them for the price sucks though.",
+        "Terrible product.",
+        "I do not recommend.",
+        "I was excited to get this and it seems like it would be a great one, but the one I received had marks all over. Highly disappointed."
+
+    ]
+    const IntermediateComments = [
+        "'They are well enough, but they ain't as fine as others I've purchased.'",
+        "Affordable, but not perfect",
+        "This one is a great value with all of the pieces you get.",
+        "It was not what I thought it would be. ",
+        "It may sound like a small thing, but it drives me nuts. When I buy these, they never look like the picture!",
+        "Normal quality, good price",
+        "Not even close to my favourite! But the price was ok. They were cheaper",
+        "i love this product!!! the only bad thing is when i received it, it was already late :("
+    ]

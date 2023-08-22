@@ -9,8 +9,8 @@ import { splitName } from "@/utils/formatUtils";
 
 export default function UserProfile() {
     const activeUser = useSelector((state) => state.activeUser);
-    
-    
+
+
 
     const [modify, setModify] = useState(false);
     const modifyHandler = () => {
@@ -130,7 +130,7 @@ export default function UserProfile() {
                                 <input type="search" name="search" placeholder="Search by Name" />
                                 {/* <button onClick={handleClick}>Search</button> */}
                             </div>
-                            <div className="items-center">
+                            <div className="items-center overflow-y-auto">
                                 {activeUser.shoppings?.map((buys, index) => {
                                     return (
                                         <div
@@ -139,28 +139,35 @@ export default function UserProfile() {
                                         >
                                             {buys.items?.map((item, index) => {
                                                 return (
-                                                    <img
-                                                        key={index}
-                                                        className="w-[100px] h-[100px] m-5 rounded-lg"
-                                                        src={item.imageUrl}
-                                                        alt=""
-                                                    />
+                                                    <div className= "ml-2 flex flex-row items-center">
+                                                        {console.log(item)}
+                                                        <img
+                                                            key={index}
+                                                            className="w-[100px] h-[100px] m-5 rounded-lg"
+                                                            src={item.imageUrl}
+                                                            alt=""
+                                                        />
+
+
+                                                        <h1 className="ml-2">Order: {item.name}</h1>
+                                                        {console.log(buys)}
+                                                        <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
+                                                        <h1 className="ml-2">| State: {buys.state}</h1>
+                                                        <h2 className="ml-2">
+                                                            |{" "}
+                                                            <Link className="hover:text-blue-500" href={`/profile/myPurchase/${item.id}?userId=${activeUser.id}`}>
+                                                                Detail
+                                                            </Link>
+                                                        </h2>
+                                                        <h2 className="ml-2">
+                                                            |{" "}
+                                                            <Link className="hover:text-blue-500" href={"#"}>
+                                                                Buy again
+                                                            </Link>
+                                                        </h2>
+                                                    </div>
                                                 );
                                             })}
-                                            <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
-                                            <h1 className="ml-2">| State: {buys.state}</h1>
-                                            <h2 className="ml-2">
-                                                |{" "}
-                                                <Link className="hover:text-blue-500" href={`/profile/myPurchase/${buys.items[0].id}?userId=${activeUser.id}`}>
-                                                    Detail
-                                                </Link>
-                                            </h2>
-                                            <h2 className="ml-2">
-                                                |{" "}
-                                                <Link className="hover:text-blue-500" href={"#"}>
-                                                    Buy again
-                                                </Link>
-                                            </h2>
                                         </div>
                                     );
                                 })}

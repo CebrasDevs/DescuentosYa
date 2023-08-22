@@ -1,6 +1,6 @@
 const { getUsersHelper } = require('../../helpers');
 
-module.exports = async () => {
-    const users = await getUsersHelper();
+module.exports = async (name) => {
+    const users = await getUsersHelper({name: {contains: name, mode:"insensitive"}});
     return users;
 };

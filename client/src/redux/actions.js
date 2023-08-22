@@ -24,6 +24,7 @@ export const SET_SHOPPING_CART = "SET_SHOPPING_CART";
 export const SET_DISTANCES = "SET_DISTANCES";
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
 export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
+export const GET_USERS_BY_NAME = 'GET_USERS_BY_NAME';
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -31,6 +32,20 @@ export const getUsers = () => {
       const { data } = await axios.get(`${URL_BASE}/users`, { withCredentials: true });
       return dispatch({
         type: GET_USERS,
+        payload: data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getUsersByName = (value) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.get(`${URL_BASE}/users?name=${value}`);
+      return dispatch({
+        type: GET_USERS_BY_NAME,
         payload: data,
       });
     } catch (error) {
