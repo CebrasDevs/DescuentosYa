@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import SignUpMember from "../../components/SignUpMember";
-import SignUpCompany from "../../components/SignUpCompany";
+import SignUpMember from "./SignUpMember";
+import SignUpCompany from "./SignUpCompany";
 
 export default function IsCompany() {
   const [IsCompany, setIsCompany] = useState(false);
@@ -13,7 +13,7 @@ export default function IsCompany() {
 
   return (
     <div>
-      <div className=" flex justify-center gap-12 my-4">
+      <div className=" flex justify-center gap-12 my-4 mt-32">
         <label className={`cursor-pointer py-2 px-6 font-bold rounded text-white bg-${IsCompany ? 'violet-500' : 'violet-900'} hover:bg-violet-700 `}>
           <input
             className={

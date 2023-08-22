@@ -1,3 +1,23 @@
+export function formatUserGoogle(user) {
+    const {
+        email,
+        given_name,
+        family_name,
+        picture
+    } = user;
+
+    const fullName = `${given_name} ${family_name}`;
+
+    return {
+        email: email,
+        password: email,
+        dni: "11111111",
+        name: fullName,
+        address: "Default",
+        phoneNumber: "1111111111",
+        imageUrl: picture
+    };
+};
 
 export function formatCompany(company) {
     const {
@@ -123,7 +143,6 @@ export function formatModifyMember(member){
 export function formatItem(item) {
 
     const {
-        userId,
         id: id,
         name,
         categoryId,
@@ -137,7 +156,6 @@ export function formatItem(item) {
     const parsedDiscount = Number(discount);
     
     return {
-        userId: userId,
         id: id,
         name: name,
         categoryId: categoryId,

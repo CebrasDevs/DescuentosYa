@@ -5,9 +5,10 @@ const {
 
 const { Router } = require("express");
 const router = Router();
+const {verifyToken} = require("../utils/authMiddleware");
 
 router.post("/", createMembersHandler);
-router.patch("/:id", updateMembersHandler);
+router.patch("/:id", verifyToken, updateMembersHandler);
 
 
 module.exports = router;

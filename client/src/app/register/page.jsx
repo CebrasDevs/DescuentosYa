@@ -1,6 +1,13 @@
+import IsCompany from "../../components/isCompany";
+import Loading from "@/components/loading";
+import { Suspense } from "react";
+
 export default function Register() {
-  return <div>
-    <h2>I'M A REGISTRATION FORM</h2>
-    
-  </div>;
+    return (
+        <div>
+            <Suspense fallback={<Loading />}>
+                <IsCompany />
+            </Suspense>
+        </div>
+    );
 }

@@ -22,9 +22,8 @@ export default function RootConfig() {
     // Conseguimos el usuario activo a partir de la cookie
     const retrievedCookie = Cookies.get("accessTrue");
     if (retrievedCookie) {
-        const parsedValue = JSON.parse(retrievedCookie);
         // Lo guardamos en el estado global
-        dispatch(setActiveUser(parsedValue.id));
+        dispatch(setActiveUser());
     };
 
     // Conseguimos los items que haya en las cookies

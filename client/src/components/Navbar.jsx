@@ -5,7 +5,7 @@ import { IoPerson } from "react-icons/io5";
 import Image from "next/image";
 import logo from "../assets/D-logo.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { cleanActiveUser } from "@/redux/actions";
 import { URL_BASE } from "@/utils/const";
 import axios from "axios";
@@ -18,16 +18,20 @@ export default function Navbar() {
     const dispatch = useDispatch();
 
     const router = useRouter();
-    const params = useSearchParams();
-    const profile = params.get("profile");
 
+    const pathname = usePathname();
 
-    const handleLogOut = () => {
-        Cookies.remove("accessTrue");
-        Cookies.remove("shoppingCart");
-        axios.post(`${URL_BASE}/logout`);
-        router.push("/");
-        dispatch(cleanActiveUser());
+    const handleLogOut = async () => {
+        try {
+            const response = await axios.post(`${URL_BASE}/logout`, null, { withCredentials: true });
+            if (response.status === 200) {
+                Cookies.remove("shoppingCart");
+                dispatch(cleanActiveUser());
+                router.push("/");
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
     };
 
     let fullName;
@@ -36,7 +40,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className=" fixed top-0 left-0 right-0 z-50  shadow-lg"> 
+        <div className=" fixed top-0 left-0 right-0 z-50  shadow-lg">
             <div className="flex items-center w-full h-16 bg-slate-50">
                 <div className=" flex w-3/4 m-auto items-center">
                     <div className="flex items-center h-full ml-10 mr-auto">
@@ -58,7 +62,7 @@ export default function Navbar() {
                             </Link>
                         )}
                         {activeUser.role === "COMPANY" && (
-                            <Link href={`/profile?profile=true`} className="ml-10 font-medium hover:text-blue-500">
+                            <Link href={`/profile`} className="ml-10 font-medium hover:text-blue-500">
                                 My Items
                             </Link>
                         )}
@@ -89,13 +93,15 @@ export default function Navbar() {
                                     </Link>
                                 )}
                                 <Link
-                                    href={activeUser.role !== "ADMIN" ? `/profile?profile=true` : `/admin`}
+                                    href={activeUser.role !== "ADMIN" ? `/profile` : `/admin`}
                                     className=" flex items-center font-medium hover:text-blue-500"
                                 >
                                     <IoPerson className=" mr-3" />
                                     <div>
                                         {activeUser.role === "ADMIN" || activeUser.role === "MEMBER" ? (
-                                            <h1>{fullName.lastName}, {fullName.firstName}</h1>
+                                            <h1>
+                                                {fullName.lastName}, {fullName.firstName}
+                                            </h1>
                                         ) : (
                                             <h1>{activeUser.name}</h1>
                                         )}
@@ -116,7 +122,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center w-full h-12 bg-neutral-800">
                 <div className=" flex w-3/4 m-auto">
-                    {profile === "true" ? (
+                    {pathname === '/profile' ? (
                         <>
                             {activeUser.role === "COMPANY" && (
                                 <div className="flex h-full mr-auto text-white">
