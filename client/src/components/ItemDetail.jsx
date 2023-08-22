@@ -98,7 +98,7 @@ export default function ItemDetail({ data }) {
     return (
       <section className=" flex w-full h-full justify-center">
         {modify ? (
-          <div className=" flex justify-center w-3/5 h-full bg-white rounded-2xl shadow-xl my-14 ">
+          <div className=" flex justify-center w-full h-full bg-white rounded-2xl shadow-xl my-14 ">
             <div className=" w-1/2 h-full">
               <img
                 className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
@@ -121,7 +121,7 @@ export default function ItemDetail({ data }) {
           </div>
         ) : (
           <div className="flex flex-col m-5">
-            <div className=" relative flex justify-center w-3/5 min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
+            <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
               <div className=" w-1/2 h-full">
                 <img
                   className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
@@ -136,17 +136,17 @@ export default function ItemDetail({ data }) {
                   <p className=" font-bold text-4xl">{data.name}</p>
                 </div>
                 <div>
-                  <h1 className=" font-semibold text-lg mt-12">
-                    Aprovecha el
-                    <span className=" text-red-600"> {data.discount}% </span>
-                    de descuento en la seccion {data.category} en {data.name}
+                  <h1 className=" font-semibold text-lg mt-6">
+                    Discover the incredible
+                    <span className="text-red-600"> {data.discount}% </span>
+                    discount awaiting you in the {data.category} section at {data.name}. Unveil the savings today!
                   </h1>
+                  <div className="font-semibold text-lg mt-12">
+                    <h2>{data.description}</h2>
+                  </div>
                   <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">
                     ${data.price}{" "}
                   </h1>
-                </div>
-                <div className="font-semibold mt-10">
-                  <h2>{data.description}</h2>
                 </div>
                 <div className=" absolute right-10 bottom-10 flex">
                   {activeUser.role === "ADMIN" ||
@@ -184,14 +184,14 @@ export default function ItemDetail({ data }) {
                         return (
                           <div className="border-b-2 m-5 w-full">
                             <div className="flex">
-                            {[1, 2, 3, 4, 5].map((starNumber) => {
-                              return starNumber <= reviews[index] ? (
-                                <FaStar className="text-yellow-500" />
-                              ) : (
-                                <FaStar />
-                              );
-                            })}
-                          </div>
+                              {[1, 2, 3, 4, 5].map((starNumber) => {
+                                return starNumber <= reviews[index] ? (
+                                  <FaStar className="text-yellow-500" />
+                                ) : (
+                                  <FaStar />
+                                );
+                              })}
+                            </div>
                             <h1 className="m-5"> {review.user.name} </h1>
                             <h1 className="m-5">"{review.comment}"</h1>
                           </div>
@@ -206,20 +206,20 @@ export default function ItemDetail({ data }) {
                     </h1>
                   </div>
                   <div className="flex">
-                              {[1, 2, 3, 4, 5].map((starNumber) => {
-                                return (
-                                  <div className="m-1">
-                                    <FaStar
-                                      className={
-                                        starNumber <= averageRating
-                                          ? "text-yellow-500 text-2xl m-1"
-                                          : "text-2xl m-1"
-                                      }
-                                    />
-                                  </div>
-                                );
-                              })}
-                            </div>
+                    {[1, 2, 3, 4, 5].map((starNumber) => {
+                      return (
+                        <div className="m-1">
+                          <FaStar
+                            className={
+                              starNumber <= averageRating
+                                ? "text-yellow-500 text-2xl m-1"
+                                : "text-2xl m-1"
+                            }
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
                   <h1>{reviews.length} reviews</h1>
                 </div>
               </div>
@@ -234,7 +234,7 @@ export default function ItemDetail({ data }) {
   return (
     <section className=" flex w-full h-full justify-center">
       {modify ? (
-        <div className=" flex justify-center w-3/5 h-full bg-white rounded-2xl shadow-xl my-14 ">
+        <div className=" flex justify-center w-full h-full bg-white rounded-2xl shadow-xl my-14 ">
           <div className=" w-1/2 h-full">
             <img
               className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
@@ -261,10 +261,10 @@ export default function ItemDetail({ data }) {
                 <p className=" font-bold text-4xl">{data.name}</p>
               </div>
               <div>
-                <h1 className=" font-semibold text-lg mt-12">
-                  Aprovecha el
-                  <span className=" text-red-600"> {data.discount}% </span>
-                  de descuento en la seccion {data.category} en {data.name}
+                <h1 className=" font-semibold text-lg mt-6">
+                  Discover the incredible
+                  <span className="text-red-600"> {data.discount}% </span>
+                  discount awaiting you in the {data.category} section at {data.name}. Unveil the savings today!
                 </h1>
                 {data.distance && <h1>Distance: {data.distance?.text}</h1>}
                 {data.price > 0 && (
@@ -272,6 +272,9 @@ export default function ItemDetail({ data }) {
                     ${data.price}{" "}
                   </h1>
                 )}
+                <div className="font-semibold text-lg mt-12">
+                    <h2>{data.description}</h2>
+                  </div>
               </div>
               <div className=" absolute right-10 bottom-10 flex">
                 {activeUser.role === 'MEMBER' && <button
