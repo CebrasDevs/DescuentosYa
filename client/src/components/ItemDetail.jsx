@@ -280,7 +280,7 @@ export default function ItemDetail({ data }) {
               src={data.imageUrl}
             ></img>
           </div>
-          <ModifiedItem data={data} type={"product"} />
+          <ModifiedItem data={data} type={"product"} handleSave={handleSetModify}/>
         </div>
       ) : (
         <div className="flex flex-col m-5">
