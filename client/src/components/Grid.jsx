@@ -3,9 +3,9 @@ import Card from "./Card";
 import usePaginate from "@/hooks/usePaginate";
 import styles from "../styles/Discounts.module.css";
 
-export default function Grid({value}) {
+export default function Grid({value, itemsFiltered}) {
     const { currentView, itemsProfile, itemsDetail } = usePaginate(value);
-    const items = currentView || itemsProfile || itemsDetail;
+    const items = itemsFiltered || currentView || itemsProfile || itemsDetail;
 
     return (
         <>

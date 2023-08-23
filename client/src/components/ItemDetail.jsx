@@ -2,7 +2,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addShoppingCartItem, getItemDetail, setActiveUser } from "@/redux/actions";
 import { BsCart3 } from "react-icons/bs";
-import Link from "next/link";
 import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
 import { FaEdit } from "react-icons/fa";
@@ -23,7 +22,7 @@ export default function ItemDetail({ data }) {
   const activeUser = useSelector((state) => state.activeUser);
   const router = useRouter();
 
-  const { averageRating, reviews } = getAverageRating(data)
+  const { averageRating, reviews } = getAverageRating(data);
 
   const [modify, setModify] = useState(false);
 
@@ -39,6 +38,12 @@ export default function ItemDetail({ data }) {
       if (shoppingCart.some((shopping) => shopping.item.id === itemFound.id)) {
         // El itemFound es igual al atributo 'item' de al menos un elemento en shoppingCart
         alert("Item already added in shopping cart");
+      } else if (
+        shoppingCart.some(
+          (shopping) => shopping.item.companyId !== itemFound.companyId
+        )
+      ) {
+        alert("Services from different companies cannot be added to the cart");
       } else {
         // El itemFound no coincide con ningún atributo 'item' en shoppingCart
         let newItem = { item: itemFound, quantity: 1 };
@@ -50,23 +55,18 @@ export default function ItemDetail({ data }) {
   };
   const voucher = {
     userId: activeUser.id,
-    itemId: data.id
-  }
-  
-  const handleGenerateCode = async() => {
+    itemId: data.id,
+  };
+
+  const handleGenerateCode = () => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
     }
-    try {
-      //logica de generacion de codigo, charlar
-      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
-      if (response.status === 200) {
-        dispatch(setActiveUser());
-      }
-    } catch (error) {
-        console.log(error.message)
-    }
+    //logica de generacion de codigo, charlar
+    axios
+      .post(`${URL_BASE}/vouchers/`, voucher)
+      .catch((error) => console.log(error.message));
   };
 
   const modifyHandler = () => {
@@ -158,43 +158,19 @@ export default function ItemDetail({ data }) {
                 </div>
                 <div className=" absolute right-10 bottom-10 flex">
                   {activeUser.role === "ADMIN" ||
-                    activeUser.role === "COMPANY" ? null : (
-                    <Link href={"/shoppingcart"}>
-                      <button
-                        className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
-                        onClick={() => handleAddItem(data)}
-                      >
-                        Add to Cart <BsCart3 className=" text-xl" />
-                      </button>
-                    </Link>
+                  activeUser.role === "COMPANY" ? null : (
+                    <button
+                      className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
+                      onClick={() => handleAddItem(data)}
+                    >
+                      Add to Cart <BsCart3 className=" text-xl" />
+                    </button>
                   )}
                   {activeUser.id === data.companyId ||
-                    activeUser.role === "ADMIN" ? (
-                      <div>
-                        <button onClick={modifyHandler}>
-                          <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
-                        </button>
-                        <label className="flex flex-col relative inline-flex items-center">
-                          <h1 className="m-2">Disable/Enable</h1>
-                          <input
-                            type="checkbox"
-                            className="sr-only"
-                            checked={!data.enabled}
-                            onChange={handleItemEnable}
-                          />
-                          <span
-                            className={`relative w-10 h-6 transition rounded-full ${
-                              data.enabled ? "bg-blue-300" : "bg-gray-300"
-                            }`}
-                          >
-                            <span className={`absolute ${
-                              data.enabled ? "right-1" : "left-1"
-                              } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
-                            </span>
-                          </span>
-                        </label>
-                        
-                      </div>
+                  activeUser.role === "ADMIN" ? (
+                    <button onClick={modifyHandler}>
+                      <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
+                    </button>
                   ) : null}
                 </div>
               </div>
@@ -314,31 +290,10 @@ export default function ItemDetail({ data }) {
                   Get Voucher
                 </button>}
                 {activeUser.id === data.companyId ||
-                  activeUser.role === "ADMIN" ? (
-                    <div>
-                      <button onClick={modifyHandler}>
-                        <FaEdit size={30} className="ml-6" />
-                      </button>
-                      <label className="flex flex-col relative items-center">
-                        <h1 className="m-2">Disable/Enable</h1>
-                        <input
-                          type="checkbox"
-                          className="sr-only"
-                          checked={!data.enabled}
-                          onChange={handleItemEnable}
-                        />
-                        <span
-                          className={`relative w-10 h-6 transition rounded-full ${
-                            data.enabled ? "bg-blue-300" : "bg-gray-300"
-                          }`}
-                        >
-                          <span className={`absolute ${
-                            data.enabled ? "right-1" : "left-1"
-                          } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
-                          </span>
-                        </span>
-                      </label>
-                    </div>
+                activeUser.role === "ADMIN" ? (
+                  <button onClick={modifyHandler}>
+                    <FaEdit size={30} className="ml-6" />
+                  </button>
                 ) : null}
               </div>
             </div>

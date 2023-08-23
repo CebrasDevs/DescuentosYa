@@ -2,16 +2,30 @@
 import { FaUserEdit } from "react-icons/fa";
 import { TiArrowBack } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCompanyItem } from "@/redux/actions";
+import { deleteCompanyItem, setFiltersProfile } from "@/redux/actions";
 import Link from "next/link";
 import Grid from "./Grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModifyCompanyProfile from "./ModifyCompanyProfile";
 
 export default function CompanyProfile() {
   const dispatch = useDispatch();
 
   const activeUser = useSelector((state) => state.activeUser);
+  const filtersProfile = useSelector((state) => state.filtersProfile);
+
+  useEffect(() => {
+    dispatch(setFiltersProfile({ property: "All", value: "" }));
+  }, [activeUser]);
+
+  const handleSearchChange = (e) => {
+    dispatch(
+      setFiltersProfile({
+        property: e.target.name,
+        value: e.target.value.trim(),
+      })
+    );
+  };
 
   const [modify, setModify] = useState(false);
   const modifyHandler = () => {
@@ -158,13 +172,14 @@ export default function CompanyProfile() {
                 </svg>
                 <input
                   type="search"
-                  name="search"
+                  name="items"
                   className="h-14 w-full rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
                   placeholder="Search items"
+                  onInput={handleSearchChange}
                 />
               </div>
               <div>
-                <Grid value="profile" />
+                <Grid value="profile" itemsFiltered={filtersProfile.items} />
               </div>
             </>
           ) : (
@@ -215,27 +230,30 @@ export default function CompanyProfile() {
                   return (
                     <div
                       key={index}
-                      className="flex items-center border border-black rounded-lg m-2"
+                      className="flex flex-col border border-black rounded-lg m-2"
                     >
                       {sale.items?.map((item, index) => {
                         return (
-                          <img
-                            key={index}
-                            className="w-[100px] h-[100px] m-5 rounded-lg"
-                            src={item.imageUrl}
-                            alt=""
-                          />
+                          <div key={index} className="flex items-center">
+                            <img
+                              className="w-[100px] h-[100px] m-5 rounded-lg"
+                              src={item.imageUrl}
+                              alt=""
+                            />
+                            <h1 className="ml-2">
+                              Way to Pay: {sale.wayToPay}
+                            </h1>
+                            <h1 className="ml-2">| State: {sale.state}</h1>
+                            <h1 className="ml-2">| User: {sale.user.name}</h1>
+                            <h2 className="ml-2">
+                              |{" "}
+                              <Link className="hover:text-blue-500" href={"#"}>
+                                Detail
+                              </Link>
+                            </h2>
+                          </div>
                         );
                       })}
-                      <h1 className="ml-2">Way to Pay: {sale.wayToPay}</h1>
-                      <h1 className="ml-2">| State: {sale.state}</h1>
-                      <h1 className="ml-2">| User: {sale.user.name}</h1>
-                      <h2 className="ml-2">
-                        |{" "}
-                        <Link className="hover:text-blue-500" href={"#"}>
-                          Detail
-                        </Link>
-                      </h2>
                     </div>
                   );
                 })}
@@ -278,13 +296,14 @@ export default function CompanyProfile() {
                 </svg>
                 <input
                   type="search"
-                  name="search"
+                  name="vouchers"
                   className="h-14 w-full rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
                   placeholder="Search vouchers"
+                  onInput={handleSearchChange}
                 />
               </div>
               <div className="items-center">
-                {activeUser.vouchers?.map((voucher, index) => {
+                {filtersProfile.vouchers?.map((voucher, index) => {
                   return (
                     <div
                       key={index}
