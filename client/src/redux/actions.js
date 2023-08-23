@@ -25,7 +25,8 @@ export const SET_SHOPPING_CART = "SET_SHOPPING_CART";
 export const SET_DISTANCES = "SET_DISTANCES";
 export const INCREASE_ITEM_QUANTITY = "INCREASE_ITEM_QUANTITY";
 export const DECREASE_ITEM_QUANTITY = "DECREASE_ITEM_QUANTITY";
-export const GET_USERS_BY_NAME = 'GET_USERS_BY_NAME';
+export const GET_USERS_BY_NAME = "GET_USERS_BY_NAME";
+export const SET_FILTERS_PROFILE = "SET_FILTERS_PROFILE";
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -118,9 +119,12 @@ export const getCompanyDetail = (id) => {
       const userLocation = localStorage.getItem("userLocation");
       if (userLocation) {
         //si se habilito, ya se calculo distancia, la buscamos y si no esta, se calcula con api nuevamente
-        const distance = localStorage.getItem("companyDistances") ?
-          (JSON.parse(localStorage.getItem("companyDistances"))[data.id - 1]).distance :
-          (await getDistances([JSON.parse(userLocation)], [data.location]))[0];
+        const distance = localStorage.getItem("companyDistances")
+          ? JSON.parse(localStorage.getItem("companyDistances"))[data.id - 1]
+              .distance
+          : (
+              await getDistances([JSON.parse(userLocation)], [data.location])
+            )[0];
         data = { ...data, distance: distance };
       }
       return dispatch({
@@ -174,6 +178,10 @@ export const setActiveUser = () => {
   };
 };
 
+export const setFiltersProfile = (filters) => {
+  return { type: SET_FILTERS_PROFILE, payload: filters };
+}
+
 export const setShoppingCart = (shoppingCart) => {
   return { type: SET_SHOPPING_CART, payload: shoppingCart };
 };
@@ -184,8 +192,11 @@ export const getItemDetail = (id) => {
       let { data } = await axios(`${URL_BASE}/items/${id}`);
       const userLocation = localStorage.getItem("userLocation");
       if (userLocation) {
-        const distance = await (getDistances([JSON.parse(userLocation)], [data.companyLocation]))
-        data = { ...data, distance: distance[0] }
+        const distance = await getDistances(
+          [JSON.parse(userLocation)],
+          [data.companyLocation]
+        );
+        data = { ...data, distance: distance[0] };
       }
       return dispatch({
         type: GET_ITEM_DETAIL,
@@ -210,9 +221,9 @@ export const decreaseItemQuantity = (index) => {
 };
 
 export const setDistances = (companies) => {
-  return async (dispatch,getState) => {
+  return async (dispatch, getState) => {
     try {
-      if(!companies){
+      if (!companies) {
         // unico caso que sirce, es cuando quiere filtrar por mas cercano, entonces no manda companies
         const currentState = getState();
         companies = currentState.companies;
@@ -220,7 +231,7 @@ export const setDistances = (companies) => {
       await getCompanyDistances(companies);
       return dispatch({ type: SET_DISTANCES, payload: companies });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
