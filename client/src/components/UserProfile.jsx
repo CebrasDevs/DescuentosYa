@@ -168,9 +168,9 @@ export default function UserProfile() {
                                                 | Company:{" "}
                                                 <Link
                                                     className="hover:text-blue-500"
-                                                    href={`/brands/${voucher.company.id}`}
+                                                    href={`/brands/${voucher.company?.id}`}
                                                 >
-                                                    {voucher.company.name}
+                                                    {voucher.company?.name}
                                                 </Link>
                                             </h2>
                                             <h2 className="ml-2">| Expiration date: {voucher.expirationDate}</h2>
