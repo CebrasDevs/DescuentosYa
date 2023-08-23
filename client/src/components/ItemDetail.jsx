@@ -62,15 +62,16 @@ export default function ItemDetail({ data }) {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
-    }
-    try {
-      //logica de generacion de codigo, charlar
-      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
-      if (response.status === 200) {
-        dispatch(setActiveUser());
+    } else {
+      try {
+        //logica de generacion de codigo, charlar
+        const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
+        if (response.status === 200) {
+          dispatch(setActiveUser());
+        }
+      } catch (error) {
+          console.log(error.message)
       }
-    } catch (error) {
-        console.log(error.message)
     }
   };
 
@@ -310,7 +311,7 @@ export default function ItemDetail({ data }) {
                   </div>
               </div>
               <div className=" absolute right-10 bottom-10 flex">
-                {activeUser.role === 'MEMBER' && <button
+                {activeUser.role !== 'COMPANY' && activeUser.role !== 'ADMIN' && <button
                   className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                   onClick={handleGenerateCode}
                 >
