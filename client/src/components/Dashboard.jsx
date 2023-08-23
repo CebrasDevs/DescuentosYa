@@ -142,10 +142,10 @@ export default function Dashboard() {
           if (user.role === "MEMBER") {
             return (
               <div className="grid grid-cols-5 justify-items-center items-center m-5 border-b-2">
-                <h1 className="m-2">{user.name}</h1>
-                <h1 className="mr-4">{user.email}</h1>
+                <h1 className="text-lg font-medium mr-6">{user.name}</h1>
+                <h1 className="mr-4 font-medium ">{user.email}</h1>
                 <Link href={`/admin/${user.id}`}>
-                  <h1 className="m-2 underline">View detail</h1>
+                  <h1 className="m-2 font-medium underline">View detail</h1>
                 </Link>
                 <h1 className={`ml-3 ${
                     user.enabled ? "text-green-600 font-extrabold text-lg" : "text-red-600 text-lg font-extrabold"
