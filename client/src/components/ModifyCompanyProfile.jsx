@@ -6,6 +6,7 @@ import axios from "axios";
 import { URL_BASE } from "@/utils/const";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "@/redux/actions";
+axios.defaults.withCredentials = true;
 
 export default function ModifyCompanyProfile({ companyData, handleSave }) {
     const { phoneNumber } = phoneNumberWithoutHyphens(companyData);
@@ -67,7 +68,7 @@ export default function ModifyCompanyProfile({ companyData, handleSave }) {
                 formattedCompany.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany, { withCredentials: true });
+            const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany);
             if (response.status === 200) {
                 dispatch(setActiveUser());
                 alert(`Company successfully modified`);

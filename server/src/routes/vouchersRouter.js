@@ -6,9 +6,10 @@ const {
 
 const { Router } = require("express");
 const router = Router();
+const {verifyToken} = require("../utils/authMiddleware");
 
-router.post("/", createVouchersHandler);
-router.patch("/:id", disableVouchersHandler);
-router.get("/", getVouchersHandler);
+router.post("/", verifyToken, createVouchersHandler);
+router.patch("/:id", verifyToken, disableVouchersHandler);
+router.get("/", verifyToken, getVouchersHandler);
 
 module.exports = router;

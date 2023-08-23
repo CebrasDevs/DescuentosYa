@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import SuccessModal from "./Modals/User/Success";
 import FailureModal from "./Modals/User/Failure";
+axios.defaults.withCredentials = true;
 
 export default function SignUpMember() {
     const [userCreated, setUserCreated] = useState("pending");
