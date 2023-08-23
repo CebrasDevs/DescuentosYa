@@ -170,9 +170,31 @@ export default function ItemDetail({ data }) {
                   )}
                   {activeUser.id === data.companyId ||
                     activeUser.role === "ADMIN" ? (
-                    <button onClick={modifyHandler}>
-                      <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
-                    </button>
+                      <div>
+                        <button onClick={modifyHandler}>
+                          <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
+                        </button>
+                        <label className="flex flex-col relative inline-flex items-center">
+                          <h1 className="m-2">Disable/Enable</h1>
+                          <input
+                            type="checkbox"
+                            className="sr-only"
+                            checked={!data.enabled}
+                            onChange={handleItemEnable}
+                          />
+                          <span
+                            className={`relative w-10 h-6 transition rounded-full ${
+                              data.enabled ? "bg-blue-300" : "bg-gray-300"
+                            }`}
+                          >
+                            <span className={`absolute ${
+                              data.enabled ? "right-1" : "left-1"
+                              } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
+                            </span>
+                          </span>
+                        </label>
+                        
+                      </div>
                   ) : null}
                 </div>
               </div>
