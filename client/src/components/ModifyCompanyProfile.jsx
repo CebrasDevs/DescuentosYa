@@ -76,6 +76,7 @@ export default function ModifyCompanyProfile({ companyData, handleSave }) {
                 handleSave();
             }
         } catch (error) {
+            console.log(error)
             alert(`Error modifying company`);
         }
     };

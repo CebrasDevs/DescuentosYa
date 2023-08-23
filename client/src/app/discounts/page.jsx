@@ -37,12 +37,12 @@ export default function discounts() {
   };
 
   return (
-        <div className="w-[90%] flex m-auto pb-32">
+        <div className="w-[90%] flex m-auto pb-32 justify-center">
           {locationRequestModal && <LocationRequestModal close={showLocationRequestModal} />}
             <div className="rounded-lg w-[20%] mt-[8.5rem]">
                 <Filters showModal={showLocationRequestModal} />
             </div>
-            <div className="mt-10 w-[80%]">
+            <div className="mt-10 w-[75%]">
                 <div className="relative flex w-2/6 m-auto items-center justify-between rounded-md border shadow-lg mb-10">
                     <svg
                         className="absolute left-2 block h-5 w-5 text-gray-500"
