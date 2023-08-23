@@ -11,14 +11,19 @@ import { HiMiniBackspace } from "react-icons/hi2";
 export default function PurchaseDetail({ id, activeUser, user }) {
   const dispatch = useDispatch();
 
-  let itemBought, reviewForItemBought;
-  if (activeUser.id) {
-    itemBought = activeUser.shoppings.find(
-      (item) => item.items[0].id === Number(id)
-    );
+  let allItemsBought, reviewForItemBought, itemBought;
+  console.log(activeUser)
+
+  if (activeUser?.id) {
+    allItemsBought = activeUser.shoppings.map(
+      (shopping) => shopping.items.find((item) => (item.id === Number(id))
+    ));
+    itemBought = allItemsBought.find((item)=> item !== undefined);
+      console.log('1',itemBought)
     reviewForItemBought = activeUser.Review.find(
-      (item) => item.itemId === itemBought.items[0].id
+      (review) => review.itemId === itemBought.id
     );
+    console.log('2',reviewForItemBought)
   }
 
   const [rating, setRating] = useState(null); //para colorear las estrellas
@@ -159,15 +164,15 @@ export default function PurchaseDetail({ id, activeUser, user }) {
       <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
         <h1>Paid with: {itemBought?.wayToPay} </h1>
         <h1>State: {itemBought?.state} </h1>
-        <h1>Seller company: {itemBought?.items[0].company.name}</h1>
+        <h1>Seller company: {itemBought?.company.name}</h1>
         <h1>
           Price paid: ${" "}
           {(
-            itemBought?.items[0].price *
-            (1 - itemBought?.items[0].discount / 100)
+            itemBought?.price *
+            (1 - itemBought?.discount / 100)
           ).toFixed(2)}
         </h1>
-        <img className="w-[300px]" src={itemBought?.items[0].imageUrl} />
+        <img className="w-[300px]" src={itemBought?.imageUrl} />
         {!edit && <button
           onClick={() => {
             setEdit(true);
