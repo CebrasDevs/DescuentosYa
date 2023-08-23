@@ -10,9 +10,12 @@ import { TiArrowBack } from "react-icons/ti";
 import { FaStar } from "react-icons/fa";
 import { getAverageRating } from "@/utils/formatUtils";
 import Cookies from "js-cookie";
-import axios from "axios";
 import { URL_BASE } from "@/utils/const";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
+
 
 export default function ItemDetail({ data }) {
   const dispatch = useDispatch();
@@ -59,7 +62,7 @@ export default function ItemDetail({ data }) {
       //logica de generacion de codigo, charlar
       const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
       if (response.status === 200) {
-        dispatch(setActiveUser(activeUser.id));
+        dispatch(setActiveUser());
       }
     } catch (error) {
         console.log(error.message)
@@ -78,9 +81,8 @@ export default function ItemDetail({ data }) {
           enabled: false
         })
         if (response.status === 200) {
-          console.log("lo disableee")
           dispatch(getItemDetail(data.id));
-          dispatch(setActiveUser(activeUser.id));
+          dispatch(setActiveUser());
           alert("Item disabled successfully");
         }
       } else {
@@ -90,7 +92,7 @@ export default function ItemDetail({ data }) {
         })
         if (response.status === 200) {
           dispatch(getItemDetail(data.id));
-          dispatch(setActiveUser(activeUser.id));
+          dispatch(setActiveUser());
           alert("Item enabled successfully");
         }
       }
