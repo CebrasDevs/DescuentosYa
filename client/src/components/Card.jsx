@@ -29,8 +29,9 @@ export default function Card({ item, value }) {
 
         <div className="bottom border-t flex flex-row  justify-center min-h-[90px] w-full items-center mx-2">
             
-          <div className="title font-semibold text-lg w-2/3 flex justify-between items-center">
+          <div className="title font-semibold text-lg w-2/3 flex flex-col justify-between items-center">
             <h1 className="ml-2">{item.name}</h1>
+            <h2>{item.distance?.text}</h2>
           </div>
           
 
