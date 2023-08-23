@@ -25,12 +25,12 @@ export default function usePaginate(value) {
     const itemsPerPage = 12;
     const maxIndex = currentPage * itemsPerPage;
     const minIndex = maxIndex - itemsPerPage;
-    const currentView = filteredItems?.slice(minIndex, maxIndex); // se envia a GRID
+    const currentView = filteredItems?.filter((item) => item.enabled).slice(minIndex, maxIndex); // se envia a GRID
     const numberOfPages = Math.ceil(filteredItems?.length / itemsPerPage) || 1; // para asegurarnos de que el number of pages no sea nunca 0
 
     const itemsProfile = activeUser.items?.slice(minIndex, maxIndex);
 
-    const itemsDetail = detailUser.items?.slice(minIndex, maxIndex);
+    const itemsDetail = detailUser.items?.filter((item) => item.enabled).slice(minIndex, maxIndex);
     
     function handleOnClick(e) {
         if (e.target.name === "previous")

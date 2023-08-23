@@ -53,6 +53,9 @@ export default function Card({ item, value }) {
           </div>
 
         </div>
+          { value === 'profile' &&
+            <h1 className="m-2">{item.enabled ? "enabled" : "disabled"}</h1>
+          }
 
         <div className="flex justify-center bottom-0">
           <button className="w-[90%] rounded-md bg-violet-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-violet-800">

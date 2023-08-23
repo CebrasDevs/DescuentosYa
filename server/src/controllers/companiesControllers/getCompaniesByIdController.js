@@ -25,7 +25,8 @@ module.exports = async (id) => {
             category: item.category.name,
             price: item.price,
             discount: item.discount,
-            imageUrl: item.imageUrl
+            imageUrl: item.imageUrl,
+            enabled: item.enabled
         };
     });
 
