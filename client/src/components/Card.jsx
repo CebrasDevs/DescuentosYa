@@ -6,7 +6,7 @@ import { FaStar } from "react-icons/fa";
 
 export default function Card({ item, value }) {
   const { averageRating } = getAverageRating(item);
-  
+  console.log(item);
   return (
     <Link href={`/${item.id}`}>
       <div className="card relative bg-white w-[270px] min-h-[410px] rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform ease-in-out duration-300">
@@ -29,8 +29,9 @@ export default function Card({ item, value }) {
 
         <div className="bottom border-t flex flex-row  justify-center min-h-[90px] w-full items-center mx-2">
             
-          <div className="title font-semibold text-lg w-2/3 flex justify-between items-center">
+          <div className="title font-semibold text-lg w-2/3 flex flex-col justify-between items-center">
             <h1 className="ml-2">{item.name}</h1>
+            <h2>{item.distance.text}</h2>
           </div>
           
 
