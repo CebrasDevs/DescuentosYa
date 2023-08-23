@@ -58,21 +58,22 @@ export default function ItemDetail({ data }) {
     itemId: data.id
   }
   
-  const handleGenerateCode = async() => {
+  const handleGenerateCode = async () => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
-    } else {
-      try {
-        //logica de generacion de codigo, charlar
-        const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
-        if (response.status === 200) {
-          dispatch(setActiveUser());
-        }
-      } catch (error) {
-          console.log(error.message)
-      }
     }
+    try{
+      //logica de generacion de codigo, charlar
+      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher)
+      if (response.status === 200){
+        dispatch(setActiveUser(activeUser.id));
+        alert('QR Generated');
+      }
+    }catch(error){
+      console.log(error.message);
+    }
+    
   };
 
   const modifyHandler = () => {
@@ -178,7 +179,11 @@ export default function ItemDetail({ data }) {
                         <button onClick={modifyHandler}>
                           <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
                         </button>
+
+    
+
                         <label className="flex flex-col relative items-center">
+
                           <h1 className="m-2">Disable/Enable</h1>
                           <input
                             type="checkbox"

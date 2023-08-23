@@ -1,7 +1,6 @@
 const { createCompaniesController } = require("../../controllers");
 
 module.exports = async (req, res) => {
-  console.log("handler")
   try {
     let {
       email,
