@@ -5,6 +5,7 @@ import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateModifiedItem from "@/utils/validateModifiedItem";
 import { getItemDetail, setActiveUser } from "@/redux/actions";
+import { TiArrowBack } from "react-icons/ti";
 
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
@@ -81,9 +82,12 @@ export default function ModifiedItem({ data, type , handleSave}) {
             <div className="flex  justify-center mt-12 pb-12 ">
                 <div className="rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
-                            Modify Item
-                        </h1>
+                        <div className="flex justify-between items-center">
+                            <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
+                                Modify Item
+                            </h1>
+                            <TiArrowBack className="text-2xl hover: cursor-pointer" onClick={()=>handleSave()}/>
+                        </div>
                         <form onSubmit={handleSubmit} className=" relative">
                             <div className=" flex flex-row h-28 justify-between">
                                 <div className=" w-2/5">
