@@ -321,7 +321,7 @@ export default function ItemDetail({ data }) {
                       <button onClick={modifyHandler}>
                         <FaEdit size={30} className="ml-6" />
                       </button>
-                      <label className="flex-col relative inline-flex items-center">
+                      <label className="flex flex-col relative items-center">
                         <h1 className="m-2">Disable/Enable</h1>
                         <input
                           type="checkbox"

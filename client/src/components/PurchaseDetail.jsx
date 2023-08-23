@@ -7,6 +7,7 @@ import validateReview from "@/utils/validateReview";
 import { setActiveUser } from "@/redux/actions";
 import { FaStar } from "react-icons/fa";
 import { HiMiniBackspace } from "react-icons/hi2";
+axios.defaults.withCredentials = true;
 
 export default function PurchaseDetail({ id, activeUser, user }) {
   const dispatch = useDispatch();
@@ -184,12 +185,12 @@ export default function PurchaseDetail({ id, activeUser, user }) {
       {!edit ? (
         <div>
           {reviewForItemBought?.enabled && (
-            <div className="flex flex-col items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
-              <h1 className="text-lg">Your review</h1>
+            <div className="m-5 items-center">
+              <h1>Your review</h1>
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((starNumber) => {
                   return (
-                    <div className="m-4">
+                    <div className="m-1">
                       <FaStar
                         className={
                           starNumber <= rating

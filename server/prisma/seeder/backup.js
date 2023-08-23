@@ -51,7 +51,7 @@ async function seedData() {
                 //se agregan los campos tambien en el arreglo de objetos
                 latitude: dataCompanies[i].location.lat,
                 longitude: dataCompanies[i].location.lng,
-                phoneNumber: faker.phone.phoneNumber().toString(),
+                phoneNumber: dataCompanies[i].phoneNumber,
                 description: dataCompanies[i].description,
                 imageUrl: dataCompanies[i].imageUrl
             }

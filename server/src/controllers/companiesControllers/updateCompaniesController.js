@@ -8,7 +8,7 @@ module.exports = async (dataCompany) => {
     (dataCompany.email && !regexEmail.test(dataCompany.email)) ||
     (dataCompany.password && !isNaN(dataCompany.password)) ||
     dataCompany.enabled ||
-    (dataCompany.cuit && isNaN(dataCompany.dni_cuit)) ||
+    (dataCompany.dni_cuit && isNaN(dataCompany.dni_cuit)) ||
     (dataCompany.name && !regexName.test(dataCompany.name)) ||
     (dataCompany.address && !isNaN(dataCompany.address))
   )

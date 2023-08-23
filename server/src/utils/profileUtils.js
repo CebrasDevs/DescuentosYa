@@ -91,7 +91,7 @@ function structureMember(user) {
         address,
         phoneNumber,
         enabled,
-        lastPayment: lastPayment.toLocaleString(),
+        lastPayment: lastPayment?.toLocaleString(),
         imageUrl,
         vouchers: structuredVouchers,
         shoppings: structuredShoppings,
@@ -166,7 +166,7 @@ function structureVouchers(vouchers) {
             id,
             code,
             enabled,
-            expirationDate,
+            expirationDate: expirationDate.toLocaleString(),
             user: {
                 id: user.id,
                 name: user.name

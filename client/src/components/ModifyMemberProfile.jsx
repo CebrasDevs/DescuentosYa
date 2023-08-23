@@ -6,6 +6,7 @@ import validateModifyMember from "@/utils/validateModifyMember";
 import { URL_BASE } from "@/utils/const";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "@/redux/actions";
+axios.defaults.withCredentials = true;
 
 export default function ModifyMemberProfile({ memberData, handleSave }) {
     const dispatch = useDispatch();
@@ -72,7 +73,7 @@ export default function ModifyMemberProfile({ memberData, handleSave }) {
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
 
-            const response = await axios.patch(`${URL_BASE}/members/${memberData.id}`, formattedMember, { withCredentials: true });
+            const response = await axios.patch(`${URL_BASE}/members/${memberData.id}`, formattedMember);
             if (response.status === 200) {
                 dispatch(setActiveUser());
                 alert("Member successfully modified");

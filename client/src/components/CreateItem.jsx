@@ -10,6 +10,7 @@ import axios from "axios";
 import { URL_BASE } from "@/utils/const";
 import ItemSuccess from "./Modals/Company/ItemSuccess";
 import ItemFailure from "./Modals/Company/ItemFailure";
+axios.defaults.withCredentials = true;
 
 export default function CreateItem() {
 
@@ -65,7 +66,7 @@ export default function CreateItem() {
                 formattedItem.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            const response = await axios.post(`${URL_BASE}/items`, formattedItem, { withCredentials: true });
+            const response = await axios.post(`${URL_BASE}/items`, formattedItem);
             if (response.status === 200) {
                 dispatch(setActiveUser());
                 setErrors({});

@@ -8,6 +8,7 @@ import { getItemDetail, setActiveUser } from "@/redux/actions";
 
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
+axios.defaults.withCredentials = true;
 
 export default function ModifiedItem({ data, type , handleSave}) {
     const dispatch = useDispatch();
@@ -54,7 +55,7 @@ export default function ModifiedItem({ data, type , handleSave}) {
                 formattedItem.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            const response = await axios.patch(`${URL_BASE}/items/${data.id}`, formattedItem, { withCredentials: true });
+            const response = await axios.patch(`${URL_BASE}/items/${data.id}`, formattedItem);
             if (response.status === 200) {
                 window.alert("The item was modified successfully");
                 setErrors({});

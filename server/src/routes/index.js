@@ -16,18 +16,18 @@ const profileRouter = require("./profileRouter");
 const reviewRouter = require("./reviewRouter");
 
 // Usamos el middleware para verificar el token en rutas protegidas
-mainRouter.use("/shopping", verifyToken, shoppingRouter);
+mainRouter.use("/shopping", shoppingRouter);
 mainRouter.use("/items", itemsRouter);
-mainRouter.use("/users", verifyToken, usersRouter);
-mainRouter.use("/admins", verifyToken, adminsRouter);
+mainRouter.use("/users", usersRouter);
+mainRouter.use("/admins", adminsRouter);
 mainRouter.use("/companies", companiesRouter);
 mainRouter.use("/members", membersRouter);
-mainRouter.use("/vouchers", verifyToken, vouchersRouter);
+mainRouter.use("/vouchers", vouchersRouter);
 mainRouter.use("/categories", categoriesRouter);
-mainRouter.use("/payment", verifyToken, paymentRouter);
+mainRouter.use("/payment", paymentRouter);
 mainRouter.use("/", authRouter);
-mainRouter.use("/profile", verifyToken, profileRouter);
-mainRouter.use("/review", verifyToken, reviewRouter);
+mainRouter.use("/profile", profileRouter);
+mainRouter.use("/review", reviewRouter);
 
 
 module.exports = mainRouter;
