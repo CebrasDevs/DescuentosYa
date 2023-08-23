@@ -2,7 +2,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addShoppingCartItem, getItemDetail, setActiveUser } from "@/redux/actions";
 import { BsCart3 } from "react-icons/bs";
-import Link from "next/link";
 import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
 import { FaEdit } from "react-icons/fa";
@@ -23,7 +22,7 @@ export default function ItemDetail({ data }) {
   const activeUser = useSelector((state) => state.activeUser);
   const router = useRouter();
 
-  const { averageRating, reviews } = getAverageRating(data)
+  const { averageRating, reviews } = getAverageRating(data);
 
   const [modify, setModify] = useState(false);
 
@@ -39,6 +38,12 @@ export default function ItemDetail({ data }) {
       if (shoppingCart.some((shopping) => shopping.item.id === itemFound.id)) {
         // El itemFound es igual al atributo 'item' de al menos un elemento en shoppingCart
         alert("Item already added in shopping cart");
+      } else if (
+        shoppingCart.some(
+          (shopping) => shopping.item.companyId !== itemFound.companyId
+        )
+      ) {
+        alert("Services from different companies cannot be added to the cart");
       } else {
         // El itemFound no coincide con ningún atributo 'item' en shoppingCart
         let newItem = { item: itemFound, quantity: 1 };
@@ -160,15 +165,13 @@ export default function ItemDetail({ data }) {
                 </div>
                 <div className=" absolute right-10 bottom-10 flex">
                   {activeUser.role === "ADMIN" ||
-                    activeUser.role === "COMPANY" ? null : (
-                    <Link href={"/shoppingcart"}>
-                      <button
-                        className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
-                        onClick={() => handleAddItem(data)}
-                      >
-                        Add to Cart <BsCart3 className=" text-xl" />
-                      </button>
-                    </Link>
+                  activeUser.role === "COMPANY" ? null : (
+                    <button
+                      className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
+                      onClick={() => handleAddItem(data)}
+                    >
+                      Add to Cart <BsCart3 className=" text-xl" />
+                    </button>
                   )}
                   {activeUser.id === data.companyId ||
                     activeUser.role === "ADMIN" ? (
@@ -309,7 +312,7 @@ export default function ItemDetail({ data }) {
                   </div>
               </div>
               <div className=" absolute right-10 bottom-10 flex">
-                {activeUser.role === 'MEMBER' && <button
+                {activeUser.role !== 'COMPANY' && activeUser.role !== 'ADMIN' && <button
                   className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                   onClick={handleGenerateCode}
                 >

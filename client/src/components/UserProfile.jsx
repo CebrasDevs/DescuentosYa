@@ -1,22 +1,38 @@
 "use client";
 import { FaUserEdit } from "react-icons/fa";
 import { TiArrowBack } from "react-icons/ti";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModifyMemberProfile from "./ModifyMemberProfile";
 import { splitName } from "@/utils/formatUtils";
+import { setFiltersProfile } from "@/redux/actions";
 
 export default function UserProfile() {
-    const activeUser = useSelector((state) => state.activeUser);
+  const activeUser = useSelector((state) => state.activeUser);
+  const filtersProfile = useSelector((state) => state.filtersProfile);
+  const dispatch = useDispatch();
 
-    const [modify, setModify] = useState(false);
-    const modifyHandler = () => {
-        setModify(true);
-    };
+  const [modify, setModify] = useState(false);
+  const modifyHandler = () => {
+    setModify(true);
+  };
 
     const handleSetModify = () => {
         setModify(false);
+    };
+
+    useEffect(() => {
+      dispatch(setFiltersProfile({ property: "All", value: "" }));
+    }, [activeUser]);
+  
+    const handleSearchChange = (e) => {
+      dispatch(
+        setFiltersProfile({
+          property: e.target.name,
+          value: e.target.value.trim(),
+        })
+      );
     };
 
     if (activeUser.role === "MEMBER") {
@@ -130,14 +146,14 @@ export default function UserProfile() {
                                 </svg>
                                 <input
                                     type="search"
-                                    name="search"
+                                    name="vouchers"
                                     className="h-14 w-full rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
                                     placeholder="Search vouchers"
+                                    onInput={handleSearchChange}
                                 />
                             </div>
                             <div className="items-center">
-                                {activeUser.vouchers?.map((voucher, index) => {
-                                    console.log(voucher)
+                                {filtersProfile.vouchers?.map((voucher, index) => {
                                     return (
                                         <div
                                             key={index}
@@ -157,15 +173,7 @@ export default function UserProfile() {
                                                     {voucher.company.name}
                                                 </Link>
                                             </h2>
-                                            
-                                            {voucher.enabled ?
-                                                <div className="flex">
-                                                    <h2 className="ml-2 ">| Expiration date:</h2>&nbsp;<h2 className="text-green-600"> {voucher.expirationDate}</h2>
-                                                </div> :
-                                                <div className="flex">
-                                                    <h2 className="ml-2 ">| Expiration date:</h2>&nbsp;<h2 className="text-red-600"> {voucher.expirationDate}</h2>
-                                                </div>
-                                            }
+                                            <h2 className="ml-2">| Expiration date: {voucher.expirationDate}</h2>
                                             <h2 className="ml-2">
                                                 |{" "}
                                                 <Link
@@ -177,7 +185,7 @@ export default function UserProfile() {
                                             </h2>
                                             <h2 className="ml-2">
                                                 |{" "}
-                                                <Link className="hover:text-blue-500" href={`/${voucher.item.id}`}>
+                                                <Link className="hover:text-blue-500" href={"#"}>
                                                     Renew
                                                 </Link>
                                             </h2>
@@ -215,12 +223,14 @@ export default function UserProfile() {
                                 </svg>
                                 <input
                                     type="search"
-                                    name="search"
+                                    name="shoppings"
                                     className="h-14 w-full rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
                                     placeholder="Search orders"
+                                    onInput={handleSearchChange}
                                 />
                             </div>
                             {activeUser.shoppings?.map((buys, index) => {
+                              console.log(activeUser)
                                 return (
                                     <div
                                         key={index}
@@ -247,7 +257,7 @@ export default function UserProfile() {
                                                     </h2>
                                                     <h2 className="ml-2">
                                                         |{" "}
-                                                        <Link className="hover:text-blue-500" href={`/${item.id}`}>
+                                                        <Link className="hover:text-blue-500" href={"#"}>
                                                             Buy again
                                                         </Link>
                                                     </h2>

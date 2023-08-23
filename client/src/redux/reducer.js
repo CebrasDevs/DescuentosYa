@@ -20,6 +20,7 @@ import {
   SET_SHOPPING_CART,
   SET_DISTANCES,
   GET_USERS_BY_NAME,
+  SET_FILTERS_PROFILE,
 } from "./actions";
 import { filterArray } from "@/utils/filterArray";
 import setItemDistances from "@/utils/geolocationUtils/setItemDistances";
@@ -38,6 +39,12 @@ const initialState = {
     chosenDiscount: "All",
     chosenCategory: "All categories",
     chosenSorting: "Alphabetical",
+  },
+  filtersProfile: {
+    vouchers: [],
+    items: [],
+    shoppings: [],
+    sales: [],
   },
   currentPage: 1,
   companyDetail: {},
@@ -72,21 +79,90 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredItems: action.payload,
       };
+    case SET_FILTERS_PROFILE:
+      const { property, value } = action.payload;
+      let filteredData = [];
+      switch (property) {
+        case "vouchers":
+          if (state.activeUser.role === "MEMBER") {
+            filteredData = state.activeUser[property].filter((element) =>
+              element.item.name.toLowerCase().includes(value.toLowerCase())
+            );
+          } else if (state.activeUser.role === "COMPANY") {
+            filteredData = state.activeUser[property].filter((element) =>
+              element.user.name.toLowerCase().includes(value.toLowerCase())
+            );
+          }
+          return {
+            ...state,
+            filtersProfile: {
+              ...state.filtersProfile,
+              [property]: filteredData,
+            },
+          };
+        case "items":
+          filteredData = state.activeUser[property].filter((element) =>
+            element.name.toLowerCase().includes(value.toLowerCase())
+          );
+          return {
+            ...state,
+            filtersProfile: {
+              ...state.filtersProfile,
+              [property]: filteredData,
+            },
+          };
+        case "sales":
+          console.log(state.activeUser)
+          filteredData = state.activeUser[property].filter((element) =>
+            element.user.name.toLowerCase().includes(value.toLowerCase())
+          );
+          return {
+            ...state,
+            filtersProfile: {
+              ...state.filtersProfile,
+              [property]: filteredData,
+            },
+          };
+        case "shoppings":
+          filteredData = state.activeUser[property].filter((element) =>
+            element.name.toLowerCase().includes(value.toLowerCase())
+          );
+          return {
+            ...state,
+            filtersProfile: {
+              ...state.filtersProfile,
+              [property]: filteredData,
+            },
+          };
+        default:
+          return {
+            ...state,
+            filtersProfile: {
+              vouchers: state.activeUser?.vouchers,
+              items: state.activeUser?.items,
+              sales: state.activeUser?.sales,
+              shoppings: state.activeUser?.shoppings,
+            },
+          };
+      }
     case SET_DISTANCES:
       const itemsWithDistances = setItemDistances(state.allItems);
       const companiesWithDistances = setCompanyDistances(action.payload);
-      const filteredItems = filterArray(itemsWithDistances, state.activeFilters);
+      const filteredItems = filterArray(
+        itemsWithDistances,
+        state.activeFilters
+      );
       return {
         ...state,
         allItems: itemsWithDistances,
         filteredItems: filteredItems,
-        companies: companiesWithDistances
+        companies: companiesWithDistances,
       };
     case GET_USERS_BY_NAME:
       return {
         ...state,
-        users: action.payload
-      }
+        users: action.payload,
+      };
     case FILTER_CARDS:
       const filtered = filterArray(state.allItems, action.payload);
       return {
