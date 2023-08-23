@@ -84,9 +84,15 @@ const rootReducer = (state = initialState, action) => {
       let filteredData = [];
       switch (property) {
         case "vouchers":
-          filteredData = state.activeUser[property].filter((element) =>
-            element.item.name.toLowerCase().includes(value.toLowerCase())
-          );
+          if (state.activeUser.role === "MEMBER") {
+            filteredData = state.activeUser[property].filter((element) =>
+              element.item.name.toLowerCase().includes(value.toLowerCase())
+            );
+          } else if (state.activeUser.role === "COMPANY") {
+            filteredData = state.activeUser[property].filter((element) =>
+              element.user.name.toLowerCase().includes(value.toLowerCase())
+            );
+          }
           return {
             ...state,
             filtersProfile: {
@@ -105,25 +111,40 @@ const rootReducer = (state = initialState, action) => {
               [property]: filteredData,
             },
           };
+        case "sales":
+          console.log(state.activeUser)
+          filteredData = state.activeUser[property].filter((element) =>
+            element.user.name.toLowerCase().includes(value.toLowerCase())
+          );
+          return {
+            ...state,
+            filtersProfile: {
+              ...state.filtersProfile,
+              [property]: filteredData,
+            },
+          };
+        case "shoppings":
+          filteredData = state.activeUser[property].filter((element) =>
+            element.name.toLowerCase().includes(value.toLowerCase())
+          );
+          return {
+            ...state,
+            filtersProfile: {
+              ...state.filtersProfile,
+              [property]: filteredData,
+            },
+          };
         default:
           return {
             ...state,
             filtersProfile: {
               vouchers: state.activeUser?.vouchers,
               items: state.activeUser?.items,
+              sales: state.activeUser?.sales,
+              shoppings: state.activeUser?.shoppings,
             },
           };
       }
-
-    // if (!value) {
-    //   return {
-    //     ...state,
-    //     filtersProfile: {
-    //       ...state.filtersProfile,
-    //       [property]: state.activeUser[property],
-    //     },
-    //   };
-    // }
     case SET_DISTANCES:
       const itemsWithDistances = setItemDistances(state.allItems);
       const companiesWithDistances = setCompanyDistances(action.payload);

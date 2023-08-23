@@ -16,6 +16,7 @@ export default function CompanyProfile() {
 
   useEffect(() => {
     dispatch(setFiltersProfile({ property: "All", value: "" }));
+    console.log(activeUser)
   }, [activeUser]);
 
   const handleSearchChange = (e) => {
@@ -220,13 +221,14 @@ export default function CompanyProfile() {
                 </svg>
                 <input
                   type="search"
-                  name="search"
+                  name="sales"
                   className="h-14 w-full rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
                   placeholder="Search sales"
+                  onInput={handleSearchChange}
                 />
               </div>
               <div className="items-center">
-                {activeUser.sales?.map((sale, index) => {
+                {filtersProfile.sales?.map((sale, index) => {
                   return (
                     <div
                       key={index}

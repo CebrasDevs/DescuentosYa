@@ -55,18 +55,23 @@ export default function ItemDetail({ data }) {
   };
   const voucher = {
     userId: activeUser.id,
-    itemId: data.id,
-  };
-
-  const handleGenerateCode = () => {
+    itemId: data.id
+  }
+  
+  const handleGenerateCode = async() => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
     }
-    //logica de generacion de codigo, charlar
-    axios
-      .post(`${URL_BASE}/vouchers/`, voucher)
-      .catch((error) => console.log(error.message));
+    try {
+      //logica de generacion de codigo, charlar
+      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
+      if (response.status === 200) {
+        dispatch(setActiveUser());
+      }
+    } catch (error) {
+        console.log(error.message)
+    }
   };
 
   const modifyHandler = () => {
@@ -167,10 +172,32 @@ export default function ItemDetail({ data }) {
                     </button>
                   )}
                   {activeUser.id === data.companyId ||
-                  activeUser.role === "ADMIN" ? (
-                    <button onClick={modifyHandler}>
-                      <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
-                    </button>
+                    activeUser.role === "ADMIN" ? (
+                      <div>
+                        <button onClick={modifyHandler}>
+                          <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
+                        </button>
+                        <label className="flex flex-col relative inline-flex items-center">
+                          <h1 className="m-2">Disable/Enable</h1>
+                          <input
+                            type="checkbox"
+                            className="sr-only"
+                            checked={!data.enabled}
+                            onChange={handleItemEnable}
+                          />
+                          <span
+                            className={`relative w-10 h-6 transition rounded-full ${
+                              data.enabled ? "bg-blue-300" : "bg-gray-300"
+                            }`}
+                          >
+                            <span className={`absolute ${
+                              data.enabled ? "right-1" : "left-1"
+                              } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
+                            </span>
+                          </span>
+                        </label>
+                        
+                      </div>
                   ) : null}
                 </div>
               </div>
@@ -290,10 +317,31 @@ export default function ItemDetail({ data }) {
                   Get Voucher
                 </button>}
                 {activeUser.id === data.companyId ||
-                activeUser.role === "ADMIN" ? (
-                  <button onClick={modifyHandler}>
-                    <FaEdit size={30} className="ml-6" />
-                  </button>
+                  activeUser.role === "ADMIN" ? (
+                    <div>
+                      <button onClick={modifyHandler}>
+                        <FaEdit size={30} className="ml-6" />
+                      </button>
+                      <label className="flex flex-col relative items-center">
+                        <h1 className="m-2">Disable/Enable</h1>
+                        <input
+                          type="checkbox"
+                          className="sr-only"
+                          checked={!data.enabled}
+                          onChange={handleItemEnable}
+                        />
+                        <span
+                          className={`relative w-10 h-6 transition rounded-full ${
+                            data.enabled ? "bg-blue-300" : "bg-gray-300"
+                          }`}
+                        >
+                          <span className={`absolute ${
+                            data.enabled ? "right-1" : "left-1"
+                          } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
                 ) : null}
               </div>
             </div>
