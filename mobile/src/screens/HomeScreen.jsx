@@ -5,7 +5,6 @@ import { useAuth } from "../context/AuthContext";
 
 export default function HomeScreen({ navigation }) {
   const { logout } = useAuth();
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Descuentos Ya!</Text>

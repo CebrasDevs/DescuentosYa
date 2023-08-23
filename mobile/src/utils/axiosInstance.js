@@ -4,8 +4,8 @@ const publicRoutes = ["/login"];
 
 //configuracion global de axios, para no setear todas las peticiones con cookies
 export const axiosInstance = axios.create({
-  baseURL: `${process.env.URL_BASE};3001`,
-  timeout: 20000, // Define un tiempo de espera en milisegundos
+  baseURL: `http://192.168.0.213:3001`,
+  timeout: 50000, // Define un tiempo de espera en milisegundos
   headers: {
     "Content-Type": "application/json",
   },
@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use(
       // Aquí puedes obtener el token de tu almacenamiento
       const token = await getToken();
       config.headers.Authorization = `Bearer ${token}`;
-    }
+    };
     return config;
   },
   (error) => {

@@ -17,7 +17,7 @@ export default function useFindUser(id) {
     async function findUser(id) {
         //podemos devolver funcion para refrescar pagina
         try {
-            const { data } = await axiosInstance(`/profile?id=${id}`);
+            const { data } = await axiosInstance(`/profile/${id}`);
             setUser(data);
         } catch (error) {
             setError(error);
