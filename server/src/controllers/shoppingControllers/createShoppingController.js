@@ -14,9 +14,11 @@ module.exports = async (data) => {
     const itemsIds = items.map(({ id }) => +id);
     //obtenemos toda la info de cada item comprado
     const itemsDB = await getItemsHelper({ id: { in: itemsIds } });
-    const itemsWithCompanyName = items.map((itemShop) => {
-        // le agregamos a cada item, la ccompañia a quien le compro para detallar el PDF
+    console.log('itemsDB', itemsDB)
+    const itemsWithCompanyName = itemsDB.map((itemShop) => {
+        // le agregamos a cada item, la compañia a quien le compro para detallar el PDF
         const item = (itemsDB.find((itemDB) => itemDB.id === itemShop.id ))
+        console.log('item',item)
         return {
             ...itemShop,
             companyName: item.user.name

@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { addShoppingCartItem } from "@/redux/actions";
+import { addShoppingCartItem, setActiveUser } from "@/redux/actions";
 import { BsCart3 } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
@@ -50,14 +50,22 @@ export default function ItemDetail({ data }) {
     itemId: data.id
   }
   
-  const handleGenerateCode = () => {
+  const handleGenerateCode = async () => {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
     }
-    //logica de generacion de codigo, charlar
-    axios.post(`${URL_BASE}/vouchers/`, voucher)
-      .catch((error) => console.log(error.message));
+    try{
+      //logica de generacion de codigo, charlar
+      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher)
+      if (response.status === 200){
+        dispatch(setActiveUser(activeUser.id));
+        alert('QR Generated');
+      }
+    }catch(error){
+      console.log(error.message);
+    }
+    
   };
 
   const modifyHandler = () => {
@@ -92,7 +100,7 @@ export default function ItemDetail({ data }) {
           </div>
         ) : (
           <div className="flex flex-col m-5">
-            <div className=" relative flex justify-center w-3/5 min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
+            <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
               <div className=" w-1/2 h-full">
                 <img
                   className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
