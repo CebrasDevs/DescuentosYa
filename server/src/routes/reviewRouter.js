@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const  { postReviewHandler, updateReviewHandler }  = require("../handlers");
 const reviewRouter = Router();
+const {verifyToken} = require("../utils/authMiddleware");
 
-reviewRouter.post("/", postReviewHandler);
-reviewRouter.patch("/:id", updateReviewHandler);
+reviewRouter.post("/", verifyToken, postReviewHandler);
+reviewRouter.patch("/:id", verifyToken, updateReviewHandler);
 
 
 

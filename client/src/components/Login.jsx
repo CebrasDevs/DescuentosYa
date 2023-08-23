@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
 import LoginFailure from "./Modals/Login/LoginFailure";
+axios.defaults.withCredentials = true;
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -39,7 +40,7 @@ export default function Login() {
     const handleLogIn = async function (event) {
         event.preventDefault();
         try {
-            const response = await axios.post(`${URL_BASE}/login`, input, { withCredentials: true });
+            const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
                 dispatch(setActiveUser());
                 setInput({
@@ -93,7 +94,7 @@ export default function Login() {
                         Log in
                     </button>
                 </div>
-                <div>---- OR ----</div>
+                {/* <div>---- OR ----</div>
                 <div className="input-button">
                     <button type="button" className={styles.button_custom}>
                         Sign In with Google
@@ -105,7 +106,7 @@ export default function Login() {
                         Sign In with Facebook
                         <BsFacebook size={"1.5em"} color="#1877F2" />
                     </button>
-                </div>
+                </div> */}
             </form>
         </div>
     );

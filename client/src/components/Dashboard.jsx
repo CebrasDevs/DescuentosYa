@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Link from "next/link";
 import { URL_BASE } from "@/utils/const";
+axios.defaults.withCredentials = true;
 
 export default function Dashboard() {
   const dispatch = useDispatch();

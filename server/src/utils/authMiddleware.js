@@ -4,8 +4,10 @@ require("dotenv").config();
 // Middleware para verificar el token en rutas protegidas
 async function verifyToken(req, res, next) {
   try {
+    console.log(req.cookies)
+    console.log(req.headers)
     if (!req.cookies.accessTrue) {
-      return res.status(401).json({ message: "Token not provided" });
+      return res.status(406).json({ message: "Token not provided" });
     }
 
     const { accessTrue } = req.cookies;

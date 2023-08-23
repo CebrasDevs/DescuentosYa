@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Map from "./Map";
 import SuccessModal from "./Modals/Company/Success";
 import FailureModal from "./Modals/Company/Failure";
+axios.defaults.withCredentials = true;
 
 export default function SignUpCompany() {
     const [companyCreated, setCompanyCreated] = useState("pending");
