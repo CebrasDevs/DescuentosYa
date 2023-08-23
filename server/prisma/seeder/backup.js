@@ -293,7 +293,7 @@ async function seedData() {
                 userId: 9,
                 categoryId: 3,
                 description: "Escape to tranquility with our curated retreat, offering holistic relaxation, rejuvenation, and a renewed sense of well-being.",
-                name: "PureBliss Relaxation Retreat",
+                name: "PureBliss Relaxation",
                 price: 18.00,
                 imageUrl: "https://pureblisswellness.com/wp-content/uploads/2017/07/Pb-massage2-1500x550.jpg"
             },
