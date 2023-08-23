@@ -13,7 +13,7 @@ module.exports = async (id, dataUser) => {
                 dni_cuit: dataUser.dni_cuit,
                 imageUrl: dataUser.imageUrl,
                 email: dataUser.email,
-                password: bcrypt.hashSync(dataUser.password,salt),
+                password: dataUser.password && bcrypt.hashSync(dataUser.password,salt),
                 enabled: dataUser.enabled,
                 name: dataUser.name,
                 phoneNumber: dataUser.phoneNumber,
