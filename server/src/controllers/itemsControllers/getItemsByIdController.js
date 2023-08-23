@@ -18,7 +18,8 @@ module.exports = async (id) => {
             companyLocation:{
                 lat: item.user.latitude,
                 lng: item.user.longitude
-            }
+            },
+            enabled: item.enabled
         }
     })
 

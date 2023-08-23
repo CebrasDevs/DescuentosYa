@@ -12,6 +12,7 @@ module.exports = async (name) => {
             price: item.price,
             discount: item.discount,
             companyId: item.userId,
+            enabled: item.enabled,
             review: item.Review,
             companyLocation: {
                 lat: item.user.latitude,

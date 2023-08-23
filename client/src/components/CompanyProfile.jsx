@@ -22,10 +22,6 @@ export default function CompanyProfile() {
     setModify(false);
   };
 
-  function handleDelete(id) {
-    dispatch(deleteCompanyItem(id));
-  }
-
   function formatedCuit(cuit) {
     if (cuit.length !== 11) {
       return "El CUIT debe tener 11 caracteres";
@@ -148,8 +144,8 @@ export default function CompanyProfile() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <circle cx="11" cy="11" r="8" className=""></circle>
                   <line

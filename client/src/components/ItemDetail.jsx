@@ -1,6 +1,6 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { addShoppingCartItem, setActiveUser } from "@/redux/actions";
+import { addShoppingCartItem, getItemDetail, setActiveUser } from "@/redux/actions";
 import { BsCart3 } from "react-icons/bs";
 import Link from "next/link";
 import { useState } from "react";
@@ -10,9 +10,12 @@ import { TiArrowBack } from "react-icons/ti";
 import { FaStar } from "react-icons/fa";
 import { getAverageRating } from "@/utils/formatUtils";
 import Cookies from "js-cookie";
-import axios from "axios";
 import { URL_BASE } from "@/utils/const";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+
+
 
 export default function ItemDetail({ data }) {
   const dispatch = useDispatch();
@@ -71,6 +74,34 @@ export default function ItemDetail({ data }) {
   const modifyHandler = () => {
     setModify(true);
   };
+
+  const handleItemEnable = async() => {
+    try {
+      if (data.enabled) {
+        const response = await axios.patch(`${URL_BASE}/items/${data.id}`, {
+          ...data,
+          enabled: false
+        })
+        if (response.status === 200) {
+          dispatch(getItemDetail(data.id));
+          dispatch(setActiveUser());
+          alert("Item disabled successfully");
+        }
+      } else {
+        const response = await axios.patch(`${URL_BASE}/items/${data.id}`, {
+          ...data,
+          enabled: true
+        })
+        if (response.status === 200) {
+          dispatch(getItemDetail(data.id));
+          dispatch(setActiveUser());
+          alert("Item enabled successfully");
+        }
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
 
   if (data.price !== 0) {
     //esto es un servicio
@@ -141,9 +172,31 @@ export default function ItemDetail({ data }) {
                   )}
                   {activeUser.id === data.companyId ||
                     activeUser.role === "ADMIN" ? (
-                    <button onClick={modifyHandler}>
-                      <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
-                    </button>
+                      <div>
+                        <button onClick={modifyHandler}>
+                          <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
+                        </button>
+                        <label className="flex-col relative inline-flex items-center">
+                          <h1 className="m-2">Disable/Enable</h1>
+                          <input
+                            type="checkbox"
+                            className="sr-only"
+                            checked={!data.enabled}
+                            onChange={handleItemEnable}
+                          />
+                          <span
+                            className={`relative w-10 h-6 transition rounded-full ${
+                              data.enabled ? "bg-blue-300" : "bg-gray-300"
+                            }`}
+                          >
+                            <span className={`absolute ${
+                              data.enabled ? "right-1" : "left-1"
+                              } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
+                            </span>
+                          </span>
+                        </label>
+                        
+                      </div>
                   ) : null}
                 </div>
               </div>
@@ -256,17 +309,38 @@ export default function ItemDetail({ data }) {
                   </div>
               </div>
               <div className=" absolute right-10 bottom-10 flex">
-                <button
+                {activeUser.role === 'MEMBER' && <button
                   className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                   onClick={handleGenerateCode}
                 >
                   Get Voucher
-                </button>
+                </button>}
                 {activeUser.id === data.companyId ||
                   activeUser.role === "ADMIN" ? (
-                  <button onClick={modifyHandler}>
-                    <FaEdit size={30} className="ml-6" />
-                  </button>
+                    <div>
+                      <button onClick={modifyHandler}>
+                        <FaEdit size={30} className="ml-6" />
+                      </button>
+                      <label className="flex-col relative inline-flex items-center">
+                        <h1 className="m-2">Disable/Enable</h1>
+                        <input
+                          type="checkbox"
+                          className="sr-only"
+                          checked={!data.enabled}
+                          onChange={handleItemEnable}
+                        />
+                        <span
+                          className={`relative w-10 h-6 transition rounded-full ${
+                            data.enabled ? "bg-blue-300" : "bg-gray-300"
+                          }`}
+                        >
+                          <span className={`absolute ${
+                            data.enabled ? "right-1" : "left-1"
+                          } top-1 w-4 h-4 transition transform bg-white rounded-full duration-1000`}>
+                          </span>
+                        </span>
+                      </label>
+                    </div>
                 ) : null}
               </div>
             </div>

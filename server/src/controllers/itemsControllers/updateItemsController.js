@@ -18,6 +18,6 @@ module.exports = async (dataItem) => {
     dataItem.categoryId = category.id
     dataItem.id = null;
     const result = await updateItemsHelper(idItem, dataItem);
-    let { id, imageUrl, name, description, categoryId, price, discount } = result
-    return { id, imageUrl, name, description, categoryId, price, discount };
+    let { id, imageUrl, name, description, categoryId, price, discount, enabled } = result
+    return { id, imageUrl, name, description, categoryId, price, discount, enabled };
 }

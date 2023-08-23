@@ -29,9 +29,9 @@ export default function Carousel({ value, type }) {
 
   if(value === "discounts") {
     if(type === "products"){
-      data = data.filter((item) => item.price === 0)
+      data = data.filter((item) => item.price === 0 && item.enabled)
     } else {
-      data = data.filter((item) => item.price !== 0)
+      data = data.filter((item) => item.price !== 0 && item.enabled)
     }
   }
 
