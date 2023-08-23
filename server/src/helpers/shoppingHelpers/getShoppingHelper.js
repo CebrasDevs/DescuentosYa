@@ -19,7 +19,6 @@ module.exports = async ( condition = {} ) => {
         }
     })
 
-    console.log(shoppings)
     await prisma.$disconnect();
     if (shoppings) {
         return shoppings;

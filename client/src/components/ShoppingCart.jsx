@@ -67,7 +67,8 @@ export default function ShoppingCart() {
 
 
 
-  const handleCheckout = () => {
+  const handleCheckoutMP = () => {
+    Cookies.remove("shoppingCart");
     axios.post(`${URL_BASE}/payment/create-order`, { products, user })
       .then(response => {
         console.log(response.data)
@@ -77,6 +78,7 @@ export default function ShoppingCart() {
   };
 
   const handleCheckoutPP = () => {
+    Cookies.remove("shoppingCart");
     axios.post(`${URL_BASE}/payment/create-payment`, { products })
       .then(response => {
         window.location.href = response.data;
@@ -155,7 +157,7 @@ export default function ShoppingCart() {
       <div className=" flex flex-col w-1/5 h-full min-h-[70vh] rounded-2xl bg-gray-300 border border-gray-200 ml-4 mt-20 text-center items-center">
         {shoppingCart.length ? (
           <div>
-            <button id='checkout' onClick={handleCheckout} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
+            <button id='checkout' onClick={handleCheckoutMP} className="ml-20 py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800">
               Checkout Mercado Pago
             </button>
 

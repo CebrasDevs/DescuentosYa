@@ -19,7 +19,7 @@ const createOrder = async (req, res) => {
         failure: "http://localhost:3000",
         pending: "http://localhost:3000"
       },
-      notification_url: `https://b068-2803-9800-9847-758a-9e9-e9d3-a5ea-4fe9.ngrok.io/payment/webhook/${user.id}`,
+      notification_url: `https://3aa0-2803-9800-9847-758a-e9b7-73ae-2c43-8adf.ngrok.io/payment/webhook/${user.id}`,
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
@@ -65,7 +65,7 @@ const receiveWebhook = async (req, res) => {
       totalPrice: transaction_amount,
       items: additional_info.items
     };
-    console.log('info',formattedObject)
+
     createShoppingController(formattedObject)
     return res.redirect(204);
   }
