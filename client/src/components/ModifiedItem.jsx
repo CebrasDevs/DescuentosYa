@@ -54,12 +54,12 @@ export default function ModifiedItem({ data, type , handleSave}) {
                 formattedItem.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
-            const response = await axios.patch(`${URL_BASE}/items/${data.id}`, formattedItem);
+            const response = await axios.patch(`${URL_BASE}/items/${data.id}`, formattedItem, { withCredentials: true });
             if (response.status === 200) {
                 window.alert("The item was modified successfully");
                 setErrors({});
                 dispatch(getItemDetail(data.id));
-                dispatch(setActiveUser(data.companyId))
+                dispatch(setActiveUser())
                 handleSave();
             }
         } catch (error) {

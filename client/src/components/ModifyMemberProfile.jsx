@@ -72,9 +72,9 @@ export default function ModifyMemberProfile({ memberData, handleSave }) {
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
 
-            const response = await axios.patch(`${URL_BASE}/members/${memberData.id}`, formattedMember);
+            const response = await axios.patch(`${URL_BASE}/members/${memberData.id}`, formattedMember, { withCredentials: true });
             if (response.status === 200) {
-                dispatch(setActiveUser(memberData.id));
+                dispatch(setActiveUser());
                 alert("Member successfully modified");
                 setErrors({});
                 handleSave();

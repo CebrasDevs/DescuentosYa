@@ -42,28 +42,28 @@ export default function CompanyProfile() {
       <div className=" mt-60 flex flex-col items-center">
         <div
           id="data"
-          className=" w-3/4 mt-10 mb-12 bg-gradient-to-b from-slate-50 to-violet-100 rounded-lg shadow-md flex"
+          className=" w-3/4 mt-4 mb-2 bg-slate-50 rounded-lg shadow-md flex"
         >
-          <div className=" flex flex-row">
-            <div className="">
-              <TiArrowBack
-                size={30}
-                onClick={() => {
-                  setModify(false);
-                }}
-                className="ml-5 my-5 text-2xl hover:cursor-pointer hover:text-violet-500 "
-              />
-            </div>
-            <div className="">
-              <button onClick={modifyHandler}>
-                <FaUserEdit
-                  size={30}
-                  className="hover:text-violet-500 ml-5 my-5"
-                />
-              </button>
-            </div>
-          </div>
           <div className="flex h-full w-full flex-col ">
+            <div className=" flex flex-row w-full">
+              <div className=" w-1/2">
+                <TiArrowBack
+                  size={35}
+                  onClick={() => {
+                    setModify(false);
+                  }}
+                  className="ml-5 my-5 text-2xl hover:cursor-pointer hover:text-violet-500 "
+                />
+              </div>
+              <div className=" flex justify-end w-1/2 ">
+                <button onClick={modifyHandler}>
+                  <FaUserEdit
+                    size={35}
+                    className=" hover:text-violet-500 mr-5 my-5"
+                  />
+                </button>
+              </div>
+            </div>
             <div className="flex justify-center items-center mt-60">
               <img
                 src={activeUser.imageUrl}
@@ -82,16 +82,16 @@ export default function CompanyProfile() {
                 <div className="w-full">
                   <div className=" flex flex-col gap-y-6">
                     <div className=" flex flex-row justify-center">
-                      <h1 className=" tracking-wide font-semibold text-5xl mt-6">
+                      <h1 className=" tracking-wide font-semibold text-5xl">
                         {activeUser.name}
                       </h1>
                     </div>
                     <div>
-                      <h1 className=" tracking-wide font-semibold text-xl text-center mx-56 mt-4 ">
+                      <h1 className=" tracking-wide font-semibold text-xl text-center mx-64 mt-4 ">
                         {activeUser.description}
                       </h1>
                     </div>
-                    <div className=" items-center justify-center flex flex-row gap-56 mt-4">
+                    <div className=" items-center justify-center flex flex-row gap-56 mt-4 ">
                       <div>
                         <h1 className=" tracking-wide font-bold text-lg text-center">
                           Email
@@ -255,7 +255,7 @@ export default function CompanyProfile() {
           )}
         </div>
 
-        <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
+        <div className=" w-3/4 mt-10 bg-slate-50  rounded-lg shadow-md">
           <h1 className="border-b-2 p-4 font-bold text-xl">VOUCHERS</h1>
           {activeUser.vouchers.length !== 0 ? (
             <>
@@ -284,7 +284,7 @@ export default function CompanyProfile() {
                   type="search"
                   name="search"
                   className="h-14 w-full rounded-md py-4 pl-12 pr-8 outline-none focus:ring-2 focus:ring-violet-400"
-                  placeholder="Search sales"
+                  placeholder="Search vouchers"
                 />
               </div>
               <div className="items-center">

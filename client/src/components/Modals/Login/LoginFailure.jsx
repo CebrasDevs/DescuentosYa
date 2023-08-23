@@ -57,7 +57,7 @@ export default function LoginFailure({ close, error }) {
             Login failed
           </p>
           <p className="mt-2 text-center text-xl font-semibold">
-            {error.message}
+            {error}
           </p>
           <div className="mt-8 flex flex-col justify-center space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
             <button

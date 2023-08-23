@@ -3,8 +3,7 @@ const { createItemsController } = require("../../controllers")
 
 module.exports = async (req, res) => {
     try {
-        let { 
-            userId, 
+        let {  
             categoryId, 
             description, 
             name, 
@@ -14,7 +13,7 @@ module.exports = async (req, res) => {
         } = req.body;
 
         let dataItem = {
-            userId, 
+            userId: req.userId, 
             categoryId, 
             description, 
             name, 

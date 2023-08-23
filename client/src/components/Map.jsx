@@ -23,9 +23,9 @@ export default function Map({ location, locationChange, editable = false }) {
     return (
         <div>
             <GoogleMap
-                zoom={6} // a charlar, a primera vista puede perder el usuario x demasiado zoom
+                zoom={11} // a charlar, a primera vista puede perder el usuario x demasiado zoom
                 center={center}
-                mapContainerStyle={{ width: '400px', height: '400px' }}
+                mapContainerStyle={{ width: '1400px', height: '250px' }}
                 onClick={handleClick}
             >
                 <Marker position={center} />

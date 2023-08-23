@@ -155,35 +155,36 @@ export default function PurchaseDetail({ id, activeUser, user }) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 mt-10">
-      {/* <h1>Date:</h1> */}
-      <h1>Paid with: {itemBought?.wayToPay} </h1>
-      <h1>State: {itemBought?.state} </h1>
-      <h1>Seller company: {itemBought?.items[0].company.name}</h1>
-      <h1>
-        Price paid: ${" "}
-        {(
-          itemBought?.items[0].price *
-          (1 - itemBought?.items[0].discount / 100)
-        ).toFixed(2)}
-      </h1>
-      <img className="w-[300px]" src={itemBought?.items[0].imageUrl} />
-      <button
-        onClick={() => {
-          setEdit(true);
-        }}
-      >
-        Edit your review
-      </button>
+    <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
+        <h1>Paid with: {itemBought?.wayToPay} </h1>
+        <h1>State: {itemBought?.state} </h1>
+        <h1>Seller company: {itemBought?.items[0].company.name}</h1>
+        <h1>
+          Price paid: ${" "}
+          {(
+            itemBought?.items[0].price *
+            (1 - itemBought?.items[0].discount / 100)
+          ).toFixed(2)}
+        </h1>
+        <img className="w-[300px]" src={itemBought?.items[0].imageUrl} />
+        {!edit && <button
+          onClick={() => {
+            setEdit(true);
+          }}
+        >
+          Edit your review
+        </button>}
+      </div>
       {!edit ? (
         <div>
           {reviewForItemBought?.enabled && (
-            <div className="m-5 items-center">
-              <h1>Your review</h1>
+            <div className="flex flex-col items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
+              <h1 className="text-lg">Your review</h1>
               <div className="flex">
                 {[1, 2, 3, 4, 5].map((starNumber) => {
                   return (
-                    <div className="m-1">
+                    <div className="m-4">
                       <FaStar
                         className={
                           starNumber <= rating

@@ -91,7 +91,7 @@ function structureMember(user) {
         address,
         phoneNumber,
         enabled,
-        lastPayment,
+        lastPayment: lastPayment.toLocaleString(),
         imageUrl,
         vouchers: structuredVouchers,
         shoppings: structuredShoppings,
