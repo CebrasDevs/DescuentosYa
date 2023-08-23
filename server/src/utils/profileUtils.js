@@ -166,7 +166,7 @@ function structureVouchers(vouchers) {
             id,
             code,
             enabled,
-            expirationDate,
+            expirationDate: expirationDate.toLocaleString(),
             user: {
                 id: user.id,
                 name: user.name

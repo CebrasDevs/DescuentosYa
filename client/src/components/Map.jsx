@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 
-export default function Map({ location, locationChange, editable = false }) {
+export default function Map({ location, locationChange, editable = false, style }) {
     const [center, setCenter] = useState(location);
+
+    const mapStyles = {
+        signUpCompany: {width: `730px`, height: `250px`},
+        companyDetail: { width: '1400px', height: '250px' }
+    }
+
     const handleClick = (e) => {
         if (editable) {
             /**
@@ -25,7 +31,7 @@ export default function Map({ location, locationChange, editable = false }) {
             <GoogleMap
                 zoom={11} // a charlar, a primera vista puede perder el usuario x demasiado zoom
                 center={center}
-                mapContainerStyle={{ width: '1400px', height: '250px' }}
+                mapContainerStyle={mapStyles[style]}
                 onClick={handleClick}
             >
                 <Marker position={center} />

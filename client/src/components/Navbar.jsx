@@ -11,6 +11,7 @@ import { URL_BASE } from "@/utils/const";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { splitName } from "@/utils/formatUtils";
+axios.defaults.withCredentials = true;
 
 export default function Navbar() {
     const activeUser = useSelector((state) => state.activeUser);
@@ -23,7 +24,7 @@ export default function Navbar() {
 
     const handleLogOut = async () => {
         try {
-            const response = await axios.post(`${URL_BASE}/logout`, null, { withCredentials: true });
+            const response = await axios.post(`${URL_BASE}/logout`, null);
             if (response.status === 200) {
                 Cookies.remove("shoppingCart");
                 dispatch(cleanActiveUser());

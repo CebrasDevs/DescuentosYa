@@ -2,6 +2,7 @@ import { URL_BASE } from "@/utils/const";
 import getCompanyDistances from "@/utils/geolocationUtils/getCompanyDistances";
 import getDistances from "@/utils/geolocationUtils/getDistances";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 export const GET_COMPANIES = "GET_COMPANIES";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
@@ -29,7 +30,7 @@ export const GET_USERS_BY_NAME = 'GET_USERS_BY_NAME';
 export const getUsers = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/users`, { withCredentials: true });
+      const { data } = await axios.get(`${URL_BASE}/users`);
       return dispatch({
         type: GET_USERS,
         payload: data,
@@ -162,13 +163,13 @@ export const deleteCompanyItem = (id) => {
 export const setActiveUser = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/profile`, { withCredentials: true });
+      const { data } = await axios.get(`${URL_BASE}/profile`);
       return dispatch({
         type: SET_ACTIVE_USER,
         payload: data,
       });
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error);
     }
   };
 };

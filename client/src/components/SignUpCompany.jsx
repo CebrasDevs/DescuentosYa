@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Map from "./Map";
 import SuccessModal from "./Modals/Company/Success";
 import FailureModal from "./Modals/Company/Failure";
+axios.defaults.withCredentials = true;
 
 export default function SignUpCompany() {
     const [companyCreated, setCompanyCreated] = useState("pending");
@@ -262,10 +263,10 @@ export default function SignUpCompany() {
                                     />
                                 </div>
                             </div>
-                            <div>
+                            <div className=" mb-10" > 
                                 {/* se agrega la posibilidad de que la compañia pueda agregar su ubicacion marcando sobre el mapa */}
-                                <div>
-                                    <Map location={input.location} locationChange={handleLocationChange} editable={true} />
+                                <div >
+                                    <Map location={input.location} locationChange={handleLocationChange} editable={true} style={"signUpCompany"} />
                                 </div>
                             </div>
                             <button

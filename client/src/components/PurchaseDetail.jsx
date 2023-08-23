@@ -7,6 +7,7 @@ import validateReview from "@/utils/validateReview";
 import { setActiveUser } from "@/redux/actions";
 import { FaStar } from "react-icons/fa";
 import { HiMiniBackspace } from "react-icons/hi2";
+axios.defaults.withCredentials = true;
 
 export default function PurchaseDetail({ id, activeUser, user }) {
   const dispatch = useDispatch();

@@ -72,7 +72,7 @@ export default function CompanyDetail({ id }) {
                     <h1>Distance {company.distance?.text}</h1>
                   )}
                   <div>
-                    <Map location={company.location} />
+                    <Map location={company.location} style={"companyDetail"} />
                   </div>
                 </div>
               </div>
