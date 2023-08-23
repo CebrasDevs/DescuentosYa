@@ -1,7 +1,7 @@
 
 // algunas regex para validar datos
 const nameRegex = /^[0-9A-Za-z\s-]+$/;
-const descriptionRegex = /^[0-9a-zA-Z \-\/\+\_\!\¡\¿]+$/;
+const descriptionRegex = /^[0-9a-zA-Z \-\/\+\_\!\¡\¿,.?]+$/;
 const floatRegex = /^[0-9.]+$/;
 const intRegex = /^[0-9]+$/;
 const urlRegex = /^(ftp|http|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?$/i;

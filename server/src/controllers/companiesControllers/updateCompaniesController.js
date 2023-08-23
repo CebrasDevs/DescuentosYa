@@ -14,6 +14,7 @@ module.exports = async (dataCompany) => {
   )
     throw new Error("Incomplete data or incorrect");
   let { id } = dataCompany;
+
   const updatedCompany = await updateUsersHelper(id, dataCompany);
   let {
     email,

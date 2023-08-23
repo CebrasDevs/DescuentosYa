@@ -1,6 +1,6 @@
 // algunas regex para validar datos
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const descriptionRegex = /^[0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙâêîôûÂÊÎÔÛ\s\-\,\.\!\¡\¿]+$/;
+const descriptionRegex = /^[0-9a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÒÙâêîôûÂÊÎÔÛ\s\-\,\.\'\!\¡\¿]+$/;
 const addressRegex = /^[a-zA-Z0-9\s.,'-]+$/;
 const passwordRegex = /^[0-9a-zA-z]+$/;
 const intRegex = /^[0-9]+$/;
