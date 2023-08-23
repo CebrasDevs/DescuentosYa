@@ -124,7 +124,7 @@ async function seedData() {
             categoryId: 4,
             description: "Dive into a month of aquatic fun with our Swimming Pass. Enjoy unlimited pool access and make a splash today!",
             name: "Swimming Pass - 1 Month",
-            price: 34.99,
+            price: 35.00,
             imageUrl: "https://imagenes.elpais.com/resizer/O_nfQn8L8LXpvOp_dWjVveDA2fo=/414x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/XQDJC5BR4ZE45KALPCWSHUXYLY.jpg"
         }],
         13: [{ //adidas
@@ -134,6 +134,14 @@ async function seedData() {
             name: "Running Shoes",
             price: 0,
             imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv5pzQJQpMveJ6v2lVDoH8UE6SqpKt7tzBifcJ1v241FfcWmGn8paY_FnV596jP9B5kwA&usqp=CAU"
+        },
+        {
+            userId: 11,
+            categoryId: 4,
+            description: "Elevate performance, personalized. AdiFit: Tailored fitness plans, expert guidance, and a holistic approach to unleash your potential.",
+            name: "AdiFit Custom Training",
+            price: 13.00,
+            imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFnWThkSJlOwYxq8yf8PS_qxUrNvS8xrTDAQ&usqp=CAU",
         }],
         12: [{ //nike
             userId: 12,
@@ -143,13 +151,29 @@ async function seedData() {
             price: 0,
             imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi7Wg33r4rG-h1-SM32mgIyeMmrPN_3SxAcfZDmiRyOTaowpSZzqcs8h6T4XEKPnUtvEc&usqp=CAU"
         }],
-        11: [{ //Ibel cosmeticos
+        11: [{ //Lbel cosmeticos
             userId: 11,
             categoryId: 3,
             description: "Revitalize your skin with our Moisturizing Face Cream, providing deep hydration and a radiant glow.",
             name: "Moisturizing Face Cream",
             price: 0,
             imageUrl: "https://http2.mlstatic.com/D_NQ_NP_910266-MLA43462195134_092020-O.webp"
+        },
+        {
+            userId: 11,
+            categoryId: 3,
+            description: "Revitalize skin with our expertly crafted facial, promoting a luminous complexion through targeted rejuvenation and deep nourishment.",
+            name: "Glow Radiance Facial Treatment",
+            price: 13.00,
+            imageUrl: "https://images.squarespace-cdn.com/content/v1/5ccc66a1b2cf79a22ea1d3ac/1a07c00b-cd27-4483-b390-01360a4daee4/Tocarre+Spring+23-55.jpg",
+        },
+        {
+            userId: 11,
+            categoryId: 3,
+            description: "Rediscover vibrant hair. Our transformative treatment revitalizes and fortifies, leaving hair visibly youthful, shiny, and irresistibly soft.",
+            name: "YouthRenew Hair Revival",
+            price: 16.00,
+            imageUrl: "https://cdn11.bigcommerce.com/s-q02qbuu0/images/stencil/870x1305/products/1098/5443/Model-Image-1800x1800_3__98598.1691785066.jpg?c=2",
         },
         {
             userId: 11,
@@ -195,9 +219,17 @@ async function seedData() {
             {
                 userId: 10,
                 categoryId: 3,
+                description: "Experience fuller, captivating lashes with our specialized treatment, enhancing volume and length for a mesmerizing, bold look.",
+                name: "LashMax Volume Enhancement",
+                price: 15.00,
+                imageUrl: "https://cdn.cuponidad.pe/images/Deals/Pestanas3D-Miraflores.jpg"
+            },
+            {
+                userId: 10,
+                categoryId: 3,
                 description: "Experience relaxation like never before with our Sea Breeze Massage, a rejuvenating escape by the shore.",
                 name: "Sea Breeze Massage",
-                price: 12.99,
+                price: 13.00,
                 imageUrl: "https://www.materialestetica.com/blog/wp-content/uploads/2019/03/cremas-para-masajes-y-sus-caracteristicas.jpg"
             },
             {
@@ -246,7 +278,7 @@ async function seedData() {
                 categoryId: 3,
                 description: "Reveal your natural beauty. Our Face Cleansing products gently purify, leaving your skin refreshed and rejuvenated.",
                 name: "Face Cleansing",
-                price: 13.99,
+                price: 14.00,
                 imageUrl: "https://massageluxe.com/wp-content/uploads/2022/01/15424cc2-3cf3-4497-8426-696901b4ba15.jpg.webp"
             },
             {
@@ -254,8 +286,16 @@ async function seedData() {
                 categoryId: 3,
                 description: "Experience silky-smooth skin with our Body Waxing service. Professional, efficient hair removal for a flawless, confident you.",
                 name: "Body waxing",
-                price: 15.25,
+                price: 15.00,
                 imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR56J50s-wkDt8iFQKj09Yv3f_PjeKh8tLDxg&usqp=CAU"
+            },
+            {
+                userId: 9,
+                categoryId: 3,
+                description: "Escape to tranquility with our curated retreat, offering holistic relaxation, rejuvenation, and a renewed sense of well-being.",
+                name: "PureBliss Relaxation Retreat",
+                price: 18.00,
+                imageUrl: "https://pureblisswellness.com/wp-content/uploads/2017/07/Pb-massage2-1500x550.jpg"
             },
             {
                 userId: 9,
@@ -321,6 +361,14 @@ async function seedData() {
             name: "Monthly Discount",
             price: 0,
             imageUrl: "https://distribuidoraelcriollo.com/wp-content/uploads/2021/08/La-serenisima-portada.jpg",
+        },
+        {
+            userId: 6,
+            categoryId: 2,
+            description: "Savor a delightful journey through our finest offerings, indulging in a diverse array of flavors that define culinary excellence.",
+            name: "TasteFiesta Product Sampling",
+            price: 12.00,
+            imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgODxuPKCQuXhxTi5IZfPj6L7XujpIDcLg3ge26o1jpT-ZN4Jc8o2myxWXsK46cZOAKLI&usqp=CAU",
         },
         {
             userId: 6,
