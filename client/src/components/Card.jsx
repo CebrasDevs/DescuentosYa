@@ -9,46 +9,44 @@ export default function Card({ item, value }) {
   
   return (
     <Link href={`/${item.id}`}>
-      <div className="card relative bg-white w-[270px] min-h-[410px] rounded-lg shadow-md hover:shadow-lg hover:scale-105 transition-transform ease-in-out duration-300">
+      <div className="relative bg-violet-600 w-[270px] h-[340px] rounded-lg shadow-xl hover:shadow-2xl overflow-hidden">
         {value === "profile" && (
           <FaEdit
             size={30}
             className="absolute -right-4 -top-4 hover:text-blue-600"
           />
         )}
-        <span className="absolute -top-1 -left-1 m-2 p-1 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
+        <span className="absolute top-5 -right-0 p-2 rounded-l-full bg-black pl-4 pr-3 text-center text-2xl font-bold  text-white">
           {item.discount}% OFF
         </span>
-        <div className="flex justify-center items-center h-[270px]">
+        <div className="flex justify-center items-center h-[230px] bg-white">
           <img
             src={item.imageUrl}
             alt=""
-            className="w-[250px] h-[250px] object-cover rounded-t-md"
+            className="w-full h-full object-cover "
           />
         </div>
 
-        <div className="bottom border-t flex flex-row  justify-center min-h-[90px] w-full items-center mx-2">
+        <div className="bottom flex flex-row w-full my-3 ">
             
-          <div className="title font-semibold text-lg w-2/3 flex flex-col justify-between items-center">
-            <h1 className="ml-2">{item.name}</h1>
+          <div className="title text-white font-bold text-2xl w-2/3 flex justify-center text-center ">
+            <h1 className="drop-shadow-xl">{item.name}</h1>
             <h2>{item.distance?.text}</h2>
           </div>
           
 
-          <div className=" my-2 flex flex-col w-1/3 items-center mr-4">
-            <div className="flex items-center">
-                <FaStar className="text-yellow-500 text-2xl m-1" />
-                <span className="mr-2 ml-3 rounded bg-yellow-200 px-2.5 py-0.5 text-xs font-semibold">
+          <div className=" flex flex-col gap-y-4 w-1/3 items-center ">
+            <div className="flex flex-row rounded-lg bg-white px-1 drop-shadow-xl items-center justify-center text-center ">
+                <FaStar className="text-yellow-500 text-xl m-1" />
+                <span className="text-lg font-bold mr-1 mt-0.5">
                     {averageRating >= 0 ? averageRating : 0}
                 </span>
             </div>
-            <div className="text-2xl text-center font-bold text-slate-900">
+            <div className="text-4xl font-bold drop-shadow-lg ">
               {item.price === 0 ? (
                 null
               ) : (
-                <div className="flex flex-row gap-8">
-                  <h3>${item.price}</h3>
-                </div>
+                  <h3 className=" text-white">${item.price}</h3>
               )}
             </div>
           </div>
@@ -57,12 +55,6 @@ export default function Card({ item, value }) {
           { value === 'profile' &&
             <h1 className="m-2">{item.enabled ? "enabled" : "disabled"}</h1>
           }
-
-        <div className="flex justify-center bottom-0">
-          <button className="w-[90%] rounded-md bg-violet-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-violet-800">
-            View Item
-          </button>
-        </div>
       </div>
     </Link>
   );
