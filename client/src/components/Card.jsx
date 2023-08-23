@@ -31,6 +31,7 @@ export default function Card({ item, value }) {
             
           <div className="title text-white font-bold text-2xl w-2/3 flex justify-center text-center ">
             <h1 className="drop-shadow-xl">{item.name}</h1>
+            <h2>{item.distance?.text}</h2>
           </div>
           
 
