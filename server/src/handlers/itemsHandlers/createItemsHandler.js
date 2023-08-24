@@ -3,6 +3,7 @@ const { createItemsController } = require("../../controllers")
 
 module.exports = async (req, res) => {
     try {
+        console.log("handler", req.body)
         let {  
             categoryId, 
             description, 
