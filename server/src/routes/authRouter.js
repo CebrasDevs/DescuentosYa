@@ -38,6 +38,7 @@ router.post("/login", async (req, res) => {
       role: user.role
     }, process.env.JWT_SECRET)
     //seteo COOKIES por HEADER
+
     // const serialized = serialize('accessTrue', token, {
     //   httpOnly: false, //true para que no se visualice la cookie en https
     //   secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
@@ -46,6 +47,7 @@ router.post("/login", async (req, res) => {
     //   path: '/'
     // })
     // res.setHeader('Set-Cookie', serialized)
+
 
     res.status(200).json({ message: "Login Successfull", token: token, userId: user.id}); // Envía un mensaje de éxito
   } catch (error) {
@@ -56,6 +58,7 @@ router.post("/login", async (req, res) => {
 router.post("/logout", async (req, res) => {
   // const {accessTrue} = req.cookies;
   try {
+
     // jwt.verify(accessTrue, process.env.JWT_SECRET);
     // const serialized = serialize('accessTrue', null, {
     //   httpOnly: false, //true para que no se visualice la cookie en https
@@ -65,6 +68,7 @@ router.post("/logout", async (req, res) => {
     //   path: '/'
     // })
     // res.setHeader('Set-Cookie', serialized)
+
 
     res.status(200).json({ message: "Logout successful!" });
   } catch (error) {
