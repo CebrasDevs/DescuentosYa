@@ -84,7 +84,7 @@ export default function ItemDetail({ data }) {
         }
       } catch (error) {
         setQrStatus("failed");
-        console.log(error.message);
+        console.log(error);
       }
     }
   };
