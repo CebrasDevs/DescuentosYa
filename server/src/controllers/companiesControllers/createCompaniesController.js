@@ -5,7 +5,8 @@ const regexName = /^[a-zA-ZÀ-ÿ\s'-]*$/;
 module.exports = async (dataCompany) => {
   if (
     !regexEmail.test(dataCompany.email) ||
-    !dataCompany.password || !isNaN(dataCompany.password) ||
+    !dataCompany.password || 
+    // !isNaN(dataCompany.password) ||
     !dataCompany.dni_cuit || isNaN(+dataCompany.dni_cuit) ||
     !regexName.test(dataCompany.name) ||
     !dataCompany.address || !isNaN(dataCompany.address) ||
