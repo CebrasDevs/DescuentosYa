@@ -2,7 +2,6 @@ const { createVouchersController } = require('../../controllers');
 
 module.exports = async (req, res) => {
     try {
-        console.log("BODY", req.body)
         let { itemId, userId } = req.body;
         const newVoucher = { itemId, userId }
         const voucher = await createVouchersController(newVoucher);

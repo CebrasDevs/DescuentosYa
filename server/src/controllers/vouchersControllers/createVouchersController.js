@@ -13,7 +13,7 @@ module.exports = async (voucher) => {
     ) throw new Error("Incomplete data or incorrect");
 
     const previousVouchers = await getVouchersHelper({ userId: + voucher.userId, itemId: + voucher.itemId });
-    console.log("LLEGA AL CONTROLLER")
+
     let newVoucher = null;
 
     const item = (await getItemsHelper({ id: +voucher.itemId }))[0];
@@ -41,6 +41,7 @@ module.exports = async (voucher) => {
         await registerVouchers(user.email, newVoucher.code, item);
     };
 
+    console.log(newVoucher)
     let { id, userId, itemId, code, expirationDate } = newVoucher;
 
     return {
