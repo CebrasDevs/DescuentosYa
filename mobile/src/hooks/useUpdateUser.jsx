@@ -2,7 +2,7 @@ import { useState } from "react";
 import { axiosInstance } from "../utils/axiosInstance";
 
 export default function useUpdateUser() {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     /**
@@ -12,8 +12,9 @@ export default function useUpdateUser() {
      */
     const updateUser = async (userId, userData) => {
         try {
+            setLoading(true);
             const { data } = await axiosInstance.patch(`/users/${userId}`, userData);
-            setUserUpdate(data);
+            return data
         } catch (error) {
             setError(error);
         } finally {

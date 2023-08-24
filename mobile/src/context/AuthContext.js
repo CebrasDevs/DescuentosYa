@@ -44,7 +44,8 @@ export const AuthProvider = ({ children }) => {
         try {
             setLoading(true);
             const { data } = await axiosInstance.post('/login', userData);
-            const token = data.data?.token;
+            console.log(JSON.stringify(data," ",2));
+            const token = data.token;
             if (token) {
                 await storeToken(token);
                 setIsAuthenticated(true);
