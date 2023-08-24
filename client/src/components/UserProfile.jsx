@@ -173,7 +173,14 @@ export default function UserProfile() {
                                                     {voucher.company?.name}
                                                 </Link>
                                             </h2>
-                                            <h2 className="ml-2">| Expiration date: {voucher.expirationDate}</h2>
+                                            {voucher.enabled ?
+                                                <div className="flex">
+                                                    <h2 className="ml-2 ">| Expires:</h2>&nbsp;<h2 className="text-green-600"> {voucher.expirationDate}</h2>
+                                                </div> :
+                                                <div className="flex">
+                                                    <h2 className="ml-2 ">| Expired on:</h2>&nbsp;<h2 className="text-red-600"> {voucher.expirationDate}</h2>
+                                                </div>
+                                            }
                                             <h2 className="ml-2">
                                                 |{" "}
                                                 <Link
@@ -185,7 +192,7 @@ export default function UserProfile() {
                                             </h2>
                                             <h2 className="ml-2">
                                                 |{" "}
-                                                <Link className="hover:text-blue-500" href={"#"}>
+                                                <Link className="hover:text-blue-500" href={`/${voucher.item.id}`}>
                                                     Renew
                                                 </Link>
                                             </h2>
@@ -257,7 +264,7 @@ export default function UserProfile() {
                                                     </h2>
                                                     <h2 className="ml-2">
                                                         |{" "}
-                                                        <Link className="hover:text-blue-500" href={"#"}>
+                                                        <Link className="hover:text-blue-500" href={`/${item.id}`}>
                                                             Buy again
                                                         </Link>
                                                     </h2>
