@@ -40,7 +40,7 @@ module.exports = async (voucher) => {
         voucher.code = url; //"https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png"
         newVoucher = await createVouchersHelper(voucher);
         //envio de email
-        // await registerVouchers(user.email, newVoucher.code, item);
+        await registerVouchers(user.email, newVoucher.code, item);
     };
 
     let { id, userId, itemId, code, expirationDate } = newVoucher;
