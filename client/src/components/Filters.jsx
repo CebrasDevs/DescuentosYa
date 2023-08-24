@@ -1,36 +1,33 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { filterCards, getCategories } from "@/redux/actions";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { filterCards } from "@/redux/actions";
 import Pagination from "./Pagination";
 
-export default function Filters() {
-    const dispatch = useDispatch();
+export default function Filters({ showModal }) {
     const activeFilters = useSelector((state) => state.activeFilters);
     const categories = useSelector((state) => state.categories);
+    const dispatch = useDispatch();
 
     const discountOptions = ["All", "25% or more", "35% or more", "45% or more"];
     const itemTypeOptions = ["All types", "Products", "Services"];
-    const sortingOptions = ["Alphabetical", "Highest discount"];
+    const sortingOptions = ["Alphabetical", "Highest discount", "Closest first"];
     const allCategories = ["All categories", ...categories];
 
-    useEffect(() => {
-        dispatch(getCategories())
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dispatch]);
-
     function handleChange(e) {
-        dispatch(
-            filterCards({
-                ...activeFilters,
-                [e.target.name]: e.target.value,
-            })
-        );
+        if (e.target.value === "Closest first" && !localStorage.getItem('userLocation')) {
+            showModal(true)
+        } else {
+            dispatch(
+                filterCards({
+                    ...activeFilters,
+                    [e.target.name]: e.target.value,
+                })
+            );
+        }
     }
-
     return (
-        <div className="sticky top-28">
+        <div className="sticky top-40 pb-10 rounded-lg border border-gray-100 bg-white shadow-md">
             <div className="flex flex-col justify-center text-center ">
                 <div className=" p-5">
                     <p className="font-medium mb-2 text-lg">Type:</p>
@@ -62,6 +59,7 @@ export default function Filters() {
                     <p className="font-medium mb-2 text-lg">Discount:</p>
                     {discountOptions.map((discount) => {
                         return (
+                            
                             <label className="flex justify-center mt-2" key={discount}>
                                 <input
                                     className=" w-10 cursor-pointer"

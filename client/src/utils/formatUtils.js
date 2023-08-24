@@ -1,3 +1,23 @@
+export function formatUserGoogle(user) {
+    const {
+        email,
+        given_name,
+        family_name,
+        picture
+    } = user;
+
+    const fullName = `${given_name} ${family_name}`;
+
+    return {
+        email: email,
+        password: email,
+        dni: "11111111",
+        name: fullName,
+        address: "Default",
+        phoneNumber: "1111111111",
+        imageUrl: picture
+    };
+};
 
 export function formatCompany(company) {
     const {
@@ -6,7 +26,8 @@ export function formatCompany(company) {
         companyName, 
         description, 
         cuit, 
-        address, 
+        address,
+        location, //se agrega la pueda propiedad para la ubicacion de la compañia 
         phoneNumber, 
         imageUrl
     } = company;
@@ -20,6 +41,7 @@ export function formatCompany(company) {
         description: description,
         cuit: parsedCuit,
         address: address,
+        location,
         phoneNumber: parsedPhoneNumber,
         imageUrl: imageUrl
     };
@@ -55,7 +77,7 @@ export function phoneNumberWithoutHyphens(company){
 }
 
 export function splitName(member){
-  let splitedName = member.name.split(', ')
+  let splitedName = member.name.split(' ')
     return{
         firstName: splitedName[0],
         lastName: splitedName[1],
@@ -81,7 +103,7 @@ export function formatMember(member) {
 
     const parsedDni = String(dni);
     const parsedPhoneNumber = String(phoneNumber);
-    const fullName = `${firstName}, ${lastName}`;
+    const fullName = `${firstName} ${lastName}`;
 
     return {
         email: email,
@@ -106,7 +128,7 @@ export function formatModifyMember(member){
         imageUrl
     } = member;
 
-    const fullName = `${firstName}, ${lastName}`;
+    const fullName = `${firstName} ${lastName}`;
 
     return {
         email: email,
@@ -121,7 +143,6 @@ export function formatModifyMember(member){
 export function formatItem(item) {
 
     const {
-        userId,
         id: id,
         name,
         categoryId,
@@ -135,7 +156,6 @@ export function formatItem(item) {
     const parsedDiscount = Number(discount);
     
     return {
-        userId: userId,
         id: id,
         name: name,
         categoryId: categoryId,
@@ -145,3 +165,29 @@ export function formatItem(item) {
         imageUrl: imageUrl
     };
 };
+
+export function getAverageRating(data){
+    let reviews = data.review
+    ?.filter((review) => review.enabled)
+    .map((review) => {
+      let selectedStars = [
+        review.star1,
+        review.star2,
+        review.star3,
+        review.star4,
+        review.star5,
+      ];
+      return selectedStars.lastIndexOf(true) + 1;
+    });
+  let total = 0;
+  reviews?.map((number) => {
+    total += number;
+  });
+  let averageRating = (total / reviews?.length).toFixed(1);
+
+  return{
+    reviews,
+    averageRating
+  }
+}
+

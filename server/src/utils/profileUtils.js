@@ -12,7 +12,8 @@ function structureMember(user) {
         phoneNumber,
         lastPayment,
         Voucher,
-        Shopping
+        Shopping,
+        Review
     } = user;
 
     const structuredVouchers = Voucher.map((voucher) => {
@@ -37,7 +38,7 @@ function structureMember(user) {
             id: voucher.id,
             code: voucher.code,
             enabled: voucher.enabled,
-            expirationDate: voucher.expirationDate,
+            expirationDate: voucher.expirationDate.toLocaleString(),
             item: structuredItem,
             company: structuredUser
         };
@@ -90,10 +91,11 @@ function structureMember(user) {
         address,
         phoneNumber,
         enabled,
-        lastPayment,
+        lastPayment: lastPayment?.toLocaleString(),
         imageUrl,
         vouchers: structuredVouchers,
-        shoppings: structuredShoppings
+        shoppings: structuredShoppings,
+        Review
     };
     return structuredMember;
 };
@@ -164,7 +166,7 @@ function structureVouchers(vouchers) {
             id,
             code,
             enabled,
-            expirationDate,
+            expirationDate: expirationDate.toLocaleString(),
             user: {
                 id: user.id,
                 name: user.name

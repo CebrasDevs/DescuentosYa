@@ -32,6 +32,7 @@ module.exports = async (id) => {
         let shoppings = await getShoppingHelper({id: {in: shoppingIds}});
         shoppings = structureShoppings(shoppings);
         
+        
         return {
             ...company,
             sales: shoppings,

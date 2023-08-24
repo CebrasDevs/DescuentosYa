@@ -1,10 +1,10 @@
 const mercadopago = require("mercadopago");
+const createShoppingController = require("../shoppingControllers/createShoppingController");
 
 
 mercadopago.configure({
-  access_token: "TEST-4063843005379415-080715-6157199ac5560f6f8c251612d3f57169-1443618271",
+  access_token: "TEST-7292748116471793-081322-314407140c27b18e0f61ceba165994d6-1449420431",
 });
-
 
 const createOrder = async (req, res) => {
   try {
@@ -23,7 +23,6 @@ const createOrder = async (req, res) => {
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
-    console.log('response preference', response)
     res.status(200).json({ response });
 
   } catch (error) {
@@ -34,22 +33,44 @@ const createOrder = async (req, res) => {
 // voy a recibir los datos de la transaccion
 const receiveWebhook = async (req, res) => {
   const payment = req.query;
+  const { id } = req.params;
 
   try {
     let data;
     if (payment.type === 'payment') {
       data = await mercadopago.payment.findById(payment['data.id']);
-
-      console.log('Toda la info', data.response)
-      // console.log('Pago', data.response.status)
-      // console.log('Metodo de pago', data.response.payment_method.type)
-      // console.log('Items comprados', data.response.additional_info.items)
       // console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
-    }
-    res.redirect(204); // investigar, redirecciona a un archivo o un URL
 
+    const {
+      payment_method,
+      status,
+      transaction_amount,
+      additional_info
+    } = data.response;
+
+    let formattedStatus, wayToPay;
+
+    if(status === 'approved') {
+      formattedStatus = 'SUCCESS';
+    };
+
+    if(payment_method.type === 'account_money') {
+      wayToPay = 'CASH';
+    };
+    
+    const formattedObject = {
+      userId: id,
+      wayToPay,
+      state: formattedStatus,
+      totalPrice: transaction_amount,
+      items: additional_info.items
+    };
+
+    createShoppingController(formattedObject)
+    return res.redirect(204);
+  }
   } catch (error) {
-    return res.sendStatus(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 

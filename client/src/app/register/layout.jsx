@@ -1,9 +1,3 @@
-import IsCompany from "./isCompany"
-
-export default function Layout () {
-    return (
-        <div>
-            <IsCompany/>
-        </div>
-    )
+export default function Layout({ children }) {
+    return <div>{children}</div>;
 }

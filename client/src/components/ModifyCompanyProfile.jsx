@@ -6,6 +6,7 @@ import axios from "axios";
 import { URL_BASE } from "@/utils/const";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "@/redux/actions";
+axios.defaults.withCredentials = true;
 
 export default function ModifyCompanyProfile({ companyData, handleSave }) {
     const { phoneNumber } = phoneNumberWithoutHyphens(companyData);
@@ -69,12 +70,13 @@ export default function ModifyCompanyProfile({ companyData, handleSave }) {
             }
             const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany);
             if (response.status === 200) {
-                dispatch(setActiveUser(companyData.id));
+                dispatch(setActiveUser());
                 alert(`Company successfully modified`);
                 setErrors({});
                 handleSave();
             }
         } catch (error) {
+            console.log(error)
             alert(`Error modifying company`);
         }
     };

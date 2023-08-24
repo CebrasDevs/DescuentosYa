@@ -1,6 +1,6 @@
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
-    justify-content: center;
-    gap: 30px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 250px));
+  justify-content: center;
+  gap: 30px;
+}

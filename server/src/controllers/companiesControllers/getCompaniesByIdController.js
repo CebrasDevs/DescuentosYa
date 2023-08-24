@@ -11,6 +11,8 @@ module.exports = async (id) => {
         name,
         imageUrl,
         address,
+        latitude, //extraemos de la consulta de la base de datos
+        longitude,
         phoneNumber,
         description,
         Item
@@ -23,7 +25,8 @@ module.exports = async (id) => {
             category: item.category.name,
             price: item.price,
             discount: item.discount,
-            imageUrl: item.imageUrl
+            imageUrl: item.imageUrl,
+            enabled: item.enabled
         };
     });
 
@@ -37,6 +40,7 @@ module.exports = async (id) => {
         name,
         imageUrl,
         address,
+        location: { lat: latitude, lng: longitude }, // y retornamos con el formato ya esperado en el front
         phoneNumber,
         description,
         items: structuredItems

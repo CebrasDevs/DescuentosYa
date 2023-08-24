@@ -1,39 +1,48 @@
 // instanciamos el framework express
-const express = require('express');
+const express = require("express");
 
 // mousqueherramienta que vamos a utilizar después son jwt
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 // nos ayuda a la interpretación de los datos que llegan por POST, PUT y PATCH
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 
 // nos ayuda a resolver las métricas con la información que nos ofrece, nos sirve para dev y en producción hay que tener cuidado con los datos sensibles
-const morgan = require('morgan');
+const morgan = require("morgan");
 // Importando rutas de mercado de pago
-const mercadoPagoRoutes = require('./routes/paymentRouter')
+const paymentsRoutes = require('./routes/paymentRouter')
 // Intanciamos las rutas
-const routes = require('./routes/index.js');
-
+const routes = require("./routes/index.js");
+const {URL_BASE} = process.env
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
+app.use(bodyParser.json({ limit: "50mb" }));
 app.use(cookieParser());
 app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }))
 
 // Establecemos cabeceras de acceso CORS
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE, PATCH');
+  res.header("Access-Control-Allow-Origin", `${URL_BASE}`);
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Cookie"
+  );
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, DELETE, PATCH"
+  );
   next();
 });
 
-app.use('/payment', mercadoPagoRoutes);
+
+app.use('/payment', paymentsRoutes);
+
 
 // Importar y utilizar las rutas
-app.use('/', routes);
+app.use("/", routes);
 
 // Middleware para manejar errores
 app.use((err, req, res, next) => {

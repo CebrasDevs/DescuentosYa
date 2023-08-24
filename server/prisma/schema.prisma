@@ -26,12 +26,15 @@ model User {
   name        String?
   imageUrl    String
   address     String
+  latitude    Float? // se agrega pero no es obligatorio
+  longitude   Float? //lo hacemos obligatorio a la hora de crear una nueva compañia
   phoneNumber String?
   lastPayment DateTime?
   description String?
   Item        Item[]
   Voucher     Voucher[]
   Shopping    Shopping[]
+  Review      Review[]
 }
 
 model Item {
@@ -48,6 +51,23 @@ model Item {
   enabled       Boolean         @default(true)
   Voucher       Voucher[]
   Item_Shopping Item_Shopping[]
+  Review        Review[]
+}
+
+model Review {
+  id            Int             @id @default(autoincrement())
+  item          Item            @relation(fields: [itemId], references: [id])
+  itemId        Int
+  user          User            @relation(fields: [userId], references: [id])
+  userId        Int
+  comment       String?
+  star1         Boolean         @default(false)
+  star2         Boolean         @default(false)
+  star3         Boolean         @default(false)
+  star4         Boolean         @default(false)
+  star5         Boolean         @default(false)
+  enabled       Boolean         @default(true)
+
 }
 
 model Category {

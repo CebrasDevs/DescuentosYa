@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
         if (!id) {
             // Si no me llego un id por params, asumo que se trata del usuario activo
             // Asi que tomo el id de la cookie
-            id = req.id;
+            id = req.userId;
         }
         const user = await getProfileController(id);
 

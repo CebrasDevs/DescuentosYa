@@ -1,26 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateItem from "@/utils/validateItem";
-import { getCategories, setActiveUser } from "@/redux/actions";
+import { setActiveUser } from "@/redux/actions";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
+import ItemSuccess from "./Modals/Company/ItemSuccess";
+import ItemFailure from "./Modals/Company/ItemFailure";
+axios.defaults.withCredentials = true;
 
 export default function CreateItem() {
-    const dispatch = useDispatch();
 
-    const retrievedCookie = Cookies.get("accessTrue");
-    const parsedValue = JSON.parse(retrievedCookie);
+    const dispatch = useDispatch();
 
     const categories = useSelector((state) => state.categories);
     const allCategories = ["Choose category", ...categories];
+    const [itemCreated, setItemCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
-        userId: parsedValue.id,
         name: "",
         categoryId: "Choose category",
         description: "",
@@ -28,10 +29,6 @@ export default function CreateItem() {
         discount: "",
     });
     const isNotReady = errors.name || errors.categoryId || errors.price || errors.discount;
-
-    useEffect(() => {
-        dispatch(getCategories());
-    }, [dispatch]);
 
     function handleChange(e) {
         setInput({
@@ -71,7 +68,7 @@ export default function CreateItem() {
             }
             const response = await axios.post(`${URL_BASE}/items`, formattedItem);
             if (response.status === 200) {
-                dispatch(setActiveUser(input.userId));
+                dispatch(setActiveUser());
                 setErrors({});
                 setInput({
                     name: "",
@@ -80,18 +77,25 @@ export default function CreateItem() {
                     price: "",
                     discount: "",
                 });
-                window.alert("Creado correctamente");
+                setItemCreated("success");
             }
         } catch (error) {
-            console.log(error);
-            window.alert("No se pudo crear el item");
+            console.log("error");
+            setItemCreated("failure");
+            
         }
     };
 
+    const close = (status) => {
+        setItemCreated("pending");
+    }
+
     return (
         <section className=" bg-slate-200 dark:bg-white h-full">
-            <div className="flex  justify-center mt-12 pb-12 bg-slate-200 ">
-                <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
+            { itemCreated === "success" && <ItemSuccess close={close} />}
+            { itemCreated === "failure" && <ItemFailure close={close} /> }
+            <div className="flex justify-center mt-12 pb-12 bg-slate-200 ">
+                <div className=" w-5/12 mt-10 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-normal text-gray-900 md:text-2xl">
                             Create Item

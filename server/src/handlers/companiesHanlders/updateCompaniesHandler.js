@@ -26,6 +26,7 @@ module.exports = async (req, res) => {
       phoneNumber,
       description,
     };
+    console.log('handler')
     const updatedCompany = await updateCompaniesController(dataCompany);
     return res.status(200).json(updatedCompany);
   } catch (error) {
