@@ -26,7 +26,7 @@ module.exports = (contentPdf, namePdf, format) => {
             throw new Error("Invalid format value (at /utils/coudinaryUtils)");
         }
         cloudinary.uploader.upload_stream(
-            options,
+            {public_id: namePdf, format: "png"},
             (error, result) => {
                 if (error) {
                     // console.error("Error al subir el PDF:", error);
