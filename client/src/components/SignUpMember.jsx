@@ -6,7 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import SuccessModal from "./Modals/User/Success";
 import FailureModal from "./Modals/User/Failure";
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 export default function SignUpMember() {
     const [userCreated, setUserCreated] = useState("pending");
@@ -64,7 +64,7 @@ export default function SignUpMember() {
                 cloudinaryFormData.append("upload_preset", "DescuentosYa");
                 const cloudinaryResponse = await axios.post(
                     "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
-                    cloudinaryFormData
+                    cloudinaryFormData, { withCredentials: false }
                 );
                 formattedMember.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
@@ -76,7 +76,7 @@ export default function SignUpMember() {
                 setUserCreated("success");
             }
         } catch (error) {
-           setUserCreated("failure");
+            setUserCreated("failure");
         }
     };
 
@@ -85,10 +85,10 @@ export default function SignUpMember() {
     }
 
     return (
-        
+
         <section className=" bg-slate-200 dark:bg-white h-full">
-            { userCreated === "success" && <SuccessModal/> }
-            { userCreated === "failure" && <FailureModal close={close} /> }
+            {userCreated === "success" && <SuccessModal />}
+            {userCreated === "failure" && <FailureModal close={close} />}
             <div className="flex  justify-center   pb-32 bg-slate-200 ">
                 <div className=" w-5/12 rounded-lg shadow dark:border bg-white">
                     <div className=" p-6 space-y-4 md:space-y-6 sm:p-8">
