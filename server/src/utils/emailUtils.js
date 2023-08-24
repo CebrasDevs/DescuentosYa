@@ -9,6 +9,31 @@ const transporter = createTransport({
     port: EMAIL_PORT,
     auth: { pass: EMAIL_PASSWORD, user: EMAIL_USER }
 });
+/**
+ * 
+ * @param {String} toEmail members que solicita el cupon
+ * @param {String} imageUrl la URL generada por cloudinary
+ * @param {Object} item el objeto item que vamos a mostrarle campos 
+ */
+const registerVouchers = async (toEmail, imageUrl, item) => {
+    try {
+        let message =
+            `<p>Congrats on your voucher!</p>
+        <p>Redeem it in-store for a great discount!</p>
+        <p>The QR code for your ${item.name} is attached for easy redemption.</p>
+        <img src="${imageUrl}" alt="voucher" width=30% height=auto/>
+        <p>Need help? We're here for you!</p>
+        <p>Thanks for choosing DescuentosYa! Enjoy savings!</p>
+        <p>Happy shopping!</p>
+        <p>Best,</p>
+        <p>The DescuentosYa! Team</p>`;
+        let webSite = "https://descuentos-ya.vercel.app/";
+        let webSiteName = "Descuentos Ya!";
+        await sendMail(toEmail, toEmail, "New voucher", message, webSite, webSiteName);
+    } catch (error) {
+        console.log("ERROR: send email for register vouchers");
+    }
+}
 
 /**
  * envia email cuando el usuario se registra en el sitio web
@@ -18,7 +43,7 @@ const transporter = createTransport({
 const registerMembers = async (toEmail, userName) => {
     try {
         let message =
-        `<p>We're thrilled to have you as part of DescuentosYa!. You're now officially one of the smart shoppers who unlock fantastic discounts and exclusive deals.</p>
+            `<p>We're thrilled to have you as part of DescuentosYa!. You're now officially one of the smart shoppers who unlock fantastic discounts and exclusive deals.</p>
             <p>At DescuentosYa!, we're all about helping you save big while enjoying your shopping sprees. Your membership opens the door to a world of exciting bargains and perks that are waiting just for you.</p>
             <p>If you ever need assistance or have any questions, our super-friendly support team is here to help. Don't hesitate to reach out!</p>
             <p>Thanks for choosing DescuentosYa! as your ultimate shopping sidekick. Get ready for awesome savings and fantastic shopping experiences.</p>
@@ -40,7 +65,7 @@ const registerMembers = async (toEmail, userName) => {
 const registerCompanies = async (toEmail, companyName) => {
     try {
         let message =
-        `<p>We're excited to welcome your company to DescuentosYa!. You're now part of our network of smart businesses offering fantastic services and products.</p>
+            `<p>We're excited to welcome your company to DescuentosYa!. You're now part of our network of smart businesses offering fantastic services and products.</p>
         <p>At DescuentosYa!, we're dedicated to helping you showcase your offerings to our community of shoppers. Your membership grants you access to a platform where you can share exciting deals and exclusive offers.</p>
         <p>If you ever need any assistance or have questions about using our platform, our support team is here to assist you. Feel free to reach out anytime!</p>
         <p>Thank you for choosing DescuentosYa! to connect with a wider audience and boost your business. Get ready to provide fantastic experiences to our members.</p>
@@ -92,4 +117,4 @@ const sendMail = async (toEmail, userName, title, message, link, linkText) => {
     });
 };
 
-module.exports = { registerMembers, registerCompanies, registerShopping };
+module.exports = { registerMembers, registerCompanies, registerShopping, registerVouchers };
