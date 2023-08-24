@@ -78,6 +78,7 @@ export default function UserProfile() {
                   />
                 </div>
               ) : (
+
                 <div className="w-full drop-shadow-md">
                   <div className=" flex flex-row justify-center">
                     <h1 className=" tracking-wide font-semibold text-5xl">
@@ -139,7 +140,6 @@ export default function UserProfile() {
           {activeUser.vouchers.length !== 0 ? (
             <>
               <div className="relative flex w-2/6 m-auto items-center justify-between rounded-md border border-gray-400 shadow-lg mt-4 mb-10">
-                
                 <svg
                   className="absolute left-2 block h-5 w-5 text-gray-500"
                   xmlns="http://www.w3.org/2000/svg"
@@ -176,6 +176,8 @@ export default function UserProfile() {
                       className="flex items-center border border-t-gray-300 mt-4 rounded-lg shadow-xl drop-shadow-lg m-2"
                     >
                       <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-t from-gray-200 to-transparent"></div>
+                      className="flex items-center border border-black rounded-lg m-2"
+                    >
                       <img
                         className="w-[100px] h-[100px] m-5 rounded-lg"
                         src={voucher.item.imageUrl}
@@ -235,6 +237,7 @@ export default function UserProfile() {
               <h1 className="text-center my-10 font-semibold text-xl">
                 You haven't generated vouchers
               </h1>
+
               <div id="orders"></div>
             </>
           )}
@@ -273,6 +276,7 @@ export default function UserProfile() {
                   onInput={handleSearchChange}
                 />
               </div>
+
               {activeUser.shoppings?.map((buys, index) => {
                 console.log(activeUser);
                 return (
@@ -289,6 +293,7 @@ export default function UserProfile() {
                             src={item.imageUrl}
                             alt=""
                           />
+
                           <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
                           <h1 className="ml-2">| State: {buys.state}</h1>
                           <h2 className="ml-2">
