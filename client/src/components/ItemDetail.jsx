@@ -5,6 +5,7 @@ import {
   getItemDetail,
   setActiveUser,
 } from "@/redux/actions";
+import Loading from "@/components/loading";
 import { BsCart3 } from "react-icons/bs";
 import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
@@ -28,8 +29,7 @@ export default function ItemDetail({ data }) {
 
   const { averageRating, reviews } = getAverageRating(data);
 
-  
-  const [itemStatus,setItemStatus] = useState("pending");
+  const [itemStatus, setItemStatus] = useState("pending");
   const [modify, setModify] = useState(false);
 
   const handleSetModify = () => {
@@ -68,16 +68,17 @@ export default function ItemDetail({ data }) {
     const retrievedCookie = Cookies.get("accessTrue");
     if (!retrievedCookie) {
       router.push(`/login?detail=true&itemId=${data.id}`);
-    }
-    try {
-      //logica de generacion de codigo, charlar
-      const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
-      if (response.status === 200) {
-        dispatch(setActiveUser(activeUser.id));
-        alert("QR Generated");
+    } else {
+      try {
+        //logica de generacion de codigo, charlar
+        const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
+        if (response.status === 200) {
+          dispatch(setActiveUser(activeUser.id));
+          alert("QR Generated");
+        }
+      } catch (error) {
+        console.log(error.message);
       }
-    } catch (error) {
-      console.log(error.message);
     }
   };
 
@@ -116,13 +117,16 @@ export default function ItemDetail({ data }) {
   const close = (status) => {
     setItemStatus("pending");
   };
-
+  
+  if (!data.id) {
+    return <Loading />;
+  }
   if (data.price !== 0) {
     //esto es un servicio
     return (
       <section className=" flex w-full h-full justify-center">
-        { itemStatus === "enabled" && <EnableItem close={close} />}
-        { itemStatus === "disabled" && <DisableItem close={close} />}
+        {itemStatus === "enabled" && <EnableItem close={close} />}
+        {itemStatus === "disabled" && <DisableItem close={close} />}
         {modify ? (
           <div className=" flex justify-center w-full h-full bg-white rounded-2xl shadow-xl my-14 ">
             <div className=" w-1/2 h-full">
@@ -146,32 +150,32 @@ export default function ItemDetail({ data }) {
             ) : null}
           </div>
         ) : (
-          <div className="flex flex-col m-5">
+          <div className="flex flex-col w-4/5 m-5">
             <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
               <div className=" w-1/2 h-full">
                 <img
-                  className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
+                  className="w-[650px] h-[500px] object-cover rounded-2xl mt-6 mb-6 ml-10 border-2 border-gray-300"
                   src={data.imageUrl}
                 ></img>
               </div>
               <div className=" w-1/2 p-6 pr-16">
-                <div className=" absolute text-2xl text-white -right-4 -top-4 bg-black p-2 rounded-full font-bold">
-                  {data.discount}%
+                <div className=" absolute text-5xl text-white right-0 top-4 bg-black p-5 pl-9 rounded-l-full font-bold drop-shadow-xl ">
+                  {data.discount}% OFF
                 </div>
-                <div className=" text-center p-6 pr-16 ">
-                  <p className=" font-bold text-4xl">{data.name}</p>
+                <div className=" py-10 ">
+                  <p className=" font-bold text-5xl mr-44">{data.name}</p>
                 </div>
                 <div>
-                  <h1 className=" font-semibold text-lg mt-6">
+                  <h1 className=" font-semibold text-lg">
                     Discover the incredible
                     <span className="text-red-600"> {data.discount}% </span>
                     discount awaiting you in the {data.category} section at{" "}
                     {data.name}. Unveil the savings today!
                   </h1>
-                  <div className="font-semibold text-lg mt-12">
+                  <div className="font-semibold text-lg mt-4">
                     <h2>{data.description}</h2>
                   </div>
-                  <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">
+                  <h1 className=" mt-28 font-extrabold text-6xl tracking-wider">
                     ${data.price}{" "}
                   </h1>
                 </div>
@@ -179,21 +183,30 @@ export default function ItemDetail({ data }) {
                   {activeUser.role === "ADMIN" ||
                   activeUser.role === "COMPANY" ? null : (
                     <button
-                      className=" flex text-center gap-2 items-center py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
+                      className=" drop-shadow-xl flex text-center text-2xl mr-16 gap-2 items-center py-4 px-9 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                       onClick={() => handleAddItem(data)}
                     >
-                      Add to Cart <BsCart3 className=" text-xl" />
+                      Add to Cart <BsCart3 className=" text-2xl" />
                     </button>
                   )}
                   {activeUser.id === data.companyId ||
                   activeUser.role === "ADMIN" ? (
-                    <div>
-                      <button onClick={modifyHandler}>
-                        <FaEdit className="ml-5 text-2xl hover: cursor-pointer" />
-                      </button>
+                    <div className=" drop-shadow-lg flex flex-row gap-8 p-3 rounded-xl bg-violet-300 mr-8">
+                      <label
+                        className=" flex flex-col items-center justify-center"
+                        onClick={modifyHandler}
+                      >
+                        <h1 className=" font-semibold text-lg">Edit Item</h1>
+                        <FaEdit
+                          size={28}
+                          className="ml-3 text-2xl hover: cursor-pointer text-violet-700"
+                        />
+                      </label>
 
                       <label className="flex flex-col relative items-center">
-                        <h1 className="m-2">Disable/Enable</h1>
+                        <h1 className=" font-semibold text-lg">
+                          Disable/Enable
+                        </h1>
                         <input
                           type="checkbox"
                           className="sr-only"
@@ -201,8 +214,8 @@ export default function ItemDetail({ data }) {
                           onChange={handleItemEnable}
                         />
                         <span
-                          className={`relative w-10 h-6 transition rounded-full ${
-                            data.enabled ? "bg-blue-300" : "bg-gray-300"
+                          className={`relative w-10 h-6 transition rounded-full mt-1 ${
+                            data.enabled ? "bg-violet-600" : "bg-gray-500"
                           }`}
                         >
                           <span
@@ -218,8 +231,8 @@ export default function ItemDetail({ data }) {
               </div>
             </div>
             {data.review?.length ? ( //el usuario tiene que tener review
-              <div className="flex">
-                <div className="flex flex-col justify-center items-center m-5 bg-white rounded-2xl shadow-xl my-14 p-5 w-4/5 min-h-[500px] overflow-scroll overflow-x-hidden">
+              <div className="flex gap-x-12">
+                <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-xl my-14 p-5 w-full min-h-[500px] overflow-x-hidden">
                   <div className="h-3/5">
                     <h1 className="font-bold text-4xl mt-12 h-6">
                       Reviews from other shoppers
@@ -231,7 +244,7 @@ export default function ItemDetail({ data }) {
                       if (review.enabled) {
                         return (
                           <div className="border-b-2 m-5 w-full">
-                            <div className="flex">
+                            <div className="flex ml-5">
                               {[1, 2, 3, 4, 5].map((starNumber) => {
                                 return starNumber <= reviews[index] ? (
                                   <FaStar className="text-yellow-500" />
@@ -240,16 +253,19 @@ export default function ItemDetail({ data }) {
                                 );
                               })}
                             </div>
-                            <h1 className="m-5"> {review.user.name} </h1>
+                            <h1 className="m-5 font-medium text-lg">
+                              {" "}
+                              {review.user.name}{" "}
+                            </h1>
                             <h1 className="m-5">"{review.comment}"</h1>
                           </div>
                         );
                       }
                     })}
                 </div>
-                <div className="flex flex-col justify-center  items-center m-5 bg-white rounded-2xl shadow-xl my-14 p-5 w-1/5 min-h-[500px]">
+                <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-xl my-14 p-5 w-1/5 min-h-[500px]">
                   <div className="flex items-center">
-                    <h1 className="font-semibold text-4xl text-violet-600 m-1">
+                    <h1 className="font-bold text-6xl text-violet-600 m-1">
                       {averageRating}
                     </h1>
                   </div>
@@ -268,7 +284,9 @@ export default function ItemDetail({ data }) {
                       );
                     })}
                   </div>
-                  <h1>{reviews.length} reviews</h1>
+                  <h1 className=" text-lg font-semibold">
+                    {reviews.length} reviews
+                  </h1>
                 </div>
               </div>
             ) : null}
@@ -281,8 +299,8 @@ export default function ItemDetail({ data }) {
   //si la company ofrece productos:
   return (
     <section className=" flex w-full h-full justify-center">
-      { itemStatus === "enabled" && <EnableItem close={close} />}
-        { itemStatus === "disabled" && <DisableItem close={close} />}
+      {itemStatus === "enabled" && <EnableItem close={close} />}
+      {itemStatus === "disabled" && <DisableItem close={close} />}
       {modify ? (
         <div className=" flex justify-center w-full h-full bg-white rounded-2xl shadow-xl my-14 ">
           <div className=" w-1/2 h-full">
@@ -298,36 +316,40 @@ export default function ItemDetail({ data }) {
           />
         </div>
       ) : (
-        <div className="flex flex-col m-5">
+        <div className="flex flex-col w-4/5 m-5">
           <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
             <div className=" w-1/2 h-full">
               <img
-                className="w-10/12 rounded-2xl mt-6 mb-6 ml-10 mr-6 border-2 border-gray-300"
+                className="w-[650px] h-[500px] object-cover rounded-2xl mt-6 mb-6 ml-10 border-2 border-gray-300"
                 src={data.imageUrl}
               ></img>
             </div>
-            <div className=" w-1/2 p-6 pr-16">
-              <div className=" absolute text-2xl text-white -right-4 -top-4  bg-black p-2 rounded-full font-bold">
-                {data.discount}%
+            <div className=" w-1/2">
+              <div className=" absolute text-5xl text-white right-0 top-4 bg-black p-5 pl-9 rounded-l-full font-bold drop-shadow-xl ">
+                {data.discount}% OFF
               </div>
 
-              <div className=" text-center p-6 pr-16 ">
-                <p className=" font-bold text-4xl">{data.name}</p>
+              <div className=" py-14 ">
+                <p className=" font-bold text-5xl mr-48">{data.name}</p>
               </div>
-              <div>
-                <h1 className=" font-semibold text-lg mt-6">
+              <div className=" mr-28">
+                <h1 className=" font-semibold text-lg mt-1">
                   Discover the incredible
                   <span className="text-red-600"> {data.discount}% </span>
                   discount awaiting you in the {data.category} section at{" "}
                   {data.name}. Unveil the savings today!
                 </h1>
-                {data.distance && <h1>Distance: {data.distance?.text}</h1>}
+                {data.distance && (
+                  <h1 className=" my-4 font-semibold text-lg">
+                    Distance to you: {data.distance?.text}
+                  </h1>
+                )}
                 {data.price > 0 && (
                   <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">
                     ${data.price}{" "}
                   </h1>
                 )}
-                <div className="font-semibold text-lg mt-12">
+                <div className="font-semibold text-lg mt-6">
                   <h2>{data.description}</h2>
                 </div>
               </div>
@@ -335,7 +357,7 @@ export default function ItemDetail({ data }) {
                 {activeUser.role !== "COMPANY" &&
                   activeUser.role !== "ADMIN" && (
                     <button
-                      className="py-2 px-4 font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
+                      className="py-2 px-4 text-2xl mr-16 drop-shadow-xl font-bold rounded text-white  bg-violet-600 hover:bg-violet-800 cursor-pointer"
                       onClick={handleGenerateCode}
                     >
                       Get Voucher
@@ -343,13 +365,20 @@ export default function ItemDetail({ data }) {
                   )}
                 {activeUser.id === data.companyId ||
                 activeUser.role === "ADMIN" ? (
-                  <div className=" flex flex-row w-full gap-x-10 justify-between border-2 border-violet-600 p-2 rounded-md bg-violet-200 mx-10">
-                    <label className=" flex flex-col items-center hover:text-blue-600" onClick={modifyHandler}>
+                  <div className=" drop-shadow-lg flex flex-row gap-8 p-3 rounded-xl bg-violet-300 mr-8">
+                    <label
+                      className=" flex flex-col items-center justify-center"
+                      onClick={modifyHandler}
+                    >
                       <h1 className=" font-semibold text-lg">Edit Item</h1>
-                      <FaEdit size={25} className="ml-2" />
+                      <FaEdit
+                        size={28}
+                        className="ml-3 text-2xl hover: cursor-pointer text-violet-600"
+                      />
                     </label>
-                    <label className="flex flex-col relative items-center mr">
-                      <h1 className="font-semibold text-lg">Disable/Enable</h1>
+
+                    <label className="flex flex-col relative items-center">
+                      <h1 className=" font-semibold text-lg">Disable/Enable</h1>
                       <input
                         type="checkbox"
                         className="sr-only"
@@ -357,7 +386,7 @@ export default function ItemDetail({ data }) {
                         onChange={handleItemEnable}
                       />
                       <span
-                        className={`relative w-10 mt-0.5 h-6 transition rounded-full ${
+                        className={`relative w-10 h-6 transition rounded-full mt-1 ${
                           data.enabled ? "bg-violet-600" : "bg-gray-500"
                         }`}
                       >
@@ -374,8 +403,8 @@ export default function ItemDetail({ data }) {
             </div>
           </div>
           {data.review?.length ? ( //el item tiene que tener review
-            <div className="flex">
-              <div className="flex flex-col justify-center items-center m-5 bg-white rounded-2xl shadow-xl my-14 p-5 w-4/5 min-h-[500px] overflow-scroll overflow-x-hidden">
+            <div className="flex gap-x-12">
+              <div className="flex flex-col justify-center items-center bg-white rounded-2xl shadow-xl my-14 p-5 w-full min-h-[500px] overflow-x-hidden">
                 <div className="h-3/5">
                   <h1 className="font-bold text-4xl mt-12 h-6">
                     Reviews from other shoppers
@@ -387,7 +416,7 @@ export default function ItemDetail({ data }) {
                     if (review.enabled) {
                       return (
                         <div className="border-b-2 m-5 w-full">
-                          <div className="flex">
+                          <div className="flex ml-5">
                             {[1, 2, 3, 4, 5].map((starNumber) => {
                               return starNumber <= reviews[index] ? (
                                 <FaStar className="text-yellow-500" />
@@ -396,16 +425,19 @@ export default function ItemDetail({ data }) {
                               );
                             })}
                           </div>
-                          <h1 className="m-5"> {review.user.name} </h1>
+                          <h1 className="m-5 font-medium text-lg">
+                            {" "}
+                            {review.user.name}{" "}
+                          </h1>
                           <h1 className="m-5">"{review.comment}"</h1>
                         </div>
                       );
                     }
                   })}
               </div>
-              <div className="flex flex-col justify-center  items-center m-5 bg-white rounded-2xl shadow-xl my-14 p-5 w-1/5 min-h-[500px]">
+              <div className="flex flex-col justify-center  items-center bg-white rounded-2xl shadow-xl my-14 p-5 w-1/5 min-h-[500px]">
                 <div className="flex items-center">
-                  <h1 className="font-semibold text-4xl text-violet-600 m-1">
+                  <h1 className="font-bold text-6xl text-violet-600 m-1">
                     {averageRating}
                   </h1>
                 </div>
@@ -424,7 +456,9 @@ export default function ItemDetail({ data }) {
                     );
                   })}
                 </div>
-                <h1>{reviews.length} reviews</h1>
+                <h1 className=" text-lg font-semibold">
+                  {reviews.length} reviews
+                </h1>
               </div>
             </div>
           ) : (
