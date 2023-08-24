@@ -12,7 +12,6 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
 import LoginFailure from "./Modals/Login/LoginFailure";
 import { jwtVerify } from 'jose';
-import { verify } from 'jsonwebtoken';
 
 axios.defaults.withCredentials = true;
 
@@ -56,7 +55,7 @@ export default function Login() {
                     name: "",
                     password: "",
                 });
-                dispatch(setActiveUser());
+                dispatch(setActiveUser(userId));
                 if (detail === "true") {
                     router.push(`/${itemId}`);
                 } else {
