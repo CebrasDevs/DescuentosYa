@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 export function formatUserGoogle(user) {
     const {
         email,
@@ -141,6 +143,7 @@ export function formatModifyMember(member){
 };
 
 export function formatItem(item) {
+    const userId = Cookies.get("userId");
 
     const {
         id: id,
@@ -156,6 +159,7 @@ export function formatItem(item) {
     const parsedDiscount = Number(discount);
     
     return {
+        userId: userId,
         id: id,
         name: name,
         categoryId: categoryId,
