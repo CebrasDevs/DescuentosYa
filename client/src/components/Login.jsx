@@ -44,7 +44,7 @@ export default function Login() {
             if (response.status === 200) {
                 Cookies.set('accessTrue', response.data.token, {
                     expires: 30, // 30 días de duración
-                    secure: false, // Solo enviar la cookie sobre HTTPS
+                    secure: true, // Solo enviar la cookie sobre HTTPS
                     sameSite: 'strict' // Permitir la cookie en solicitudes de diferentes sitios
                   });
                 dispatch(setActiveUser());
