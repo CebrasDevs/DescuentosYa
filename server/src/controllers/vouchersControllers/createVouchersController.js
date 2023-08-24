@@ -26,7 +26,7 @@ module.exports = async (voucher) => {
         voucher.code = url
         newVoucher = await createVouchersHelper(voucher);
         //envio de email
-        await registerVouchers(user.email, newVoucher.code, item);
+        // await registerVouchers(user.email, newVoucher.code, item);
     } else if (previousVouchers[previousVouchers.length - 1].expirationDate > new Date() &&
         previousVouchers[previousVouchers.length - 1].enabled) {
 
