@@ -5,6 +5,7 @@ import {
   getItemDetail,
   setActiveUser,
 } from "@/redux/actions";
+import Loading from "@/components/loading";
 import { BsCart3 } from "react-icons/bs";
 import { useState } from "react";
 import ModifiedItem from "./ModifiedItem";
@@ -116,7 +117,10 @@ export default function ItemDetail({ data }) {
   const close = (status) => {
     setItemStatus("pending");
   };
-
+  
+  if (!data.id) {
+    return <Loading />;
+  }
   if (data.price !== 0) {
     //esto es un servicio
     return (
@@ -193,7 +197,10 @@ export default function ItemDetail({ data }) {
                         onClick={modifyHandler}
                       >
                         <h1 className=" font-semibold text-lg">Edit Item</h1>
-                        <FaEdit size={28} className="ml-3 text-2xl hover: cursor-pointer text-violet-700" />
+                        <FaEdit
+                          size={28}
+                          className="ml-3 text-2xl hover: cursor-pointer text-violet-700"
+                        />
                       </label>
 
                       <label className="flex flex-col relative items-center">
@@ -246,7 +253,10 @@ export default function ItemDetail({ data }) {
                                 );
                               })}
                             </div>
-                            <h1 className="m-5 font-medium text-lg"> {review.user.name} </h1>
+                            <h1 className="m-5 font-medium text-lg">
+                              {" "}
+                              {review.user.name}{" "}
+                            </h1>
                             <h1 className="m-5">"{review.comment}"</h1>
                           </div>
                         );
@@ -274,7 +284,9 @@ export default function ItemDetail({ data }) {
                       );
                     })}
                   </div>
-                  <h1 className=" text-lg font-semibold">{reviews.length} reviews</h1>
+                  <h1 className=" text-lg font-semibold">
+                    {reviews.length} reviews
+                  </h1>
                 </div>
               </div>
             ) : null}
@@ -359,7 +371,10 @@ export default function ItemDetail({ data }) {
                       onClick={modifyHandler}
                     >
                       <h1 className=" font-semibold text-lg">Edit Item</h1>
-                      <FaEdit size={28} className="ml-3 text-2xl hover: cursor-pointer text-violet-600" />
+                      <FaEdit
+                        size={28}
+                        className="ml-3 text-2xl hover: cursor-pointer text-violet-600"
+                      />
                     </label>
 
                     <label className="flex flex-col relative items-center">
@@ -410,7 +425,10 @@ export default function ItemDetail({ data }) {
                               );
                             })}
                           </div>
-                          <h1 className="m-5 font-medium text-lg"> {review.user.name} </h1>
+                          <h1 className="m-5 font-medium text-lg">
+                            {" "}
+                            {review.user.name}{" "}
+                          </h1>
                           <h1 className="m-5">"{review.comment}"</h1>
                         </div>
                       );
@@ -438,7 +456,9 @@ export default function ItemDetail({ data }) {
                     );
                   })}
                 </div>
-                <h1 className=" text-lg font-semibold">{reviews.length} reviews</h1>
+                <h1 className=" text-lg font-semibold">
+                  {reviews.length} reviews
+                </h1>
               </div>
             </div>
           ) : (
