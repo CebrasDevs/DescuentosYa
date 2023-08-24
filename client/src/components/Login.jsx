@@ -42,7 +42,7 @@ export default function Login() {
         try {
             const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
-                Cookies.set('accessTrue', response.data.token);
+                Cookies.set('accessTrue', response.data.token, {expires: 30, secure: true});
                 setInput({
                     name: "",
                     password: "",
