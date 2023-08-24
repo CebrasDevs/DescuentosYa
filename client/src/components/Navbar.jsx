@@ -29,6 +29,7 @@ export default function Navbar() {
       const response = await axios.post(`${URL_BASE}/logout`, null);
       if (response.status === 200) {
         Cookies.remove("shoppingCart");
+        Cookies.remove("accessTrue");
         dispatch(cleanActiveUser());
         router.push("/");
       }

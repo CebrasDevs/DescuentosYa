@@ -1,5 +1,5 @@
 "use client";
-
+import Cookies from 'js-cookie';
 import axios from "axios";
 import { useState } from "react";
 import styles from "../styles/Login.module.css";
@@ -11,6 +11,9 @@ import { useDispatch } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
 import LoginFailure from "./Modals/Login/LoginFailure";
+import { jwtVerify } from 'jose';
+import { verify } from 'jsonwebtoken';
+
 axios.defaults.withCredentials = true;
 
 export default function Login() {
@@ -42,11 +45,13 @@ export default function Login() {
         try {
             const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
-                dispatch(setActiveUser());
+                Cookies.set('accessTrue', response.data.token, {expires: 30, secure: true});
+                Cookies.set('userId', response.data.userId);
                 setInput({
                     name: "",
                     password: "",
                 });
+                dispatch(setActiveUser(response.data.userId));
                 if (detail === "true") {
                     router.push(`/${itemId}`);
                 } else {

@@ -21,6 +21,7 @@
     "eslint-config-next": "13.4.12",
     "jose": "^4.14.4",
     "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.1",
     "mercadopago": "^1.5.17",
     "next": "13.4.12",
     "next-auth": "^4.22.3",
