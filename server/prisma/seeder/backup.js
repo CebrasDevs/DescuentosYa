@@ -620,7 +620,7 @@ async function seedData() {
                 data: {
                     item: { connect: { id: item.id } },
                     user: { connect: { id: shopper.id } },
-                    code: faker.random.alphaNumeric(20),
+                    code: "https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png",
                     enabled: enabled,
                     expirationDate: expirationDate,
                 },

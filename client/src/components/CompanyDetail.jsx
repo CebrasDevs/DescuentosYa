@@ -3,6 +3,7 @@
 import useCompany from "@/hooks/useCompany";
 import Grid from "./Grid";
 import Map from "./Map";
+import Loading from "@/components/loading";
 
 export default function CompanyDetail({ id }) {
   const company = useCompany(id);
@@ -19,7 +20,7 @@ export default function CompanyDetail({ id }) {
   }
 
   if (!company.id) {
-    return <p>Loading...</p>;
+    return <Loading />;;
   }
   return (
     <div className=" justify-center items-center flex flex-col">
