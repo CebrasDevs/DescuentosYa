@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // Establecemos cabeceras de acceso CORS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://descuentos-ya.vercel.app/");
+  res.header("Access-Control-Allow-Origin", "https://descuentos-ya.vercel.app");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
