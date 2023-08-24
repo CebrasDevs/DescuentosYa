@@ -39,8 +39,8 @@ router.post("/login", async (req, res) => {
     //seteo COOKIES por HEADER
     const serialized = serialize('accessTrue', token, {
       httpOnly: false, //true para que no se visualice la cookie en https
-      secure: true, //seguridad https, se habilita si la V.E es igual a 'production'
-      sameSite: 'strict', //cambiar a none, para seguridad https
+      secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
+      sameSite: 'none', //cambiar a none, para seguridad https
       maxAge: 1000 * 60 * 60 * 24 * 30,
       path: '/'
     })
@@ -58,8 +58,8 @@ router.post("/logout", verifyToken, async (req, res) => {
     jwt.verify(accessTrue, process.env.JWT_SECRET);
     const serialized = serialize('accessTrue', null, {
       httpOnly: false, //true para que no se visualice la cookie en https
-      secure: true, //seguridad https, se habilita si la V.E es igual a 'production'
-      sameSite: 'strict', //cambiar a none, para seguridad https
+      secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
+      sameSite: 'none', //cambiar a none, para seguridad https
       maxAge: 0, // 0 para que desaparezca la cookie
       path: '/'
     })
