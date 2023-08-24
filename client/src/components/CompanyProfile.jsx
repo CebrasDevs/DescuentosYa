@@ -266,9 +266,9 @@ export default function CompanyProfile() {
               <h1 className="text-center my-10 font-semibold text-xl">
                 You haven't made any sales yet
               </h1>
-              <div id="vouchers"></div>
             </>
           )}
+          <div id="vouchers"></div>
         </div>
 
         <div className=" w-3/4 mt-10 bg-slate-50  rounded-lg shadow-md">
