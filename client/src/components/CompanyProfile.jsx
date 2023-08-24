@@ -249,7 +249,10 @@ export default function CompanyProfile() {
                             <h1 className="ml-2">| User: {sale.user.name}</h1>
                             <h2 className="ml-2">
                               |{" "}
-                              <Link className="hover:text-blue-500" href={"#"}>
+                              <Link
+                                className="hover:text-blue-500"
+                                href={`/${item.id}`}
+                              >
                                 Detail
                               </Link>
                             </h2>
