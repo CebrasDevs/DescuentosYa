@@ -19,6 +19,10 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import EnableItem from "./Modals/Items/EnableItem";
 import DisableItem from "./Modals/Items/DisableItem";
+import QrGenerated from "./Modals/Items/QrGenerated";
+import QrFailed from "./Modals/Items/QrFail";
+import ItemCartAdditionFail from "./Modals/Items/CannotAdd";
+import ItemSameCompanyAddition from "./Modals/Items/SameCompany";
 axios.defaults.withCredentials = true;
 
 export default function ItemDetail({ data }) {
@@ -28,7 +32,8 @@ export default function ItemDetail({ data }) {
   const router = useRouter();
 
   const { averageRating, reviews } = getAverageRating(data);
-
+  const [addPermision, setAddPermision] = useState("pending");
+  const [qrStatus, setQrStatus] = useState("pending");
   const [itemStatus, setItemStatus] = useState("pending");
   const [modify, setModify] = useState(false);
 
@@ -43,13 +48,13 @@ export default function ItemDetail({ data }) {
     } else {
       if (shoppingCart.some((shopping) => shopping.item.id === itemFound.id)) {
         // El itemFound es igual al atributo 'item' de al menos un elemento en shoppingCart
-        alert("Item already added in shopping cart");
+        setAddPermision("already");
       } else if (
         shoppingCart.some(
           (shopping) => shopping.item.companyId !== itemFound.companyId
         )
       ) {
-        alert("Services from different companies cannot be added to the cart");
+        setAddPermision("different");
       } else {
         // El itemFound no coincide con ningún atributo 'item' en shoppingCart
         let newItem = { item: itemFound, quantity: 1 };
@@ -73,10 +78,12 @@ export default function ItemDetail({ data }) {
         //logica de generacion de codigo, charlar
         const response = await axios.post(`${URL_BASE}/vouchers/`, voucher);
         if (response.status === 200) {
+          setQrStatus("success");
           dispatch(setActiveUser(activeUser.id));
-          alert("QR Generated");
+          
         }
       } catch (error) {
+        setQrStatus("failed");
         console.log(error.message);
       }
     }
@@ -116,6 +123,8 @@ export default function ItemDetail({ data }) {
 
   const close = (status) => {
     setItemStatus("pending");
+    setQrStatus("pending");
+    setAddPermision("pending");
   };
   
   if (!data.id) {
@@ -124,9 +133,11 @@ export default function ItemDetail({ data }) {
   if (data.price !== 0) {
     //esto es un servicio
     return (
-      <section className=" flex w-full h-full justify-center">
+      <section className=" flex w-full h-full justify-center drop-shadow-lg">
         {itemStatus === "enabled" && <EnableItem close={close} />}
         {itemStatus === "disabled" && <DisableItem close={close} />}
+        {addPermision === "already" && <ItemCartAdditionFail close={close} />}
+        {addPermision === "different" && <ItemSameCompanyAddition close={close} />}
         {modify ? (
           <div className=" flex justify-center w-full h-full bg-white rounded-2xl shadow-xl my-14 ">
             <div className=" w-1/2 h-full">
@@ -317,6 +328,8 @@ export default function ItemDetail({ data }) {
         </div>
       ) : (
         <div className="flex flex-col w-4/5 m-5">
+          {qrStatus === "success" && <QrGenerated close={close} />}
+          {qrStatus === "failed" && <QrFailed close={close} />}
           <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
             <div className=" w-1/2 h-full">
               <img
