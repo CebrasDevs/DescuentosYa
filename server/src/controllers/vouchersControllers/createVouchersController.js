@@ -14,7 +14,7 @@ module.exports = async (voucher) => {
     ) throw new Error("Incomplete data or incorrect");
 
     const previousVouchers = await getVouchersHelper({ userId: + voucher.userId, itemId: + voucher.itemId });
-
+    console.log("LLEGA AL CONTROLLER")
     let newVoucher = null;
 
     const item = (await getItemsHelper({ id: +voucher.itemId }))[0];
