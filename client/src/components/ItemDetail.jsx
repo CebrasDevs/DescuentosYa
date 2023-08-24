@@ -352,11 +352,6 @@ export default function ItemDetail({ data }) {
                   discount awaiting you in the {data.category} section at{" "}
                   {data.name}. Unveil the savings today!
                 </h1>
-                {data.distance && (
-                  <h1 className=" my-4 font-semibold text-lg">
-                    Distance from you: {data.distance?.text}
-                  </h1>
-                )}
                 {data.price > 0 && (
                   <h1 className=" mt-10 font-extrabold text-5xl tracking-wider">
                     ${data.price}{" "}
