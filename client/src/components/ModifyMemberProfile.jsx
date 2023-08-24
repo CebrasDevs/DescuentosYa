@@ -6,6 +6,8 @@ import validateModifyMember from "@/utils/validateModifyMember";
 import { URL_BASE } from "@/utils/const";
 import { useDispatch } from "react-redux";
 import { setActiveUser } from "@/redux/actions";
+import CompanyModificationSuccess from "./Modals/Company/CompanyModSuccess";
+import CompanyModificationFail from "./Modals/Company/CompanyModFail";
 axios.defaults.withCredentials = true;
 
 export default function ModifyMemberProfile({ memberData, handleSave }) {
@@ -14,7 +16,7 @@ export default function ModifyMemberProfile({ memberData, handleSave }) {
     const { phoneNumber } = phoneNumberWithoutDots(memberData);
     const [imageFile, setImageFile] = useState(null);
     const [editImage, setEditImage] = useState(false);
-
+    const [userModify, setUserModify] = useState("pending");
     const [errors, setErrors] = useState({});
     const [input, setInput] = useState({
         email: memberData.email,
@@ -76,17 +78,23 @@ export default function ModifyMemberProfile({ memberData, handleSave }) {
             const response = await axios.patch(`${URL_BASE}/members/${memberData.id}`, formattedMember);
             if (response.status === 200) {
                 dispatch(setActiveUser());
-                alert("Member successfully modified");
+                setUserModify("success");
                 setErrors({});
                 handleSave();
             }
         } catch (error) {
-            alert("Error modifying member");
+            setUserModify("fail");
         }
     };
 
+    const close = (status) => {
+        setUserModify("pending");
+      };
+
     return (
         <div className="m-1">
+            { userModify === "success" && <CompanyModificationSuccess close={close} /> }
+            { userModify === "fail" && <CompanyModificationFail close={close} /> }
             <div className="rounded-lg shadow dark:border bg-white">
                 <div className="md:space-y-6 sm:p-8">
                     <form onSubmit={handleSubmit} className="">

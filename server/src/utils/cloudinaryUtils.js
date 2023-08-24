@@ -8,13 +8,31 @@ cloudinary.config({
     api_secret: CLOUDINARY_API_SECRET
 });
 
+/**
+ * funcion para subir un archivo a cloudinary
+ * @param {Object} contentPdf es el CONTENIDO del archivo (no es la ruta)
+ * @param {String} namePdf es el nombre del archivo
+ * @param {String} format es el formato del archivo a subir
+ * @returns 
+ */
 module.exports = (contentPdf, namePdf, format) => {
+    let options = {};
+    if (format === "png") {
+        options = {
+            format: format, //para el voucher png
+            public_id: namePdf
+        }
+    }else if(format==="raw"){
+        options = {
+            resource_type: format, //para el pdf
+            public_id: namePdf
+        }
+    }else{
+        console.log("Invalid format value (at /utils/coudinaryUtils)");
+    }
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
-            {
-                format: format,
-                public_id: namePdf
-            },
+            options,
             (error, result) => {
                 if (error) {
                     // console.error("Error al subir el PDF:", error);

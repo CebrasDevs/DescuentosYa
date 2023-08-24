@@ -11,6 +11,7 @@ axios.defaults.withCredentials = true;
 export default function ModifyCompanyProfile({ companyData, handleSave }) {
     const { phoneNumber } = phoneNumberWithoutHyphens(companyData);
     const dispatch = useDispatch();
+    const [companyModification, setCompanyModification] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [editImage, setEditImage] = useState(false);
     const [errors, setErrors] = useState({});
@@ -70,16 +71,20 @@ export default function ModifyCompanyProfile({ companyData, handleSave }) {
             }
             const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany);
             if (response.status === 200) {
+                setCompanyModification("success");
                 dispatch(setActiveUser());
-                alert(`Company successfully modified`);
                 setErrors({});
                 handleSave();
             }
         } catch (error) {
-            console.log(error)
-            alert(`Error modifying company`);
+            console.log(error);
+            setCompanyModification("fail");
         }
     };
+
+    const close = (status) => {
+        setCompanyModification("pending");
+      };
 
     return (
         <div className="m-1">
