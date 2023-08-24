@@ -354,7 +354,7 @@ export default function ItemDetail({ data }) {
                 </h1>
                 {data.distance && (
                   <h1 className=" my-4 font-semibold text-lg">
-                    Distance to you: {data.distance?.text}
+                    Distance from you: {data.distance?.text}
                   </h1>
                 )}
                 {data.price > 0 && (

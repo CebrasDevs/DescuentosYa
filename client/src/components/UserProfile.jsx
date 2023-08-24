@@ -176,8 +176,6 @@ export default function UserProfile() {
                       className="flex items-center border border-t-gray-300 mt-4 rounded-lg shadow-xl drop-shadow-lg m-2"
                     >
                       <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-t from-gray-200 to-transparent"></div>
-                      className="flex items-center border border-black rounded-lg m-2"
-                    >
                       <img
                         className="w-[100px] h-[100px] m-5 rounded-lg"
                         src={voucher.item.imageUrl}
