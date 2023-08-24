@@ -16,17 +16,15 @@ cloudinary.config({
  * @returns 
  */
 module.exports = (contentPdf, namePdf, format) => {
-    let options = {};
-    if (format === "png") {
-        options = {
-            format: format, //para el voucher png
-            public_id: namePdf
-        }
-    }else if(format==="raw"){
-        options = {
-            resource_type: format, //para el pdf
-            public_id: namePdf
-        }
+    const options = {
+        public_id: namePdf
+    };
+
+    if (format === 'war') {
+        options.resource_type = 'raw';
+    } else if (format === 'png') {
+        options.format = 'png'; 
+    
     }else{
         console.log("Invalid format value (at /utils/coudinaryUtils)");
     }
