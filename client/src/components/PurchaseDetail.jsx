@@ -186,8 +186,6 @@ export default function PurchaseDetail({ id, activeUser, user }) {
       ) : (
         <div>
           <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
-            <h1>Paid with: {itemBought?.wayToPay} </h1>
-            <h1>State: {itemBought?.state} </h1>
             <h1>Seller company: {itemBought?.company.name}</h1>
             <h1>
               Price paid: ${" "}
