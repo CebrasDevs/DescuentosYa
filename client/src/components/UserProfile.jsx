@@ -250,7 +250,8 @@ export default function UserProfile() {
                                                         src={item.imageUrl}
                                                         alt=""
                                                     />
-                                                    <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
+                                                    <h1 className="ml-2">Name: {item.name}</h1>
+                                                    <h1 className="ml-2">| Way to Pay: {buys.wayToPay}</h1>
                                                     <h1 className="ml-2">| State: {buys.state}</h1>
                                                     <h2 className="ml-2">
                                                         |{" "}
