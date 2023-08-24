@@ -3,8 +3,8 @@ const  { postReviewHandler, updateReviewHandler }  = require("../handlers");
 const reviewRouter = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
-reviewRouter.post("/", verifyToken, postReviewHandler);
-reviewRouter.patch("/:id", verifyToken, updateReviewHandler);
+reviewRouter.post("/", postReviewHandler);
+reviewRouter.patch("/:id", updateReviewHandler);
 
 
 

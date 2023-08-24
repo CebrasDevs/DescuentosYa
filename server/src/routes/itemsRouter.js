@@ -13,7 +13,7 @@ const {verifyToken} = require("../utils/authMiddleware");
 
 itemsRouter.get('/', getItemsHandler)
 itemsRouter.get('/:id', getItemsByIdHandler)
-itemsRouter.post('/', verifyToken, createItemsHandler)
-itemsRouter.patch('/:id', verifyToken, updateItemsHandler)
+itemsRouter.post('/', createItemsHandler)
+itemsRouter.patch('/:id', updateItemsHandler)
 
 module.exports = itemsRouter;

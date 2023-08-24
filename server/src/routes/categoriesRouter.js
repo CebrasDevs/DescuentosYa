@@ -10,8 +10,8 @@ const router = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
 router.get("/", getCategoriesHandler);
-router.delete("/", verifyToken, deleteCategoryHandler);
-router.post("/", verifyToken, createCategoryHandler);
-router.patch("/", verifyToken, updateCategoryHandler);
+router.delete("/", deleteCategoryHandler);
+router.post("/", createCategoryHandler);
+router.patch("/", updateCategoryHandler);
 
 module.exports = router;

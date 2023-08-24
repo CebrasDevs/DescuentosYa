@@ -11,8 +11,8 @@ const { Router } = require('express');
 const shoppingRouter = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
-shoppingRouter.get('/', verifyToken, getShoppingHandler)
-shoppingRouter.post('/', verifyToken, createShoppingHandler)
-shoppingRouter.patch('/:id', verifyToken, updateShoppingHandler)
+shoppingRouter.get('/', getShoppingHandler)
+shoppingRouter.post('/', createShoppingHandler)
+shoppingRouter.patch('/:id', updateShoppingHandler)
 
 module.exports = shoppingRouter;

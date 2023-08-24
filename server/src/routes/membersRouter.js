@@ -8,7 +8,7 @@ const router = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
 router.post("/", createMembersHandler);
-router.patch("/:id", verifyToken, updateMembersHandler);
+router.patch("/:id", updateMembersHandler);
 
 
 module.exports = router;

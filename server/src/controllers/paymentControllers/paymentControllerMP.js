@@ -15,11 +15,11 @@ const createOrder = async (req, res) => {
       payer: user,
       //indica hacia donde se retornan las respuestas
       back_urls: {
-        success: "http://localhost:3000",
-        failure: "http://localhost:3000",
-        pending: "http://localhost:3000"
+        success: "https://descuentos-ya.vercel.app",
+        failure: "https://descuentos-ya.vercel.app",
+        pending: "https://descuentos-ya.vercel.app"
       },
-      notification_url: `https://3aa0-2803-9800-9847-758a-e9b7-73ae-2c43-8adf.ngrok.io/payment/webhook/${user.id}`,
+      notification_url: `https://descuentosya-back.onrender.com/payment/webhook/${user.id}`,
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
