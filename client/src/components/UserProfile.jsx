@@ -236,8 +236,7 @@ export default function UserProfile() {
                                     onInput={handleSearchChange}
                                 />
                             </div>
-                            {activeUser.shoppings?.map((buys, index) => {
-                              console.log(activeUser)
+                            {filtersProfile.shoppings?.map((buys, index) => {
                                 return (
                                     <div
                                         key={index}
