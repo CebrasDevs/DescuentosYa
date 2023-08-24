@@ -43,11 +43,11 @@ export default function Login() {
             const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
                 Cookies.set('accessTrue', response.data.token);
-                dispatch(setActiveUser());
                 setInput({
                     name: "",
                     password: "",
                 });
+                dispatch(setActiveUser());
                 if (detail === "true") {
                     router.push(`/${itemId}`);
                 } else {
