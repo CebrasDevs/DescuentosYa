@@ -164,10 +164,10 @@ export const deleteCompanyItem = (id) => {
   return { type: DELETE_COMPANY_ITEM, payload: id };
 };
 
-export const setActiveUser = (id) => {
+export const setActiveUser = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}/profile/${id}`);
+      const { data } = await axios.get(`${URL_BASE}/profile`);
       return dispatch({
         type: SET_ACTIVE_USER,
         payload: data,

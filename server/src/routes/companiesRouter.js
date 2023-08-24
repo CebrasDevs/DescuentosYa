@@ -10,7 +10,7 @@ const router = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
 router.post("/", createCompaniesHandler);
-router.patch("/:id", updateCompaniesHandler);
+router.patch("/:id", verifyToken, updateCompaniesHandler);
 router.get("/:id",getCompaniesByIdHandler);
 router.get("/", getCompaniesHandler);
 
