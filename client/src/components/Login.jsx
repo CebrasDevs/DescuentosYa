@@ -12,6 +12,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
 import LoginFailure from "./Modals/Login/LoginFailure";
 import { jwtVerify } from 'jose';
+import { verify } from 'jsonwebtoken';
 
 axios.defaults.withCredentials = true;
 
