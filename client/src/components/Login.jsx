@@ -56,7 +56,7 @@ export default function Login() {
                     name: "",
                     password: "",
                 });
-                dispatch(setActiveUser(response.data.userId));
+                dispatch(setActiveUser());
                 if (detail === "true") {
                     router.push(`/${itemId}`);
                 } else {
