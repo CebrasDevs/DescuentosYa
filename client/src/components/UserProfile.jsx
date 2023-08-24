@@ -276,7 +276,6 @@ export default function UserProfile() {
               </div>
 
               {activeUser.shoppings?.map((buys, index) => {
-                console.log(activeUser);
                 return (
                   <div
                     key={index}
