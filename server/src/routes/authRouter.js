@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
     // })
     // res.setHeader('Set-Cookie', serialized)
 
-    res.status(200).json({ message: "Login Successfull", token: token }); // Envía un mensaje de éxito
+    res.status(200).json({ message: "Login Successfull", token: token, userId: user.id}); // Envía un mensaje de éxito
   } catch (error) {
     res.status(500).json({ error: "Error authenticating the user" });
   }
