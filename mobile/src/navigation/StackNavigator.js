@@ -8,6 +8,7 @@ import UserListScreen from "../screens/UserListScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import LogoutScreen from "../screens/LogoutScreen";
 import { StyleSheet } from "react-native";
+import ProfileEditScreen from "../screens/ProfileEditScreen";
 
 const Stack = createStackNavigator();
 
@@ -31,6 +32,7 @@ export default function StackNavigator() {
           <Stack.Screen name="UserDetailScreen" component={UserDetailScreen} />
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           <Stack.Screen name="LogoutScreen" component={LogoutScreen} />
+          <Stack.Screen name="ProfileEditScreen" component={ProfileEditScreen} />
         </>
       }
     </Stack.Navigator>

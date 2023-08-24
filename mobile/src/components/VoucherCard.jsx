@@ -1,15 +1,28 @@
 import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 
-export default function VoucherCard({ voucher }) {
-    return (<View style={styles.card}>
-        <Image source={{ uri: voucher.item.imageUrl }} style={styles.cardImage} />
-        <View style={{ justifyContent: "center", alignItems: "flex-start", marginLeft: 20 }}>
-            <Text style={styles.cardTitle}>{voucher.item.name}</Text>
-            <Text style={styles.cardMember}>Member: {voucher.user.name}</Text>
-            <Text style={styles.cardPrice}>Expiration: {voucher.expirationDate}</Text>
-        </View>
-    </View>
+export default function VoucherCard({ voucher, role }) {
+    return (
+        <>{role==="COMPANY" ? 
+            <View style={styles.card}>
+                <Image source={{ uri: voucher.item.imageUrl }} style={styles.cardImage} />
+                <View style={{ justifyContent: "center", alignItems: "flex-start", marginLeft: 20 }}>
+                    <Text style={styles.cardTitle}>{voucher.item.name}</Text>
+                    <Text style={styles.cardMember}>Member: {voucher.user.name}</Text>
+                    <Text style={styles.cardPrice}>Expiration: {voucher.expirationDate}</Text>
+                </View>
+            </View>
+            :
+            <View style={styles.card}>
+                <Image source={{ uri: voucher.item.imageUrl }} style={styles.cardImage} />
+                <View style={{ justifyContent: "center", alignItems: "flex-start", marginLeft: 20 }}>
+                    <Text style={styles.cardTitle}>{voucher.item.name}</Text>
+                    <Text style={styles.cardMember}>Company: {voucher.company.name}</Text>
+                    <Text style={styles.cardPrice}>Expiration: {voucher.expirationDate}</Text>
+                    <Text style={styles.cardPrice}>Discount: {voucher.item.discount} %</Text>
+                </View>
+            </View>}
+        </>
     )
 };
 
