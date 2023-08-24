@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.post("/logout", verifyToken, async (req, res) => {
+router.post("/logout", async (req, res) => {
   // const {accessTrue} = req.cookies;
   try {
     // jwt.verify(accessTrue, process.env.JWT_SECRET);
