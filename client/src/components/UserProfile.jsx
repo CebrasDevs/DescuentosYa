@@ -26,6 +26,7 @@ export default function UserProfile() {
     dispatch(setFiltersProfile({ property: "All", value: "" }));
   }, [activeUser]);
 
+
   const handleSearchChange = (e) => {
     dispatch(
       setFiltersProfile({
@@ -131,6 +132,7 @@ export default function UserProfile() {
                       </h1>
                     </div>
                   </div>
+
                 </div>
               )}
               <div id="vouchers"></div>
