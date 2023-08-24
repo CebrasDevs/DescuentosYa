@@ -12,7 +12,6 @@ module.exports = async (dataItem) => {
         (isNaN(dataItem.discount)) 
     )  throw new Error("Incomplete data or incorrect");
 
-    console.log("controler", dataItem)
     const newItem = await createItemsHelper(dataItem);
     let {
         id,
