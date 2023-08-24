@@ -48,7 +48,7 @@ const registerShoppingPDF = async (userName, items, totalPrice, wayToPay, state,
             .replace("${linkText}", 'Checkout our new discounts');
         const objectPdf = await createPdf(formattedPdf);
         await registerShopping(userEmail, formattedPdf, objectPdf);
-        const url = await uploadCloudinary(objectPdf.pdf, objectPdf.namePdf);
+        const url = await uploadCloudinary(objectPdf.pdf, objectPdf.namePdf, "raw");
         return url;
     } catch (error) {
         console.log(`Error al generar PDF`, error);
