@@ -4,7 +4,7 @@ import { useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateItem from "@/utils/validateItem";
-import { setActiveUser } from "@/redux/actions";
+import { getDiscounts, setActiveUser } from "@/redux/actions";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
@@ -67,10 +67,9 @@ export default function CreateItem() {
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
             const response = await axios.post(`${URL_BASE}/items`, formattedItem);
-            dispatch(getItemDetail(data.id));
-            const userId = Cookies.get("userId")
             if (response.status === 200) {
-                dispatch(setActiveUser(userId));
+                dispatch(setActiveUser(formattedItem.userId));
+                dispatch(getDiscounts());
                 setErrors({});
                 setInput({
                     name: "",
@@ -82,7 +81,7 @@ export default function CreateItem() {
                 setItemCreated("success");
             }
         } catch (error) {
-            console.log("error");
+            console.log(error);
             setItemCreated("failure");
             
         }
