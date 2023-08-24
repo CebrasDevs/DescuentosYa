@@ -37,14 +37,14 @@ router.post("/login", async (req, res) => {
       role: user.role
     }, process.env.JWT_SECRET)
     //seteo COOKIES por HEADER
-    const serialized = serialize('accessTrue', token, {
-      httpOnly: false, //true para que no se visualice la cookie en https
-      secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
-      sameSite: 'strict', //cambiar a none, para seguridad https
-      maxAge: 1000 * 60 * 60 * 24 * 30,
-      path: '/'
-    })
-    res.setHeader('Set-Cookie', serialized)
+    // const serialized = serialize('accessTrue', token, {
+    //   httpOnly: false, //true para que no se visualice la cookie en https
+    //   secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
+    //   sameSite: 'strict', //cambiar a none, para seguridad https
+    //   maxAge: 1000 * 60 * 60 * 24 * 30,
+    //   path: '/'
+    // })
+    // res.setHeader('Set-Cookie', serialized)
 
     res.status(200).json({ message: "Login Successfull", token: token }); // Envía un mensaje de éxito
   } catch (error) {

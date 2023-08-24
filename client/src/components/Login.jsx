@@ -42,10 +42,11 @@ export default function Login() {
         try {
             const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
+                console.log(response.data)
                 Cookies.set('accessTrue', response.data.token, {
                     expires: 30, // 30 días de duración
                     secure: false, // Solo enviar la cookie sobre HTTPS
-                    sameSite: 'none' // Permitir la cookie en solicitudes de diferentes sitios
+                    sameSite: 'strict' // Permitir la cookie en solicitudes de diferentes sitios
                   });
                 dispatch(setActiveUser());
                 setInput({
