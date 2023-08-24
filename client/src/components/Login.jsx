@@ -11,6 +11,8 @@ import { useDispatch } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
 import LoginFailure from "./Modals/Login/LoginFailure";
+import { jwtVerify } from 'jose';
+
 axios.defaults.withCredentials = true;
 
 export default function Login() {
@@ -43,11 +45,13 @@ export default function Login() {
             const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
                 Cookies.set('accessTrue', response.data.token, {expires: 30, secure: true});
+                const accessTrue = Cookies.get('accessTrue');
+                const { userId } = jwtVerify(accessTrue, process.env.JWT_SECRET)
                 setInput({
                     name: "",
                     password: "",
                 });
-                dispatch(setActiveUser());
+                dispatch(setActiveUser(userId));
                 if (detail === "true") {
                     router.push(`/${itemId}`);
                 } else {
