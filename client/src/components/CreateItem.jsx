@@ -67,8 +67,10 @@ export default function CreateItem() {
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
             }
             const response = await axios.post(`${URL_BASE}/items`, formattedItem);
+            dispatch(getItemDetail(data.id));
+            const userId = Cookies.get("userId")
             if (response.status === 200) {
-                dispatch(setActiveUser());
+                dispatch(setActiveUser(userId));
                 setErrors({});
                 setInput({
                     name: "",
