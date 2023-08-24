@@ -58,7 +58,6 @@ export default function ModifiedItem({ data, type , handleSave}) {
             }
             const response = await axios.patch(`${URL_BASE}/items/${data.id}`, formattedItem);
             if (response.status === 200) {
-                window.alert("The item was modified successfully");
                 setErrors({});
                 dispatch(getItemDetail(data.id));
                 dispatch(setActiveUser())
@@ -66,7 +65,6 @@ export default function ModifiedItem({ data, type , handleSave}) {
             }
         } catch (error) {
             console.log(error);
-            window.alert("error");
         }
     };
 
