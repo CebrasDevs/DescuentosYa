@@ -31,7 +31,7 @@ const registerVouchers = async (toEmail, imageUrl, item) => {
         let webSiteName = "Descuentos Ya!";
         await sendMail(toEmail, toEmail, "New voucher", message, webSite, webSiteName);
     } catch (error) {
-        console.log("ERROR: send email for register vouchers");
+        console.log("ERROR: send email for register vouchers: ", error.message);
     }
 }
 
