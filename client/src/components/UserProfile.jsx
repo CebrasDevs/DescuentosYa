@@ -78,57 +78,54 @@ export default function UserProfile() {
                   />
                 </div>
               ) : (
-                <div className="w-full">
-                  <div className=" flex flex-col gap-y-4">
-                    <div className=" flex flex-row justify-center">
-                      <h1 className=" tracking-wide font-semibold text-5xl">
-                        {lastName}, {firstName}{" "}
-                      </h1>
-                    </div>
-                    <div className=" text-center justify-center flex flex-row gap-40 mt-4 ">
-                      <div>
-                        <h1 className=" tracking-wide font-bold text-lg text-center">
-                          Email
-                        </h1>
-                        <h1 className=" tracking-wide font-semibold text-base">
-                          {activeUser.email}
-                        </h1>
-                      </div>
-                      <div>
-                        <h1 className=" tracking-wide font-bold text-lg text-center">
-                          DNI
-                        </h1>
-                        <h1 className=" tracking-wide font-semibold text-base">
-                          {activeUser.dni}
-                        </h1>
-                      </div>
-                    </div>
-                    <div className=" text-center justify-center flex flex-row gap-32 mt-4 ">
-                      <div>
-                        <h1 className=" tracking-wide font-bold text-lg text-center">
-                          Address
-                        </h1>
-                        <h1 className=" tracking-wide font-semibold text-base text-center">
-                          {activeUser.address}
-                        </h1>
-                      </div>
-                      <div>
-                        <h1 className=" tracking-wide font-bold text-lg text-center">
-                          Phone Number
-                        </h1>
-                        <h1 className=" tracking-wide font-semibold text-base">
-                          {activeUser.phoneNumber}
-                        </h1>
-                      </div>
-                    </div>
-                    <div className=" items-center justify-center flex flex-col mb-4 ">
+
+                <div className="w-full drop-shadow-md">
+                  <div className=" flex flex-row justify-center">
+                    <h1 className=" tracking-wide font-semibold text-5xl">
+                      {lastName}, {firstName}{" "}
+                    </h1>
+                  </div>
+                  <div className=" flex flex-row justify-between my-16 mx-20">
+                    <div>
                       <h1 className=" tracking-wide font-bold text-lg text-center">
-                        Last payment
+                        Email
                       </h1>
                       <h1 className=" tracking-wide font-semibold text-base">
-                        {" "}
-                        {activeUser.lastPayment}
+                        {activeUser.email}
                       </h1>
+                    </div>
+                    <div>
+                      <h1 className=" tracking-wide font-bold text-lg text-center">
+                        DNI
+                      </h1>
+                      <h1 className=" tracking-wide font-semibold text-base">
+                        {activeUser.dni}
+                      </h1>
+                    </div>
+                    <div>
+                      <h1 className=" tracking-wide font-bold text-lg text-center">
+                        Address
+                      </h1>
+                      <h1 className=" tracking-wide font-semibold text-base text-center">
+                        {activeUser.address}
+                      </h1>
+                    </div>
+                    <div>
+                      <h1 className=" tracking-wide font-bold text-lg text-center">
+                        Phone Number
+                      </h1>
+                      <h1 className=" tracking-wide font-semibold text-base">
+                        {activeUser.phoneNumber}
+                      </h1>
+                    </div>
+                    <div>
+                    <h1 className=" tracking-wide font-bold text-lg text-center">
+                      Last payment
+                    </h1>
+                    <h1 className=" tracking-wide font-semibold text-base">
+                      {" "}
+                      {activeUser.lastPayment}
+                    </h1>
                     </div>
                   </div>
                 </div>
@@ -151,8 +148,8 @@ export default function UserProfile() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <circle cx="11" cy="11" r="8" className=""></circle>
                   <line
@@ -176,8 +173,9 @@ export default function UserProfile() {
                   return (
                     <div
                       key={index}
-                      className="flex items-center border border-black rounded-lg m-2"
+                      className="flex items-center border border-t-gray-300 mt-4 rounded-lg shadow-xl drop-shadow-lg m-2"
                     >
+                      <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-t from-gray-200 to-transparent"></div>
                       <img
                         className="w-[100px] h-[100px] m-5 rounded-lg"
                         src={voucher.item.imageUrl}
@@ -237,9 +235,10 @@ export default function UserProfile() {
               <h1 className="text-center my-10 font-semibold text-xl">
                 You haven't generated vouchers
               </h1>
+
+              <div id="orders"></div>
             </>
           )}
-          <div id="orders"></div>
         </div>
         {/* PARTE DE LAS COMPRAS DEL USUARIO */}
         <div className=" w-3/4 mt-10 bg-slate-50 rounded-lg shadow-md">
@@ -255,8 +254,8 @@ export default function UserProfile() {
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <circle cx="11" cy="11" r="8" className=""></circle>
                   <line
@@ -275,12 +274,14 @@ export default function UserProfile() {
                   onInput={handleSearchChange}
                 />
               </div>
-              {filtersProfile.shoppings?.map((buys, index) => {
+
+              {activeUser.shoppings?.map((buys, index) => {
                 return (
                   <div
                     key={index}
-                    className="flex flex-col border border-black rounded-lg m-2"
+                    className="flex items-center border border-t-gray-300 mt-4 rounded-lg shadow-xl drop-shadow-lg m-2"
                   >
+                    <div className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-t from-gray-200 to-transparent"></div>
                     {buys.items?.map((item, index) => {
                       return (
                         <div key={index} className="flex items-center">
@@ -289,10 +290,8 @@ export default function UserProfile() {
                             src={item.imageUrl}
                             alt=""
                           />
-                          <h1 className="ml-2">Item: {item.name}</h1>
-                          <h1 className="ml-2">
-                            | Way to Pay: {buys.wayToPay}
-                          </h1>
+
+                          <h1 className="ml-2">Way to Pay: {buys.wayToPay}</h1>
                           <h1 className="ml-2">| State: {buys.state}</h1>
                           <h2 className="ml-2">
                             |{" "}

@@ -20,6 +20,7 @@ export default function Card({ item, value }) {
                 <div className="bottom flex justify-between bg-violet-600 min-h-[120px] rounded-b-2xl">
                     <div className="title text-white flex flex-col ml-2 mt-2 mb-2 justify-between">
                         <h1 className=" drop-shadow-md font-semibold text-lg">{item.name}</h1>
+                        <h2>{item.distance?.text}</h2>
                     </div>
                     <div className="flex flex-col m-2 justify-between">
                         <div>
