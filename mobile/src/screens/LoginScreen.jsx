@@ -37,9 +37,10 @@ export default function LoginScreen({ navigation }) {
 
     if (loading) return <Loading />;
 
-    if (error) return alert("Error: " + error.message);
-
-    return (
+    return (<>
+        {error && (
+            <Text style={styles.errorText}>Error: Invalid credentials. Please check your email and password.</Text>
+        )}
         <View style={styles.container}>
             <Image source={BackgroundImage} style={styles.backgroundImage} />
             <Text style={styles.logo}>DescuentosYa!</Text>
@@ -60,6 +61,7 @@ export default function LoginScreen({ navigation }) {
                 )}
             </Formik>
         </View>
+    </>
     );
 };
 
@@ -99,6 +101,7 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: "red",
-        marginTop: 5,
+        textAlign: "center",
+        marginTop:20
     },
 });
