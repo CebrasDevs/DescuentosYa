@@ -275,7 +275,7 @@ export default function UserProfile() {
                 />
               </div>
 
-              {activeUser.shoppings?.map((buys, index) => {
+              {filtersProfile.shoppings?.map((buys, index) => {
                 return (
                   <div
                     key={index}
