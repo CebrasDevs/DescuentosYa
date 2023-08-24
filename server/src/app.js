@@ -13,7 +13,6 @@ const morgan = require("morgan");
 const paymentsRoutes = require('./routes/paymentRouter')
 // Intanciamos las rutas
 const routes = require("./routes/index.js");
-const {URL_BASE} = process.env
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
@@ -24,7 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 
 // Establecemos cabeceras de acceso CORS
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://descuentos-ya.vercel.app");
+  res.header("Access-Control-Allow-Origin", `${process.env.URL_BASE}`);
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
