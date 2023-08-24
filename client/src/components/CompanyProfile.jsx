@@ -241,8 +241,9 @@ export default function CompanyProfile() {
                               src={item.imageUrl}
                               alt=""
                             />
+                            <h1 className="ml-2">Item: {item.name}</h1>
                             <h1 className="ml-2">
-                              Way to Pay: {sale.wayToPay}
+                              | Way to Pay: {sale.wayToPay}
                             </h1>
                             <h1 className="ml-2">| State: {sale.state}</h1>
                             <h1 className="ml-2">| User: {sale.user.name}</h1>
