@@ -16,7 +16,6 @@ export default function CompanyProfile() {
 
   useEffect(() => {
     dispatch(setFiltersProfile({ property: "All", value: "" }));
-    console.log(activeUser)
   }, [activeUser]);
 
   const handleSearchChange = (e) => {
