@@ -39,12 +39,10 @@ module.exports = async (voucher) => {
         const url = await uploadCloudinary(qrDataUrl, `${code}`, 'png');
         voucher.code = url; //"https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png"
         newVoucher = await createVouchersHelper(voucher);
-        console.log(newVoucher)
         //envio de email
-        await registerVouchers(user.email, newVoucher.code, item);
+        // await registerVouchers(user.email, newVoucher.code, item);
     };
 
-    console.log(newVoucher)
     let { id, userId, itemId, code, expirationDate } = newVoucher;
 
     return {
