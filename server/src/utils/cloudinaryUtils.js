@@ -16,21 +16,21 @@ cloudinary.config({
  * @returns 
  */
 module.exports = (contentPdf, namePdf, format) => {
-    const options = {
-        public_id: namePdf
-    };
+    // const options = {
+    //     public_id: namePdf
+    // };
 
-    if (format === 'war') {
-        options.resource_type = 'raw';
-    } else if (format === 'png') {
-        options.format = 'png'; 
+    // if (format === 'war') {
+    //     options.resource_type = 'raw';
+    // } else if (format === 'png') {
+    //     options.format = 'png'; 
     
-    }else{
-        console.log("Invalid format value (at /utils/coudinaryUtils)");
-    }
+    // }else{
+    //     console.log("Invalid format value (at /utils/coudinaryUtils)");
+    // }
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
-            options,
+            {public_id: namePdf, format: "png"},
             (error, result) => {
                 if (error) {
                     // console.error("Error al subir el PDF:", error);
