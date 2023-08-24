@@ -72,7 +72,7 @@ export default function ModifyCompanyProfile({ companyData, handleSave }) {
             const response = await axios.patch(`${URL_BASE}/companies/${companyData.id}`, formattedCompany);
             if (response.status === 200) {
                 setCompanyModification("success");
-                dispatch(setActiveUser());
+                dispatch(setActiveUser(companyData.id));
                 setErrors({});
                 handleSave();
             }

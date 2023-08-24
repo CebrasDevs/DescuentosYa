@@ -31,6 +31,7 @@ export default function Navbar() {
         Cookies.remove("shoppingCart");
         Cookies.remove("accessTrue");
         dispatch(cleanActiveUser());
+        router.refresh();
         router.push("/");
       }
     } catch (error) {

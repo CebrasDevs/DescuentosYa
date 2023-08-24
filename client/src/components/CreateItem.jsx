@@ -60,7 +60,7 @@ export default function CreateItem() {
                 cloudinaryFormData.append("upload_preset", "DescuentosYa");
                 const cloudinaryResponse = await axios.post(
                     "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
-                    cloudinaryFormData
+                    cloudinaryFormData, {withCredentials: false}
                 );
 
                 formattedItem.imageUrl =

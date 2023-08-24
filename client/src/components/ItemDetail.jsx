@@ -102,7 +102,7 @@ export default function ItemDetail({ data }) {
         });
         if (response.status === 200) {
           dispatch(getItemDetail(data.id));
-          dispatch(setActiveUser());
+          dispatch(setActiveUser(activeUser.id));
           setItemStatus("disabled");
         }
       } else {
@@ -112,7 +112,7 @@ export default function ItemDetail({ data }) {
         });
         if (response.status === 200) {
           dispatch(getItemDetail(data.id));
-          dispatch(setActiveUser());
+          dispatch(setActiveUser(activeUser.id));
           setItemStatus("enabled");
         }
       }

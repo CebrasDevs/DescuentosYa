@@ -4,11 +4,12 @@ import { useState } from "react";
 import { formatItem } from "@/utils/formatUtils";
 import { useDispatch, useSelector } from "react-redux";
 import validateModifiedItem from "@/utils/validateModifiedItem";
-import { getItemDetail, setActiveUser } from "@/redux/actions";
+import { getDiscounts, getItemDetail, setActiveUser } from "@/redux/actions";
 import { TiArrowBack } from "react-icons/ti";
 
 import axios from "axios";
 import { URL_BASE } from "@/utils/const";
+import Cookies from "js-cookie";
 axios.defaults.withCredentials = true;
 
 export default function ModifiedItem({ data, type , handleSave}) {
@@ -60,7 +61,9 @@ export default function ModifiedItem({ data, type , handleSave}) {
             if (response.status === 200) {
                 setErrors({});
                 dispatch(getItemDetail(data.id));
-                dispatch(setActiveUser())
+                const userId = Cookies.get("userId")
+                dispatch(setActiveUser(userId));
+                dispatch(getDiscounts());
                 handleSave();
             }
         } catch (error) {

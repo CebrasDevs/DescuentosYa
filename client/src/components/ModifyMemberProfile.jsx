@@ -69,7 +69,7 @@ export default function ModifyMemberProfile({ memberData, handleSave }) {
                 cloudinaryFormData.append("upload_preset", "DescuentosYa");
                 const cloudinaryResponse = await axios.post(
                     "https://api.cloudinary.com/v1_1/dwndzlcxp/image/upload",
-                    cloudinaryFormData
+                    cloudinaryFormData , {withCredentials: false}
                 );
                 formattedMember.imageUrl =
                     "https://res.cloudinary.com/dwndzlcxp/image/upload/" + cloudinaryResponse.data.public_id;
@@ -77,7 +77,7 @@ export default function ModifyMemberProfile({ memberData, handleSave }) {
 
             const response = await axios.patch(`${URL_BASE}/members/${memberData.id}`, formattedMember);
             if (response.status === 200) {
-                dispatch(setActiveUser());
+                dispatch(setActiveUser(memberData.id));
                 setUserModify("success");
                 setErrors({});
                 handleSave();

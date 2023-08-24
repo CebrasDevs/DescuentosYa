@@ -1,5 +1,5 @@
 "use client";
-import { getUsers, getUsersByName } from "@/redux/actions";
+import { getCompanies, getUsers, getUsersByName } from "@/redux/actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -33,6 +33,7 @@ export default function Dashboard() {
       if (response.status === 200) {
         setUserStatus("desabling");
         dispatch(getUsers()); // actualizo el estado global
+        dispatch(getCompanies());
       }
     } catch (error) {
       console.log(error);
@@ -47,6 +48,7 @@ export default function Dashboard() {
       if (response.status === 200) {
         setUserStatus("enabling");
         dispatch(getUsers()); // actualizo el estado global de users
+        dispatch(getCompanies());
       }
     } catch (error) {
       console.log(error);
