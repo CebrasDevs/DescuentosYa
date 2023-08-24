@@ -16,7 +16,6 @@ export default function CompanyProfile() {
 
   useEffect(() => {
     dispatch(setFiltersProfile({ property: "All", value: "" }));
-    console.log(activeUser)
   }, [activeUser]);
 
   const handleSearchChange = (e) => {
@@ -242,14 +241,18 @@ export default function CompanyProfile() {
                               src={item.imageUrl}
                               alt=""
                             />
+                            <h1 className="ml-2">Item: {item.name}</h1>
                             <h1 className="ml-2">
-                              Way to Pay: {sale.wayToPay}
+                              | Way to Pay: {sale.wayToPay}
                             </h1>
                             <h1 className="ml-2">| State: {sale.state}</h1>
                             <h1 className="ml-2">| User: {sale.user.name}</h1>
                             <h2 className="ml-2">
                               |{" "}
-                              <Link className="hover:text-blue-500" href={"#"}>
+                              <Link
+                                className="hover:text-blue-500"
+                                href={`/${item.id}`}
+                              >
                                 Detail
                               </Link>
                             </h2>
@@ -266,9 +269,9 @@ export default function CompanyProfile() {
               <h1 className="text-center my-10 font-semibold text-xl">
                 You haven't made any sales yet
               </h1>
-              <div id="vouchers"></div>
             </>
           )}
+          <div id="vouchers"></div>
         </div>
 
         <div className=" w-3/4 mt-10 bg-slate-50  rounded-lg shadow-md">

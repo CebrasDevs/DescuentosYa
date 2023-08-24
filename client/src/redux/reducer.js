@@ -112,7 +112,7 @@ const rootReducer = (state = initialState, action) => {
             },
           };
         case "sales":
-          console.log(state.activeUser)
+          console.log(state.activeUser);
           filteredData = state.activeUser[property].filter((element) =>
             element.user.name.toLowerCase().includes(value.toLowerCase())
           );
@@ -124,8 +124,11 @@ const rootReducer = (state = initialState, action) => {
             },
           };
         case "shoppings":
+          console.log(state.activeUser.shoppings);
           filteredData = state.activeUser[property].filter((element) =>
-            element.name.toLowerCase().includes(value.toLowerCase())
+            element.items.some((item) =>
+              item.name.toLowerCase().includes(value.toLowerCase())
+            )
           );
           return {
             ...state,
