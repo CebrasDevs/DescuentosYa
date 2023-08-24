@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { useAuth } from "../context/AuthContext";
 import Loading from "../components/Loading";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function ProfileScreen({ navigation }) {
   const { getProfile } = useAuth();
@@ -23,10 +24,23 @@ export default function ProfileScreen({ navigation }) {
   useEffect(() => {
     loadUser();
   }, []);
-  
-  if (loading) return <Loading />
+
+  if (loading) { return <Loading /> } else {
+    console.log(user)
+  }
+  const handleEdit = () => {
+    navigation.navigate("ProfileEditScreen")
+  }
   return (
     <>
+      <View style={styles.buttonContainer}>
+        <Icon
+          name="edit"
+          size={24}
+          color="blue"
+          onPress={handleEdit}
+        />
+      </View >
       <View style={styles.container}>
         <View style={styles.profileContainer}>
           <Image source={{ uri: user.imageUrl }} style={styles.profileImage} />
@@ -44,6 +58,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f7f7f7",
     padding: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    marginTop: 10,
+    marginRight: 50
   },
   goBackText: {
     fontSize: 16,
