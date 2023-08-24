@@ -29,6 +29,7 @@ router.post("/login", async (req, res) => {
     if (user.enabled !== true) {
       return res.status(401).json({ error: "User disabled by an admin" });
     }
+    console.log("LOGIN", user.id)
 
     //uso de JWT
     const token = jwt.sign({
@@ -53,17 +54,17 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/logout", verifyToken, async (req, res) => {
-  const {accessTrue} = req.cookies;
+  // const {accessTrue} = req.cookies;
   try {
-    jwt.verify(accessTrue, process.env.JWT_SECRET);
-    const serialized = serialize('accessTrue', null, {
-      httpOnly: false, //true para que no se visualice la cookie en https
-      secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
-      sameSite: 'strict', //cambiar a none, para seguridad https
-      maxAge: 0, // 0 para que desaparezca la cookie
-      path: '/'
-    })
-    res.setHeader('Set-Cookie', serialized)
+    // jwt.verify(accessTrue, process.env.JWT_SECRET);
+    // const serialized = serialize('accessTrue', null, {
+    //   httpOnly: false, //true para que no se visualice la cookie en https
+    //   secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
+    //   sameSite: 'strict', //cambiar a none, para seguridad https
+    //   maxAge: 0, // 0 para que desaparezca la cookie
+    //   path: '/'
+    // })
+    // res.setHeader('Set-Cookie', serialized)
 
     res.status(200).json({ message: "Logout successful!" });
   } catch (error) {
