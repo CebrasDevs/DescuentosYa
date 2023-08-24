@@ -4,7 +4,7 @@ const publicRoutes = ["/login"];
 
 //configuracion global de axios, para no setear todas las peticiones con cookies
 export const axiosInstance = axios.create({
-  baseURL: `http://192.168.0.213:3001`,
+  baseURL: `http://192.168.100.4:3001`,
   timeout: 50000, // Define un tiempo de espera en milisegundos
   headers: {
     "Content-Type": "application/json",
