@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { axiosInstance } from "../utils/axiosInstance";
+import inputsFormatted from "../utils/inputsformatted";
 
 export default function useUpdateUser() {
     const [loading, setLoading] = useState(false);
@@ -8,11 +9,12 @@ export default function useUpdateUser() {
     /**
      * Recibe el id que va a modificar el admin con la nueva informacion
      * @param {Number} userId 
-     * @param {Object} userData
+     * @param {Object} inputsData
      */
-    const updateUser = async (userId, userData) => {
+    const updateUser = async (userId, inputsData) => {
         try {
             setLoading(true);
+            const userData = inputsFormatted(inputsData);
             const { data } = await axiosInstance.patch(`/users/${userId}`, userData);
             return data
         } catch (error) {

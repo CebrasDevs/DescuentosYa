@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
 
     /**
      * obtenemos los datos del usuario logueado
+     * @return Object user
      */
     async function getProfile() {
         try {
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
                 return data;
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.message);
         } finally {
             setLoading(false);
         }
@@ -44,7 +45,8 @@ export const AuthProvider = ({ children }) => {
         try {
             setLoading(true);
             const { data } = await axiosInstance.post('/login', userData);
-            console.log(JSON.stringify(data," ",2));
+            //este console.log queda de ejemplo para ver en la terminar de vsc
+            console.log(JSON.stringify(data, " ", 2));
             const token = data.token;
             if (token) {
                 await storeToken(token);

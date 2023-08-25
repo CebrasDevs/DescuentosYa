@@ -13,7 +13,6 @@ export default function ProfileScreen({ navigation }) {
     try {
       const data = await getProfile();
       setUser(data);
-      console.log(JSON.stringify(data, " ", 2))
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -25,9 +24,8 @@ export default function ProfileScreen({ navigation }) {
     loadUser();
   }, []);
 
-  if (loading) { return <Loading /> } else {
-    console.log(user)
-  }
+  if (loading) return <Loading />
+  
   const handleEdit = () => {
     navigation.navigate("ProfileEditScreen")
   }

@@ -11,7 +11,7 @@ import useUpdateUser from "../hooks/useUpdateUser";
 export default function UserDetailScreen({ route, navigation }) {
     const { userId } = route.params;
 
-    let { user, loading, error } = useFindUser(userId);
+    let { user, loading } = useFindUser(userId);
 
     const { updateUser, loading: loadingUpdate } = useUpdateUser()
 
@@ -56,7 +56,7 @@ export default function UserDetailScreen({ route, navigation }) {
                     onPress: async () => {
                         user = await updateUser(user.id, { enabled: true });
                         Alert.alert("Success", "The user has been successfully disabled.");
-                        navigation.navigate("HomeScreen")
+                        navigation.navigate("UserListScreen")
                     }
                 }
             ]
@@ -77,7 +77,7 @@ export default function UserDetailScreen({ route, navigation }) {
                     onPress: async () => {
                         user = await updateUser(user.id, { enabled: false });
                         Alert.alert("Success", "The user has been successfully disabled.");
-                        navigation.navigate("HomeScreen")
+                        navigation.navigate("UserListScreen")
                     }
                 }
             ]
