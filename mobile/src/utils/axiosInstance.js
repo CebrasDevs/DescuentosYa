@@ -1,10 +1,11 @@
 import axios from "axios";
 import { getToken } from "./authStorage";
+import { API_URL } from "@env"
 const publicRoutes = ["/login"];
 
 //configuracion global de axios, para no setear todas las peticiones con cookies
 export const axiosInstance = axios.create({
-  baseURL: `https://descuentosya-production.up.railway.app`,
+  baseURL: API_URL,
   timeout: 50000, // Define un tiempo de espera en milisegundos
   headers: {
     "Content-Type": "application/json",
