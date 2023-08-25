@@ -51,6 +51,7 @@ export const AuthProvider = ({ children }) => {
             if (token) {
                 await storeToken(token);
                 setIsAuthenticated(true);
+                setError(null)
                 return true;
             }
             return false;
