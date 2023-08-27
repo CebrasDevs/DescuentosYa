@@ -3,8 +3,8 @@ const { getProfileHandler } = require("../handlers");
 const router = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
-router.get("/", getProfileHandler);
-router.get("/:id", getProfileHandler);
+router.get("/", verifyToken, getProfileHandler);
+router.get("/:id", verifyToken, getProfileHandler);
 
 
 

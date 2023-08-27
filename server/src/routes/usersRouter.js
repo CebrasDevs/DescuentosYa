@@ -10,8 +10,8 @@ const router = Router();
 const {verifyToken} = require("../utils/authMiddleware");
 
 router.post("/", createUsersHandler);
-router.patch("/:id", updateUsersHandler);
-router.get("/", getUsersHandler);
-router.get("/:id/myVouchers", getVouchersHandler);
+router.patch("/:id", verifyToken, updateUsersHandler);
+router.get("/", verifyToken, getUsersHandler);
+router.get("/:id/myVouchers", verifyToken, getVouchersHandler);
 
 module.exports = router;

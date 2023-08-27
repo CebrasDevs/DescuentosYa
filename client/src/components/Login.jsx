@@ -11,6 +11,9 @@ import { useDispatch } from "react-redux";
 import { useSearchParams, useRouter } from "next/navigation";
 import { setActiveUser } from "@/redux/actions";
 import LoginFailure from "./Modals/Login/LoginFailure";
+import { jwtVerify } from 'jose';
+import { verify } from 'jsonwebtoken';
+
 axios.defaults.withCredentials = true;
 
 export default function Login() {
@@ -42,17 +45,11 @@ export default function Login() {
         try {
             const response = await axios.post(`${URL_BASE}/login`, input);
             if (response.status === 200) {
-                console.log(response.data)
-                Cookies.set('accessTrue', response.data.token, {
-                    expires: 30, // 30 días de duración
-                    secure: false, // Solo enviar la cookie sobre HTTPS
-                    sameSite: 'strict' // Permitir la cookie en solicitudes de diferentes sitios
-                  });
-                dispatch(setActiveUser());
                 setInput({
                     name: "",
                     password: "",
                 });
+                dispatch(setActiveUser());
                 if (detail === "true") {
                     router.push(`/${itemId}`);
                 } else {

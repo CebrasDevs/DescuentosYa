@@ -16,7 +16,6 @@ export default function ProfileEditScreen({ navigation }) {
     try {
       const data = await getProfile();
       setUser(data);
-      console.log(JSON.stringify(data, " ", 2))
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -29,15 +28,14 @@ export default function ProfileEditScreen({ navigation }) {
   }, []);
 
   const initialValue = {
-    email: user.email || "",
-    password: "",
-    name: user.name || "",
-    phoneNumber: user.phoneNumber || ""
+    email: user.email || null,
+    password: null,
+    name: user.name || null,
+    phoneNumber: user.phoneNumber || null
   };
 
-  if (loading) { return <Loading /> } else {
-    console.log(user)
-  }
+  if (loading) return <Loading />
+  
   const handleUpdate = async (values) => {
     await updateUser(user.id, values);
     Alert.alert("Success", "The user has been successfully updated.")

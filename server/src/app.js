@@ -13,7 +13,6 @@ const morgan = require("morgan");
 const paymentsRoutes = require('./routes/paymentRouter')
 // Intanciamos las rutas
 const routes = require("./routes/index.js");
-const {URL_BASE} = process.env
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));

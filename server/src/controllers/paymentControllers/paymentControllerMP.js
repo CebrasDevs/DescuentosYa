@@ -21,6 +21,7 @@ const createOrder = async (req, res) => {
         failure: URL_DEPLOY_FRONTEND,
         pending: URL_DEPLOY_FRONTEND
       },
+
       notification_url: `${URL_DEPLOY_BACKEND}/payment/webhook/${user.id}`,
       auto_return: "approved",
     };

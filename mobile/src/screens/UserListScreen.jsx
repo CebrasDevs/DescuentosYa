@@ -14,7 +14,7 @@ export default function UsersScreen({ navigation }) {
     const companyUsers = users.filter(user => user.role === "COMPANY");
     const memberUsers = users.filter(user => user.role === "MEMBER");
     
-    if (loading) {return <Loading />}else{console.log(JSON.stringify(companyUsers," ",2))}
+    if (loading) return <Loading />
 
     return (
         <View style={styles.container}>

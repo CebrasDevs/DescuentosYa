@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
+import React ,{ useState } from "react";
 import { axiosInstance } from "../utils/axiosInstance";
+import { useFocusEffect } from "@react-navigation/native";
 
+/**
+ * Este hooks se encarga de buscar a todos los usuarios
+ */
 export default function useFetchUsers() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-
     async function fetchUsers() {
-        //podemos devolver funcion para refrescar pagina
         try {
             const { data } = await axiosInstance('/users');
             setUsers(data);
@@ -22,10 +21,15 @@ export default function useFetchUsers() {
         };
     };
 
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchUsers();
+        }, [])
+    );
+
     return {
         users,
         loading,
-        error,
-        fetchUsers
+        error
     };
 }
