@@ -1,3 +1,13 @@
+// Crea un objeto de formateo de fecha y hora para la zona horaria de Argentina
+const formatterDate = new Intl.DateTimeFormat('es-AR', {
+    timeZone: 'America/Argentina/Buenos_Aires',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    // hour: 'numeric',
+    // minute: 'numeric',
+    // second: 'numeric'
+});
 
 function structureMember(user) {
     const {
@@ -91,7 +101,7 @@ function structureMember(user) {
         address,
         phoneNumber,
         enabled,
-        lastPayment: lastPayment?.toLocaleString(),
+        lastPayment: lastPayment ? formatterDate.format(lastPayment) : null,
         imageUrl,
         vouchers: structuredVouchers,
         shoppings: structuredShoppings,
@@ -166,7 +176,7 @@ function structureVouchers(vouchers) {
             id,
             code,
             enabled,
-            expirationDate: expirationDate.toLocaleString(),
+            expirationDate: formatterDate.format(expirationDate),
             user: {
                 id: user.id,
                 name: user.name
