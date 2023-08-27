@@ -23,7 +23,7 @@ module.exports = async (voucher) => {
         // // Genera los datos de la imagen en formato base64
         const qrDataUrl = await qr.toDataURL(code, { margin: 1 });
         const url = await uploadCloudinary(qrDataUrl, `${code}`, 'png');
-        voucher.code = "https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png"
+        voucher.code = url; //"https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png"
         newVoucher = await createVouchersHelper(voucher);
         // envio de email
         await registerVouchers(user.email, newVoucher.code, item);
@@ -36,7 +36,7 @@ module.exports = async (voucher) => {
         let code = faker.random.alphaNumeric(50);
         const qrDataUrl = await qr.toDataURL(code, { margin: 1 });
         const url = await uploadCloudinary(qrDataUrl, `${code}`, 'png');
-        voucher.code = "https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png"
+        voucher.code = url; //"https://res.cloudinary.com/dwndzlcxp/image/upload/v1692830635/ubgb31uo59a6by0va4o8.png"
         newVoucher = await createVouchersHelper(voucher);
         //envio de email
         await registerVouchers(user.email, newVoucher.code, item);
