@@ -3,7 +3,8 @@ const qr = require("qrcode");
 const uploadCloudinary = require("../../utils/cloudinaryUtils");
 const faker = require('faker');
 const { registerVouchers } = require('../../utils/emailUtils');
-
+const moment = require("moment-timezone");
+const argTime = moment.tz("America/Argentina/Buenos_Aires");
 
 module.exports = async (voucher) => {
     if (
@@ -28,7 +29,7 @@ module.exports = async (voucher) => {
         // envio de email
         await registerVouchers(user.email, newVoucher.code, item);
     } 
-    else if (previousVouchers[previousVouchers.length - 1].expirationDate > new Date() &&
+    else if (moment.tz(previousVouchers[previousVouchers.length - 1].expirationDate,"America/Argentina/Buenos_Aires").isAfter(argTime) &&
         previousVouchers[previousVouchers.length - 1].enabled) {
 
         throw new Error("voucher already exists");

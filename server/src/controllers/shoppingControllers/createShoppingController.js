@@ -22,8 +22,6 @@ module.exports = async (data) => {
             companyName: item.user.name
         }
     });
-    console.log("shopping controller");
-    console.log(itemsWithCompanyName);
     const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithCompanyName, totalPrice, wayToPay, state, shopper.email);
     const shopping = {
         userId,
