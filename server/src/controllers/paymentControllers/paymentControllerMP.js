@@ -1,3 +1,5 @@
+require("dotenv").config();
+const { URL_DEPLOY_BACKEND, URL_DEPLOY_FRONTEND } = process.env;
 const mercadopago = require("mercadopago");
 const createShoppingController = require("../shoppingControllers/createShoppingController");
 
@@ -15,11 +17,11 @@ const createOrder = async (req, res) => {
       payer: user,
       //indica hacia donde se retornan las respuestas
       back_urls: {
-        success: "https://descuentos-ya.vercel.app",
-        failure: "https://descuentos-ya.vercel.app",
-        pending: "https://descuentos-ya.vercel.app"
+        success: URL_DEPLOY_FRONTEND,
+        failure: URL_DEPLOY_FRONTEND,
+        pending: URL_DEPLOY_FRONTEND
       },
-      notification_url: `https://descuentosya-back.onrender.com/payment/webhook/${user.id}`,
+      notification_url: `${URL_DEPLOY_BACKEND}/payment/webhook/${user.id}`,
       auto_return: "approved",
     };
     const response = await mercadopago.preferences.create(preference);
@@ -41,34 +43,34 @@ const receiveWebhook = async (req, res) => {
       data = await mercadopago.payment.findById(payment['data.id']);
       // console.log(payment) // { 'data.id': '1314281800', type: 'payment' } llega el ID del pago y el type.
 
-    const {
-      payment_method,
-      status,
-      transaction_amount,
-      additional_info
-    } = data.response;
+      const {
+        payment_method,
+        status,
+        transaction_amount,
+        additional_info
+      } = data.response;
 
-    let formattedStatus, wayToPay;
+      let formattedStatus, wayToPay;
 
-    if(status === 'approved') {
-      formattedStatus = 'SUCCESS';
-    };
+      if (status === 'approved') {
+        formattedStatus = 'SUCCESS';
+      };
 
-    if(payment_method.type === 'account_money') {
-      wayToPay = 'CASH';
-    };
-    
-    const formattedObject = {
-      userId: id,
-      wayToPay,
-      state: formattedStatus,
-      totalPrice: transaction_amount,
-      items: additional_info.items
-    };
+      if (payment_method.type === 'account_money') {
+        wayToPay = 'CASH';
+      };
 
-    createShoppingController(formattedObject)
-    return res.redirect(204);
-  }
+      const formattedObject = {
+        userId: id,
+        wayToPay,
+        state: formattedStatus,
+        totalPrice: transaction_amount,
+        items: additional_info.items
+      };
+
+      createShoppingController(formattedObject)
+      return res.redirect(204);
+    }
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
