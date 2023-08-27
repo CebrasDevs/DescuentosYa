@@ -2,6 +2,8 @@ const { createShoppingHelper, createItemShoppingHelper, getItemsHelper, getUsers
 const { registerShoppingPDF } = require('../../utils/pdfUtils');
 
 module.exports = async (data) => {
+    console.log("shopping controller");
+    console.log(data);
     const {
         userId,
         wayToPay,
@@ -10,7 +12,6 @@ module.exports = async (data) => {
         items
     } = data;
     const shopper = (await getUsersHelper({ id: +userId }))[0];
-    console.log(shopper)
     //obtenemos todos los ID de los items comprados
     const itemsIds = items.map(({ id }) => +id);
     //obtenemos toda la info de cada item comprado
