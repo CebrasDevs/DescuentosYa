@@ -69,7 +69,7 @@ const receiveWebhook = async (req, res) => {
       };
 
       createShoppingController(formattedObject)
-      return res.redirect(204);
+      return res.redirect(204).end();
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
