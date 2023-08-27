@@ -69,7 +69,7 @@ const createPdf = async (htmlContent) => {
         await generatePdf.close();
         // instanciamos el nombre del pdf
 
-        const filename = `${argTime.getDate()}-${argTime.getMonth()}-${argTime.getFullYear()}T${argTime.getHours()}-HS${argTime.getMinutes()}-MM${argTime.getSeconds()}-SS`;
+        const filename = `${argTime.date()}-${argTime.month()+1}-${argTime.year()}T${argTime.hour()}-HS${argTime.minutes()}-MM${argTime.seconds()}-SS`;
 
         // por ultimo se genera el archivo en la ruta mencionada
         // fs.writeFileSync(`PDF/${filename}.pdf`, resultPdf, 'binary');
