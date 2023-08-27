@@ -2,6 +2,8 @@ const { createShoppingHelper, createItemShoppingHelper, getItemsHelper, getUsers
 const { registerShoppingPDF } = require('../../utils/pdfUtils');
 
 module.exports = async (data) => {
+    console.log("shopping controller");
+    console.log(data);
     const {
         userId,
         wayToPay,
