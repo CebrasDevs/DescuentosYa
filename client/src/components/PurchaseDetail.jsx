@@ -194,7 +194,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                 2
               )}
             </h1>
-            <Link href=`${itemBought?.pdfUrl}.pdf`>
+            <Link href={`${itemBought?.pdfUrl}.pdf`}>
               <button
                 type="button"
               >
