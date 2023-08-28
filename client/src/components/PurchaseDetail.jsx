@@ -201,7 +201,6 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                 Get ticket
               </button>
             </Link>
-            )}
             <img className="w-[300px]" src={itemBought?.imageUrl} />
             {!edit && (
               <button
