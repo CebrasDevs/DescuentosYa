@@ -180,6 +180,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
   reviewForItemBought = activeUser?.Review?.find(
     (review) => review.itemId === itemBought.id
   );
+  console.log(itemBought);
   return (
     <div className="flex flex-col justify-center items-center">
       {isLoading ? (
