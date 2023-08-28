@@ -5,7 +5,7 @@ const { serialize } = require("cookie");
 const bcrypt = require("bcryptjs");
 const { PrismaClient } = require("@prisma/client");
 require("dotenv").config();
-const {verifyToken} = require("../utils/authMiddleware");
+const { verifyToken } = require("../utils/authMiddleware");
 
 const prisma = new PrismaClient();
 
@@ -21,11 +21,11 @@ router.post("/login", async (req, res) => {
       return res.status(404).json({ error: "User doesn't exist" });
     }
     // comparacion de contraseña con hash
-    const passwordMatch = await bcrypt.compare(password,user.password);
+    const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
       return res.status(401).json({ error: "Incorrect password" });
     }
-    
+
     if (user.enabled !== true) {
       return res.status(401).json({ error: "User disabled by an admin" });
     }
@@ -39,35 +39,35 @@ router.post("/login", async (req, res) => {
     }, process.env.JWT_SECRET)
     //seteo COOKIES por HEADER
 
-    const serialized = serialize('accessTrue', token, {
-      httpOnly: false, //true para que no se visualice la cookie en https
-      secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
-      sameSite: 'strict', //cambiar a none, para seguridad https
-      maxAge: 1000 * 60 * 60 * 24 * 30,
-      path: '/'
-    })
-    res.setHeader('Set-Cookie', serialized)
+    // const serialized = serialize('accessTrue', token, {
+    //   httpOnly: false, //true para que no se visualice la cookie en https
+    //   secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
+    //   sameSite: 'strict', //cambiar a none, para seguridad https
+    //   maxAge: 1000 * 60 * 60 * 24 * 30,
+    //   path: '/'
+    // })
+    // res.setHeader('Set-Cookie', serialized)
 
 
-    res.status(200).json({ message: "Login Successfull", token: token}); // Envía un mensaje de éxito
+    res.status(200).json({ message: "Login Successfull", token: token, userId: user.id }); // Envía un mensaje de éxito
   } catch (error) {
     res.status(500).json({ error: "Error authenticating the user" });
   }
 });
 
 router.post("/logout", verifyToken, async (req, res) => {
-  const {accessTrue} = req.cookies;
+  // const { accessTrue } = req.cookies;
   try {
 
-    jwt.verify(accessTrue, process.env.JWT_SECRET);
-    const serialized = serialize('accessTrue', null, {
-      httpOnly: false, //true para que no se visualice la cookie en https
-      secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
-      sameSite: 'strict', //cambiar a none, para seguridad https
-      maxAge: 0, // 0 para que desaparezca la cookie
-      path: '/'
-    })
-    res.setHeader('Set-Cookie', serialized)
+    // jwt.verify(accessTrue, process.env.JWT_SECRET);
+    // const serialized = serialize('accessTrue', null, {
+    //   httpOnly: false, //true para que no se visualice la cookie en https
+    //   secure: false, //seguridad https, se habilita si la V.E es igual a 'production'
+    //   sameSite: 'strict', //cambiar a none, para seguridad https
+    //   maxAge: 0, // 0 para que desaparezca la cookie
+    //   path: '/'
+    // })
+    // res.setHeader('Set-Cookie', serialized)
 
 
     res.status(200).json({ message: "Logout successful!" });
