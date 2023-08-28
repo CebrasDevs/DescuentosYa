@@ -8,6 +8,7 @@ import { setActiveUser } from "@/redux/actions";
 import { FaStar } from "react-icons/fa";
 import { HiMiniBackspace } from "react-icons/hi2";
 import Loading from "@/components/loading";
+import Link from 'next/link';
 axios.defaults.withCredentials = true;
 
 export default function PurchaseDetail({ id, activeUser, user }) {
@@ -193,6 +194,14 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                 2
               )}
             </h1>
+            <Link href=`${itemBought?.pdfUrl}.pdf`>
+              <button
+                type="button"
+              >
+                Get ticket
+              </button>
+            </Link>
+            )}
             <img className="w-[300px]" src={itemBought?.imageUrl} />
             {!edit && (
               <button
