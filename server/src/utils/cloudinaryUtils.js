@@ -16,15 +16,19 @@ cloudinary.config({
  * @returns 
  */
 module.exports = (contentPdf, namePdf, format) => {
+    const options = {
+        public_id: namePdf
+    };
+
+    if (format === 'war') {
+        options.resource_type = 'raw';
+    } else if (format === 'png') {
+        options.format = 'png'; 
+    
+    }else{
+        console.log("Invalid format value (at /utils/coudinaryUtils)");
+    }
     return new Promise((resolve, reject) => {
-        const options = { public_id: namePdf };
-        if (format === 'raw') {
-            options.resource_type = 'raw';
-        } else if (format === 'png') {
-            options.format = 'png';
-        } else {
-            throw new Error("Invalid format value (at /utils/coudinaryUtils)");
-        }
         cloudinary.uploader.upload_stream(
             options,
             (error, result) => {

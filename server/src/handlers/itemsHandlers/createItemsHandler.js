@@ -9,12 +9,11 @@ module.exports = async (req, res) => {
             name, 
             price,
             imageUrl,
-            discount,
-            userId
+            discount
         } = req.body;
 
         let dataItem = {
-            userId, 
+            userId: req.userId, 
             categoryId, 
             description, 
             name, 

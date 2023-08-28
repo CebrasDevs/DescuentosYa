@@ -10,6 +10,7 @@ module.exports = async (data) => {
         items
     } = data;
     const shopper = (await getUsersHelper({ id: +userId }))[0];
+    console.log(shopper)
     //obtenemos todos los ID de los items comprados
     const itemsIds = items.map(({ id }) => +id);
     //obtenemos toda la info de cada item comprado
@@ -22,7 +23,7 @@ module.exports = async (data) => {
             companyName: item.user.name
         }
     });
-    const pdfUrl = await registerShoppingPDF(shopper.name, itemsWithCompanyName, totalPrice, wayToPay, state, shopper.email);
+    const pdfUrl = "await registerShoppingPDF(shopper.name, itemsWithCompanyName, totalPrice, wayToPay, state, shopper.email)";
     const shopping = {
         userId,
         pdfUrl,
