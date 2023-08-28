@@ -194,14 +194,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
               {(itemBought?.price * (1 - itemBought?.discount / 100)).toFixed(
                 2
               )}
-            </h1>
-            <Link href={`${itemBought?.pdfUrl}.pdf`}>
-              <button
-                type="button"
-              >
-                Get ticket
-              </button>
-            </Link>
+            </h1>  
             <img className="w-[300px]" src={itemBought?.imageUrl} />
             {!edit && (
               <button
