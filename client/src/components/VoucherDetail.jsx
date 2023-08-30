@@ -12,10 +12,10 @@ axios.defaults.withCredentials = true;
 
 export default function VoucherDetail({ id, user }) {
   const dispatch = useDispatch();
-  const activeUser = useSelector((state)=> state.activeUser)
+  const activeUser = useSelector((state) => state.activeUser);
 
   const [isLoading, setIsLoading] = useState(true);
-  
+
   let voucherBought, reviewForVoucherBought;
   useEffect(() => {
     setIsLoading(true);
@@ -28,10 +28,7 @@ export default function VoucherDetail({ id, user }) {
       );
       setIsLoading(false);
     }
-  
   }, [activeUser, id]);
-  
-
 
   const [rating, setRating] = useState(null); //manejo el color de las estrellasenabled && reviewForVoucherBought?.
   const [edit, setEdit] = useState();
@@ -194,59 +191,99 @@ export default function VoucherDetail({ id, user }) {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 mt-10">
-          <div className="flex flex-col items-center ">
-            <h1>Expiration Date: {voucherBought?.expirationDate} </h1>
-            {/* <h1>Code: {voucherBought?.code} </h1> */}
-            <h1>Seller company: {voucherBought?.company.name}</h1>
-            <img src={voucherBought?.code} alt="qrCode" />
-            <img className="w-[300px]" src={voucherBought?.item.imageUrl} />
-            { !edit && (<button
-              onClick={() => {
-                setEdit(true);
-              }}
-            >
-              Edit your review
-            </button>)}
+        <div className="flex flex-col w-4/5 m-5 drop-shadow-xl">
+          <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
+            <div className=" w-1/2 h-full">
+              <img
+                className="w-[650px] h-[500px] object-cover rounded-2xl mt-6 mb-6 ml-10 border-2 border-gray-300"
+                src={voucherBought?.item.imageUrl}
+              ></img>
+            </div>
+            <div className=" w-1/2 p-6 flex-col flex">
+              <div className=" py-10 ">
+                <h1 className=" font-bold text-5xl mr-44">
+                  {" "}
+                  {voucherBought.item.name}{" "}
+                </h1>
+              </div>
+              <div className=" flex flex-row items-center gap-16">
+                <div className=" flex flex-col gap-y-10">
+                  <h1 className=" font-semibold text-xl">
+                    Expiration Date: {voucherBought?.expirationDate}{" "}
+                  </h1>
+
+                  <h1 className=" font-semibold text-xl">
+                    Seller company: {voucherBought?.company.name}
+                  </h1>
+                </div>
+                <div>
+                  <img
+                    className="w-[250px] h-100px] "
+                    src={voucherBought?.code}
+                    alt="qrCode"
+                  />
+                </div>
+              </div>
+              <div className=" py-10 ">
+                {!edit && (
+                  <button
+                    className="cursor-pointer py-2 px-6 font-bold rounded text-white bg-violet-500 hover:bg-violet-700"
+                    onClick={() => {
+                      setEdit(true);
+                    }}
+                  >
+                    Edit your review
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
           {!edit ? (
             <div>
               {reviewForVoucherBought?.enabled && (
-                <div className="flex flex-col items-center bg-slate-50 rounded-lg shadow-md m-5 p-2 mt-10">
-                  <h1>Your review</h1>
-                  <div className="flex">
+                <div className="flex flex-col items-center bg-slate-50 rounded-2xl shadow-xl">
+                  <h1 className=" font-semibold text-3xl mb-8 mt-8 ">Your review</h1>
+                  <h1 className=" font-medium text-xl mb-4">
+                    {reviewForVoucherBought?.comment}
+                  </h1>
+                  <div className="flex mb-6">
                     {[1, 2, 3, 4, 5].map((starNumber) => {
                       return (
                         <div className="m-1">
                           <FaStar
                             className={
                               starNumber <= rating
-                                ? "text-yellow-500 text-5xl m-1"
-                                : "text-5xl m-1"
+                                ? "text-yellow-500 text-4xl m-1"
+                                : "text-4xl m-1"
                             }
                           />
                         </div>
                       );
                     })}
                   </div>
-                  <h1>{reviewForVoucherBought?.comment}</h1>
                 </div>
               )}
             </div>
           ) : (
-            <div className="flex justify-center flex-col items-center border border-black m-5 rounded-lg">
-              <HiMiniBackspace
-                onClick={() => {
-                  setEdit(false);
-                }}
-                className="hover: cursor-pointer text-4xl m-4"
-              />
-              <h1>Leave a review of your purchase</h1>
+            <div className="flex flex-col w-full items-center bg-slate-50 rounded-2xl shadow-xl">
+              <div className=" flex gap-10 mt-10 items-center w-full justify-center">
+                <div>
+                  <HiMiniBackspace
+                    onClick={() => {
+                      setEdit(false);
+                    }}
+                    className="hover:cursor-pointer text-4xl text-violet-600"
+                  />
+                </div>
+
+                <h1 className=" text-4xl ">Leave a review of your purchase</h1>
+              </div>
+
               <form onSubmit={handleSubmit}>
-                <div className="flex m-5">
+                <div className="flex w-full m-5 items-center justify-center">
                   {[1, 2, 3, 4, 5].map((starNumber) => {
                     return (
-                      <div key={starNumber}>
+                      <div key={starNumber} className=" items-center justify-center" >
                         <FaStar
                           key={starNumber}
                           name={`star${starNumber}`}
@@ -256,8 +293,8 @@ export default function VoucherDetail({ id, user }) {
                           }}
                           className={
                             starNumber <= rating
-                              ? "text-yellow-500 text-5xl cursor-pointer m-1"
-                              : "text-5xl cursor-pointer m-1"
+                              ? "text-yellow-500 text-4xl cursor-pointer m-1"
+                              : "text-4xl cursor-pointer m-1"
                           }
                         />
                       </div>
@@ -277,11 +314,11 @@ export default function VoucherDetail({ id, user }) {
                     }
                     value={review.comment}
                     onChange={handleReview}
-                    className=" h-[200px] bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                    className=" h-[200px] w-[1000px] bg-gray-50 border border-gray-400 text-gray-900 sm:text-2xl rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 "
                   />
                   <p className="text-red-600 h-4">{errors.comment}</p>
                 </div>
-                <div className="flex m-5">
+                <div className="flex m-5 justify-center items-center">
                   <button
                     disabled={
                       !Object.values(review).some((value) => value === true) ||
@@ -289,14 +326,14 @@ export default function VoucherDetail({ id, user }) {
                     }
                     type="submit"
                     name="save"
-                    className=" mt-2 ml-2 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border "
+                    className=" mt-2 ml-2 self-center w-44 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border "
                   >
                     Save
                   </button>
                   <button
                     disabled={!reviewForVoucherBought}
                     name="delete"
-                    className=" mt-2 ml-2 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed"
+                    className=" mt-2 ml-2 self-center w-44 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleDelete}
                   >
                     Delete
