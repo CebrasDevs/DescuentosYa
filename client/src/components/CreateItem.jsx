@@ -18,6 +18,7 @@ export default function CreateItem() {
 
     const categories = useSelector((state) => state.categories);
     const allCategories = ["Choose category", ...categories];
+    const [isService, setIsService] = useState(false);
     const [itemCreated, setItemCreated] = useState("pending");
     const [imageFile, setImageFile] = useState(null);
     const [errors, setErrors] = useState({});
@@ -47,9 +48,17 @@ export default function CreateItem() {
         setImageFile(e.target.files[0]);
     }
 
+    function handleRadioChange(e) {
+        if (e.target.value === 'false') {
+            setIsService(false);
+        } else if (e.target.value === 'true') {
+            setIsService(true);
+        };
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formattedItem = formatItem(input);
+        const formattedItem = formatItem(input, isService);
         const imageInput = document.getElementById("imageInput");
         try {
             if (imageInput.files.length === 0) {
@@ -103,8 +112,28 @@ export default function CreateItem() {
                         </h1>
                         <form onSubmit={handleSubmit} className=" relative">
                             <div className=" flex flex-row h-28 justify-between">
+                                <div>
+                                    <label>
+                                        <input 
+                                            type="radio"
+                                            value="false"
+                                            checked={!isService}
+                                            onChange={handleRadioChange}
+                                        />
+                                        Product
+                                    </label>
+                                    <label>
+                                        <input 
+                                            type="radio" 
+                                            value="true"
+                                            checked={isService}
+                                            onChange={handleRadioChange}
+                                        />
+                                        Service
+                                    </label>
+                                </div>
                                 <div className=" w-2/5">
-                                    <label className="block mb-2 text-m font-medium text-gray-900 ">Product name</label>
+                                    <label className="block mb-2 text-m font-medium text-gray-900 ">Item name</label>
                                     <input
                                         type="text"
                                         name="name"
@@ -141,7 +170,7 @@ export default function CreateItem() {
                             <div className=" flex flex-row h-28 justify-between">
                                 <div className=" w-2/5">
                                     <label className="block mb-2 text-m font-medium text-gray-900 ">
-                                        Product description
+                                        Description
                                     </label>
                                     <input
                                         type="text"
@@ -155,22 +184,24 @@ export default function CreateItem() {
                                         <p className=" text-red-600 text-sm font-semibold ">{errors.description}</p>
                                     )}
                                 </div>
-                                <div className=" w-2/5">
-                                    <label className="block mb-2 text-m font-medium text-gray-900 ">
-                                        Original Price
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="price"
-                                        placeholder="Product price"
-                                        value={input.price}
-                                        onChange={handleChange}
-                                        className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                    />
-                                    {errors.price && (
-                                        <p className=" text-red-600 text-sm font-semibold ">{errors.price}</p>
-                                    )}
-                                </div>
+                                {isService &&
+                                    <div className=" w-2/5">
+                                        <label className="block mb-2 text-m font-medium text-gray-900 ">
+                                            Original Price
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="price"
+                                            placeholder="Product price"
+                                            value={input.price}
+                                            onChange={handleChange}
+                                            className="bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                                        />
+                                        {errors.price && (
+                                            <p className=" text-red-600 text-sm font-semibold ">{errors.price}</p>
+                                        )}
+                                    </div>
+                                }
                             </div>
                             <div className=" flex flex-row h-28 justify-between">
                                 <div className=" w-2/5">
@@ -192,7 +223,7 @@ export default function CreateItem() {
                                 </div>
                                 <div className=" w-2/5">
                                     <label className="block mb-2 text-m font-medium text-gray-900 ">
-                                        Product image
+                                        Image
                                     </label>
                                     <input
                                         accept="image/*"
