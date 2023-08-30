@@ -7,13 +7,15 @@ import validateReview from "@/utils/validateReview";
 import { setActiveUser } from "@/redux/actions";
 import { FaStar } from "react-icons/fa";
 import { HiMiniBackspace } from "react-icons/hi2";
+import  ReviewSaved from '../components/Modals/Reviews/ReviewSaved'
+import  ReviewDeleted from '../components/Modals/Reviews/ReviewDeleted'
 import Loading from "@/components/loading";
-import Link from 'next/link';
 axios.defaults.withCredentials = true;
 
 export default function PurchaseDetail({ id, activeUser, user }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
+  const [reviewSaved, setReviewSaved] = useState('pending');
 
   let allItemsBought, reviewForItemBought, itemBought;
 
@@ -107,7 +109,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
   };
 
   //CUANDO SUBMITEO:
-  const handleSubmit = async (e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -122,9 +124,9 @@ export default function PurchaseDetail({ id, activeUser, user }) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
           if (reviewForItemBought.enabled) {
-            window.alert(`Your review was successfully modified`);
+            setReviewSaved(true)
           } else {
-            window.alert(`Your review was successfully saved!`);
+            setReviewSaved(true)
           }
         }
       } else {
@@ -137,6 +139,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
         if (response.status === 200) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
+          setReviewSaved(true)
           window.alert(`Your review was successfully saved`);
         }
       }
@@ -167,7 +170,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
         });
         setRating(null);
         dispatch(setActiveUser(activeUser.id));
-        window.alert(`Your review was successfully deleted`);
+        setReviewSaved(false)
       }
     } catch (error) {
       window.alert("Error sending your review");
@@ -180,13 +183,19 @@ export default function PurchaseDetail({ id, activeUser, user }) {
   reviewForItemBought = activeUser?.Review?.find(
     (review) => review.itemId === itemBought.id
   );
-  console.log(itemBought);
+  
+  const handleCloseModal = () => {
+    setReviewSaved('pending')
+  }
+
   return (
     <div className="flex flex-col justify-center items-center">
       {isLoading ? (
         <Loading />
       ) : (
         <div>
+           {reviewSaved === true && <ReviewSaved close={handleCloseModal}/>}
+          {reviewSaved === false && <ReviewDeleted close={handleCloseModal} />}
           <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
             <h1>Seller company: {itemBought?.company.name}</h1>
             <h1>
