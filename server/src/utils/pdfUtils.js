@@ -26,13 +26,12 @@ const registerShoppingPDF = async (userName, items, totalPrice, wayToPay, state,
             <ul>
             ${items.map((item) => (
             `<li>
-                <b>${item.name}</b>
+                <b>${item.title}</b>
                 <ul>
                     <li><b>Description:</b> ${item.description}, <br></li>
                     <li><b>Price:</b> $${item.unit_price} per unit, <br></li>
                     <li><b>Quantity:</b>${item.quantity}, <br></li>
                     <li><b>Company:</b> ${item.companyName}</li>
-                    <li><b>Email company:</b> ${item.user.email}</li>
                 </ul>
             </li>`
         )).join("")}

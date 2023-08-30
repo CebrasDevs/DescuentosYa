@@ -67,9 +67,8 @@ const receiveWebhook = async (req, res) => {
         totalPrice: transaction_amount,
         items: additional_info.items
       };
-
       createShoppingController(formattedObject)
-      return res.redirect(204);
+      return res.sendStatus(200);
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
