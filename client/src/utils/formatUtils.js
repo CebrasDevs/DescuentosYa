@@ -142,7 +142,7 @@ export function formatModifyMember(member){
     };
 };
 
-export function formatItem(item) {
+export function formatItem(item, isService) {
     const userId = Cookies.get("userId");
 
     const {
@@ -155,7 +155,7 @@ export function formatItem(item) {
         imageUrl
     } = item;
 
-    const parsedPrice = parseFloat(price).toFixed(2);
+    const parsedPrice = isService ? parseFloat(price).toFixed(2) : 0;
     const parsedDiscount = Number(discount);
     
     return {
