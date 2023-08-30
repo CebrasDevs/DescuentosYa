@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   addShoppingCartItem,
+  getDiscounts,
   getItemDetail,
   setActiveUser,
 } from "@/redux/actions";
@@ -101,6 +102,7 @@ export default function ItemDetail({ data }) {
           enabled: false,
         });
         if (response.status === 200) {
+          dispatch(getDiscounts());
           dispatch(getItemDetail(data.id));
           dispatch(setActiveUser(activeUser.id));
           setItemStatus("disabled");
@@ -111,6 +113,7 @@ export default function ItemDetail({ data }) {
           enabled: true,
         });
         if (response.status === 200) {
+          dispatch(getDiscounts());
           dispatch(getItemDetail(data.id));
           dispatch(setActiveUser(activeUser.id));
           setItemStatus("enabled");
