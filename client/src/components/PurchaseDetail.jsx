@@ -7,15 +7,15 @@ import validateReview from "@/utils/validateReview";
 import { setActiveUser } from "@/redux/actions";
 import { FaStar } from "react-icons/fa";
 import { HiMiniBackspace } from "react-icons/hi2";
-import  ReviewSaved from '../components/Modals/Reviews/ReviewSaved'
-import  ReviewDeleted from '../components/Modals/Reviews/ReviewDeleted'
+import ReviewSaved from "../components/Modals/Reviews/ReviewSaved";
+import ReviewDeleted from "../components/Modals/Reviews/ReviewDeleted";
 import Loading from "@/components/loading";
 axios.defaults.withCredentials = true;
 
 export default function PurchaseDetail({ id, activeUser, user }) {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-  const [reviewSaved, setReviewSaved] = useState('pending');
+  const [reviewSaved, setReviewSaved] = useState("pending");
 
   let allItemsBought, reviewForItemBought, itemBought;
 
@@ -109,7 +109,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
   };
 
   //CUANDO SUBMITEO:
-   const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -124,9 +124,9 @@ export default function PurchaseDetail({ id, activeUser, user }) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
           if (reviewForItemBought.enabled) {
-            setReviewSaved(true)
+            setReviewSaved(true);
           } else {
-            setReviewSaved(true)
+            setReviewSaved(true);
           }
         }
       } else {
@@ -139,7 +139,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
         if (response.status === 200) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
-          setReviewSaved(true)
+          setReviewSaved(true);
         }
       }
     } catch (error) {
@@ -169,7 +169,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
         });
         setRating(null);
         dispatch(setActiveUser(activeUser.id));
-        setReviewSaved(false)
+        setReviewSaved(false);
       }
     } catch (error) {
       window.alert("Error sending your review");
@@ -182,43 +182,69 @@ export default function PurchaseDetail({ id, activeUser, user }) {
   reviewForItemBought = activeUser?.Review?.find(
     (review) => review.itemId === itemBought.id
   );
-  
+
   const handleCloseModal = () => {
-    setReviewSaved('pending')
-  }
+    setReviewSaved("pending");
+  };
 
   return (
     <div className="flex flex-col justify-center items-center">
       {isLoading ? (
         <Loading />
       ) : (
-        <div>
-           {reviewSaved === true && <ReviewSaved close={handleCloseModal}/>}
+        <div className="flex flex-col w-4/5 m-5 drop-shadow-xl">
+          {reviewSaved === true && <ReviewSaved close={handleCloseModal} />}
           {reviewSaved === false && <ReviewDeleted close={handleCloseModal} />}
-          <div className="flex flex-col justify-center items-center border-b-2 bg-slate-50 rounded-lg shadow-md m-5 p-5">
-            <h1>Seller company: {itemBought?.company.name}</h1>
-            <h1>
-              Price paid: ${" "}
-              {(itemBought?.price * (1 - itemBought?.discount / 100)).toFixed(
-                2
-              )}
-            </h1>  
-            <img className="w-[300px]" src={itemBought?.imageUrl} />
-            {!edit && (
-              <button
-                onClick={() => {
-                  setEdit(true);
-                }}
-              >
-                Edit your review
-              </button>
-            )}
+          <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
+            <div className=" w-1/2 h-full">
+              <img
+                className="w-[650px] h-[500px] object-cover rounded-2xl mt-6 mb-6 ml-10 border-2 border-gray-300"
+                src={itemBought?.imageUrl}
+              />
+            </div>
+            <div className=" w-1/2 p-6 flex-col flex">
+              <div className=" py-10 ">
+                <h1 className=" font-bold text-5xl mr-44">
+                  {" "}
+                  {itemBought.name}{" "}
+                </h1>
+              </div>
+              <div className=" flex flex-col gap-y-10">
+                <h1 className=" font-semibold text-xl">
+                  Seller company: {itemBought?.company.name}
+                </h1>
+                <h1 className=" font-semibold text-xl">
+                  Price paid: ${" "}
+                  {(
+                    itemBought?.price *
+                    (1 - itemBought?.discount / 100)
+                  ).toFixed(2)}
+                </h1>
+              </div>
+              <div className=" py-10 ">
+                {!edit && (
+                  <button
+                    className="cursor-pointer py-2 px-6 font-bold rounded text-white bg-violet-500 hover:bg-violet-700 mt-20"
+                    onClick={() => {
+                      setEdit(true);
+                    }}
+                  >
+                    Edit your review
+                  </button>
+                )}
+              </div>
+            </div>
           </div>
           {!edit ? (
             <div>
               {reviewForItemBought?.enabled && (
-                <div className="flex flex-col items-center bg-slate-50 rounded-lg shadow-md m-5 p-5">
-                  <h1>Your review</h1>
+                <div className="flex flex-col items-center bg-slate-50 rounded-2xl shadow-xl">
+                  <h1 className=" font-semibold text-3xl mb-8 mt-8 ">
+                    Your review
+                  </h1>
+                  <h1 className=" font-medium text-xl mb-4">
+                    {reviewForItemBought?.comment}
+                  </h1>
                   <div className="flex">
                     {[1, 2, 3, 4, 5].map((starNumber) => {
                       return (
@@ -226,29 +252,30 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                           <FaStar
                             className={
                               starNumber <= rating
-                                ? "text-yellow-500 text-5xl m-1"
-                                : "text-5xl m-1"
+                                ? "text-yellow-500 text-4xl m-1"
+                                : "text-4xl m-1"
                             }
                           />
                         </div>
                       );
                     })}
                   </div>
-                  <h1>{reviewForItemBought?.comment}</h1>
                 </div>
               )}
             </div>
           ) : (
-            <div className="flex justify-center flex-col items-center border bg-slate-50 rounded-lg shadow-md m-5 p-5">
-              <HiMiniBackspace
-                onClick={() => {
-                  setEdit(false);
-                }}
-                className="hover: cursor-pointer text-4xl m-4"
-              />
-              <h1>Leave a review of your purchase</h1>
+            <div className="flex flex-col w-full items-center bg-slate-50 rounded-2xl shadow-xl">
+              <div className=" flex gap-10 mt-10 items-center w-full justify-center">
+                <HiMiniBackspace
+                  onClick={() => {
+                    setEdit(false);
+                  }}
+                  className="hover:cursor-pointer text-4xl text-violet-600"
+                />
+                <h1 className=" text-4xl ">Leave a review of your purchase</h1>
+              </div>
               <form onSubmit={handleSubmit}>
-                <div className="flex m-5">
+                <div className="flex w-full m-5 items-center justify-center">
                   {[1, 2, 3, 4, 5].map((starNumber) => {
                     return (
                       <div key={starNumber}>
@@ -261,8 +288,8 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                           }}
                           className={
                             starNumber <= rating
-                              ? "text-yellow-500 text-5xl cursor-pointer m-1"
-                              : "text-5xl cursor-pointer m-1"
+                              ? "text-yellow-500 text-4xl cursor-pointer m-1"
+                              : "text-4xl cursor-pointer m-1"
                           }
                         />
                       </div>
@@ -284,11 +311,11 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                       /* reviewForItemBought?.enabled ? reviewForItemBought.comment :  */ review.comment
                     }
                     onChange={handleReview}
-                    className=" h-[200px] bg-gray-50 border border-gray-400 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                    className=" h-[200px] w-[1000px] bg-gray-50 border border-gray-400 text-gray-900 sm:text-2xl rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 "
                   />
                   <p className="text-red-600 h-4">{errors.comment}</p>
                 </div>
-                <div className="flex m-5">
+                <div className="flex m-5 justify-center items-center">
                   <button
                     disabled={
                       !Object.values(review).some((value) => value === true) ||
@@ -296,9 +323,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                     }
                     type="submit"
                     name="save"
-                    className={
-                      "mt-2 ml-2 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed"
-                    }
+                    className=" mt-2 ml-2 self-center w-44 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border "
                   >
                     Save
                   </button>
@@ -306,7 +331,7 @@ export default function PurchaseDetail({ id, activeUser, user }) {
                   <button
                     disabled={!reviewForItemBought?.enabled}
                     name="delete"
-                    className=" mt-2 ml-2 self-center w-1/2 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed"
+                    className=" mt-2 ml-2 self-center w-44 h-12 text-white bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 hover:border-blue-500 hover:text-gray-700  hover:border disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={handleDelete}
                   >
                     Delete

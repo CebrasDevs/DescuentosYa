@@ -29,7 +29,7 @@ export default function ReviewSaved({ close }) {
           <div className="mt-8 flex flex-col justify-center space-y-3 sm:flex-row sm:space-x-3 sm:space-y-0">
             <button
               onClick={handleClose}
-              className="whitespace-nowrap rounded-md  bg-red-500 hover:bg-red-700 px-6 py-3 font-semibold tracking-wide text-white"
+              className="whitespace-nowrap rounded-md  bg-green-500 hover:bg-green-700 px-6 py-3 font-semibold tracking-wide text-white"
             >
               Close
             </button>

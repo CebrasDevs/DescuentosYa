@@ -8,6 +8,8 @@ import { setActiveUser } from "@/redux/actions";
 import { FaStar } from "react-icons/fa";
 import { HiMiniBackspace } from "react-icons/hi2";
 import Loading from "@/components/loading";
+import ReviewSaved from "./Modals/Reviews/ReviewSaved";
+import ReviewDeleted from "./Modals/Reviews/ReviewDeleted";
 axios.defaults.withCredentials = true;
 
 export default function VoucherDetail({ id, user }) {
@@ -15,6 +17,7 @@ export default function VoucherDetail({ id, user }) {
   const activeUser = useSelector((state) => state.activeUser);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [reviewSaved, setReviewSaved] = useState("pending");
 
   let voucherBought, reviewForVoucherBought;
   useEffect(() => {
@@ -127,9 +130,9 @@ export default function VoucherDetail({ id, user }) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
           if (reviewForVoucherBought.enabled) {
-            window.alert(`Your review was successfully modified`);
+            setReviewSaved(true);
           } else {
-            window.alert(`Your review was successfully saved!`);
+            setReviewSaved(true);
           }
         }
       } else {
@@ -142,7 +145,7 @@ export default function VoucherDetail({ id, user }) {
         if (response.status === 200) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
-          window.alert(`Your review was successfully saved`);
+          setReviewSaved(true);
         }
       }
     } catch (error) {
@@ -172,7 +175,7 @@ export default function VoucherDetail({ id, user }) {
         });
         setRating(null);
         dispatch(setActiveUser(activeUser.id));
-        window.alert(`Your review was successfully deleted`);
+        setReviewSaved(false);
       }
     } catch (error) {
       window.alert("Error sending your review");
@@ -192,6 +195,8 @@ export default function VoucherDetail({ id, user }) {
         <Loading />
       ) : (
         <div className="flex flex-col w-4/5 m-5 drop-shadow-xl">
+          {reviewSaved === true && <ReviewSaved close={handleCloseModal} />}
+          {reviewSaved === false && <ReviewDeleted close={handleCloseModal} />}
           <div className=" relative flex justify-center w-full min-h-[500px] bg-white rounded-2xl shadow-xl my-14 ">
             <div className=" w-1/2 h-full">
               <img
@@ -242,7 +247,9 @@ export default function VoucherDetail({ id, user }) {
             <div>
               {reviewForVoucherBought?.enabled && (
                 <div className="flex flex-col items-center bg-slate-50 rounded-2xl shadow-xl">
-                  <h1 className=" font-semibold text-3xl mb-8 mt-8 ">Your review</h1>
+                  <h1 className=" font-semibold text-3xl mb-8 mt-8 ">
+                    Your review
+                  </h1>
                   <h1 className=" font-medium text-xl mb-4">
                     {reviewForVoucherBought?.comment}
                   </h1>
@@ -283,7 +290,10 @@ export default function VoucherDetail({ id, user }) {
                 <div className="flex w-full m-5 items-center justify-center">
                   {[1, 2, 3, 4, 5].map((starNumber) => {
                     return (
-                      <div key={starNumber} className=" items-center justify-center" >
+                      <div
+                        key={starNumber}
+                        className=" items-center justify-center"
+                      >
                         <FaStar
                           key={starNumber}
                           name={`star${starNumber}`}
