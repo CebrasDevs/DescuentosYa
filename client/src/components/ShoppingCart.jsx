@@ -53,7 +53,7 @@ export default function ShoppingCart() {
   const products = shoppingCart?.map((element, index) => ({
     id: element.item?.id,
     title: element.item?.name,
-    unit_price: Math.ceil(element.item?.price),
+    unit_price: +(((+ element.item?.price)-(((+ element.item?.price)*(+ element.item?.discount))/100)).toFixed(2)),
     quantity: shoppingCart[index].quantity,
     category_id: element.item?.category,
     description: "DescuentosYa",
@@ -146,7 +146,7 @@ export default function ShoppingCart() {
               <div className="flex w-1/4 px-4 py-4 text-center justify-center items-center">
                 <h2 className=" text-lg font-semibold">Total Price: $</h2>
                 <h2 className=" justify-center text-lg font-semibold">
-                  {(item.item.price * shoppingCart[index].quantity).toFixed(2)}
+                  {((+item.item.price - ((+item.item.price) * (+item.item.discount))/100) * shoppingCart[index].quantity).toFixed(2)}
                 </h2>
               </div>
               <div className=" flex items-center ">
