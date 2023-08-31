@@ -140,7 +140,6 @@ export default function PurchaseDetail({ id, activeUser, user }) {
           setErrors({});
           dispatch(setActiveUser(activeUser.id));
           setReviewSaved(true)
-          window.alert(`Your review was successfully saved`);
         }
       }
     } catch (error) {
