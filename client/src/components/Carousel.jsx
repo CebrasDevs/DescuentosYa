@@ -47,7 +47,7 @@ const scrollRight = () => {
       }
 }
 
-
+//probamos levantar el front
   return (
     <div className="flex items-center">
         <button onClick={scrollLeft} className="mr-3">
